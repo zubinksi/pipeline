@@ -1,0 +1,10 @@
+{"results": [
+  {"application_number": "NDA219999", "openfda": {"generic_name": ["ENLICITIDE"], "brand_name": ["LIPFENDRA"]},
+   "products": [{"brand_name": "LIPFENDRA", "active_ingredients": [{"name": "ENLICITIDE", "strength": "20MG"}]}],
+   "submissions": [
+     {"submission_type": "SUPPL", "submission_status": "AP", "submission_status_date": "20260901"},
+     {"submission_type": "ORIG", "submission_status": "AP", "submission_status_date": "20260716"}
+   ]},
+  {"application_number": "ANDA200000", "products": [{"brand_name": "X", "active_ingredients": [{"name": "ENLICITIDE"}]}],
+   "submissions": [{"submission_type": "ORIG", "submission_status": "AP", "submission_status_date": "20300101"}]}
+]}

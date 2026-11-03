@@ -1,0 +1,33 @@
+CHOLESTEROL PIPELINE · week of {{ today.strftime("%b %-d, %Y") }}
+
+{{ headline }}
+{% if changes %}
+
+WHAT MOVED
+{% for c in changes %}
+
+- {% if c.drug %}{{ c.drug }} ({{ c.company }}): {% endif %}{{ c.what }}
+  Why it matters: {{ c.why }}
+  Source: {{ c.url }}
+{% endfor %}
+{% endif %}
+{% if horizon %}
+
+ON THE HORIZON (next {{ horizon_days }} days)
+{% for h in horizon %}
+- {{ h.date }}  {{ h.drug }}: {{ h.what }}
+  Source: {{ h.url }}
+{% endfor %}
+{% endif %}
+
+PIPELINE (1-3 = Phase 1-3, F = Filed, A = Approved)
+{{ "%-16s"|format("") }}  1  2  3  F  A
+{% for r in rows %}
+{{ "%-16s"|format(r.name[:16]) }}  {{ r.text_dots }}{% if r.moved %}  ▲ moved{% endif %}{% if r.badge %}  ({{ r.badge }}){% endif %}
+
+{% endfor %}
+
+{% if errors %}
+Couldn't reach this week: {{ errors|join(", ") }} (last week's data kept).
+{% endif %}
+Sources: ClinicalTrials.gov, openFDA, FDA press announcements, news searches. Informational only, not medical advice.

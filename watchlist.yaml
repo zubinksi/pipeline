@@ -1,0 +1,174 @@
+# Watchlist for the weekly cholesterol-pipeline digest.
+#
+# Each drug's `stage` is a FLOOR: the digest takes the highest of this value,
+# the highest phase seen on ClinicalTrials.gov, and an FDA approval found on
+# openFDA. Use it for stages the APIs can't detect (e.g. "filed", or an
+# approval outside the US). Stages: phase1, phase2, phase3, filed, approved.
+#
+# `aliases` are code names / brand names, used to search every source.
+# `badge` (optional) is a short tag shown next to the name in the pipeline strip.
+# `plain` is a one-line plain-English description, used as context for the
+# summary and as the "why it matters" fallback when the Claude API is off.
+#
+# Verified by web search on 2026-11-03 (sources listed per drug).
+# clinicaltrials.gov itself was not reachable from the build sandbox, so the
+# first real run on GitHub Actions is the first check against the registry.
+
+settings:
+  horizon_days: 60          # "On the horizon" window
+  min_trial_phase: 2        # ignore new trials / status changes below this phase (halts are always reported)
+  max_news_per_drug: 5
+  discovery:                # flag NEW industry Phase 2/3 trials in these conditions that aren't on the watchlist
+    enabled: true
+    conditions: ["Hypercholesterolemia", "Lipoprotein(a)", "Hyperlipoproteinemia(a)", "Atherosclerotic Cardiovascular Disease"]
+    max_items: 5
+
+reader_context: >
+  32 years old, not on cholesterol medication, with a family history of high
+  cholesterol, so expects to need treatment eventually. Would prefer to avoid
+  statins if possible. Most interested in non-statin options: oral pills,
+  infrequent injections, and anything targeting lipoprotein(a).
+
+# Extra RSS feeds scanned for any watchlist drug name (in addition to a
+# Google News search per drug, which picks up company press releases).
+feeds:
+  - name: FDA press announcements
+    url: https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml
+
+# Dated events you know about (PDUFA dates, scheduled readouts). They appear
+# under "On the horizon" when inside the window. Each needs a source URL.
+events: []
+#  - drug: obicetrapib
+#    date: 2027-01-15
+#    what: "FDA decision date (PDUFA)"
+#    url: https://example.com/press-release
+
+drugs:
+  # ---- Lipoprotein(a) ----
+  - id: muvalaplin
+    name: Muvalaplin
+    aliases: [LY3473329]
+    company: Eli Lilly
+    target: Lp(a)
+    form: Daily pill
+    plain: "A once-daily pill that blocks Lp(a) from forming. It would be the first oral Lp(a) drug."
+    stage: phase3
+    note: "MOVE-Lp(a) outcomes trial recruiting; primary completion est. 2031"
+    sources: [https://clinicaltrials.gov/study/NCT07157774]
+
+  - id: lepodisiran
+    name: Lepodisiran
+    aliases: [LY3819469]
+    company: Eli Lilly
+    target: Lp(a)
+    form: Injection, possibly once or twice a year
+    plain: "An siRNA injection that switches off Lp(a) production in the liver for many months."
+    stage: phase3
+    note: "ACCLAIM-Lp(a) outcomes trial ongoing; results expected ~2029"
+    sources: [https://www.clinicaltrialsarena.com/analyst-comment/jpm26-eli-lilly-lpa-drugs/]
+
+  - id: pelacarsen
+    name: Pelacarsen
+    aliases: [TQJ230, "IONIS-APO(a)-LRx", AKCEA-APO(a)-LRx]
+    company: Novartis / Ionis
+    target: Lp(a)
+    form: Monthly injection
+    plain: "A monthly antisense injection that lowers Lp(a). It is the first Lp(a) drug with outcomes data."
+    stage: phase3
+    badge: missed endpoint
+    note: "Lp(a)HORIZON missed its primary endpoint (Sep 2026); full data pending"
+    sources: [https://www.tctmd.com/news/lpahorizon-top-line-results-dash-hopes-pelacarsen]
+
+  - id: olpasiran
+    name: Olpasiran
+    aliases: [AMG 890, AMG890]
+    company: Amgen
+    target: Lp(a)
+    form: Injection every 12 weeks or less often
+    plain: "An siRNA injection that strongly lowers Lp(a). It is dosed a few times a year."
+    stage: phase3
+    note: "OCEAN(a)-Outcomes enrolled (active, not recruiting); event-driven, readout timing unclear"
+    sources: [https://clinicaltrials.gov/study/NCT05581303]
+
+  - id: zerlasiran
+    name: Zerlasiran
+    aliases: [SLN360]
+    company: Silence Therapeutics
+    target: Lp(a)
+    form: Infrequent injection
+    plain: "An siRNA injection that cut Lp(a) by more than 80% in Phase 2."
+    stage: phase2
+    badge: seeking partner
+    note: "Phase 3-ready, but start depends on finding a partner"
+    sources: [https://www.biospace.com/drug-development/silence-quiets-phase-iii-pace-for-lipoprotein-drug-seeks-partner]
+
+  # ---- Oral PCSK9 ----
+  - id: enlicitide
+    name: Enlicitide
+    aliases: [MK-0616, Lipfendra]
+    company: Merck
+    target: PCSK9 (LDL)
+    form: Daily pill
+    plain: "The first PCSK9 pill. It lowers LDL by about half, similar to the injectable PCSK9 drugs."
+    stage: approved
+    note: "FDA approved Jul 16 2026 (Lipfendra); CORALreef Outcomes trial ongoing"
+    sources: [https://www.tctmd.com/news/fda-approves-enlicitide-oral-pcsk9-inhibitor-ldl-lowering]
+
+  - id: laroprovstat
+    name: Laroprovstat
+    aliases: [AZD0780]
+    company: AstraZeneca
+    target: PCSK9 (LDL)
+    form: Daily pill
+    plain: "A once-daily oral PCSK9 blocker, a pill alternative to PCSK9 injections."
+    stage: phase3
+    note: "AZURE Phase 3 program running; data expected 2027"
+    sources: [https://www.sec.gov/Archives/edgar/data/901832/000110465926019110/tm261135d3_ex99-1.pdf]
+
+  # ---- CETP ----
+  - id: obicetrapib
+    name: Obicetrapib
+    aliases: [TA-8995, Ubeslo, Evlarco]
+    company: NewAmsterdam / Menarini
+    target: CETP (LDL)
+    form: Daily pill
+    plain: "A once-daily CETP-inhibitor pill that lowers LDL. It is also sold as a combination pill with ezetimibe."
+    stage: approved
+    badge: EU only
+    note: "EU approved Sep 2026; US NDA reportedly not yet filed; PREVAIL outcomes interim expected Q4 2026"
+    sources: [https://www.thepharmaletter.com/biotech-news/first-global-regulatory-approval-of-obicetrapib]
+
+  # ---- Other mechanisms ----
+  - id: solbinsiran
+    name: Solbinsiran
+    aliases: [LY3561774]
+    company: Eli Lilly
+    target: ANGPTL3
+    form: Infrequent injection
+    plain: "An siRNA injection against ANGPTL3 that lowers triglycerides and LDL."
+    stage: phase2
+    note: "Phase 2 (SOLARIS-1, severe hypertriglyceridemia) recruiting"
+    sources: [https://clinicaltrials.gov/study/NCT07269210]
+
+  - id: verve102
+    name: VERVE-102
+    aliases: ["VERVE 102"]
+    company: Eli Lilly (Verve)
+    target: PCSK9 (gene editing)
+    form: One-time infusion
+    plain: "A one-time gene-editing treatment meant to permanently switch off PCSK9 and lower LDL for life."
+    stage: phase1
+    note: "Phase 1b Heart-2 positive interim data (May 2026); Phase 2 planned by end of 2026; FDA Fast Track"
+    sources: [https://www.hcplive.com/view/verve-102-lowers-pcsk9-ldl-c-interim-phase-1b-hypercholesterolemia-data]
+
+  # Added: approved recently, relevant to "infrequent injections"
+  - id: lerodalcibep
+    name: Lerodalcibep
+    aliases: [Lerochol, LIB003]
+    company: LIB Therapeutics
+    target: PCSK9 (LDL)
+    form: Monthly injection
+    plain: "A once-monthly PCSK9 injection that can be stored at room temperature."
+    stage: approved
+    note: "FDA approved Dec 2025; autoinjector + CV-risk label update Aug 2026"
+    sources: [https://www.tctmd.com/news/fda-approves-lerodalcibep-adults-hypercholesterolemia]
