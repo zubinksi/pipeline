@@ -31,9 +31,9 @@ reader_context: >
 
 # Extra RSS feeds scanned for any watchlist drug name (in addition to a
 # Google News search per drug, which picks up company press releases).
-feeds:
-  - name: FDA press announcements
-    url: https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml
+# (fda.gov's own RSS blocks GitHub's servers as bots, so it isn't listed;
+# FDA approvals come from openFDA and FDA news shows up via Google News.)
+feeds: []
 
 # Dated events you know about (PDUFA dates, scheduled readouts). They appear
 # under "On the horizon" when inside the window. Each needs a source URL.
@@ -152,13 +152,13 @@ drugs:
 
   - id: verve102
     name: VERVE-102
-    aliases: ["VERVE 102"]
+    aliases: ["VERVE 102", LY4636581]
     company: Eli Lilly (Verve)
     target: PCSK9 (gene editing)
     form: One-time infusion
     plain: "A one-time gene-editing treatment meant to permanently switch off PCSK9 and lower LDL for life."
-    stage: phase1
-    note: "Phase 1b Heart-2 positive interim data (May 2026); Phase 2 planned by end of 2026; FDA Fast Track"
+    stage: phase2
+    note: "Phase 2 trial registered Sep 2026 (NCT07839936), not yet recruiting; positive Phase 1b data May 2026; FDA Fast Track"
     sources: [https://www.hcplive.com/view/verve-102-lowers-pcsk9-ldl-c-interim-phase-1b-hypercholesterolemia-data]
 
   # Added: approved recently, relevant to "infrequent injections"

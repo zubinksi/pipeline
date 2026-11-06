@@ -109,9 +109,8 @@ def build(watchlist: dict, prev: dict | None, client: httpx.Client | None = None
             fda[d["id"]] = prev.get("fda", {}).get(d["id"], {"approved": False})
 
     # --- news ---
-    n_errors = len(errors)
     news_items = collect_news(client, watchlist, errors, now)
-    news_ok = len(errors) == n_errors
+    news_ok = "Google News" not in errors  # extra feeds failing shouldn't block news forever
 
     stages = {d["id"]: resolve_stage(d, trials, fda.get(d["id"], {})) for d in drugs}
 

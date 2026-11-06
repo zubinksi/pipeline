@@ -5,7 +5,7 @@
   {% if latest %}
   <div class="eyebrow">Week of {{ latest.date|nice_date }}</div>
   <h1>{{ latest.headline }}</h1>
-  {% if latest.errors %}<div class="warn">Couldn't reach this week: {{ latest.errors|join(", ") }}. Last week's data was kept for these.</div>{% endif %}
+  {% if latest.errors %}<div class="warn">Couldn't reach this week: {{ latest.errors|join(", ") }}.{% if not latest.baseline %} Last week's data was kept for these.{% endif %} They'll be retried next week.</div>{% endif %}
   {% else %}
   <h1>No weekly runs yet.</h1>
   {% endif %}

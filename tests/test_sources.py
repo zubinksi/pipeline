@@ -103,3 +103,20 @@ def test_ctgov_failure_keeps_previous_trials():
     assert snap["trials"] == {"NCT1": prev_trial}
     assert snap["errors"][0] == "ClinicalTrials.gov"
     assert snap["baselined"]["ctgov"] == []
+
+
+def test_failing_extra_feed_does_not_block_news_baseline():
+    rss = (FIX / "gnews.xml").read_bytes()
+
+    def handler(req):
+        if "news.google.com" in req.url.host:
+            return httpx.Response(200, content=rss)
+        if "blocked.example" in req.url.host:
+            return httpx.Response(404)
+        return httpx.Response(404, json={})
+
+    wl = _wl([OBI])
+    wl["feeds"] = [{"name": "Blocked feed", "url": "https://blocked.example/rss"}]
+    snap = snapshot.build(wl, None, client=mock_client(handler), now=datetime(2026, 11, 3, tzinfo=timezone.utc))
+    assert "Blocked feed" in snap["errors"]
+    assert snap["baselined"]["news"] is True
