@@ -1,10 +1,10 @@
 {% extends "base.html.j2" %}
 {% import "_macros.html.j2" as m with context %}
-{% block title %}{{ drug.name }} · {{ site_title }}{% endblock %}
+{% block title %}{{ drug.brand ~ " (" ~ drug.name ~ ")" if drug.brand else drug.name }} · {{ site_title }}{% endblock %}
 {% block content %}
 <a class="back" href="{{ root }}index.html">&larr; All drugs</a>
 <div class="intro">
-  <div class="d-head"><h1>{{ drug.name }}{{ m.badge(drug.badge) }}{% if row.moved %}<span class="tag moved">&#9650; moved this week</span>{% endif %}</h1></div>
+  <div class="d-head"><h1>{{ drug.brand or drug.name }}{% if drug.brand %} <span class="generic">{{ drug.name|lower }}</span>{% endif %}{{ m.badge(drug.badge) }}{% if row.moved %}<span class="tag moved">&#9650; moved this week</span>{% endif %}</h1></div>
   {% if drug.plain %}<p>{{ drug.plain }}</p>{% endif %}
 </div>
 

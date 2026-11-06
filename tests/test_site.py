@@ -122,7 +122,7 @@ def test_drugs_grouped_by_closeness(tmp_path):
     html = (out / "index.html").read_text()
     a, c, l = html.index("Available now"), html.index("Getting close"), html.index("Further out")
     assert a < c < l
-    assert html.index("Lerodalcibep") < c  # approved -> available now
+    assert html.index("Lerochol") < c  # approved -> available now
 
 
 def test_past_weeks_button_and_back_links(tmp_path):
@@ -130,3 +130,11 @@ def test_past_weeks_button_and_back_links(tmp_path):
     assert 'class="btn" href="weeks/index.html"' in (out / "index.html").read_text()
     assert 'class="back" href="../index.html"' in (out / "weeks/index.html").read_text()
     assert 'class="back" href="../index.html"' in (out / "weeks/2026-11-03.html").read_text()
+
+
+def test_approved_drugs_show_brand_first(tmp_path):
+    out, _ = _build(tmp_path)
+    html = (out / "index.html").read_text()
+    assert '<span class="drug-name">Repatha</span><span class="generic">evolocumab</span>' in html
+    assert '<span class="drug-name">Olpasiran</span>' in html  # no brand yet: unchanged
+    assert "Leqvio" in (out / "drugs/inclisiran.html").read_text()

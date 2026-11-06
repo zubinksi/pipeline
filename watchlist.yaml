@@ -61,10 +61,12 @@ drugs:
   #           with proven_note and proven_source
   #   note    where it stands, in plain words
   #   badge   optional short flag
+  #   brand   the name it's sold under (approved drugs); shown first
 
   # ---- approved ----
   - id: evolocumab
     name: Evolocumab
+    brand: Repatha
     aliases: [Repatha, AMG 145]
     company: Amgen
     target: PCSK9 (LDL)
@@ -86,6 +88,7 @@ drugs:
 
   - id: alirocumab
     name: Alirocumab
+    brand: Praluent
     aliases: [Praluent, SAR236553, REGN727]
     company: Sanofi / Regeneron
     target: PCSK9 (LDL)
@@ -107,6 +110,7 @@ drugs:
 
   - id: inclisiran
     name: Inclisiran
+    brand: Leqvio
     aliases: [Leqvio, ALN-PCSsc, KJX839]
     company: Novartis
     target: PCSK9 (LDL)
@@ -128,6 +132,7 @@ drugs:
 
   - id: lerodalcibep
     name: Lerodalcibep
+    brand: Lerochol
     aliases: [Lerochol, LIB003]
     company: LIB Therapeutics
     target: PCSK9 (LDL)

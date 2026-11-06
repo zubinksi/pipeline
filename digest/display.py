@@ -51,7 +51,9 @@ def rows(watchlist: dict, stages: dict, moved: set[str]) -> list[dict]:
     out = []
     for d in watchlist["drugs"]:
         stage = stages.get(d["id"], d["stage"])
-        out.append({**d, "rank": STAGE_RANK[stage], "stage_label": STAGE_LABEL[stage],
+        out.append({**d, "display_name": d.get("brand") or d["name"],
+                    "generic": d["name"] if d.get("brand") else "",
+                    "rank": STAGE_RANK[stage], "stage_label": STAGE_LABEL[stage],
                     "stage_plain": STAGE_PLAIN[stage][0], "stage_explain": STAGE_PLAIN[stage][1],
                     "stage": stage, "moved": d["id"] in moved,
                     "lowers_keys": lowers_keys(d.get("lowers", "")),

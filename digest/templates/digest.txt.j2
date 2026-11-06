@@ -25,7 +25,7 @@ THE DRUGS
 
 {{ g.title|upper }}
 {% for r in g.rows %}
-- {{ r.name }}{% if r.badge %} ({{ r.badge }}){% endif %}{% if r.moved %} ▲ moved{% endif %}: {{ r.form }}{% if r.effect %}; {{ r.effect }}{% endif %}{% if r.proven_label %}; {{ r.proven_label|lower }}{% endif %}{% if r.show_stage %}; {{ r.stage_plain|lower }}{% endif %}
+- {{ r.display_name }}{% if r.generic %} ({{ r.generic|lower }}){% endif %}{% if r.badge %} ({{ r.badge }}){% endif %}{% if r.moved %} ▲ moved{% endif %}: {{ r.form }}{% if r.effect %}; {{ r.effect }}{% endif %}{% if r.proven_label %}; {{ r.proven_label|lower }}{% endif %}{% if r.show_stage %}; {{ r.stage_plain|lower }}{% endif %}
 
 {% endfor %}
 {% endfor %}
