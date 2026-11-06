@@ -61,7 +61,7 @@ def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
     # a baseline week's stored headline counts drugs at the time; say it plainly instead
     headline = ("Tracking started this week. Changes show up here from next week." if rec.get("baseline")
                 else rec["headline"] or "Nothing changed this week.")
-    quiet = "tracking started" if rec.get("baseline") else "no changes"
+    quiet = "" if rec.get("baseline") else "no changes"
     return {**rec, "headline": headline, "changes": changes, "quiet": quiet,
             "horizon": [h for h in rec.get("horizon", []) if h["drug"] in names],
             "errors": [e for e in rec.get("errors", []) if e.split(" (")[0] in sources]}

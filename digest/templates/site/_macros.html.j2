@@ -30,7 +30,6 @@
     </div>
     {% endif %}
   </div>
-  {% if filterable and has_lpa %}<p class="hint">Lp(a) drugs only help if your Lp(a) is high. A one-time blood test checks it.</p>{% endif %}
   {% for g in groups %}
   <div class="group" data-group>
     <h3>{{ g.title }} <span class="n" data-count>{{ g.rows|length }}</span></h3>
@@ -80,7 +79,7 @@
 {# "This week": the changes, or (on a quiet week) just the heading line. #}
 {% macro this_week(w, root, title, past=0) -%}
 <section class="section">
-  <div class="section-head{{ ' quiet-head' if not w.changes }}"><h2>{{ title }} <span class="sub">· {{ w.date|nice_date_short }}{% if not w.changes %} · {{ w.quiet }}{% endif %}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
+  <div class="section-head{{ ' quiet-head' if not w.changes }}"><h2>{{ title }} <span class="sub">· {{ w.date|nice_date_short }}{% if not w.changes and w.quiet %} · {{ w.quiet }}{% endif %}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
   {% if w.errors %}<div class="note" style="margin-top:0.625rem">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}
   {% if w.changes %}{{ changes(w.changes, root) }}{% endif %}
 </section>

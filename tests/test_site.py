@@ -64,7 +64,7 @@ def test_untrusted_text_is_escaped(tmp_path):
 
 def test_empty_site_builds(tmp_path):
     out = site.build(tmp_path / "s", weeks=[], snapshot={"drugs": {}, "trials": {}}, watchlist=WL)
-    assert "Cholesterol Drugs in the Pipeline" in (out / "index.html").read_text()
+    assert "Cholesterol Drugs Pipeline" in (out / "index.html").read_text()
     assert "No weekly runs yet" in (out / "weeks/index.html").read_text()
 
 
@@ -78,7 +78,6 @@ def test_pipeline_rows_carry_filter_data(tmp_path):
     for d in WL["drugs"]:
         assert d.get("route") and d.get("frequency") and d.get("proven"), d["id"]
     assert 'data-lowers="tg ldl"' in html or 'data-lowers="ldl tg"' in html  # solbinsiran matches both
-    assert "Lp(a) drugs only help if your Lp(a) is high" in html
     assert (out / "assets/filter.js").exists() and (out / "assets/site.css").exists()
 
 
