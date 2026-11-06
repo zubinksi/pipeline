@@ -1,9 +1,9 @@
-{# Same look as the site: cream paper on a pale wall, slate ink, teal accent,
+{# Same look as the site: cream paper on a pale wall, slate ink, navy accent,
    serif text with mono labels. Email clients rarely load web fonts, so the
    stacks fall back to Georgia and the system monospace. #}
 {% set serif = "'Geist Serif',Georgia,'Times New Roman',serif" %}
 {% set mono = "'Geist Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" %}
-{% set ink = "#1f2933" %}{% set ink2 = "#374151" %}{% set muted = "#6b7280" %}{% set accent = "#0f766e" %}
+{% set ink = "#1f2933" %}{% set ink2 = "#374151" %}{% set muted = "#6b7280" %}{% set accent = "#2c4a7a" %}
 {% set rule = "#ece8dc" %}{% set rule2 = "#ddd8ca" %}{% set paper = "#fbf9f3" %}{% set wall = "#eceae3" %}
 {% set label = "font-family:" ~ mono ~ ";font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:" ~ muted ~ ";" %}
 <!doctype html>
@@ -46,7 +46,7 @@
 <tr><td style="padding:4px 28px 8px 28px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
   {% for g in groups %}
-  <tr><td colspan="2" style="padding:14px 0 4px;"><div style="background:#e3f0ed;border-radius:2px;padding:6px 10px;font-family:{{ mono }};font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:{{ accent }};">&#9679; {{ g.title }}</div></td></tr>
+  <tr><td colspan="2" style="padding:14px 0 4px;"><div style="background:#e6ebf3;border-radius:2px;padding:6px 10px;font-family:{{ mono }};font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:{{ accent }};">&#9679; {{ g.title }}</div></td></tr>
   {% for r in g.rows %}
   <tr>
     <td style="padding:10px 8px 10px 0;{% if not loop.first %}border-top:1px solid {{ rule }};{% endif %}">
@@ -56,7 +56,7 @@
     </td>
     <td align="right" style="padding:10px 0;white-space:nowrap;{% if not loop.first %}border-top:1px solid {{ rule }};{% endif %}">
       {% if r.show_stage %}<div style="font-family:{{ mono }};font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:{{ ink2 }};margin-bottom:3px;">{{ r.stage_plain }}</div>{% endif %}
-      {% for i in range(1, 6) %}{% if i == r.rank %}<span style="color:{{ '#b45309' if r.moved else accent }};font-size:15px;">&#9679;</span>{% elif i < r.rank %}<span style="color:#99c9c3;font-size:11px;">&#9679;</span>{% else %}<span style="color:#d6d3ca;font-size:11px;">&#9675;</span>{% endif %}{% endfor %}
+      {% for i in range(1, 6) %}{% if i == r.rank %}<span style="color:{{ '#b45309' if r.moved else accent }};font-size:15px;">&#9679;</span>{% elif i < r.rank %}<span style="color:#a9b8d0;font-size:11px;">&#9679;</span>{% else %}<span style="color:#d6d3ca;font-size:11px;">&#9675;</span>{% endif %}{% endfor %}
     </td>
   </tr>
   {% endfor %}

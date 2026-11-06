@@ -1,5 +1,5 @@
 /* Light, matched to the weekly email: cream paper on a pale graph-paper wall,
-   slate ink, teal accent. Geist Serif for reading, Geist Mono for small labels
+   slate ink, navy accent. Geist Serif for reading, Geist Mono for small labels
    (SIL OFL, fonts/OFL.txt). */
 @font-face {
   font-family: 'Geist Serif';
@@ -17,7 +17,7 @@
 }
 :root {
   --ground: #eceae3;
-  --grid: rgba(15, 118, 110, 0.07);
+  --grid: rgba(44, 74, 122, 0.07);
   --slab: #fbf9f3;
   --raised: #f4f1e8;
   --hover: #f3efe4;
@@ -30,10 +30,10 @@
   --ink3: #4b5563;
   --muted: #6b7280;
   --track: #d6d3ca;
-  --done: #99c9c3;
-  --now: #0f766e;
-  --accent: #0f766e;
-  --accent-dim: #e3f0ed;
+  --done: #a9b8d0;
+  --now: #2c4a7a;
+  --accent: #2c4a7a;
+  --accent-dim: #e6ebf3;
   --moved: #b45309;
   --amber: #92400e;
   --setback: #9b3b2f;
