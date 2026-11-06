@@ -25,6 +25,13 @@ PROVEN_LABEL = {
     "failed": "Didn't prevent heart attacks",
     "untested": "No heart-attack trial yet",
 }
+# The same, short enough for a table column headed "Prevents heart attacks?"
+PROVEN_SHORT = {
+    "yes": "Proven",
+    "testing": "Trial underway",
+    "failed": "Didn't prevent",
+    "untested": "No trial yet",
+}
 LOWERS_LABEL = {"ldl": "LDL", "lpa": "Lp(a)", "tg": "Triglycerides"}
 
 
@@ -48,7 +55,8 @@ def rows(watchlist: dict, stages: dict, moved: set[str]) -> list[dict]:
                     "stage_plain": STAGE_PLAIN[stage][0], "stage_explain": STAGE_PLAIN[stage][1],
                     "stage": stage, "moved": d["id"] in moved,
                     "lowers_keys": lowers_keys(d.get("lowers", "")),
-                    "proven_label": PROVEN_LABEL.get(d.get("proven", ""), "")})
+                    "proven_label": PROVEN_LABEL.get(d.get("proven", ""), ""),
+                    "proven_short": PROVEN_SHORT.get(d.get("proven", ""), "")})
     return out
 
 

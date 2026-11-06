@@ -52,9 +52,10 @@ events: []
 drugs:
   # Plain-language fields shown on the site and in the email:
   #   lowers  what it lowers (LDL, Lp(a), triglycerides)
-  #   form    how you'd take it
+  #   form    how you'd take it (often: the short version for the table)
   #   plain   one sentence
-  #   effect  how much it lowers, from trials (with effect_source)
+  #   effect  how much it lowers, from trials (with effect_source;
+  #           effect_short for the table)
   #   proven  did it prevent heart attacks and strokes in a large trial?
   #           yes | testing (trial underway) | failed | untested (no trial yet)
   #           with proven_note and proven_source
@@ -69,11 +70,13 @@ drugs:
     target: PCSK9 (LDL)
     lowers: LDL
     form: Shot, every 2 weeks or monthly
+    often: "Every 2–4 weeks"
     route: injection
     frequency: monthly
     plain: "A shot every 2 weeks or once a month that lowers LDL. Sold as Repatha; on the market since 2015."
     stage: approved
     effect: "LDL down about 60%"
+    effect_short: "LDL ↓ 60%"
     effect_source: https://www.tctmd.com/news/fourier-evolocumab-reduces-risk-cvd-events-15-compared-placebo
     proven: "yes"
     proven_note: "15% fewer heart attacks, strokes and related events in a 27,000-person trial (FOURIER, 2017). A 2025 trial (VESALIUS-CV) also found a benefit in people who hadn't had a heart attack or stroke."
@@ -88,11 +91,13 @@ drugs:
     target: PCSK9 (LDL)
     lowers: LDL
     form: Shot, every 2 weeks or monthly
+    often: "Every 2–4 weeks"
     route: injection
     frequency: monthly
     plain: "A shot every 2 weeks or once a month that lowers LDL. Sold as Praluent."
     stage: approved
     effect: "LDL down about 50%"
+    effect_short: "LDL ↓ 50%"
     effect_source: https://www.acc.org/Latest-in-Cardiology/Articles/2018/03/05/15/53/Sat-9am-ODYSSEY-Outcomes-CV-Outcomes-With-Alirocumab-After-ACS-acc-2018
     proven: "yes"
     proven_note: "About 15% fewer heart attacks, strokes and related events in a 19,000-person trial of people who'd recently had a heart attack (ODYSSEY OUTCOMES, 2018)."
@@ -107,11 +112,13 @@ drugs:
     target: PCSK9 (LDL)
     lowers: LDL
     form: Shot, twice a year (after two starter doses)
+    often: "Twice a year"
     route: injection
     frequency: infrequent
     plain: "A shot twice a year that lowers LDL by switching off PCSK9 in the liver. Sold as Leqvio."
     stage: approved
     effect: "LDL down about 50%"
+    effect_short: "LDL ↓ 50%"
     effect_source: https://www.pharmacytimes.com/view/inclisiran-shows-promise-treating-hyperlipidemia-in-phase-3-clinical-trials
     proven: testing
     proven_note: "Two large heart-attack prevention trials are running: ORION-4 (main data expected around Oct 2026) and VICTORION-2 PREVENT (around May 2027)."
@@ -126,11 +133,13 @@ drugs:
     target: PCSK9 (LDL)
     lowers: LDL
     form: Shot, once a month
+    often: "Monthly"
     route: injection
     frequency: monthly
     plain: "A once-a-month shot that lowers LDL. It can be kept at room temperature."
     stage: approved
     effect: "LDL down about 60%"
+    effect_short: "LDL ↓ 60%"
     effect_source: https://www.hcplive.com/view/lerodalcibep-autoinjector-receives-fda-approval-for-hypercholesterolemia
     proven: untested
     proven_note: "No heart-attack trial of its own. Its 2026 label points to results from other drugs in the same class (Repatha, Praluent)."
@@ -146,11 +155,13 @@ drugs:
     target: Lp(a)
     lowers: Lp(a)
     form: Shot, possibly once or twice a year
+    often: "1–2× a year"
     route: injection
     frequency: infrequent
     plain: "A shot that switches off the liver's production of Lp(a) for many months at a time."
     stage: phase3
     effect: "Lp(a) down about 94%"
+    effect_short: "Lp(a) ↓ 94%"
     effect_source: https://www.acc.org/Latest-in-Cardiology/Journal-Scans/2025/03/24/16/30/sun-130pm-alpaca-acc-2025
     proven: testing
     proven_note: "A large final-stage trial (ACCLAIM-Lp(a)) is testing whether it prevents heart attacks and strokes. Results are expected around 2029."
@@ -165,11 +176,13 @@ drugs:
     target: Lp(a)
     lowers: Lp(a)
     form: Shot, every 3 months or less often
+    often: "Every 3+ months"
     route: injection
     frequency: infrequent
     plain: "A shot a few times a year that strongly lowers Lp(a)."
     stage: phase3
     effect: "Lp(a) down 95%+"
+    effect_short: "Lp(a) ↓ 95%+"
     effect_source: https://www.amgen.com/newsroom/press-releases/2022/11/amgen-presents-new-phase-2-data-that-show-olpasiran-delivers-significant-reduction-in-lipoproteina-levels
     proven: testing
     proven_note: "Its large heart-attack prevention trial (OCEAN(a)-Outcomes) is fully enrolled. Amgen hasn't said when results will come; some sources point to 2028."
@@ -184,12 +197,14 @@ drugs:
     target: Lp(a)
     lowers: Lp(a)
     form: Shot, once a month
+    often: "Monthly"
     route: injection
     frequency: monthly
     plain: "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial."
     stage: phase3
     badge: setback
     effect: "Lp(a) down about 80%"
+    effect_short: "Lp(a) ↓ 80%"
     effect_source: https://nutrition-evidence.com/article/377243/emerging-rna-therapeutics-to-lower-blood-levels-of-lpa-jacc-focus-seminar-24
     proven: failed
     proven_note: "Its large trial (Lp(a)HORIZON, Sep 2026) lowered Lp(a) but did not reduce heart attacks or strokes. Full results are still to be presented."
@@ -204,11 +219,13 @@ drugs:
     target: PCSK9 (gene editing)
     lowers: LDL
     form: One-time infusion
+    often: "Once"
     route: infusion
     frequency: once
     plain: "A one-time gene-editing treatment meant to lower LDL for life."
     stage: phase2
     effect: "LDL down up to 62%"
+    effect_short: "LDL ↓ up to 62%"
     effect_source: https://www.hcplive.com/view/verve-102-lowers-pcsk9-ldl-c-interim-phase-1b-hypercholesterolemia-data
     proven: untested
     proven_note: "Too early for a heart-attack trial."
@@ -223,12 +240,14 @@ drugs:
     target: Lp(a)
     lowers: Lp(a)
     form: Shot, a few times a year
+    often: "A few times a year"
     route: injection
     frequency: infrequent
     plain: "A shot a few times a year that strongly lowers Lp(a)."
     stage: phase2
     badge: on hold
     effect: "Lp(a) down 80%+"
+    effect_short: "Lp(a) ↓ 80%+"
     effect_source: https://www.healio.com/news/cardiology/20250117/the-year-in-lipids-progress-in-lpa-management-and-a-blow-to-the-hdl-hypothesis
     proven: untested
     proven_note: "No heart-attack trial yet; one is planned once the company finds a partner."
@@ -243,11 +262,13 @@ drugs:
     target: ANGPTL3
     lowers: triglycerides & LDL
     form: Shot, a few times a year
+    often: "A few times a year"
     route: injection
     frequency: infrequent
     plain: "A shot that mainly lowers triglycerides (another blood fat), with a smaller drop in LDL."
     stage: phase2
     effect: "Triglycerides down about 50%, LDL about 17%"
+    effect_short: "Triglycerides ↓ 50%; LDL ↓ 17%"
     effect_source: https://www.acc.org/latest-in-cardiology/clinical-trials/2025/03/28/03/10/prolong-ang3
     proven: untested
     proven_note: "Too early for a heart-attack trial."

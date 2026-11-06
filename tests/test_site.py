@@ -85,7 +85,7 @@ def test_rows_show_evidence_and_only_unusual_stage_words(tmp_path):
     out, _ = _build(tmp_path)
     html = (out / "index.html").read_text()
     assert "Prevents heart attacks" in html and "Didn&#39;t prevent heart attacks" in html
-    assert "LDL down about 60%" in html
+    assert "LDL ↓ 60%" in html and "Twice a year" in html and "Heart attacks?" in html
     # every drug in "Getting close" is in final-stage trials, so the words aren't repeated per row
     close = html[html.index("Getting close"):html.index("Further out")]
     assert "Final-stage trials" not in close

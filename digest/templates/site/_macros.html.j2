@@ -30,22 +30,27 @@
     </div>
     {% endif %}
   </div>
-  {% for g in groups %}
-  <div class="group" data-group>
-    <h3>{{ g.title }} <span class="n" data-count>{{ g.rows|length }}</span></h3>
-    {% for r in g.rows %}
-    <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-lowers="{{ r.lowers_keys|join(' ') }}" data-freq="{{ r.frequency or '' }}">
-      <div>
-        <div class="drug-name">{{ r.name }}{{ badge(r.badge) }}{% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}</div>
-        <div class="drug-line">{{ r.form }}{% if r.effect %}<span class="sep">·</span>{{ r.effect }}{% elif r.lowers %}<span class="sep">·</span>lowers {{ r.lowers }}{% endif %}</div>
-        <div class="drug-proof">{{ proven(r) }}</div>
-      </div>
-      <div class="drug-stage">{% if r.show_stage %}<span class="words">{{ r.stage_plain }}</span>{% endif %}{{ mini(r.rank, r.moved) }}</div>
-      <span class="go" aria-hidden="true">&rsaquo;</span>
-    </a>
+  <div class="dtable">
+    <div class="dhead" aria-hidden="true">
+      <span>Drug</span><span>How often</span><span>Lowers</span><span>Heart attacks?</span><span class="c-stage">Stage</span><span></span>
+    </div>
+    {% for g in groups %}
+    <div class="group" data-group>
+      <h3>{{ g.title }} <span class="n" data-count>{{ g.rows|length }}</span></h3>
+      {% for r in g.rows %}
+      <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-lowers="{{ r.lowers_keys|join(' ') }}" data-freq="{{ r.frequency or '' }}">
+        <span class="c-name"><span class="drug-name">{{ r.name }}</span>{{ badge(r.badge) }}{% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}</span>
+        <span class="c-line"><span class="nb">{{ r.often or r.form }}</span><span class="sep">·</span>{% for part in (r.effect_short or r.effect or r.lowers).split("; ") %}<span class="nb">{{ part }}</span>{% if not loop.last %}, {% endif %}{% endfor %}</span>
+        <span class="c-often">{{ r.often or r.form }}</span>
+        <span class="c-effect">{{ r.effect_short or r.effect or r.lowers }}</span>
+        <span class="c-proof">{% if r.proven %}<span class="pf pf-{{ r.proven }}"><span class="pf-i" aria-hidden="true">{% if r.proven == 'yes' %}&#10003;{% elif r.proven == 'failed' %}&#10007;{% elif r.proven == 'testing' %}&#8230;{% else %}&ndash;{% endif %}</span><span class="pf-short">{{ r.proven_short }}</span><span class="pf-long">{{ r.proven_label }}</span></span>{% endif %}</span>
+        <span class="c-stage">{% if r.show_stage %}<span class="words">{{ r.stage_plain }}</span>{% endif %}{{ mini(r.rank, r.moved) }}</span>
+        <span class="go" aria-hidden="true">&rsaquo;</span>
+      </a>
+      {% endfor %}
+    </div>
     {% endfor %}
   </div>
-  {% endfor %}
   {% if filterable %}<p class="empty f-empty" hidden>Nothing on the list matches. Try setting Lowers or How often back.</p>{% endif %}
 </section>
 {%- endmacro %}
