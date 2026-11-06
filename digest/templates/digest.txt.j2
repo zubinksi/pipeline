@@ -15,7 +15,7 @@ WHAT MOVED
 
 ON THE HORIZON (next {{ horizon_days }} days)
 {% for h in horizon %}
-- {{ h.date }}  {{ h.drug }}: {{ h.what }}
+- {{ h.date|horizon_date }}  {{ h.drug }}: {{ h.what }}
   Source: {{ h.url }}
 {% endfor %}
 {% endif %}

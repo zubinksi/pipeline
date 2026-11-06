@@ -191,3 +191,17 @@ def _parse_partial_date(s: str) -> date | None:
     except (ValueError, TypeError):
         pass
     return None
+
+
+def fmt_horizon_date(s: str) -> str:
+    """'2026-11' -> 'NOV 2026'; '2027-01-04' -> '4 JAN 2027'."""
+    parts = s.split("-")
+    try:
+        if len(parts) == 2:
+            return date(int(parts[0]), int(parts[1]), 1).strftime("%b %Y").upper()
+        if len(parts) == 3:
+            d = date(*map(int, parts))
+            return f"{d.day} {d:%b %Y}".upper()
+    except ValueError:
+        pass
+    return s

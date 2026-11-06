@@ -1,61 +1,65 @@
-{% set font = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" %}
-{% set ink = "#1f2933" %}{% set muted = "#6b7280" %}{% set accent = "#0f766e" %}{% set rule = "#e5e7eb" %}
+{# Same look as the site: cream paper on a pale wall, slate ink, teal accent,
+   serif text with mono labels. Email clients rarely load web fonts, so the
+   stacks fall back to Georgia and the system monospace. #}
+{% set serif = "'Geist Serif',Georgia,'Times New Roman',serif" %}
+{% set mono = "'Geist Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" %}
+{% set ink = "#1f2933" %}{% set ink2 = "#374151" %}{% set muted = "#6b7280" %}{% set accent = "#0f766e" %}
+{% set rule = "#ece8dc" %}{% set rule2 = "#ddd8ca" %}{% set paper = "#fbf9f3" %}{% set wall = "#eceae3" %}
+{% set label = "font-family:" ~ mono ~ ";font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:" ~ muted ~ ";" %}
 <!doctype html>
 <html>
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cholesterol pipeline</title></head>
-<body style="margin:0;padding:0;background:#f4f5f7;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f5f7;">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>Cholesterol pipeline</title></head>
+<body style="margin:0;padding:0;background:{{ wall }};">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{{ wall }};">
 <tr><td align="center" style="padding:24px 12px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:10px;font-family:{{ font }};color:{{ ink }};">
-<tr><td style="padding:28px 28px 8px 28px;">
-  <div style="font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:{{ muted }};">Cholesterol pipeline · week of {{ today.strftime("%b %-d, %Y") }}</div>
-  <div style="font-size:20px;line-height:1.35;font-weight:600;margin-top:8px;">{{ headline }}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;">
+<tr><td style="padding:0 4px 12px 4px;font-family:{{ serif }};font-size:16px;letter-spacing:.01em;color:{{ ink }};">CHOLESTEROL PIPELINE</td></tr>
+</table>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:{{ paper }};border:1px solid {{ rule2 }};border-radius:3px;font-family:{{ serif }};color:{{ ink }};">
+<tr><td style="padding:28px 28px 6px 28px;">
+  <div style="{{ label }}">Week of {{ today.strftime("%b %-d, %Y") }}</div>
+  <div style="font-size:21px;line-height:1.35;margin-top:10px;">{{ headline }}</div>
 </td></tr>
 
 {% if changes %}
-<tr><td style="padding:16px 28px 4px 28px;">
-  <div style="font-size:13px;font-weight:600;color:{{ accent }};text-transform:uppercase;letter-spacing:.05em;">What moved</div>
-</td></tr>
+<tr><td style="padding:22px 28px 0 28px;"><div style="{{ label }}padding-bottom:6px;border-bottom:1px solid {{ rule2 }};">What moved</div></td></tr>
 {% for c in changes %}
-<tr><td style="padding:10px 28px;border-bottom:1px solid {{ rule }};">
-  {% if c.drug %}<div style="font-size:13px;color:{{ muted }};">{{ c.drug }} · {{ c.company }}</div>{% endif %}
-  <div style="font-size:15px;line-height:1.45;margin-top:2px;">{{ c.what }} <a href="{{ c.url }}" style="color:{{ accent }};font-size:13px;white-space:nowrap;">{{ c.source }} &rarr;</a></div>
-  {% if c.why %}<div style="font-size:14px;line-height:1.45;color:#374151;margin-top:6px;padding-left:10px;border-left:3px solid #cce5e2;"><span style="color:{{ muted }};">Why it matters:</span> {{ c.why }}</div>{% endif %}
+<tr><td style="padding:12px 28px;{% if not loop.last %}border-bottom:1px solid {{ rule }};{% endif %}">
+  {% if c.drug %}<div style="font-family:{{ mono }};font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:{{ muted }};">{{ c.drug }} · {{ c.company }}</div>{% endif %}
+  <div style="font-size:16px;line-height:1.45;margin-top:3px;">{{ c.what }} <a href="{{ c.url }}" style="font-family:{{ mono }};font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:{{ accent }};text-decoration:none;white-space:nowrap;">{{ c.source }} &rarr;</a></div>
+  {% if c.why %}<div style="font-size:15px;line-height:1.45;color:{{ ink2 }};margin-top:6px;"><span style="{{ label }}">Why it matters</span> {{ c.why }}</div>{% endif %}
 </td></tr>
 {% endfor %}
 {% endif %}
 
 {% if horizon %}
-<tr><td style="padding:22px 28px 4px 28px;">
-  <div style="font-size:13px;font-weight:600;color:{{ accent }};text-transform:uppercase;letter-spacing:.05em;">On the horizon <span style="color:{{ muted }};font-weight:400;text-transform:none;letter-spacing:0;">(next {{ horizon_days }} days)</span></div>
-</td></tr>
+<tr><td style="padding:24px 28px 0 28px;"><div style="{{ label }}padding-bottom:6px;border-bottom:1px solid {{ rule2 }};">On the horizon · next {{ horizon_days }} days</div></td></tr>
 {% for h in horizon %}
-<tr><td style="padding:6px 28px;font-size:14px;line-height:1.45;">
-  <span style="color:{{ muted }};display:inline-block;min-width:84px;">{{ h.date }}</span> <strong style="font-weight:600;">{{ h.drug }}</strong>: {{ h.what }} <a href="{{ h.url }}" style="color:{{ accent }};font-size:13px;">source &rarr;</a>
+<tr><td style="padding:10px 28px;font-size:15px;line-height:1.45;{% if not loop.last %}border-bottom:1px solid {{ rule }};{% endif %}">
+  <div style="font-family:{{ mono }};font-size:11px;letter-spacing:.08em;color:{{ ink2 }};">{{ h.date|horizon_date }}</div>
+  <strong style="font-weight:400;">{{ h.drug }}</strong>: <span style="color:{{ ink2 }};">{{ h.what }}</span> <a href="{{ h.url }}" style="font-family:{{ mono }};font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:{{ accent }};text-decoration:none;">Source &rarr;</a>
 </td></tr>
 {% endfor %}
 {% endif %}
 
-<tr><td style="padding:22px 28px 6px 28px;">
-  <div style="font-size:13px;font-weight:600;color:{{ accent }};text-transform:uppercase;letter-spacing:.05em;">Pipeline</div>
-</td></tr>
+<tr><td style="padding:24px 28px 0 28px;"><div style="{{ label }}padding-bottom:6px;border-bottom:1px solid {{ rule2 }};">Pipeline</div></td></tr>
 <tr><td style="padding:0 20px 8px 28px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:13px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0">
   <tr>
     <td></td>
-    {% for s in stages %}<td align="center" style="font-size:11px;color:{{ muted }};padding-bottom:6px;width:13%;">{{ s }}</td>{% endfor %}
+    {% for s in stages %}<td align="center" style="font-family:{{ mono }};font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:{{ muted }};padding:8px 0 6px;width:13%;">{{ s }}</td>{% endfor %}
   </tr>
   {% for r in rows %}
   <tr>
-    <td style="padding:7px 6px 7px 0;border-top:1px solid {{ rule }};">
-      <a href="{{ r.url }}" style="color:{{ ink }};text-decoration:none;font-weight:600;">{{ r.name }}</a>{% if r.moved %} <span style="color:#b45309;font-size:11px;font-weight:600;">&#9650; moved</span>{% endif %}{% if r.badge %} <span style="color:{{ muted }};font-size:10px;border:1px solid {{ rule }};border-radius:4px;padding:0 4px;white-space:nowrap;">{{ r.badge }}</span>{% endif %}
-      <div style="color:{{ muted }};font-size:11px;">{{ r.company }} · {{ r.form }}</div>
+    <td style="padding:8px 6px 8px 0;border-top:1px solid {{ rule }};">
+      <a href="{{ r.url }}" style="font-family:{{ mono }};font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:{{ ink }};text-decoration:none;">{{ r.name }}</a>{% if r.moved %} <span style="font-family:{{ mono }};color:#b45309;font-size:10px;">&#9650; MOVED</span>{% endif %}{% if r.badge %} <span style="font-family:{{ mono }};color:{{ muted }};font-size:9px;border:1px solid {{ rule2 }};border-radius:2px;padding:0 4px;white-space:nowrap;text-transform:uppercase;">{{ r.badge }}</span>{% endif %}
+      <div style="font-family:{{ mono }};color:{{ muted }};font-size:9px;letter-spacing:.08em;text-transform:uppercase;margin-top:2px;">{{ r.company }} · {{ r.form }}</div>
     </td>
     {% for i in range(1, stages|length + 1) %}
     <td align="center" style="border-top:1px solid {{ rule }};">
-      {% if i == r.rank %}<span style="color:{{ '#b45309' if r.moved else accent }};font-size:20px;line-height:1;">&#9679;</span>
-      {% elif i < r.rank %}<span style="color:#99c9c3;font-size:13px;line-height:1;">&#9679;</span>
-      {% else %}<span style="color:#d1d5db;font-size:13px;line-height:1;">&#9675;</span>{% endif %}
+      {% if i == r.rank %}<span style="color:{{ '#b45309' if r.moved else accent }};font-size:18px;line-height:1;">&#9679;</span>
+      {% elif i < r.rank %}<span style="color:#99c9c3;font-size:12px;line-height:1;">&#9679;</span>
+      {% else %}<span style="color:#d6d3ca;font-size:12px;line-height:1;">&#9675;</span>{% endif %}
     </td>
     {% endfor %}
   </tr>
@@ -63,10 +67,10 @@
 </table>
 </td></tr>
 
-<tr><td style="padding:18px 28px 26px 28px;font-size:12px;line-height:1.5;color:{{ muted }};">
-  {% if errors %}<div style="margin-bottom:8px;color:#92400e;">Couldn't reach this week: {{ errors|join(", ") }}. Last week's data was kept for these; they'll be checked again next week.</div>{% endif %}
-  {% if site_url %}<div style="margin-bottom:8px;"><a href="{{ site_url }}" style="color:{{ accent }};">Open the full pipeline site &rarr;</a></div>{% endif %}
-  Built from ClinicalTrials.gov, openFDA, FDA press announcements and news searches. Every item links to its source. "Why it matters" lines are AI-written from those items. Informational only, not medical advice.
+<tr><td style="padding:16px 28px 26px 28px;font-family:{{ mono }};font-size:9.5px;letter-spacing:.08em;line-height:1.7;text-transform:uppercase;color:{{ muted }};">
+  {% if errors %}<div style="margin-bottom:8px;color:#92400e;">Couldn't reach this week: {{ errors|join(", ") }}. Last week's data was kept for these.</div>{% endif %}
+  {% if site_url %}<div style="margin-bottom:8px;"><a href="{{ site_url }}" style="color:{{ accent }};text-decoration:none;">Open the pipeline site &rarr;</a></div>{% endif %}
+  Built from ClinicalTrials.gov, openFDA and news searches · every item links to its source · "why it matters" lines are AI-written · informational only, not medical advice
 </td></tr>
 </table>
 </td></tr>

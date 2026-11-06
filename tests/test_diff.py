@@ -51,17 +51,17 @@ def test_phase1_noise_is_ignored():
 
 def test_new_phase2_trial_reported():
     before, after = before_after(WL)
-    after["trials"]["NCT3"] = _trial("NCT3", "muvalaplin", ["PHASE2"], "NOT_YET_RECRUITING", 2)
+    after["trials"]["NCT3"] = _trial("NCT3", "pelacarsen", ["PHASE2"], "NOT_YET_RECRUITING", 2)
     new = [c for c in diff.compute(before, after, WL) if c.kind == "trial_new"]
     assert len(new) == 1 and "NCT3" in new[0].what
 
 
 def test_fda_approval_suppresses_duplicate_stage_change():
     before, after = before_after(WL)
-    after["fda"]["laroprovstat"] = {"approved": True, "brand": "Example", "date": "2026-11-01",
+    after["fda"]["lepodisiran"] = {"approved": True, "brand": "Example", "date": "2026-11-01",
                                     "url": "https://fda.example/1"}
-    after["drugs"]["laroprovstat"] = {"stage": "approved", "basis": "FDA", "url": "https://fda.example/1"}
-    lar = [c for c in diff.compute(before, after, WL) if c.drug == "laroprovstat"]
+    after["drugs"]["lepodisiran"] = {"stage": "approved", "basis": "FDA", "url": "https://fda.example/1"}
+    lar = [c for c in diff.compute(before, after, WL) if c.drug == "lepodisiran"]
     assert [c.kind for c in lar if c.kind in ("fda_approval", "stage_change")] == ["fda_approval"]
 
 
@@ -73,9 +73,9 @@ def test_seen_news_not_repeated():
 
 def test_new_drug_on_watchlist_is_baseline():
     before, after = before_after(WL)
-    del before["drugs"]["muvalaplin"]
-    after["trials"]["NCT4"] = _trial("NCT4", "muvalaplin", ["PHASE3"], "RECRUITING", 3)
-    assert not [c for c in diff.compute(before, after, WL) if c.drug == "muvalaplin"]
+    del before["drugs"]["pelacarsen"]
+    after["trials"]["NCT4"] = _trial("NCT4", "pelacarsen", ["PHASE3"], "RECRUITING", 3)
+    assert not [c for c in diff.compute(before, after, WL) if c.drug == "pelacarsen"]
 
 
 def test_discovery_skips_seen_and_watched():
@@ -116,13 +116,13 @@ def test_finalize_marks_seen():
 
 def test_source_down_on_first_run_does_not_flood_next_week():
     before, after = before_after(WL)
-    # last week CT.gov and openFDA never succeeded for laroprovstat, and news was down
-    others = [d["id"] for d in WL["drugs"] if d["id"] != "laroprovstat"]
+    # last week CT.gov and openFDA never succeeded for lepodisiran, and news was down
+    others = [d["id"] for d in WL["drugs"] if d["id"] != "lepodisiran"]
     before["baselined"] = {"ctgov": others, "fda": others, "news": False, "discovery": True}
-    after["trials"]["NCT6"] = _trial("NCT6", "laroprovstat", ["PHASE3"], "RECRUITING", 3)
-    after["fda"]["laroprovstat"] = {"approved": True, "url": "u"}
+    after["trials"]["NCT6"] = _trial("NCT6", "lepodisiran", ["PHASE3"], "RECRUITING", 3)
+    after["fda"]["lepodisiran"] = {"approved": True, "url": "u"}
     changes = diff.compute(before, after, WL)
-    assert not [c for c in changes if c.drug == "laroprovstat" and c.kind != "stage_change"]
+    assert not [c for c in changes if c.drug == "lepodisiran" and c.kind != "stage_change"]
     assert "news" not in kinds(changes)
 
 
@@ -131,3 +131,9 @@ def test_stage_change_needs_baselined_evidence():
     others = [d["id"] for d in WL["drugs"] if d["id"] != "zerlasiran"]
     before["baselined"] = {"ctgov": others, "fda": others, "news": True, "discovery": True}
     assert "stage_change" not in kinds(diff.compute(before, after, WL))
+
+
+def test_horizon_date_format():
+    assert diff.fmt_horizon_date("2026-11") == "NOV 2026"
+    assert diff.fmt_horizon_date("2027-01-04") == "4 JAN 2027"
+    assert diff.fmt_horizon_date("soon") == "soon"

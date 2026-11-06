@@ -70,11 +70,12 @@ def test_empty_site_builds(tmp_path):
 def test_pipeline_rows_carry_filter_data(tmp_path):
     out, _ = _build(tmp_path)
     html = (out / "index.html").read_text()
-    assert "data-filter" in html and 'data-k="type" data-v="pill"' in html and 'data-k="freq" data-v="monthly"' in html
+    assert "data-filter" in html and 'data-k="type" data-v="injection"' in html and 'data-k="freq" data-v="monthly"' in html
+    assert 'data-v="daily"' not in html  # filter options only for values on the watchlist
     assert html.count('class="strip-row"') == len(WL["drugs"])
     for d in WL["drugs"]:
         assert d.get("route") and d.get("frequency"), d["id"]
-    assert 'data-type="pill" data-freq="daily"' in html
+    assert 'data-type="injection" data-freq="monthly"' in html
     assert (out / "assets/filter.js").exists() and (out / "assets/site.css").exists()
 
 
@@ -86,3 +87,20 @@ def test_watchlist_rejects_unknown_route(tmp_path):
     p.write_text(yaml.safe_dump(data))
     with pytest.raises(ValueError, match="route"):
         load(p)
+
+
+def test_dropped_drugs_and_retired_sources_are_hidden(tmp_path):
+    rec = {"date": "2026-11-06", "headline": "h", "baseline": True, "moved": [], "stages": {},
+           "changes": [{"id": "x", "kind": "news", "drug": "obicetrapib", "what": "gone", "url": "u", "source": "s", "why": ""}],
+           "horizon": [{"date": "2026-11", "drug": "Obicetrapib", "what": "gone", "url": "u"},
+                       {"date": "2026-12", "drug": "Olpasiran", "what": "kept", "url": "u"}],
+           "errors": ["FDA press announcements", "openFDA"]}
+    out = site.build(tmp_path / "s", weeks=[rec], snapshot={"drugs": {}, "trials": {}}, watchlist=WL)
+    html = (out / "index.html").read_text()
+    assert "Obicetrapib" not in html and "gone" not in html and "kept" in html and "DEC 2026" in html
+    assert "FDA press announcements" not in html and "openFDA" in html
+
+
+def test_drug_page_has_back_link(tmp_path):
+    out, _ = _build(tmp_path)
+    assert 'class="back" href="../index.html"' in (out / "drugs/olpasiran.html").read_text()

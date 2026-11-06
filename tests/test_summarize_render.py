@@ -76,7 +76,7 @@ def test_render_full_digest():
                       snapshot=after, watchlist=WL, today=date(2026, 11, 3))
     for section in ("WHAT MOVED", "ON THE HORIZON", "PIPELINE"):
         assert section in d.text
-    assert "▲ moved" in d.text and "&#9650; moved" in d.html
+    assert "▲ moved" in d.text and "&#9650; MOVED" in d.html
     for c in changes:
         assert c.url.replace("&", "&amp;") in d.html
     assert "not medical advice" in d.text

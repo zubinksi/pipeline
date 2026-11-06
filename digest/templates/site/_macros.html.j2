@@ -52,7 +52,7 @@
     {% if not show_drug and c.week %}<a href="{{ root }}weeks/{{ c.week }}.html">{{ c.week|nice_date }}</a> · {% endif %}
     <span class="kind">{{ c.kind_label }}</span>
   </div>
-  <div class="what">{{ c.what }} <a class="src" href="{{ c.url }}" rel="noopener">{{ c.source }} &rarr;</a></div>
+  <div class="what">{{ c.what }} <a class="src" href="{{ c.url }}" rel="noopener noreferrer">{{ c.source }} &rarr;</a></div>
   {% if c.why %}<div class="why"><span class="label">Why it matters</span>{{ c.why }}</div>{% endif %}
 </div>
 {% endfor %}
@@ -63,8 +63,8 @@
   <div class="module-head"><span class="label">On the horizon</span><span class="label">Next {{ horizon_days }} days</span></div>
   {% for h in items %}
   <div class="h-row">
-    <div class="h-when">{{ h.date }}</div>
-    <div class="h-what"><b>{{ h.drug }}</b>: {{ h.what }} <a class="src" href="{{ h.url }}" rel="noopener">Source &rarr;</a></div>
+    <div class="h-when">{{ h.date|horizon_date }}</div>
+    <div class="h-what"><b>{{ h.drug }}</b>: {{ h.what }} <a class="src" href="{{ h.url }}" rel="noopener noreferrer">Source &rarr;</a></div>
   </div>
   {% endfor %}
 </div>

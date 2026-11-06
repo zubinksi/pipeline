@@ -13,6 +13,8 @@
 # summary and as the "why it matters" fallback when the Claude API is off.
 #
 # Verified by web search on 2026-11-03 (sources listed per drug).
+# Not tracked: daily-dosed drugs and drugs approved only outside the US
+# (removed 2026-11-06: muvalaplin, enlicitide, laroprovstat, obicetrapib).
 # clinicaltrials.gov itself was not reachable from the build sandbox, so the
 # first real run on GitHub Actions is the first check against the registry.
 
@@ -28,8 +30,9 @@ settings:
 reader_context: >
   32 years old, not on cholesterol medication, with a family history of high
   cholesterol, so expects to need treatment eventually. Would prefer to avoid
-  statins if possible. Most interested in non-statin options: oral pills,
-  infrequent injections, and anything targeting lipoprotein(a).
+  statins if possible. Most interested in non-statin options that don't need
+  daily dosing (monthly or less often, or one-time), and anything targeting
+  lipoprotein(a).
 
 # Extra RSS feeds scanned for any watchlist drug name (in addition to a
 # Google News search per drug, which picks up company press releases).
@@ -47,19 +50,6 @@ events: []
 
 drugs:
   # ---- Lipoprotein(a) ----
-  - id: muvalaplin
-    name: Muvalaplin
-    aliases: [LY3473329]
-    company: Eli Lilly
-    target: Lp(a)
-    form: Daily pill
-    route: pill
-    frequency: daily
-    plain: "A once-daily pill that blocks Lp(a) from forming. It would be the first oral Lp(a) drug."
-    stage: phase3
-    note: "MOVE-Lp(a) outcomes trial recruiting; primary completion est. 2031"
-    sources: [https://clinicaltrials.gov/study/NCT07157774]
-
   - id: lepodisiran
     name: Lepodisiran
     aliases: [LY3819469]
@@ -113,48 +103,6 @@ drugs:
     badge: seeking partner
     note: "Phase 3-ready, but start depends on finding a partner"
     sources: [https://www.biospace.com/drug-development/silence-quiets-phase-iii-pace-for-lipoprotein-drug-seeks-partner]
-
-  # ---- Oral PCSK9 ----
-  - id: enlicitide
-    name: Enlicitide
-    aliases: [MK-0616, Lipfendra]
-    company: Merck
-    target: PCSK9 (LDL)
-    form: Daily pill
-    route: pill
-    frequency: daily
-    plain: "The first PCSK9 pill. It lowers LDL by about half, similar to the injectable PCSK9 drugs."
-    stage: approved
-    note: "FDA approved Jul 16 2026 (Lipfendra); CORALreef Outcomes trial ongoing"
-    sources: [https://www.tctmd.com/news/fda-approves-enlicitide-oral-pcsk9-inhibitor-ldl-lowering]
-
-  - id: laroprovstat
-    name: Laroprovstat
-    aliases: [AZD0780]
-    company: AstraZeneca
-    target: PCSK9 (LDL)
-    form: Daily pill
-    route: pill
-    frequency: daily
-    plain: "A once-daily oral PCSK9 blocker, a pill alternative to PCSK9 injections."
-    stage: phase3
-    note: "AZURE Phase 3 program running; data expected 2027"
-    sources: [https://www.sec.gov/Archives/edgar/data/901832/000110465926019110/tm261135d3_ex99-1.pdf]
-
-  # ---- CETP ----
-  - id: obicetrapib
-    name: Obicetrapib
-    aliases: [TA-8995, Ubeslo, Evlarco]
-    company: NewAmsterdam / Menarini
-    target: CETP (LDL)
-    form: Daily pill
-    route: pill
-    frequency: daily
-    plain: "A once-daily CETP-inhibitor pill that lowers LDL. It is also sold as a combination pill with ezetimibe."
-    stage: approved
-    badge: EU only
-    note: "EU approved Sep 2026; US NDA reportedly not yet filed; PREVAIL outcomes interim expected Q4 2026"
-    sources: [https://www.thepharmaletter.com/biotech-news/first-global-regulatory-approval-of-obicetrapib]
 
   # ---- Other mechanisms ----
   - id: solbinsiran

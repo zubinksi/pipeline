@@ -12,7 +12,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from . import STAGE_LABEL, STAGE_RANK, STAGES
-from .diff import KIND_LABEL
+from .diff import KIND_LABEL, fmt_horizon_date
 from .sources.ctgov import STATUS_PLAIN, phase_label
 
 TEMPLATES = Path(__file__).parent / "templates" / "site"
@@ -36,6 +36,7 @@ def _fmt_short(s: str) -> str:
 
 _env.filters["nice_date"] = _fmt_date
 _env.filters["nice_date_short"] = _fmt_short
+_env.filters["horizon_date"] = fmt_horizon_date
 STATIC = Path(__file__).parent / "static"
 TYPE_LABEL = {"pill": "Pills", "injection": "Injections", "infusion": "Infusions"}
 FREQ_LABEL = {"daily": "Daily", "monthly": "Monthly", "infrequent": "Infrequent", "once": "One-time"}
@@ -51,14 +52,21 @@ def _rows(watchlist: dict, stages: dict, moved: set[str]) -> list[dict]:
     return rows
 
 
-def _week_view(rec: dict, drugs: dict) -> dict:
+def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
+    """A week's record as shown today: drugs since dropped from the watchlist are
+    left out, and so are errors from sources no longer used."""
+    names = {d["name"] for d in drugs.values()}
     changes = []
     for c in rec["changes"]:
+        if c.get("drug") and c["drug"] not in drugs:
+            continue
         d = drugs.get(c.get("drug"))
         changes.append({**c, "drug_name": d["name"] if d else "", "company": d["company"] if d else "",
                         "kind_label": KIND_LABEL[c["kind"]][0]})
     headline = rec["headline"] or "Nothing changed this week."
-    return {**rec, "headline": headline, "changes": changes}
+    return {**rec, "headline": headline, "changes": changes,
+            "horizon": [h for h in rec.get("horizon", []) if h["drug"] in names],
+            "errors": [e for e in rec.get("errors", []) if e.split(" (")[0] in sources]}
 
 
 def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict,
@@ -70,7 +78,8 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
     (out / "drugs").mkdir()
     shutil.copytree(STATIC, out / "assets")
     drugs = {d["id"]: d for d in watchlist["drugs"]}
-    views = [_week_view(w, drugs) for w in weeks]  # newest first
+    sources = {"ClinicalTrials.gov", "openFDA", "Google News", *(f["name"] for f in watchlist.get("feeds", []))}
+    views = [_week_view(w, drugs, sources) for w in weeks]  # newest first
     latest = views[0] if views else None
     stages = {k: v["stage"] for k, v in snapshot.get("drugs", {}).items()}
     moved = set(latest["moved"]) if latest else set()

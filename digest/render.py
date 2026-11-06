@@ -9,13 +9,14 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from . import STAGE_RANK, STAGES
-from .diff import Change, HorizonItem
+from .diff import Change, HorizonItem, fmt_horizon_date
 
 TEMPLATES = Path(__file__).parent / "templates"
 _env = Environment(loader=FileSystemLoader(TEMPLATES), autoescape=select_autoescape(["html", "j2"]),
                    trim_blocks=True, lstrip_blocks=True)
 _text_env = Environment(loader=FileSystemLoader(TEMPLATES), autoescape=False,
                         trim_blocks=True, lstrip_blocks=True)
+_env.filters["horizon_date"] = _text_env.filters["horizon_date"] = fmt_horizon_date
 
 
 @dataclass
@@ -53,7 +54,7 @@ def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], 
         if errors:
             line += f" (Couldn't reach: {', '.join(errors)}; they'll be checked again next week.)"
         return Digest(subject=f"Cholesterol pipeline: nothing changed ({today:%b %-d})",
-                      html=f"<p style=\"font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;"
+                      html=f"<p style=\"font-family:Georgia,serif;"
                            f"font-size:15px;color:#1f2933\">{_esc(line)}</p>",
                       text=line + "\n")
 
