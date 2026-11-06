@@ -12,6 +12,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from . import STAGE_LABEL, STAGE_RANK, STAGES
+from . import display
 from .diff import KIND_LABEL, fmt_horizon_date
 from .sources.ctgov import STATUS_PLAIN, phase_label
 
@@ -38,43 +39,12 @@ _env.filters["nice_date"] = _fmt_date
 _env.filters["nice_date_short"] = _fmt_short
 _env.filters["horizon_date"] = fmt_horizon_date
 STATIC = Path(__file__).parent / "static"
-TYPE_LABEL = {"pill": "Pills", "injection": "Shots", "infusion": "Infusions"}
 FREQ_LABEL = {"daily": "Daily", "monthly": "Monthly", "infrequent": "Less than monthly", "once": "One-time"}
-# Plain words for each stage, and what it means for someone waiting on a drug.
-STAGE_PLAIN = {
-    "phase1": ("Early safety tests", "First tests in people, mainly for safety."),
-    "phase2": ("Mid-stage testing", "Testing whether it works and finding the right dose."),
-    "phase3": ("Final-stage trials", "Large trials, often testing whether it prevents heart attacks. The last step before applying for approval."),
-    "filed": ("FDA reviewing", "The company has applied; the FDA is deciding."),
-    "approved": ("Approved", "Doctors can prescribe it."),
-}
-GROUPS = [
-    ("now", "Available now", ("approved",)),
-    ("close", "Getting close", ("phase3", "filed")),
-    ("later", "Further out", ("phase1", "phase2")),
-]
 ACTIVE = {"NOT_YET_RECRUITING", "RECRUITING", "ENROLLING_BY_INVITATION", "ACTIVE_NOT_RECRUITING"}
 
 
-def _rows(watchlist: dict, stages: dict, moved: set[str]) -> list[dict]:
-    rows = []
-    for d in watchlist["drugs"]:
-        stage = stages.get(d["id"], d["stage"])
-        rows.append({**d, "rank": STAGE_RANK[stage], "stage_label": STAGE_LABEL[stage],
-                     "stage_plain": STAGE_PLAIN[stage][0], "stage_explain": STAGE_PLAIN[stage][1],
-                     "stage": stage, "moved": d["id"] in moved})
-    return rows
-
-
-def _groups(rows: list[dict]) -> list[dict]:
-    """Drugs grouped by how close they are to a pharmacy, closest first."""
-    out = []
-    for key, title, stages in GROUPS:
-        members = [r for r in rows if r["stage"] in stages]
-        if members:
-            members.sort(key=lambda r: -r["rank"])
-            out.append({"key": key, "title": title, "rows": members})
-    return out
+_rows = display.rows
+_groups = display.groups
 
 
 def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
@@ -91,7 +61,8 @@ def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
     # a baseline week's stored headline counts drugs at the time; say it plainly instead
     headline = ("Tracking started this week. Changes show up here from next week." if rec.get("baseline")
                 else rec["headline"] or "Nothing changed this week.")
-    return {**rec, "headline": headline, "changes": changes,
+    quiet = "tracking started" if rec.get("baseline") else "no changes"
+    return {**rec, "headline": headline, "changes": changes, "quiet": quiet,
             "horizon": [h for h in rec.get("horizon", []) if h["drug"] in names],
             "errors": [e for e in rec.get("errors", []) if e.split(" (")[0] in sources]}
 
@@ -114,8 +85,10 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
     common = {"site_title": site_title, "stages": [label for _, label in STAGES],
               "horizon_days": watchlist["settings"].get("horizon_days", 60),
               "updated": snapshot.get("generated_at", "")[:10],
-              "filters": {"type": [(k, v) for k, v in TYPE_LABEL.items() if k in present("route")],
-                          "freq": [(k, v) for k, v in FREQ_LABEL.items() if k in present("frequency")]}}
+              "filters": {"lowers": [(k, v) for k, v in display.LOWERS_LABEL.items()
+                                     if any(k in display.lowers_keys(d.get("lowers", "")) for d in watchlist["drugs"])],
+                          "freq": [(k, v) for k, v in FREQ_LABEL.items() if k in present("frequency")]},
+              "has_lpa": any("lpa" in display.lowers_keys(d.get("lowers", "")) for d in watchlist["drugs"])}
 
     def write(path: str, template: str, root: str, sel: str = "", **ctx):
         html = _env.get_template(template).render(**common, root=root, sel=sel, **ctx)

@@ -7,7 +7,7 @@
   var selects = Array.prototype.slice.call(bar.querySelectorAll('select'));
   var groups = Array.prototype.slice.call(box.querySelectorAll('[data-group]'));
   var empty = box.querySelector('.f-empty');
-  var attr = { type: 'type', freq: 'freq' };
+  var attr = { lowers: 'lowers', freq: 'freq' };
   var params = new URLSearchParams(location.search);
   selects.forEach(function (s) {
     var v = params.get(s.dataset.k);
@@ -25,7 +25,7 @@
       var shown = 0;
       g.querySelectorAll('.drug').forEach(function (r) {
         var ok = Object.keys(want).every(function (k) {
-          return want[k] === 'all' || r.dataset[attr[k]] === want[k];
+          return want[k] === 'all' || (r.dataset[attr[k]] || '').split(' ').indexOf(want[k]) !== -1;
         });
         r.hidden = !ok;
         if (ok) shown++;

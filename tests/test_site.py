@@ -71,15 +71,25 @@ def test_empty_site_builds(tmp_path):
 def test_pipeline_rows_carry_filter_data(tmp_path):
     out, _ = _build(tmp_path)
     html = (out / "index.html").read_text()
-    assert "data-filter" in html and '<option value="injection">Shots</option>' in html
+    assert "data-filter" in html and '<option value="lpa">Lp(a)</option>' in html
     assert '<option value="monthly">Monthly</option>' in html
     assert 'value="daily"' not in html  # filter options only for values on the watchlist
     assert html.count('class="drug"') == len(WL["drugs"])
     for d in WL["drugs"]:
-        assert d.get("route") and d.get("frequency"), d["id"]
-    assert 'data-type="injection" data-freq="monthly"' in html
+        assert d.get("route") and d.get("frequency") and d.get("proven"), d["id"]
+    assert 'data-lowers="tg ldl"' in html or 'data-lowers="ldl tg"' in html  # solbinsiran matches both
+    assert "Lp(a) drugs only help if your Lp(a) is high" in html
     assert (out / "assets/filter.js").exists() and (out / "assets/site.css").exists()
 
+
+def test_rows_show_evidence_and_only_unusual_stage_words(tmp_path):
+    out, _ = _build(tmp_path)
+    html = (out / "index.html").read_text()
+    assert "Prevents heart attacks" in html and "Didn&#39;t prevent heart attacks" in html
+    assert "LDL down about 60%" in html
+    # every drug in "Getting close" is in final-stage trials, so the words aren't repeated per row
+    close = html[html.index("Getting close"):html.index("Further out")]
+    assert "Final-stage trials" not in close
 
 def test_watchlist_rejects_unknown_route(tmp_path):
     import pytest, yaml

@@ -20,15 +20,18 @@ ON THE HORIZON (next {{ horizon_days }} days)
 {% endfor %}
 {% endif %}
 
-PIPELINE (1-3 = Phase 1-3, F = Filed, A = Approved)
-{{ "%-16s"|format("") }}  1  2  3  F  A
-{% for r in rows %}
-{{ "%-16s"|format(r.name[:16]) }}  {{ r.text_dots }}{% if r.moved %}  ▲ moved{% endif %}{% if r.badge %}  ({{ r.badge }}){% endif %}
+THE DRUGS
+{% for g in groups %}
 
+{{ g.title|upper }}
+{% for r in g.rows %}
+- {{ r.name }}{% if r.badge %} ({{ r.badge }}){% endif %}{% if r.moved %} ▲ moved{% endif %}: {{ r.form }}{% if r.effect %}; {{ r.effect }}{% endif %}{% if r.proven_label %}; {{ r.proven_label|lower }}{% endif %}{% if r.show_stage %}; {{ r.stage_plain|lower }}{% endif %}
+
+{% endfor %}
 {% endfor %}
 
 {% if errors %}
 Couldn't reach this week: {{ errors|join(", ") }} (last week's data kept).
 {% endif %}
 {% if site_url %}Full site: {{ site_url }}
-{% endif %}Sources: ClinicalTrials.gov, openFDA, FDA press announcements, news searches. Informational only, not medical advice.
+{% endif %}Sources: ClinicalTrials.gov, openFDA, news searches. Every item links to its source. A news tracker, not medical advice.

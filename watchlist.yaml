@@ -15,6 +15,7 @@
 # Verified by web search on 2026-11-03 (sources listed per drug).
 # Not tracked: daily-dosed drugs and drugs approved only outside the US
 # (removed 2026-11-06: muvalaplin, enlicitide, laroprovstat, obicetrapib).
+# Added 2026-11-07: approved non-daily options (evolocumab, alirocumab, inclisiran).
 # clinicaltrials.gov itself was not reachable from the build sandbox, so the
 # first real run on GitHub Actions is the first check against the registry.
 
@@ -49,9 +50,74 @@ events: []
 #    url: https://example.com/press-release
 
 drugs:
-  # Plain-language fields shown on the site: `lowers` (what it lowers),
-  # `form` (how you'd take it), `plain` (one sentence), `note` (where it stands,
-  # in plain words), `badge` (optional short flag).
+  # Plain-language fields shown on the site and in the email:
+  #   lowers  what it lowers (LDL, Lp(a), triglycerides)
+  #   form    how you'd take it
+  #   plain   one sentence
+  #   effect  how much it lowers, from trials (with effect_source)
+  #   proven  did it prevent heart attacks and strokes in a large trial?
+  #           yes | testing (trial underway) | failed | untested (no trial yet)
+  #           with proven_note and proven_source
+  #   note    where it stands, in plain words
+  #   badge   optional short flag
+
+  # ---- approved ----
+  - id: evolocumab
+    name: Evolocumab
+    aliases: [Repatha, AMG 145]
+    company: Amgen
+    target: PCSK9 (LDL)
+    lowers: LDL
+    form: Shot, every 2 weeks or monthly
+    route: injection
+    frequency: monthly
+    plain: "A shot every 2 weeks or once a month that lowers LDL. Sold as Repatha; on the market since 2015."
+    stage: approved
+    effect: "LDL down about 60%"
+    effect_source: https://www.tctmd.com/news/fourier-evolocumab-reduces-risk-cvd-events-15-compared-placebo
+    proven: "yes"
+    proven_note: "15% fewer heart attacks, strokes and related events in a 27,000-person trial (FOURIER, 2017). A 2025 trial (VESALIUS-CV) also found a benefit in people who hadn't had a heart attack or stroke."
+    proven_source: https://www.amgen.com/newsroom/press-releases/2025/10/landmark-phase-3-trial-vesaliuscv-meets-primary-endpoints-in-a-cardiovascular-primary-prevention-study-of-12000-patients
+    note: "Approved and widely used, usually added to a statin or for people who can't take one."
+    sources: [https://www.tctmd.com/news/fourier-evolocumab-reduces-risk-cvd-events-15-compared-placebo]
+
+  - id: alirocumab
+    name: Alirocumab
+    aliases: [Praluent, SAR236553, REGN727]
+    company: Sanofi / Regeneron
+    target: PCSK9 (LDL)
+    lowers: LDL
+    form: Shot, every 2 weeks or monthly
+    route: injection
+    frequency: monthly
+    plain: "A shot every 2 weeks or once a month that lowers LDL. Sold as Praluent."
+    stage: approved
+    effect: "LDL down about 50%"
+    effect_source: https://www.acc.org/Latest-in-Cardiology/Articles/2018/03/05/15/53/Sat-9am-ODYSSEY-Outcomes-CV-Outcomes-With-Alirocumab-After-ACS-acc-2018
+    proven: "yes"
+    proven_note: "About 15% fewer heart attacks, strokes and related events in a 19,000-person trial of people who'd recently had a heart attack (ODYSSEY OUTCOMES, 2018)."
+    proven_source: https://www.acc.org/Latest-in-Cardiology/Articles/2018/03/05/15/53/Sat-9am-ODYSSEY-Outcomes-CV-Outcomes-With-Alirocumab-After-ACS-acc-2018
+    note: "Approved and widely used. A once-a-month dose (300 mg) is on the US label."
+    sources: [https://www.managedcaremag.com/news/fda-approves-once-monthly-dosing-option-praluent-injection/]
+
+  - id: inclisiran
+    name: Inclisiran
+    aliases: [Leqvio, ALN-PCSsc, KJX839]
+    company: Novartis
+    target: PCSK9 (LDL)
+    lowers: LDL
+    form: Shot, twice a year (after two starter doses)
+    route: injection
+    frequency: infrequent
+    plain: "A shot twice a year that lowers LDL by switching off PCSK9 in the liver. Sold as Leqvio."
+    stage: approved
+    effect: "LDL down about 50%"
+    effect_source: https://www.pharmacytimes.com/view/inclisiran-shows-promise-treating-hyperlipidemia-in-phase-3-clinical-trials
+    proven: testing
+    proven_note: "Two large heart-attack prevention trials are running: ORION-4 (main data expected around Oct 2026) and VICTORION-2 PREVENT (around May 2027)."
+    proven_source: https://clinicaltrials.gov/study/NCT03705234
+    note: "Approved in the US and widely available. The least frequent cholesterol drug on the market today."
+    sources: [https://www.pharmacytimes.com/view/inclisiran-shows-promise-treating-hyperlipidemia-in-phase-3-clinical-trials]
 
   - id: lerodalcibep
     name: Lerodalcibep
@@ -62,11 +128,17 @@ drugs:
     form: Shot, once a month
     route: injection
     frequency: monthly
-    plain: "A once-a-month shot that lowers LDL, the 'bad' cholesterol statins target. It can be kept at room temperature."
+    plain: "A once-a-month shot that lowers LDL. It can be kept at room temperature."
     stage: approved
+    effect: "LDL down about 60%"
+    effect_source: https://www.hcplive.com/view/lerodalcibep-autoinjector-receives-fda-approval-for-hypercholesterolemia
+    proven: untested
+    proven_note: "No heart-attack trial of its own. Its 2026 label points to results from other drugs in the same class (Repatha, Praluent)."
+    proven_source: https://www.pharmacytimes.com/view/fda-approves-autoinjector-device-for-lerodalcibep-liga-updates-indication-to-reflect-mace-risk-reduction
     note: "FDA-approved in Dec 2025 as Lerochol. An auto-injector pen was approved in Aug 2026."
     sources: [https://www.tctmd.com/news/fda-approves-lerodalcibep-adults-hypercholesterolemia]
 
+  # ---- in development ----
   - id: lepodisiran
     name: Lepodisiran
     aliases: [LY3819469]
@@ -78,7 +150,12 @@ drugs:
     frequency: infrequent
     plain: "A shot that switches off the liver's production of Lp(a) for many months at a time."
     stage: phase3
-    note: "In a large final-stage trial (ACCLAIM-Lp(a)) testing whether it prevents heart attacks and strokes. Results are expected around 2029."
+    effect: "Lp(a) down about 94%"
+    effect_source: https://www.acc.org/Latest-in-Cardiology/Journal-Scans/2025/03/24/16/30/sun-130pm-alpaca-acc-2025
+    proven: testing
+    proven_note: "A large final-stage trial (ACCLAIM-Lp(a)) is testing whether it prevents heart attacks and strokes. Results are expected around 2029."
+    proven_source: https://www.clinicaltrialsarena.com/analyst-comment/jpm26-eli-lilly-lpa-drugs/
+    note: "In final-stage trials. Results are expected around 2029."
     sources: [https://www.clinicaltrialsarena.com/analyst-comment/jpm26-eli-lilly-lpa-drugs/]
 
   - id: olpasiran
@@ -92,7 +169,12 @@ drugs:
     frequency: infrequent
     plain: "A shot a few times a year that strongly lowers Lp(a)."
     stage: phase3
-    note: "Its large final-stage trial (OCEAN(a)-Outcomes) is fully enrolled. Amgen hasn't said when results will come; some sources point to 2028."
+    effect: "Lp(a) down 95%+"
+    effect_source: https://www.amgen.com/newsroom/press-releases/2022/11/amgen-presents-new-phase-2-data-that-show-olpasiran-delivers-significant-reduction-in-lipoproteina-levels
+    proven: testing
+    proven_note: "Its large heart-attack prevention trial (OCEAN(a)-Outcomes) is fully enrolled. Amgen hasn't said when results will come; some sources point to 2028."
+    proven_source: https://clinicaltrials.gov/study/NCT05581303
+    note: "In final-stage trials, fully enrolled."
     sources: [https://clinicaltrials.gov/study/NCT05581303]
 
   - id: pelacarsen
@@ -107,7 +189,12 @@ drugs:
     plain: "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial."
     stage: phase3
     badge: setback
-    note: "Its large trial (Sep 2026) lowered Lp(a) but did not reduce heart attacks or strokes. Full results are still to be presented."
+    effect: "Lp(a) down about 80%"
+    effect_source: https://nutrition-evidence.com/article/377243/emerging-rna-therapeutics-to-lower-blood-levels-of-lpa-jacc-focus-seminar-24
+    proven: failed
+    proven_note: "Its large trial (Lp(a)HORIZON, Sep 2026) lowered Lp(a) but did not reduce heart attacks or strokes. Full results are still to be presented."
+    proven_source: https://www.tctmd.com/news/lpahorizon-top-line-results-dash-hopes-pelacarsen
+    note: "Future unclear after its final-stage trial missed its main goal."
     sources: [https://www.tctmd.com/news/lpahorizon-top-line-results-dash-hopes-pelacarsen]
 
   - id: verve102
@@ -121,7 +208,12 @@ drugs:
     frequency: once
     plain: "A one-time gene-editing treatment meant to lower LDL for life."
     stage: phase2
-    note: "Early results (May 2026) cut LDL by up to 62%, lasting up to 18 months so far. A mid-stage trial was registered in Sep 2026 but hasn't started enrolling. The FDA gave it Fast Track status."
+    effect: "LDL down up to 62%"
+    effect_source: https://www.hcplive.com/view/verve-102-lowers-pcsk9-ldl-c-interim-phase-1b-hypercholesterolemia-data
+    proven: untested
+    proven_note: "Too early for a heart-attack trial."
+    proven_source: https://www.hcplive.com/view/verve-102-lowers-pcsk9-ldl-c-interim-phase-1b-hypercholesterolemia-data
+    note: "Early results (May 2026) lasted up to 18 months so far. A mid-stage trial was registered in Sep 2026 but hasn't started enrolling. The FDA gave it Fast Track status."
     sources: [https://www.hcplive.com/view/verve-102-lowers-pcsk9-ldl-c-interim-phase-1b-hypercholesterolemia-data]
 
   - id: zerlasiran
@@ -133,9 +225,14 @@ drugs:
     form: Shot, a few times a year
     route: injection
     frequency: infrequent
-    plain: "A shot that cut Lp(a) by more than 80% in mid-stage testing."
+    plain: "A shot a few times a year that strongly lowers Lp(a)."
     stage: phase2
     badge: on hold
+    effect: "Lp(a) down 80%+"
+    effect_source: https://www.healio.com/news/cardiology/20250117/the-year-in-lipids-progress-in-lpa-management-and-a-blow-to-the-hdl-hypothesis
+    proven: untested
+    proven_note: "No heart-attack trial yet; one is planned once the company finds a partner."
+    proven_source: https://www.biospace.com/drug-development/silence-quiets-phase-iii-pace-for-lipoprotein-drug-seeks-partner
     note: "Ready for final-stage trials, but the company won't start them until it finds a partner to fund them."
     sources: [https://www.biospace.com/drug-development/silence-quiets-phase-iii-pace-for-lipoprotein-drug-seeks-partner]
 
@@ -148,7 +245,12 @@ drugs:
     form: Shot, a few times a year
     route: injection
     frequency: infrequent
-    plain: "A shot that lowers triglycerides (another blood fat) and LDL."
+    plain: "A shot that mainly lowers triglycerides (another blood fat), with a smaller drop in LDL."
     stage: phase2
+    effect: "Triglycerides down about 50%, LDL about 17%"
+    effect_source: https://www.acc.org/latest-in-cardiology/clinical-trials/2025/03/28/03/10/prolong-ang3
+    proven: untested
+    proven_note: "Too early for a heart-attack trial."
+    proven_source: https://www.acc.org/latest-in-cardiology/clinical-trials/2025/03/28/03/10/prolong-ang3
     note: "In mid-stage testing, mainly in people with very high triglycerides."
     sources: [https://clinicaltrials.gov/study/NCT07269210]

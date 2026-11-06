@@ -74,7 +74,7 @@ def test_render_full_digest():
     d = render.render(headline=headline, changes=changes,
                       horizon=diff.horizon(after, WL, today=date(2026, 11, 3)),
                       snapshot=after, watchlist=WL, today=date(2026, 11, 3))
-    for section in ("WHAT MOVED", "ON THE HORIZON", "PIPELINE"):
+    for section in ("WHAT MOVED", "ON THE HORIZON", "THE DRUGS", "AVAILABLE NOW", "GETTING CLOSE"):
         assert section in d.text
     assert "▲ moved" in d.text and "&#9650; MOVED" in d.html
     for c in changes:
@@ -102,7 +102,7 @@ def test_baseline_email():
     _, after = _changes()
     d = render.render(headline="", changes=[], horizon=[], snapshot=after, watchlist=WL,
                       baseline=True, today=date(2026, 11, 3))
-    assert "First run" in d.text and "PIPELINE" in d.text
+    assert "Tracking started" in d.text and "THE DRUGS" in d.text and "prevents heart attacks" in d.text
 
 
 def test_email_message_has_both_parts():

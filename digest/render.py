@@ -9,6 +9,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from . import STAGE_RANK, STAGES
+from . import display
 from .diff import Change, HorizonItem, fmt_horizon_date
 
 TEMPLATES = Path(__file__).parent / "templates"
@@ -27,19 +28,19 @@ class Digest:
 
 
 def strip_rows(snapshot: dict, watchlist: dict, changes: list[Change]) -> list[dict]:
+    """The same plain-language rows the site uses, plus a text-mode bar and a link
+    (the drug's page on the site when SITE_URL is set)."""
     moved = {c.drug for c in changes if c.kind in ("stage_change", "fda_approval")}
-    rows = []
-    for d in watchlist["drugs"]:
-        s = snapshot["drugs"][d["id"]]
-        rank = STAGE_RANK[s["stage"]]
-        rows.append({
-            "name": d["name"], "company": d["company"], "form": d.get("form", ""),
-            "target": d.get("target", ""), "badge": d.get("badge", ""), "rank": rank, "moved": d["id"] in moved,
-            "url": s.get("url", ""),
-            "text_dots": "──".join("◉" if i + 1 == rank else ("●" if i + 1 < rank else "○")
-                                   for i in range(len(STAGES))),
-        })
-    return rows
+    stages = {k: v["stage"] for k, v in snapshot["drugs"].items()}
+    site_url = os.environ.get("SITE_URL", "").rstrip("/")
+    out = []
+    for r in display.rows(watchlist, stages, moved):
+        rank = r["rank"]
+        out.append({**r,
+                    "url": f"{site_url}/drugs/{r['id']}" if site_url else snapshot["drugs"].get(r["id"], {}).get("url", ""),
+                    "text_dots": "──".join("◉" if i + 1 == rank else ("●" if i + 1 < rank else "○")
+                                           for i in range(len(STAGES)))})
+    return out
 
 
 def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], snapshot: dict,
@@ -73,6 +74,7 @@ def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], 
         "horizon_days": watchlist["settings"].get("horizon_days", 60),
         "stages": [label for _, label in STAGES],
         "rows": strip_rows(snapshot, watchlist, changes),
+        "groups": display.groups(strip_rows(snapshot, watchlist, changes)),
         "errors": errors,
         "today": today,
         "baseline": baseline,
@@ -85,7 +87,7 @@ def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], 
 
 
 def baseline_headline(snapshot: dict, watchlist: dict) -> str:
-    return (f"First run: now tracking {len(watchlist['drugs'])} drugs and "
+    return (f"Tracking started: {len(watchlist['drugs'])} drugs and "
             f"{len(snapshot.get('trials', {}))} trials. From next week, only changes are reported.")
 
 

@@ -8,6 +8,7 @@ from . import STAGE_RANK
 
 ROUTES = ("pill", "injection", "infusion")
 FREQUENCIES = ("daily", "monthly", "infrequent", "once")
+PROVEN = ("yes", "testing", "failed", "untested")
 
 DEFAULT_SETTINGS = {
     "horizon_days": 60,
@@ -38,6 +39,8 @@ def load(path: str | Path = "watchlist.yaml") -> dict:
             raise ValueError(f"{d['id']}: route must be one of {ROUTES}")
         if d.get("frequency") and d["frequency"] not in FREQUENCIES:
             raise ValueError(f"{d['id']}: frequency must be one of {FREQUENCIES}")
+        if d.get("proven") and d["proven"] not in PROVEN:
+            raise ValueError(f"{d['id']}: proven must be one of {PROVEN}")
         d.setdefault("aliases", [])
         d["aliases"] = [str(a) for a in d["aliases"]]
         d.setdefault("sources", [])

@@ -10,7 +10,7 @@
 
 <div class="glance">
   <div><span class="label">How you'd take it</span><div class="v">{{ drug.form or "–" }}</div></div>
-  <div><span class="label">What it lowers</span><div class="v">{{ drug.lowers or drug.target or "–" }}</div></div>
+  <div><span class="label">What it does</span><div class="v">{{ drug.effect or ("Lowers " ~ drug.lowers if drug.lowers else "–") }}</div>{% if drug.effect_source %}<a class="src" href="{{ drug.effect_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</div>
   <div><span class="label">Made by</span><div class="v">{{ drug.company }}</div></div>
 </div>
 
@@ -24,6 +24,14 @@
     <p class="explain-line">{{ row.stage_explain }}</p>
   </div>
 </section>
+
+{% if drug.proven %}
+<section class="section">
+  <div class="section-head"><h2>Does it prevent heart attacks?</h2></div>
+  <div style="padding-top:0.875rem">{{ m.proven(row) }}</div>
+  {% if drug.proven_note %}<p class="prose" style="padding-top:0.5rem">{{ drug.proven_note }}{% if drug.proven_source %} <a class="src" href="{{ drug.proven_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
+</section>
+{% endif %}
 
 {% if drug.note %}
 <section class="section">

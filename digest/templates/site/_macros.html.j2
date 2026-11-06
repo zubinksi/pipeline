@@ -8,6 +8,10 @@
 {% if text %}<span class="tag{{ ' setback' if text == 'setback' }}">{{ text }}</span>{% endif %}
 {%- endmacro %}
 
+{% macro proven(r) -%}
+{% if r.proven_label %}<span class="proof proof-{{ r.proven }}">{% if r.proven == 'yes' %}&#10003; {% elif r.proven == 'failed' %}&#10007; {% endif %}{{ r.proven_label }}</span>{% endif %}
+{%- endmacro %}
+
 {# The drug list, grouped by how close each drug is to a pharmacy. #}
 {% macro drug_list(groups, root, title="The drugs", filterable=false) -%}
 <section class="section"{% if filterable %} data-filter{% endif %}>
@@ -15,9 +19,9 @@
     <h2>{{ title }} <span class="sub">· {{ n_drugs }}</span></h2>
     {% if filterable %}
     <div class="filters" hidden>
-      <select data-k="type" aria-label="How you'd take it">
-        <option value="all">Type</option>
-        {% for v, label in filters.type %}<option value="{{ v }}">{{ label }}</option>{% endfor %}
+      <select data-k="lowers" aria-label="What it lowers">
+        <option value="all">Lowers</option>
+        {% for v, label in filters.lowers %}<option value="{{ v }}">{{ label }}</option>{% endfor %}
       </select>
       <select data-k="freq" aria-label="How often">
         <option value="all">How often</option>
@@ -26,22 +30,24 @@
     </div>
     {% endif %}
   </div>
+  {% if filterable and has_lpa %}<p class="hint">Lp(a) drugs only help if your Lp(a) is high. A one-time blood test checks it.</p>{% endif %}
   {% for g in groups %}
   <div class="group" data-group>
     <h3>{{ g.title }} <span class="n" data-count>{{ g.rows|length }}</span></h3>
     {% for r in g.rows %}
-    <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-type="{{ r.route or '' }}" data-freq="{{ r.frequency or '' }}">
+    <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-lowers="{{ r.lowers_keys|join(' ') }}" data-freq="{{ r.frequency or '' }}">
       <div>
         <div class="drug-name">{{ r.name }}{{ badge(r.badge) }}{% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}</div>
-        <div class="drug-line">{{ r.form }}{% if r.lowers %}<span class="sep">·</span>lowers {{ r.lowers }}{% endif %}</div>
+        <div class="drug-line">{{ r.form }}{% if r.effect %}<span class="sep">·</span>{{ r.effect }}{% elif r.lowers %}<span class="sep">·</span>lowers {{ r.lowers }}{% endif %}</div>
+        <div class="drug-proof">{{ proven(r) }}</div>
       </div>
-      <div class="drug-stage"><span class="words">{{ r.stage_plain }}</span>{{ mini(r.rank, r.moved) }}</div>
+      <div class="drug-stage">{% if r.show_stage %}<span class="words">{{ r.stage_plain }}</span>{% endif %}{{ mini(r.rank, r.moved) }}</div>
       <span class="go" aria-hidden="true">&rsaquo;</span>
     </a>
     {% endfor %}
   </div>
   {% endfor %}
-  {% if filterable %}<p class="empty f-empty" hidden>Nothing on the list matches. Try setting Type or How often back.</p>{% endif %}
+  {% if filterable %}<p class="empty f-empty" hidden>Nothing on the list matches. Try setting Lowers or How often back.</p>{% endif %}
 </section>
 {%- endmacro %}
 
@@ -71,13 +77,12 @@
 </section>
 {%- endmacro %}
 
-{# "This week": the changes, or one quiet line. #}
+{# "This week": the changes, or (on a quiet week) just the heading line. #}
 {% macro this_week(w, root, title, past=0) -%}
 <section class="section">
-  <div class="section-head"><h2>{{ title }} <span class="sub">· {{ w.date|nice_date_short }}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
+  <div class="section-head{{ ' quiet-head' if not w.changes }}"><h2>{{ title }} <span class="sub">· {{ w.date|nice_date_short }}{% if not w.changes %} · {{ w.quiet }}{% endif %}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
   {% if w.errors %}<div class="note" style="margin-top:0.625rem">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}
-  {% if w.changes %}{{ changes(w.changes, root) }}
-  {% else %}<p class="quiet">{{ w.headline }}</p>{% endif %}
+  {% if w.changes %}{{ changes(w.changes, root) }}{% endif %}
 </section>
 {% if w.horizon %}{{ horizon(w.horizon) }}{% endif %}
 {%- endmacro %}
@@ -104,7 +109,9 @@
         <dt>Lp(a)</dt><dd>A cholesterol particle set mostly by your genes. High levels raise heart risk, and statins don't lower it. A one-time blood test measures it.</dd>
         <dt>Triglycerides</dt><dd>Another blood fat linked to heart risk.</dd>
       </dl>
-      <p style="margin-top:0.75rem">Everything listed here is a non-statin drug you wouldn't take daily. This is a news tracker, not medical advice.</p>
+      <h4 style="margin-top:1rem">Heart attacks</h4>
+      <p>Lowering a number isn't the same as preventing heart attacks. "Prevents heart attacks" means a large trial showed fewer heart attacks and strokes. Pelacarsen lowered Lp(a) but didn't.</p>
+      <p style="margin-top:0.75rem">Everything listed is a non-statin drug you wouldn't take daily. This is a news tracker, not medical advice.</p>
     </div>
   </div>
 </details>
