@@ -3,15 +3,13 @@
 {% block content %}
 {% if latest %}
 <div class="d-title"><h1>This week</h1><span class="amt">{{ latest.date|nice_date_short }}</span></div>
-<div class="d-sub"><span>Week of {{ latest.date|nice_date }}</span><span>{{ side.rows|length }} drugs · {{ n_trials }} trials</span></div>
 <p class="headline">{{ latest.headline }}</p>
-{{ m.stat_cards(latest, n_trials, n_approved, side.rows|length) }}
 {{ m.week_body(latest, root, horizon_days) }}
 {% else %}
 <div class="d-title"><h1>This week</h1></div>
 <p class="headline">No weekly runs yet.</p>
 {% endif %}
-{{ m.strip(rows, root) }}
+{{ m.strip(rows, root, filterable=true) }}
 {% if weeks|length > 1 %}
 <div class="module">
   <div class="module-head"><span class="label">Recent weeks</span>{% if n_weeks > weeks|length %}<a class="src" href="weeks/index.html">All {{ n_weeks }} &rarr;</a>{% endif %}</div>

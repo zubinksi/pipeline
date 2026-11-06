@@ -11,13 +11,10 @@
   <div class="strip-row"><div class="name"><span class="label">Stage</span></div>{{ m.track(row.rank, row.moved) }}</div>
 </div>
 
-<div class="cards" style="--n:3">
-  <div class="card"><span class="label">Form</span><span class="card-v serif" style="font-size:1.25rem;line-height:1.25">{{ drug.form or "–" }}</span></div>
-  <div class="card"><span class="label">Trials tracked</span><span class="card-v">{{ trials|length }}</span><span class="card-d">{{ n_active }} active</span></div>
-  <div class="card"><span class="label">Next primary completion</span><span class="card-v">{{ next_pcd.primary_completion if next_pcd else "–" }}</span><span class="card-d">{% if next_pcd %}{{ next_pcd.acronym or next_pcd.nct }}{% else %}none scheduled{% endif %}</span></div>
-</div>
-
 <dl class="facts">
+  {% if drug.form %}<dt>Form</dt><dd>{{ drug.form }}</dd>{% endif %}
+  <dt>Trials tracked</dt><dd><span class="mono">{{ trials|length }}</span> · {{ n_active }} active</dd>
+  {% if next_pcd %}<dt>Next completion</dt><dd><span class="mono">{{ next_pcd.primary_completion }}</span> · {{ next_pcd.acronym or next_pcd.nct }} (primary completion, est.)</dd>{% endif %}
   {% if drug.aliases %}<dt>Also known as</dt><dd>{{ drug.aliases|join(", ") }}</dd>{% endif %}
   {% if drug.note %}<dt>Status note</dt><dd>{{ drug.note }}</dd>{% endif %}
   <dt>Stage based on</dt><dd>

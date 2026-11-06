@@ -3,20 +3,11 @@
 {% block title %}{{ week.date|nice_date }} · {{ site_title }}{% endblock %}
 {% block content %}
 <div class="d-title"><h1>Week of {{ week.date|nice_date_short }}</h1><span class="amt">{{ week.date[:4] }}</span></div>
-<div class="d-sub pager">
+<div class="d-sub">
   <span>{% if older %}<a href="{{ older }}.html">&larr; {{ older|nice_date }}</a>{% endif %}</span>
   <span>{% if newer %}<a href="{{ newer }}.html">{{ newer|nice_date }} &rarr;</a>{% endif %}</span>
 </div>
 <p class="headline">{{ week.headline }}</p>
 {{ m.week_body(week, root, horizon_days) }}
-<div class="module">
-  <div class="module-head"><span class="label">Pipeline that week</span></div>
-  {{ m.stage_head() }}
-  {% for r in rows %}
-  <div class="strip-row">
-    <div class="name"><a href="{{ root }}drugs/{{ r.id }}.html">{{ r.name }}</a>{% if r.moved %} <span class="tag moved">&#9650; moved</span>{% endif %}<div class="sub">{{ r.company }} · {{ r.form }}</div></div>
-    {{ m.track(r.rank, r.moved) }}
-  </div>
-  {% endfor %}
-</div>
+{{ m.strip(rows, root, title="Pipeline that week", filterable=true) }}
 {% endblock %}

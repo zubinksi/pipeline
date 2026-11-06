@@ -6,6 +6,9 @@ import yaml
 
 from . import STAGE_RANK
 
+ROUTES = ("pill", "injection", "infusion")
+FREQUENCIES = ("daily", "monthly", "infrequent", "once")
+
 DEFAULT_SETTINGS = {
     "horizon_days": 60,
     "min_trial_phase": 2,
@@ -31,6 +34,10 @@ def load(path: str | Path = "watchlist.yaml") -> dict:
         seen.add(d["id"])
         if d["stage"] not in STAGE_RANK:
             raise ValueError(f"{d['id']}: unknown stage {d['stage']!r}")
+        if d.get("route") and d["route"] not in ROUTES:
+            raise ValueError(f"{d['id']}: route must be one of {ROUTES}")
+        if d.get("frequency") and d["frequency"] not in FREQUENCIES:
+            raise ValueError(f"{d['id']}: frequency must be one of {FREQUENCIES}")
         d.setdefault("aliases", [])
         d["aliases"] = [str(a) for a in d["aliases"]]
         d.setdefault("sources", [])

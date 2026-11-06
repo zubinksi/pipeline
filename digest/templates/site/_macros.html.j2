@@ -10,12 +10,27 @@
 <div class="strip-head"><div class="lbl"></div><div class="stages">{% for s in stages %}<div class="label">{{ s }}</div>{% endfor %}</div></div>
 {%- endmacro %}
 
-{% macro strip(rows, root) -%}
-<div class="module">
-  <div class="module-head"><span class="label">Pipeline</span></div>
+{% macro strip(rows, root, title="Pipeline", filterable=false) -%}
+<div class="module"{% if filterable %} data-filter{% endif %}>
+  <div class="module-head"><span class="label">{{ title }}</span></div>
+  {% if filterable %}
+  <div class="filters" hidden>
+    <div class="f-group" role="group" aria-label="Type">
+      <span class="label">Type</span>
+      <button type="button" class="chip" data-k="type" data-v="all">All</button>
+      {% for v, label in filters.type %}<button type="button" class="chip" data-k="type" data-v="{{ v }}">{{ label }}</button>{% endfor %}
+    </div>
+    <div class="f-group" role="group" aria-label="Frequency">
+      <span class="label">Frequency</span>
+      <button type="button" class="chip" data-k="freq" data-v="all">All</button>
+      {% for v, label in filters.freq %}<button type="button" class="chip" data-k="freq" data-v="{{ v }}">{{ label }}</button>{% endfor %}
+    </div>
+    <span class="label f-count"></span>
+  </div>
+  {% endif %}
   {{ stage_head() }}
   {% for r in rows %}
-  <div class="strip-row">
+  <div class="strip-row" data-type="{{ r.route or '' }}" data-freq="{{ r.frequency or '' }}">
     <div class="name">
       <a href="{{ root }}drugs/{{ r.id }}.html">{{ r.name }}</a>
       {% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}
@@ -25,6 +40,7 @@
     {{ track(r.rank, r.moved) }}
   </div>
   {% endfor %}
+  {% if filterable %}<p class="empty f-empty" hidden>No drugs on the watchlist match these filters.</p>{% endif %}
 </div>
 {%- endmacro %}
 
@@ -54,14 +70,7 @@
 </div>
 {%- endmacro %}
 
-{% macro stat_cards(w, n_trials, n_approved, n_drugs) -%}
-<div class="cards" style="--n:4">
-  <div class="card"><span class="label">What moved</span><span class="card-v">{{ w.changes|length }}</span><span class="card-d">{{ 'baseline week' if w.baseline else 'this week' }}</span></div>
-  <div class="card"><span class="label">On the horizon</span><span class="card-v">{{ w.horizon|length }}</span><span class="card-d">next 60 days</span></div>
-  <div class="card"><span class="label">Trials tracked</span><span class="card-v">{{ n_trials }}</span><span class="card-d">ClinicalTrials.gov</span></div>
-  <div class="card"><span class="label">Approved</span><span class="card-v">{{ n_approved }}<span class="of">of {{ n_drugs }}</span></span><span class="card-d">anywhere</span></div>
-</div>
-{%- endmacro %}
+
 
 {% macro week_body(w, root, horizon_days) -%}
 {% if w.errors %}<div class="note">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}

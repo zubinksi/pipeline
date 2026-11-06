@@ -65,3 +65,24 @@ def test_untrusted_text_is_escaped(tmp_path):
 def test_empty_site_builds(tmp_path):
     out = site.build(tmp_path / "s", weeks=[], snapshot={"drugs": {}, "trials": {}}, watchlist=WL)
     assert "No weekly runs yet" in (out / "index.html").read_text()
+
+
+def test_pipeline_rows_carry_filter_data(tmp_path):
+    out, _ = _build(tmp_path)
+    html = (out / "index.html").read_text()
+    assert "data-filter" in html and 'data-k="type" data-v="pill"' in html and 'data-k="freq" data-v="monthly"' in html
+    assert html.count('class="strip-row"') == len(WL["drugs"])
+    for d in WL["drugs"]:
+        assert d.get("route") and d.get("frequency"), d["id"]
+    assert 'data-type="pill" data-freq="daily"' in html
+    assert (out / "assets/filter.js").exists() and (out / "assets/site.css").exists()
+
+
+def test_watchlist_rejects_unknown_route(tmp_path):
+    import pytest, yaml
+    data = yaml.safe_load(open("watchlist.yaml"))
+    data["drugs"][0]["route"] = "patch"
+    p = tmp_path / "w.yaml"
+    p.write_text(yaml.safe_dump(data))
+    with pytest.raises(ValueError, match="route"):
+        load(p)

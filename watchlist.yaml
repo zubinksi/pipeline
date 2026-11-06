@@ -6,6 +6,8 @@
 # approval outside the US). Stages: phase1, phase2, phase3, filed, approved.
 #
 # `aliases` are code names / brand names, used to search every source.
+# `route` (pill, injection, infusion) and `frequency` (daily, monthly,
+# infrequent, once) drive the filters on the site's pipeline.
 # `badge` (optional) is a short tag shown next to the name in the pipeline strip.
 # `plain` is a one-line plain-English description, used as context for the
 # summary and as the "why it matters" fallback when the Claude API is off.
@@ -51,6 +53,8 @@ drugs:
     company: Eli Lilly
     target: Lp(a)
     form: Daily pill
+    route: pill
+    frequency: daily
     plain: "A once-daily pill that blocks Lp(a) from forming. It would be the first oral Lp(a) drug."
     stage: phase3
     note: "MOVE-Lp(a) outcomes trial recruiting; primary completion est. 2031"
@@ -62,6 +66,8 @@ drugs:
     company: Eli Lilly
     target: Lp(a)
     form: Injection, possibly once or twice a year
+    route: injection
+    frequency: infrequent
     plain: "An siRNA injection that switches off Lp(a) production in the liver for many months."
     stage: phase3
     note: "ACCLAIM-Lp(a) outcomes trial ongoing; results expected ~2029"
@@ -73,6 +79,8 @@ drugs:
     company: Novartis / Ionis
     target: Lp(a)
     form: Monthly injection
+    route: injection
+    frequency: monthly
     plain: "A monthly antisense injection that lowers Lp(a). It is the first Lp(a) drug with outcomes data."
     stage: phase3
     badge: missed endpoint
@@ -85,6 +93,8 @@ drugs:
     company: Amgen
     target: Lp(a)
     form: Injection every 12 weeks or less often
+    route: injection
+    frequency: infrequent
     plain: "An siRNA injection that strongly lowers Lp(a). It is dosed a few times a year."
     stage: phase3
     note: "OCEAN(a)-Outcomes enrolled (active, not recruiting); event-driven, readout timing unclear"
@@ -96,6 +106,8 @@ drugs:
     company: Silence Therapeutics
     target: Lp(a)
     form: Infrequent injection
+    route: injection
+    frequency: infrequent
     plain: "An siRNA injection that cut Lp(a) by more than 80% in Phase 2."
     stage: phase2
     badge: seeking partner
@@ -109,6 +121,8 @@ drugs:
     company: Merck
     target: PCSK9 (LDL)
     form: Daily pill
+    route: pill
+    frequency: daily
     plain: "The first PCSK9 pill. It lowers LDL by about half, similar to the injectable PCSK9 drugs."
     stage: approved
     note: "FDA approved Jul 16 2026 (Lipfendra); CORALreef Outcomes trial ongoing"
@@ -120,6 +134,8 @@ drugs:
     company: AstraZeneca
     target: PCSK9 (LDL)
     form: Daily pill
+    route: pill
+    frequency: daily
     plain: "A once-daily oral PCSK9 blocker, a pill alternative to PCSK9 injections."
     stage: phase3
     note: "AZURE Phase 3 program running; data expected 2027"
@@ -132,6 +148,8 @@ drugs:
     company: NewAmsterdam / Menarini
     target: CETP (LDL)
     form: Daily pill
+    route: pill
+    frequency: daily
     plain: "A once-daily CETP-inhibitor pill that lowers LDL. It is also sold as a combination pill with ezetimibe."
     stage: approved
     badge: EU only
@@ -145,6 +163,8 @@ drugs:
     company: Eli Lilly
     target: ANGPTL3
     form: Infrequent injection
+    route: injection
+    frequency: infrequent
     plain: "An siRNA injection against ANGPTL3 that lowers triglycerides and LDL."
     stage: phase2
     note: "Phase 2 (SOLARIS-1, severe hypertriglyceridemia) recruiting"
@@ -156,6 +176,8 @@ drugs:
     company: Eli Lilly (Verve)
     target: PCSK9 (gene editing)
     form: One-time infusion
+    route: infusion
+    frequency: once
     plain: "A one-time gene-editing treatment meant to permanently switch off PCSK9 and lower LDL for life."
     stage: phase2
     note: "Phase 2 trial registered Sep 2026 (NCT07839936), not yet recruiting; positive Phase 1b data May 2026; FDA Fast Track"
@@ -168,6 +190,8 @@ drugs:
     company: LIB Therapeutics
     target: PCSK9 (LDL)
     form: Monthly injection
+    route: injection
+    frequency: monthly
     plain: "A once-monthly PCSK9 injection that can be stored at room temperature."
     stage: approved
     note: "FDA approved Dec 2025; autoinjector + CV-risk label update Aug 2026"

@@ -37,7 +37,8 @@ def _fmt_short(s: str) -> str:
 _env.filters["nice_date"] = _fmt_date
 _env.filters["nice_date_short"] = _fmt_short
 STATIC = Path(__file__).parent / "static"
-STAGE_SHORT = {"phase1": "P1", "phase2": "P2", "phase3": "P3", "filed": "FILED", "approved": "APPR"}
+TYPE_LABEL = {"pill": "Pills", "injection": "Injections", "infusion": "Infusions"}
+FREQ_LABEL = {"daily": "Daily", "monthly": "Monthly", "infrequent": "Infrequent", "once": "One-time"}
 ACTIVE = {"NOT_YET_RECRUITING", "RECRUITING", "ENROLLING_BY_INVITATION", "ACTIVE_NOT_RECRUITING"}
 
 
@@ -46,7 +47,7 @@ def _rows(watchlist: dict, stages: dict, moved: set[str]) -> list[dict]:
     for d in watchlist["drugs"]:
         stage = stages.get(d["id"], d["stage"])
         rows.append({**d, "rank": STAGE_RANK[stage], "stage_label": STAGE_LABEL[stage],
-                     "stage_short": STAGE_SHORT[stage], "moved": d["id"] in moved})
+                     "moved": d["id"] in moved})
     return rows
 
 
@@ -73,26 +74,18 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
     latest = views[0] if views else None
     stages = {k: v["stage"] for k, v in snapshot.get("drugs", {}).items()}
     moved = set(latest["moved"]) if latest else set()
-    trials_all = snapshot.get("trials", {})
-    if latest:
-        n = len(latest["changes"])
-        sub = (f"BASELINE · {_fmt_short(latest['date']).upper()}" if latest["baseline"] else
-               f"{n} CHANGE{'S' if n != 1 else ''} · WEEK OF {_fmt_short(latest['date']).upper()}")
-    else:
-        sub = "NO RUNS YET"
+    present = lambda key: {d.get(key) for d in watchlist["drugs"]}
     common = {"site_title": site_title, "stages": [label for _, label in STAGES],
               "horizon_days": watchlist["settings"].get("horizon_days", 60),
               "updated": snapshot.get("generated_at", "")[:10],
-              "side": {"rows": _rows(watchlist, stages, moved), "sub": sub, "n_weeks": len(views)},
-              "n_trials": len(trials_all),
-              "n_approved": sum(1 for d in watchlist["drugs"]
-                                if stages.get(d["id"], d["stage"]) == "approved")}
+              "filters": {"type": [(k, v) for k, v in TYPE_LABEL.items() if k in present("route")],
+                          "freq": [(k, v) for k, v in FREQ_LABEL.items() if k in present("frequency")]}}
 
     def write(path: str, template: str, root: str, sel: str = "", **ctx):
         html = _env.get_template(template).render(**common, root=root, sel=sel, **ctx)
         (out / path).write_text(html)
 
-    write("index.html", "index.html.j2", "", latest=latest, weeks=views[:12], n_weeks=len(views),
+    write("index.html", "index.html.j2", "", sel="home", latest=latest, weeks=views[:12], n_weeks=len(views),
           rows=_rows(watchlist, stages, moved))
     for i, w in enumerate(views):
         newer = views[i - 1]["date"] if i > 0 else None
@@ -121,7 +114,7 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
         upcoming = [t for t in trials if t["status"] in ACTIVE and t.get("primary_completion")
                     and t["primary_completion"][:7] >= today and t["phase_rank"] >= 2]
         next_pcd = min(upcoming, key=lambda t: t["primary_completion"], default=None)
-        write(f"drugs/{d['id']}.html", "drug.html.j2", "../", sel=d["id"], drug=d,
+        write(f"drugs/{d['id']}.html", "drug.html.j2", "../", drug=d,
               n_active=sum(1 for t in trials if t["status"] in ACTIVE), next_pcd=next_pcd,
               row=_rows({"drugs": [d]}, {d["id"]: stage}, moved)[0],
               stage_basis=snapshot.get("drugs", {}).get(d["id"], {}),

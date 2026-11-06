@@ -53,11 +53,11 @@ The site is public, though pages ask search engines not to index them. The first
 
 ## Design
 
-The site borrows the look of the household finance site (`zubinksi/home`): sage wall, iris masthead, cream paper slab, Geist Serif + Geist Mono (SIL Open Font License, `digest/static/fonts/OFL.txt`). Tokens live at the top of `digest/static/site.css`.
+Dark slate with cool neutral tones and a faint graph-paper grid. Fonts are Geist Serif and Geist Mono (SIL Open Font License, see `digest/static/fonts/OFL.txt`). Colors are set at the top of `digest/static/site.css`. You can filter the pipeline on the home page by how each drug is taken and how often, using the `route` and `frequency` fields in `watchlist.yaml`. The filter is kept in the URL (e.g. `?type=pill&freq=daily`), so a filtered view can be bookmarked.
 
 ## Maintaining the watchlist
 
-- To add a drug, add an entry with `id`, `name`, `aliases` (code names and brand names), `company`, `stage`, and ideally `form`, `target`, `plain`, `sources`. Its first week is treated as a baseline.
+- To add a drug, add an entry with `id`, `name`, `aliases` (code names and brand names), `company`, `stage`, `route` (pill / injection / infusion), `frequency` (daily / monthly / infrequent / once), and ideally `form`, `target`, `plain`, `sources`. Its first week is treated as a baseline.
 - `stage` is a floor. The digest takes the highest of the floor, the highest phase on ClinicalTrials.gov, and an FDA approval found on openFDA. Set it by hand for things the APIs can't see: `filed`, or an approval outside the US. (Hand edits aren't reported as changes.)
 - `events:` takes dated items you know about, such as a PDUFA date, each with a source URL. They show up under "On the horizon" when they're inside the window.
 - `feeds:` takes extra RSS feeds, scanned for any watchlist drug name.
