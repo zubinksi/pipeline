@@ -1,0 +1,19 @@
+{% extends "base.html.j2" %}
+{% import "_macros.html.j2" as m with context %}
+{% block title %}{{ week.date|nice_date }} · {{ site_title }}{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="eyebrow">Week of {{ week.date|nice_date }}</div>
+  <h1>{{ week.headline }}</h1>
+  {% if week.errors %}<div class="warn">Couldn't reach that week: {{ week.errors|join(", ") }}.</div>{% endif %}
+  <div class="pager">
+    <span>{% if older %}<a href="{{ older }}.html">&larr; {{ older|nice_date }}</a>{% endif %}</span>
+    <span>{% if newer %}<a href="{{ newer }}.html">{{ newer|nice_date }} &rarr;</a>{% endif %}</span>
+  </div>
+</section>
+{{ m.week_body(week, root, horizon_days) }}
+<section class="card">
+  <h2>Pipeline that week</h2>
+  {{ m.strip(rows, root) }}
+</section>
+{% endblock %}

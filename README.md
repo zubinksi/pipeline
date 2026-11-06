@@ -1,6 +1,9 @@
 # Cholesterol pipeline digest
 
-A small personal tool. Once a week, GitHub Actions checks ClinicalTrials.gov, openFDA, FDA press announcements, and news searches for the drugs in `watchlist.yaml`, and compares the results with last week's snapshot. It then emails a short digest of **only what changed**. If nothing changed, the email is one line.
+A small personal tool. Once a week, GitHub Actions checks ClinicalTrials.gov, openFDA, FDA press announcements, and news searches for the drugs in `watchlist.yaml`, and compares the results with last week's snapshot. It then:
+
+- updates a **static site** (this week, past weeks, and a page per drug with its updates, stage history and trials), committed to `site/` and deployed by Vercel, and
+- optionally **emails** a short digest of only what changed. If nothing changed, the email is one line.
 
 ```
 watchlist.yaml          drugs, aliases, company, target, form, current stage (a floor)
@@ -9,8 +12,11 @@ digest/snapshot.py      builds this week's state; a failed source keeps last wee
 digest/diff.py          last week vs this week -> list of changes (each with a source URL)
 digest/summarize.py     Claude writes the headline + "why it matters" lines from the diff
 digest/render.py        HTML email + plain-text fallback, incl. the pipeline strip
-digest/send.py          SMTP (Gmail or Resend)
+digest/site.py          static site (templates in digest/templates/site/)
+digest/send.py          SMTP (Gmail or Resend), skipped if not configured
 state/snapshot.json     last week's state, committed back by the workflow
+history/*.json          one record per week, the site's archive
+site/                   the built site; Vercel serves this folder
 ```
 
 ## Guardrails, as implemented
@@ -25,7 +31,8 @@ state/snapshot.json     last week's state, committed back by the workflow
 ```bash
 pip install -r requirements-dev.txt
 python -m pytest -q                   # tests use fake before/after data, no network
-python -m digest preview              # dummy data -> out/preview.html (to review the look)
+python -m digest preview              # dummy data -> out/preview.html + out/site/ (to review the look)
+python -m digest site                 # rebuild site/ from history/ + state, no fetching
 python -m digest fetch                # hit the real sources, print what was found
 python -m digest run --dry-run        # full run, writes out/digest.html, sends nothing, saves nothing
 python -m digest run                  # the weekly job (needs the env vars below)
@@ -33,15 +40,16 @@ python -m digest run                  # the weekly job (needs the env vars below
 
 ## Setup
 
-1. Push this repo to GitHub.
-2. Add repository secrets (Settings → Secrets and variables → Actions):
-   - `ANTHROPIC_API_KEY`: optional. Without it, the "why it matters" lines fall back to each drug's `plain` description.
-   - Email via **Gmail**: `SMTP_USER` = your Gmail address, `SMTP_PASSWORD` = a Gmail [app password](https://myaccount.google.com/apppasswords) (2-step verification required), `DIGEST_TO` = where to send it.
-   - Or via **Resend**: `SMTP_HOST=smtp.resend.com`, `SMTP_USER=resend`, `SMTP_PASSWORD` = Resend API key, `DIGEST_FROM` = an address on your verified domain, `DIGEST_TO`.
-3. Actions → *Weekly digest* → *Run workflow* with mode **dry-run**, then download the `digest-N` artifact to check the output. Run it again with **send** to get the first (baseline) email and save the first snapshot.
-4. After that, it runs Mondays at 12:23 UTC. To change the time, edit the `cron` line in `.github/workflows/weekly-digest.yml`.
+1. **Site on Vercel:** in Vercel choose *Add New → Project*, then import `zubinksi/pipeline`. Set **Root Directory** to `site` and **Framework Preset** to *Other*, and leave the build command empty. Every commit the workflow makes then deploys automatically. The production branch is the repo's default branch.
+2. **Secrets** (GitHub → Settings → Secrets and variables → Actions). All are optional:
+   - `ANTHROPIC_API_KEY`: without it, the "why it matters" lines fall back to each drug's `plain` description.
+   - `SITE_URL`: your Vercel URL. The email then links to the site.
+   - `READER_CONTEXT`: overrides `reader_context` in `watchlist.yaml`, so your personal details don't have to sit in a public repo.
+   - Email via **Gmail**: `SMTP_USER` (your address), `SMTP_PASSWORD` (a Gmail [app password](https://myaccount.google.com/apppasswords)), `DIGEST_TO`. Via **Resend**: `SMTP_HOST=smtp.resend.com`, `SMTP_USER=resend`, `SMTP_PASSWORD` (API key), `DIGEST_FROM` (an address on your verified domain), `DIGEST_TO`. With no email secrets set, the run just updates the site.
+3. **First run:** go to Actions → *Weekly digest* → *Run workflow*. Mode **dry-run** builds everything and saves nothing (download the `digest-N` artifact to look). Mode **send** saves the baseline and publishes the site.
+4. After that it runs Mondays at 12:23 UTC. To change the time, edit the `cron` line in `.github/workflows/weekly-digest.yml`. Editing `watchlist.yaml` or the site templates triggers *Rebuild site*, which redeploys without fetching anything.
 
-The first sent email is a baseline: it shows the pipeline strip and what's coming up, with no "what moved" section. Change reporting starts the following week.
+The site is public, though pages ask search engines not to index them. The first week is a baseline: the pipeline strip and what's coming up. Change reporting starts the following week.
 
 ## Maintaining the watchlist
 

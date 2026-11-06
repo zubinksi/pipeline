@@ -28,6 +28,10 @@ def build_message(d: Digest, sender: str, to: str) -> EmailMessage:
     return msg
 
 
+def configured() -> bool:
+    return bool(os.environ.get("SMTP_USER") and os.environ.get("SMTP_PASSWORD") and os.environ.get("DIGEST_TO"))
+
+
 def send(d: Digest) -> None:
     host = os.environ.get("SMTP_HOST") or "smtp.gmail.com"
     port = int(os.environ.get("SMTP_PORT") or "465")

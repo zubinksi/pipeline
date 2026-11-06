@@ -1,6 +1,7 @@
 """Render the digest as HTML email + plain-text fallback."""
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
@@ -57,9 +58,7 @@ def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], 
                       text=line + "\n")
 
     if baseline:
-        n_trials = len(snapshot.get("trials", {}))
-        headline = (f"First run: now tracking {n_drugs} drugs and {n_trials} trials. "
-                    "From next week, you'll only see what changed.")
+        headline = baseline_headline(snapshot, watchlist)
 
     ctx = {
         "headline": headline,
@@ -76,11 +75,17 @@ def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], 
         "errors": errors,
         "today": today,
         "baseline": baseline,
+        "site_url": os.environ.get("SITE_URL", ""),
     }
     subject = f"Cholesterol pipeline: {headline}" if len(headline) < 90 else "Cholesterol pipeline weekly"
     return Digest(subject=subject,
                   html=_env.get_template("digest.html.j2").render(**ctx),
                   text=_text_env.get_template("digest.txt.j2").render(**ctx))
+
+
+def baseline_headline(snapshot: dict, watchlist: dict) -> str:
+    return (f"First run: now tracking {len(watchlist['drugs'])} drugs and "
+            f"{len(snapshot.get('trials', {}))} trials. From next week, only changes are reported.")
 
 
 def _esc(s: str) -> str:

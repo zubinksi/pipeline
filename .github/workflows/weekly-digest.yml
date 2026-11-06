@@ -7,13 +7,13 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "send = normal run; no-send = render only (state still saved); dry-run = render only, state untouched"
+        description: "send = normal run; no-send = update state + site, no email; dry-run = nothing saved or sent"
         type: choice
         options: [send, no-send, dry-run]
         default: dry-run
 
 permissions:
-  contents: write   # to commit state/snapshot.json back
+  contents: write   # to commit state/, history/ and site/ back (Vercel deploys site/ on each commit)
 
 concurrency:
   group: weekly-digest
@@ -46,6 +46,8 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           DIGEST_TO: ${{ secrets.DIGEST_TO }}
           DIGEST_FROM: ${{ secrets.DIGEST_FROM }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+          READER_CONTEXT: ${{ secrets.READER_CONTEXT }}
           MODE: ${{ github.event.inputs.mode || 'send' }}
         run: |
           case "$MODE" in
@@ -62,11 +64,11 @@ jobs:
           path: out/
           if-no-files-found: ignore
 
-      - name: Commit snapshot
+      - name: Commit snapshot, history and site
         if: github.event.inputs.mode != 'dry-run'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add state/snapshot.json
-          git diff --cached --quiet || git commit -m "Update pipeline snapshot $(date -u +%F)"
+          git add state history site
+          git diff --cached --quiet || git commit -m "Weekly pipeline update $(date -u +%F)"
           git push

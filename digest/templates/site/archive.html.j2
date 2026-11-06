@@ -1,0 +1,16 @@
+{% extends "base.html.j2" %}
+{% block title %}Past weeks · {{ site_title }}{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Past weeks</h1>
+</section>
+<section class="card">
+  {% if weeks %}
+  <ul class="plain weeks">
+  {% for w in weeks %}
+    <li><span class="when">{{ w.date|nice_date }}</span><a href="{{ w.date }}.html">{{ w.headline }}</a></li>
+  {% endfor %}
+  </ul>
+  {% else %}<p class="empty">No weekly runs yet.</p>{% endif %}
+</section>
+{% endblock %}

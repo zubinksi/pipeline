@@ -30,4 +30,5 @@ PIPELINE (1-3 = Phase 1-3, F = Filed, A = Approved)
 {% if errors %}
 Couldn't reach this week: {{ errors|join(", ") }} (last week's data kept).
 {% endif %}
-Sources: ClinicalTrials.gov, openFDA, FDA press announcements, news searches. Informational only, not medical advice.
+{% if site_url %}Full site: {{ site_url }}
+{% endif %}Sources: ClinicalTrials.gov, openFDA, FDA press announcements, news searches. Informational only, not medical advice.

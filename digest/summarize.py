@@ -129,6 +129,12 @@ def summarize(changes: list[Change], watchlist: dict, client=None) -> tuple[str,
     return headline, kept
 
 
+def reader_context(watchlist: dict) -> str:
+    """READER_CONTEXT (e.g. a GitHub secret) overrides watchlist.yaml, so personal
+    details don't have to live in a public repo."""
+    return (os.environ.get("READER_CONTEXT") or watchlist.get("reader_context") or "").strip()
+
+
 def _call(client, changes, watchlist, drugs) -> dict:
     response = client.beta.messages.create(
         model=MODEL,
@@ -136,7 +142,7 @@ def _call(client, changes, watchlist, drugs) -> dict:
         betas=["server-side-fallback-2026-07-01"],
         fallbacks="default",
         output_config={"effort": "medium", "format": {"type": "json_schema", "schema": SCHEMA}},
-        system=SYSTEM.format(reader=watchlist.get("reader_context", "").strip()),
+        system=SYSTEM.format(reader=reader_context(watchlist)),
         messages=[{"role": "user", "content": _payload(changes, drugs)}],
     )
     if response.stop_reason in ("refusal", "max_tokens"):

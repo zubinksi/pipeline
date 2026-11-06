@@ -65,6 +65,7 @@
 
 <tr><td style="padding:18px 28px 26px 28px;font-size:12px;line-height:1.5;color:{{ muted }};">
   {% if errors %}<div style="margin-bottom:8px;color:#92400e;">Couldn't reach this week: {{ errors|join(", ") }}. Last week's data was kept for these; they'll be checked again next week.</div>{% endif %}
+  {% if site_url %}<div style="margin-bottom:8px;"><a href="{{ site_url }}" style="color:{{ accent }};">Open the full pipeline site &rarr;</a></div>{% endif %}
   Built from ClinicalTrials.gov, openFDA, FDA press announcements and news searches. Every item links to its source. "Why it matters" lines are AI-written from those items. Informational only, not medical advice.
 </td></tr>
 </table>

@@ -1,0 +1,56 @@
+{% macro track(rank, moved=false) -%}
+<div class="track" role="img" aria-label="{{ stages[rank-1] }}">
+  {% for i in range(1, 6) %}
+  <div class="cell {{ 'done' if i < rank else ('now' if i == rank else '') }}{{ ' moved' if moved and i == rank else '' }}"><span class="dot"></span></div>
+  {% endfor %}
+</div>
+{%- endmacro %}
+
+{% macro strip(rows, root) -%}
+<div class="strip-head"><div class="label"></div><div class="stages">{% for s in stages %}<div>{{ s }}</div>{% endfor %}</div></div>
+{% for r in rows %}
+<div class="strip-row">
+  <div class="name">
+    <a href="{{ root }}drugs/{{ r.id }}.html">{{ r.name }}</a>
+    {% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}
+    {% if r.badge %}<span class="tag">{{ r.badge }}</span>{% endif %}
+    <div class="sub">{{ r.company }} · {{ r.form }}</div>
+  </div>
+  {{ track(r.rank, r.moved) }}
+</div>
+{% endfor %}
+{%- endmacro %}
+
+{% macro changes(list, root, show_drug=true) -%}
+{% for c in list %}
+<div class="change">
+  {% if show_drug and c.drug_name %}<div class="meta"><a href="{{ root }}drugs/{{ c.drug }}.html">{{ c.drug_name }}</a> · {{ c.company }}</div>
+  {% elif not show_drug %}<div class="meta">{% if c.week %}<a href="{{ root }}weeks/{{ c.week }}.html">{{ c.week|nice_date }}</a>{% endif %}</div>{% endif %}
+  <div class="what">{{ c.what }} <a class="src" href="{{ c.url }}" rel="noopener">{{ c.source }} &rarr;</a></div>
+  {% if c.why %}<div class="why"><span>Why it matters:</span> {{ c.why }}</div>{% endif %}
+</div>
+{% endfor %}
+{%- endmacro %}
+
+{% macro horizon(items, root) -%}
+<ul class="plain horizon">
+{% for h in items %}
+  <li><span class="when">{{ h.date }}</span> <strong>{{ h.drug }}</strong>: {{ h.what }} <a href="{{ h.url }}" rel="noopener">source &rarr;</a></li>
+{% endfor %}
+</ul>
+{%- endmacro %}
+
+{% macro week_body(w, root, horizon_days) -%}
+{% if w.changes %}
+<section class="card">
+  <h2>What moved</h2>
+  {{ changes(w.changes, root) }}
+</section>
+{% endif %}
+{% if w.horizon %}
+<section class="card">
+  <h2>On the horizon <span class="sub">(next {{ horizon_days }} days)</span></h2>
+  {{ horizon(w.horizon, root) }}
+</section>
+{% endif %}
+{%- endmacro %}
