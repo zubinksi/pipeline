@@ -2,9 +2,9 @@
 {% import "_macros.html.j2" as m with context %}
 {% block title %}Past weeks · {{ site_title }}{% endblock %}
 {% block content %}
-<div class="d-title"><h1>Past weeks</h1><span class="amt">{{ weeks|length }}</span></div>
-<div class="module">
+<div class="intro"><h1>Past weeks</h1><p>Each Monday's check, newest first.</p></div>
+<section class="section">
   {% if weeks %}{{ m.week_list(weeks, "") }}
   {% else %}<p class="empty">No weekly runs yet.</p>{% endif %}
-</div>
+</section>
 {% endblock %}

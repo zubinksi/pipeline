@@ -1,19 +1,11 @@
 {% extends "base.html.j2" %}
 {% import "_macros.html.j2" as m with context %}
 {% block content %}
-{% if latest %}
-<div class="d-title"><h1>This week</h1><span class="amt">{{ latest.date|nice_date_short }}</span></div>
-<p class="headline">{{ latest.headline }}</p>
-{{ m.week_body(latest, root, horizon_days) }}
-{% else %}
-<div class="d-title"><h1>This week</h1></div>
-<p class="headline">No weekly runs yet.</p>
-{% endif %}
-{{ m.strip(rows, root, filterable=true) }}
-{% if weeks|length > 1 %}
-<div class="module">
-  <div class="module-head"><span class="label">Recent weeks</span>{% if n_weeks > weeks|length %}<a class="src" href="weeks/index.html">All {{ n_weeks }} &rarr;</a>{% endif %}</div>
-  {{ m.week_list(weeks[1:], "weeks/") }}
+<div class="intro">
+  <h1>Statin alternatives in the pipeline</h1>
+  <p>Cholesterol drugs you wouldn't take every day: what each one does, how often you'd take it, and how close it is to your pharmacy. Checked every Monday.</p>
 </div>
-{% endif %}
+{% if latest %}{{ m.this_week(latest, root, "This week") }}{% endif %}
+{{ m.drug_list(groups, root, filterable=true) }}
+{{ m.explainer() }}
 {% endblock %}

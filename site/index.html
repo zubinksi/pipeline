@@ -24,119 +24,123 @@
 </header>
 <main class="body">
   <div class="slab">
-<div class="d-title"><h1>This week</h1><span class="amt">Nov 6</span></div>
-<p class="headline">First run: now tracking 11 drugs and 145 trials. From next week, only changes are reported.</p>
-<div class="module">
-  <div class="module-head"><span class="label">What moved</span></div>
-<p class="empty">First week of tracking. Changes are reported from next week.</p>
+<div class="intro">
+  <h1>Statin alternatives in the pipeline</h1>
+  <p>Cholesterol drugs you wouldn't take every day: what each one does, how often you'd take it, and how close it is to your pharmacy. Checked every Monday.</p>
 </div>
-
-<div class="module" data-filter>
-  <div class="module-head"><span class="label">Pipeline</span></div>
-  <div class="filters" hidden>
-    <div class="f-group" role="group" aria-label="Type">
-      <span class="label">Type</span>
-      <button type="button" class="chip" data-k="type" data-v="all">All</button>
-<button type="button" class="chip" data-k="type" data-v="injection">Injections</button><button type="button" class="chip" data-k="type" data-v="infusion">Infusions</button>    </div>
-    <div class="f-group" role="group" aria-label="Frequency">
-      <span class="label">Frequency</span>
-      <button type="button" class="chip" data-k="freq" data-v="all">All</button>
-<button type="button" class="chip" data-k="freq" data-v="monthly">Monthly</button><button type="button" class="chip" data-k="freq" data-v="infrequent">Infrequent</button><button type="button" class="chip" data-k="freq" data-v="once">One-time</button>    </div>
-    <span class="label f-count"></span>
-  </div>
-  <div class="strip-head"><div class="lbl"></div><div class="stages"><div class="label">Phase 1</div><div class="label">Phase 2</div><div class="label">Phase 3</div><div class="label">Filed</div><div class="label">Approved</div></div></div>
-  <div class="strip-row" data-type="injection" data-freq="infrequent">
-    <div class="name">
-      <a href="drugs/lepodisiran.html">Lepodisiran</a>
-      <div class="sub">Eli Lilly · Injection, possibly once or twice a year</div>
+<section class="section">
+  <div class="section-head"><h2>This week <span class="sub">· Nov 6</span></h2></div>
+<p class="quiet">Tracking started this week. Changes show up here from next week.</p></section>
+<section class="section" data-filter>
+  <div class="section-head">
+    <h2>The drugs <span class="sub">· 7</span></h2>
+    <div class="filters" hidden>
+      <select data-k="type" aria-label="How you'd take it">
+        <option value="all">Type</option>
+<option value="injection">Shots</option><option value="infusion">Infusions</option>      </select>
+      <select data-k="freq" aria-label="How often">
+        <option value="all">How often</option>
+<option value="monthly">Monthly</option><option value="infrequent">Less than monthly</option><option value="once">One-time</option>      </select>
     </div>
-    <div class="track" role="img" aria-label="Phase 3">
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell now"><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-</div>
   </div>
-  <div class="strip-row" data-type="injection" data-freq="monthly">
-    <div class="name">
-      <a href="drugs/pelacarsen.html">Pelacarsen</a>
-<span class="tag">missed endpoint</span>      <div class="sub">Novartis / Ionis · Monthly injection</div>
+  <div class="group" data-group>
+    <h3>Available now <span class="n" data-count>1</span></h3>
+    <a class="drug" href="drugs/lerodalcibep.html" data-type="injection" data-freq="monthly">
+      <div>
+        <div class="drug-name">Lerodalcibep</div>
+        <div class="drug-line">Shot, once a month<span class="sep">·</span>lowers LDL</div>
+      </div>
+      <div class="drug-stage"><span class="words">Approved</span><div class="mini" role="img" aria-label="Step 5 of 5: Approved">
+<div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div></div></div>
+      <span class="go" aria-hidden="true">&rsaquo;</span>
+    </a>
+  </div>
+  <div class="group" data-group>
+    <h3>Getting close <span class="n" data-count>3</span></h3>
+    <a class="drug" href="drugs/lepodisiran.html" data-type="injection" data-freq="infrequent">
+      <div>
+        <div class="drug-name">Lepodisiran</div>
+        <div class="drug-line">Shot, possibly once or twice a year<span class="sep">·</span>lowers Lp(a)</div>
+      </div>
+      <div class="drug-stage"><span class="words">Final-stage trials</span><div class="mini" role="img" aria-label="Step 3 of 5: Phase 3">
+<div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div></div>
+      <span class="go" aria-hidden="true">&rsaquo;</span>
+    </a>
+    <a class="drug" href="drugs/olpasiran.html" data-type="injection" data-freq="infrequent">
+      <div>
+        <div class="drug-name">Olpasiran</div>
+        <div class="drug-line">Shot, every 3 months or less often<span class="sep">·</span>lowers Lp(a)</div>
+      </div>
+      <div class="drug-stage"><span class="words">Final-stage trials</span><div class="mini" role="img" aria-label="Step 3 of 5: Phase 3">
+<div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div></div>
+      <span class="go" aria-hidden="true">&rsaquo;</span>
+    </a>
+    <a class="drug" href="drugs/pelacarsen.html" data-type="injection" data-freq="monthly">
+      <div>
+        <div class="drug-name">Pelacarsen<span class="tag setback">setback</span></div>
+        <div class="drug-line">Shot, once a month<span class="sep">·</span>lowers Lp(a)</div>
+      </div>
+      <div class="drug-stage"><span class="words">Final-stage trials</span><div class="mini" role="img" aria-label="Step 3 of 5: Phase 3">
+<div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div></div>
+      <span class="go" aria-hidden="true">&rsaquo;</span>
+    </a>
+  </div>
+  <div class="group" data-group>
+    <h3>Further out <span class="n" data-count>3</span></h3>
+    <a class="drug" href="drugs/verve102.html" data-type="infusion" data-freq="once">
+      <div>
+        <div class="drug-name">VERVE-102</div>
+        <div class="drug-line">One-time infusion<span class="sep">·</span>lowers LDL</div>
+      </div>
+      <div class="drug-stage"><span class="words">Mid-stage testing</span><div class="mini" role="img" aria-label="Step 2 of 5: Phase 2">
+<div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div></div>
+      <span class="go" aria-hidden="true">&rsaquo;</span>
+    </a>
+    <a class="drug" href="drugs/zerlasiran.html" data-type="injection" data-freq="infrequent">
+      <div>
+        <div class="drug-name">Zerlasiran<span class="tag">on hold</span></div>
+        <div class="drug-line">Shot, a few times a year<span class="sep">·</span>lowers Lp(a)</div>
+      </div>
+      <div class="drug-stage"><span class="words">Mid-stage testing</span><div class="mini" role="img" aria-label="Step 2 of 5: Phase 2">
+<div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div></div>
+      <span class="go" aria-hidden="true">&rsaquo;</span>
+    </a>
+    <a class="drug" href="drugs/solbinsiran.html" data-type="injection" data-freq="infrequent">
+      <div>
+        <div class="drug-name">Solbinsiran</div>
+        <div class="drug-line">Shot, a few times a year<span class="sep">·</span>lowers triglycerides &amp; LDL</div>
+      </div>
+      <div class="drug-stage"><span class="words">Mid-stage testing</span><div class="mini" role="img" aria-label="Step 2 of 5: Phase 2">
+<div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div></div>
+      <span class="go" aria-hidden="true">&rsaquo;</span>
+    </a>
+  </div>
+<p class="empty f-empty" hidden>Nothing on the list matches. Try setting Type or How often back.</p></section>
+<details class="explain">
+  <summary>How to read this</summary>
+  <div class="explain-body">
+    <div>
+      <h4>How far along</h4>
+      <dl>
+        <dt>Early safety tests</dt><dd>First tests in people, mainly for safety.</dd>
+        <dt>Mid-stage testing</dt><dd>Does it work, and at what dose?</dd>
+        <dt>Final-stage trials</dt><dd>Large trials, often testing whether it prevents heart attacks. The last step before applying for approval.</dd>
+        <dt>FDA reviewing</dt><dd>The company has applied for approval.</dd>
+        <dt>Approved</dt><dd>Doctors can prescribe it.</dd>
+      </dl>
+      <p style="margin-top:0.75rem">Many drugs stop along the way. Even final-stage drugs are usually a few years from pharmacies.</p>
     </div>
-    <div class="track" role="img" aria-label="Phase 3">
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell now"><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-</div>
-  </div>
-  <div class="strip-row" data-type="injection" data-freq="infrequent">
-    <div class="name">
-      <a href="drugs/olpasiran.html">Olpasiran</a>
-      <div class="sub">Amgen · Injection every 12 weeks or less often</div>
+    <div>
+      <h4>What they lower</h4>
+      <dl>
+        <dt>LDL</dt><dd>The "bad" cholesterol that statins lower.</dd>
+        <dt>Lp(a)</dt><dd>A cholesterol particle set mostly by your genes. High levels raise heart risk, and statins don't lower it. A one-time blood test measures it.</dd>
+        <dt>Triglycerides</dt><dd>Another blood fat linked to heart risk.</dd>
+      </dl>
+      <p style="margin-top:0.75rem">Everything listed here is a non-statin drug you wouldn't take daily. This is a news tracker, not medical advice.</p>
     </div>
-    <div class="track" role="img" aria-label="Phase 3">
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell now"><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-</div>
   </div>
-  <div class="strip-row" data-type="injection" data-freq="infrequent">
-    <div class="name">
-      <a href="drugs/zerlasiran.html">Zerlasiran</a>
-<span class="tag">seeking partner</span>      <div class="sub">Silence Therapeutics · Infrequent injection</div>
-    </div>
-    <div class="track" role="img" aria-label="Phase 2">
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell now"><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-</div>
-  </div>
-  <div class="strip-row" data-type="injection" data-freq="infrequent">
-    <div class="name">
-      <a href="drugs/solbinsiran.html">Solbinsiran</a>
-      <div class="sub">Eli Lilly · Infrequent injection</div>
-    </div>
-    <div class="track" role="img" aria-label="Phase 2">
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell now"><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-</div>
-  </div>
-  <div class="strip-row" data-type="infusion" data-freq="once">
-    <div class="name">
-      <a href="drugs/verve102.html">VERVE-102</a>
-      <div class="sub">Eli Lilly (Verve) · One-time infusion</div>
-    </div>
-    <div class="track" role="img" aria-label="Phase 2">
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell now"><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-  <div class="cell "><span class="dot"></span></div>
-</div>
-  </div>
-  <div class="strip-row" data-type="injection" data-freq="monthly">
-    <div class="name">
-      <a href="drugs/lerodalcibep.html">Lerodalcibep</a>
-      <div class="sub">LIB Therapeutics · Monthly injection</div>
-    </div>
-    <div class="track" role="img" aria-label="Approved">
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell done"><span class="dot"></span></div>
-  <div class="cell now"><span class="dot"></span></div>
-</div>
-  </div>
-<p class="empty f-empty" hidden>No drugs on the watchlist match these filters.</p></div>
+</details>
   </div>
 </main>
 <footer>

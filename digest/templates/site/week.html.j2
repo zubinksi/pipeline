@@ -2,12 +2,11 @@
 {% import "_macros.html.j2" as m with context %}
 {% block title %}{{ week.date|nice_date }} · {{ site_title }}{% endblock %}
 {% block content %}
-<div class="d-title"><h1>Week of {{ week.date|nice_date_short }}</h1><span class="amt">{{ week.date[:4] }}</span></div>
-<div class="d-sub">
+<div class="intro"><h1>Week of {{ week.date|nice_date }}</h1></div>
+<div class="pager">
   <span>{% if older %}<a href="{{ older }}.html">&larr; {{ older|nice_date }}</a>{% endif %}</span>
   <span>{% if newer %}<a href="{{ newer }}.html">{{ newer|nice_date }} &rarr;</a>{% endif %}</span>
 </div>
-<p class="headline">{{ week.headline }}</p>
-{{ m.week_body(week, root, horizon_days) }}
-{{ m.strip(rows, root, title="Pipeline that week", filterable=true) }}
+{{ m.this_week(week, root, "What moved") }}
+{{ m.drug_list(groups, root, title="Where things stood") }}
 {% endblock %}

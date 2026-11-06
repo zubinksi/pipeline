@@ -2,58 +2,74 @@
 {% import "_macros.html.j2" as m with context %}
 {% block title %}{{ drug.name }} · {{ site_title }}{% endblock %}
 {% block content %}
-<a class="back" href="{{ root }}index.html" aria-label="Back to this week">&larr; All drugs</a>
-<div class="d-title"><h1>{{ drug.name }}</h1><span class="amt">{{ row.stage_label }}</span></div>
-<div class="d-sub"><span>{{ drug.company }}{% if drug.target %} · {{ drug.target }}{% endif %}</span>{% if drug.badge or row.moved %}<span>{% if row.moved %}<span class="tag moved">&#9650; moved this week</span> {% endif %}{% if drug.badge %}<span class="tag">{{ drug.badge }}</span>{% endif %}</span>{% endif %}</div>
-{% if drug.plain %}<p class="lede">{{ drug.plain }}</p>{% endif %}
-
-<div class="module">
-  {{ m.stage_head() }}
-  <div class="strip-row"><div class="name"><span class="label">Stage</span></div>{{ m.track(row.rank, row.moved) }}</div>
+<a class="back" href="{{ root }}index.html">&larr; All drugs</a>
+<div class="intro">
+  <div class="d-head"><h1>{{ drug.name }}{{ m.badge(drug.badge) }}{% if row.moved %}<span class="tag moved">&#9650; moved this week</span>{% endif %}</h1></div>
+  {% if drug.plain %}<p>{{ drug.plain }}</p>{% endif %}
 </div>
 
-<dl class="facts">
-  {% if drug.form %}<dt>Form</dt><dd>{{ drug.form }}</dd>{% endif %}
-  <dt>Trials tracked</dt><dd><span class="mono">{{ trials|length }}</span> · {{ n_active }} active</dd>
-  {% if next_pcd %}<dt>Next completion</dt><dd><span class="mono">{{ next_pcd.primary_completion }}</span> · {{ next_pcd.acronym or next_pcd.nct }} (primary completion, est.)</dd>{% endif %}
-  {% if drug.aliases %}<dt>Also known as</dt><dd>{{ drug.aliases|join(", ") }}</dd>{% endif %}
-  {% if drug.note %}<dt>Status note</dt><dd>{{ drug.note }}</dd>{% endif %}
-  <dt>Stage based on</dt><dd>
-    {% if stage_basis.basis and stage_basis.basis.startswith("NCT") %}<a href="{{ stage_basis.url }}">{{ stage_basis.basis }}</a> on ClinicalTrials.gov
-    {% elif stage_basis.basis == "FDA" %}<a href="{{ stage_basis.url }}">FDA approval record</a>
-    {% else %}Watchlist{% if drug.sources %} (<a href="{{ drug.sources[0] }}">source</a>){% endif %}{% endif %}
-  </dd>
-</dl>
-
-<div class="module">
-  <div class="module-head"><span class="label">Updates</span></div>
-  {% if updates %}{{ m.changes(updates, root, show_drug=false) }}
-  {% else %}<p class="empty">No changes recorded since tracking started.</p>{% endif %}
+<div class="glance">
+  <div><span class="label">How you'd take it</span><div class="v">{{ drug.form or "–" }}</div></div>
+  <div><span class="label">What it lowers</span><div class="v">{{ drug.lowers or drug.target or "–" }}</div></div>
+  <div><span class="label">Made by</span><div class="v">{{ drug.company }}</div></div>
 </div>
 
-{% if history|length > 1 %}
-<div class="module">
-  <div class="module-head"><span class="label">Stage history</span></div>
-  {% for h in history %}<div class="w-row"><span class="w-when">{{ h.date|nice_date }}</span><span class="w-head">{{ h.label }}</span></div>{% endfor %}
-</div>
+<section class="section">
+  <div class="section-head"><h2>How far along</h2></div>
+  <div class="stage-box" style="padding-top:0.875rem">
+    <div class="v" style="font-size:1.25rem">{{ row.stage_plain }}</div>
+    <div>{{ m.mini(row.rank, row.moved, big=true) }}
+      <div class="mini-labels">{% for s in ["Early", "Mid", "Final", "FDA", "Approved"] %}<span{% if loop.index == row.rank %} class="on"{% endif %}>{{ s }}</span>{% endfor %}</div>
+    </div>
+    <p class="explain-line">{{ row.stage_explain }}</p>
+  </div>
+</section>
+
+{% if drug.note %}
+<section class="section">
+  <div class="section-head"><h2>Where it stands</h2></div>
+  <p class="prose" style="padding-top:0.75rem">{{ drug.note }}{% if drug.sources %} <a class="src" href="{{ drug.sources[0] }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>
+</section>
 {% endif %}
 
-<div class="module">
-  <div class="module-head"><span class="label">Trials on ClinicalTrials.gov</span></div>
-  {% if trials %}
-  <div class="scroll"><table class="trials">
-    <thead><tr><th>Trial</th><th>Phase</th><th>Status</th><th>Primary completion</th></tr></thead>
-    <tbody>
-    {% for t in trials %}
-      <tr>
-        <td><a href="{{ t.url }}">{{ t.acronym or t.nct }}</a>{% if t.has_results %} <span class="tag">results</span>{% endif %}<div class="t-title">{{ t.title[:90] }}</div></td>
-        <td class="nowrap">{{ t.phase }}</td>
-        <td>{{ t.status_plain }}</td>
-        <td class="nowrap">{{ t.primary_completion or "–" }}{% if t.primary_completion_type == "ESTIMATED" %} <span class="est">est.</span>{% endif %}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table></div>
-  {% else %}<p class="empty">None found yet.</p>{% endif %}
-</div>
+<section class="section">
+  <div class="section-head"><h2>News since tracking started</h2></div>
+  {% if updates %}{{ m.changes(updates, root, show_drug=false) }}
+  {% else %}<p class="quiet">Nothing new yet. Changes will appear here as they happen.</p>{% endif %}
+</section>
+
+<details class="more">
+  <summary>Clinical trials and details ({{ trials|length }} trials)</summary>
+  <div>
+    <dl class="facts">
+      {% if drug.aliases %}<dt>Also known as</dt><dd>{{ drug.aliases|join(", ") }}</dd>{% endif %}
+      {% if drug.target %}<dt>Works on</dt><dd>{{ drug.target }}</dd>{% endif %}
+      <dt>Active trials</dt><dd>{{ n_active }} of {{ trials|length }}</dd>
+      {% if next_pcd %}<dt>Next trial finishing</dt><dd>{{ next_pcd.primary_completion|horizon_date }} · {{ next_pcd.acronym or next_pcd.nct }} (estimated)</dd>{% endif %}
+      <dt>Stage based on</dt><dd>
+        {% if stage_basis.basis and stage_basis.basis.startswith("NCT") %}<a href="{{ stage_basis.url }}">{{ stage_basis.basis }}</a> on ClinicalTrials.gov
+        {% elif stage_basis.basis == "FDA" %}<a href="{{ stage_basis.url }}">FDA approval record</a>
+        {% else %}Watchlist{% if drug.sources %} (<a href="{{ drug.sources[0] }}">source</a>){% endif %}{% endif %}
+      </dd>
+    </dl>
+    {% if history|length > 1 %}
+    <dl class="facts">{% for h in history %}<dt>{{ h.date|nice_date }}</dt><dd>{{ h.label }}</dd>{% endfor %}</dl>
+    {% endif %}
+    {% if trials %}
+    <div class="scroll"><table class="trials">
+      <thead><tr><th>Trial</th><th>Phase</th><th>Status</th><th>Main results due</th></tr></thead>
+      <tbody>
+      {% for t in trials %}
+        <tr>
+          <td><a href="{{ t.url }}">{{ t.acronym or t.nct }}</a>{% if t.has_results %} <span class="tag">results</span>{% endif %}<div class="t-title">{{ t.title[:90] }}</div></td>
+          <td class="nowrap">{{ t.phase }}</td>
+          <td>{{ t.status_plain }}</td>
+          <td class="nowrap">{{ t.primary_completion or "–" }}{% if t.primary_completion_type == "ESTIMATED" %} <span class="est">est.</span>{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table></div>
+    {% endif %}
+  </div>
+</details>
 {% endblock %}

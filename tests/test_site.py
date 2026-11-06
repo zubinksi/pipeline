@@ -34,7 +34,7 @@ def test_site_pages_exist(tmp_path):
 def test_index_shows_latest_week_and_sources(tmp_path):
     out, changes = _build(tmp_path)
     html = (out / "index.html").read_text()
-    assert "What moved" in html and "On the horizon" in html and "Recent weeks" in html
+    assert "This week" in html and "Coming up" in html and "How to read this" in html
     for c in changes:
         assert c.url in html
     assert 'href="drugs/zerlasiran.html"' in html  # relative links work on any host
@@ -44,7 +44,7 @@ def test_drug_page_has_updates_history_and_trials(tmp_path):
     out, _ = _build(tmp_path)
     html = (out / "drugs/zerlasiran.html").read_text()
     assert "moved from Phase 2 to Phase 3" in html          # update
-    assert "Stage history" in html                           # phase 2 -> phase 3 across weeks
+    assert "Phase 2</dd>" in html and "Phase 3</dd>" in html  # stage history across weeks
     assert "NCT90000010" in html                             # trial table
     assert 'href="../weeks/2026-11-03.html"' in html
 
@@ -64,15 +64,17 @@ def test_untrusted_text_is_escaped(tmp_path):
 
 def test_empty_site_builds(tmp_path):
     out = site.build(tmp_path / "s", weeks=[], snapshot={"drugs": {}, "trials": {}}, watchlist=WL)
-    assert "No weekly runs yet" in (out / "index.html").read_text()
+    assert "Statin alternatives" in (out / "index.html").read_text()
+    assert "No weekly runs yet" in (out / "weeks/index.html").read_text()
 
 
 def test_pipeline_rows_carry_filter_data(tmp_path):
     out, _ = _build(tmp_path)
     html = (out / "index.html").read_text()
-    assert "data-filter" in html and 'data-k="type" data-v="injection"' in html and 'data-k="freq" data-v="monthly"' in html
-    assert 'data-v="daily"' not in html  # filter options only for values on the watchlist
-    assert html.count('class="strip-row"') == len(WL["drugs"])
+    assert "data-filter" in html and '<option value="injection">Shots</option>' in html
+    assert '<option value="monthly">Monthly</option>' in html
+    assert 'value="daily"' not in html  # filter options only for values on the watchlist
+    assert html.count('class="drug"') == len(WL["drugs"])
     for d in WL["drugs"]:
         assert d.get("route") and d.get("frequency"), d["id"]
     assert 'data-type="injection" data-freq="monthly"' in html
@@ -104,3 +106,11 @@ def test_dropped_drugs_and_retired_sources_are_hidden(tmp_path):
 def test_drug_page_has_back_link(tmp_path):
     out, _ = _build(tmp_path)
     assert 'class="back" href="../index.html"' in (out / "drugs/olpasiran.html").read_text()
+
+
+def test_drugs_grouped_by_closeness(tmp_path):
+    out, _ = _build(tmp_path)
+    html = (out / "index.html").read_text()
+    a, c, l = html.index("Available now"), html.index("Getting close"), html.index("Further out")
+    assert a < c < l
+    assert html.index("Lerodalcibep") < c  # approved -> available now

@@ -38,8 +38,21 @@ _env.filters["nice_date"] = _fmt_date
 _env.filters["nice_date_short"] = _fmt_short
 _env.filters["horizon_date"] = fmt_horizon_date
 STATIC = Path(__file__).parent / "static"
-TYPE_LABEL = {"pill": "Pills", "injection": "Injections", "infusion": "Infusions"}
-FREQ_LABEL = {"daily": "Daily", "monthly": "Monthly", "infrequent": "Infrequent", "once": "One-time"}
+TYPE_LABEL = {"pill": "Pills", "injection": "Shots", "infusion": "Infusions"}
+FREQ_LABEL = {"daily": "Daily", "monthly": "Monthly", "infrequent": "Less than monthly", "once": "One-time"}
+# Plain words for each stage, and what it means for someone waiting on a drug.
+STAGE_PLAIN = {
+    "phase1": ("Early safety tests", "First tests in people, mainly for safety."),
+    "phase2": ("Mid-stage testing", "Testing whether it works and finding the right dose."),
+    "phase3": ("Final-stage trials", "Large trials, often testing whether it prevents heart attacks. The last step before applying for approval."),
+    "filed": ("FDA reviewing", "The company has applied; the FDA is deciding."),
+    "approved": ("Approved", "Doctors can prescribe it."),
+}
+GROUPS = [
+    ("now", "Available now", ("approved",)),
+    ("close", "Getting close", ("phase3", "filed")),
+    ("later", "Further out", ("phase1", "phase2")),
+]
 ACTIVE = {"NOT_YET_RECRUITING", "RECRUITING", "ENROLLING_BY_INVITATION", "ACTIVE_NOT_RECRUITING"}
 
 
@@ -48,8 +61,20 @@ def _rows(watchlist: dict, stages: dict, moved: set[str]) -> list[dict]:
     for d in watchlist["drugs"]:
         stage = stages.get(d["id"], d["stage"])
         rows.append({**d, "rank": STAGE_RANK[stage], "stage_label": STAGE_LABEL[stage],
-                     "moved": d["id"] in moved})
+                     "stage_plain": STAGE_PLAIN[stage][0], "stage_explain": STAGE_PLAIN[stage][1],
+                     "stage": stage, "moved": d["id"] in moved})
     return rows
+
+
+def _groups(rows: list[dict]) -> list[dict]:
+    """Drugs grouped by how close they are to a pharmacy, closest first."""
+    out = []
+    for key, title, stages in GROUPS:
+        members = [r for r in rows if r["stage"] in stages]
+        if members:
+            members.sort(key=lambda r: -r["rank"])
+            out.append({"key": key, "title": title, "rows": members})
+    return out
 
 
 def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
@@ -63,7 +88,9 @@ def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
         d = drugs.get(c.get("drug"))
         changes.append({**c, "drug_name": d["name"] if d else "", "company": d["company"] if d else "",
                         "kind_label": KIND_LABEL[c["kind"]][0]})
-    headline = rec["headline"] or "Nothing changed this week."
+    # a baseline week's stored headline counts drugs at the time; say it plainly instead
+    headline = ("Tracking started this week. Changes show up here from next week." if rec.get("baseline")
+                else rec["headline"] or "Nothing changed this week.")
     return {**rec, "headline": headline, "changes": changes,
             "horizon": [h for h in rec.get("horizon", []) if h["drug"] in names],
             "errors": [e for e in rec.get("errors", []) if e.split(" (")[0] in sources]}
@@ -95,12 +122,13 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
         (out / path).write_text(html)
 
     write("index.html", "index.html.j2", "", sel="home", latest=latest, weeks=views[:12], n_weeks=len(views),
-          rows=_rows(watchlist, stages, moved))
+          groups=_groups(_rows(watchlist, stages, moved)), n_drugs=len(watchlist["drugs"]))
     for i, w in enumerate(views):
         newer = views[i - 1]["date"] if i > 0 else None
         older = views[i + 1]["date"] if i + 1 < len(views) else None
         write(f"weeks/{w['date']}.html", "week.html.j2", "../", sel="weeks", week=w, newer=newer, older=older,
-              rows=_rows(watchlist, w.get("stages", stages), set(w["moved"])))
+              groups=_groups(_rows(watchlist, w.get("stages", stages), set(w["moved"]))),
+              n_drugs=len(watchlist["drugs"]))
     write("weeks/index.html", "archive.html.j2", "../", sel="weeks", weeks=views)
 
     trials_by_drug: dict[str, list] = {}

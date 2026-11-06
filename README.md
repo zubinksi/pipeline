@@ -53,7 +53,9 @@ The site is public, though pages ask search engines not to index them. The first
 
 ## Design
 
-Dark slate with cool neutral tones and a faint graph-paper grid. Fonts are Geist Serif and Geist Mono (SIL Open Font License, see `digest/static/fonts/OFL.txt`). Colors are set at the top of `digest/static/site.css`. You can filter the pipeline on the home page by how each drug is taken and how often, using the `route` and `frequency` fields in `watchlist.yaml`. The filter is kept in the URL (e.g. `?type=pill&freq=daily`), so a filtered view can be bookmarked.
+The site is written for a non-specialist: "Statin alternatives in the pipeline", with each drug described as how you'd take it, what it lowers, and how far along it is in plain words (Early safety tests → Mid-stage testing → Final-stage trials → FDA reviewing → Approved). The drugs are grouped as Available now / Getting close / Further out. Two dropdowns filter by type and how often (kept in the URL, e.g. `?freq=monthly`). Drug pages lead with the plain summary and put the clinical-trial detail behind a "Clinical trials and details" toggle.
+
+The look is light and matches the email: cream paper on a pale grid, slate ink, teal accent. Fonts are Geist Serif and Geist Mono (SIL Open Font License, `digest/static/fonts/OFL.txt`). Colors are set at the top of `digest/static/site.css`. The plain-language text comes from the `lowers`, `form`, `plain`, `note` and `badge` fields in `watchlist.yaml`.
 
 ## Maintaining the watchlist
 

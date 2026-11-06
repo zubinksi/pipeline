@@ -1,86 +1,113 @@
-{% macro track(rank, moved=false) -%}
-<div class="track" role="img" aria-label="{{ stages[rank-1] }}">
-  {% for i in range(1, 6) %}
-  <div class="cell {{ 'done' if i < rank else ('now' if i == rank else '') }}{{ ' moved' if moved and i == rank else '' }}"><span class="dot"></span></div>
-  {% endfor %}
+{% macro mini(rank, moved=false, big=false) -%}
+<div class="mini{{ ' big' if big }}" role="img" aria-label="Step {{ rank }} of 5: {{ stages[rank-1] }}">
+  {% for i in range(1, 6) %}<div class="cell {{ 'done' if i < rank else ('now' if i == rank else '') }}{{ ' moved' if moved and i == rank else '' }}"><span class="dot"></span></div>{% endfor %}
 </div>
 {%- endmacro %}
 
-{% macro stage_head() -%}
-<div class="strip-head"><div class="lbl"></div><div class="stages">{% for s in stages %}<div class="label">{{ s }}</div>{% endfor %}</div></div>
+{% macro badge(text) -%}
+{% if text %}<span class="tag{{ ' setback' if text == 'setback' }}">{{ text }}</span>{% endif %}
 {%- endmacro %}
 
-{% macro strip(rows, root, title="Pipeline", filterable=false) -%}
-<div class="module"{% if filterable %} data-filter{% endif %}>
-  <div class="module-head"><span class="label">{{ title }}</span></div>
-  {% if filterable %}
-  <div class="filters" hidden>
-    <div class="f-group" role="group" aria-label="Type">
-      <span class="label">Type</span>
-      <button type="button" class="chip" data-k="type" data-v="all">All</button>
-      {% for v, label in filters.type %}<button type="button" class="chip" data-k="type" data-v="{{ v }}">{{ label }}</button>{% endfor %}
+{# The drug list, grouped by how close each drug is to a pharmacy. #}
+{% macro drug_list(groups, root, title="The drugs", filterable=false) -%}
+<section class="section"{% if filterable %} data-filter{% endif %}>
+  <div class="section-head">
+    <h2>{{ title }} <span class="sub">· {{ n_drugs }}</span></h2>
+    {% if filterable %}
+    <div class="filters" hidden>
+      <select data-k="type" aria-label="How you'd take it">
+        <option value="all">Type</option>
+        {% for v, label in filters.type %}<option value="{{ v }}">{{ label }}</option>{% endfor %}
+      </select>
+      <select data-k="freq" aria-label="How often">
+        <option value="all">How often</option>
+        {% for v, label in filters.freq %}<option value="{{ v }}">{{ label }}</option>{% endfor %}
+      </select>
     </div>
-    <div class="f-group" role="group" aria-label="Frequency">
-      <span class="label">Frequency</span>
-      <button type="button" class="chip" data-k="freq" data-v="all">All</button>
-      {% for v, label in filters.freq %}<button type="button" class="chip" data-k="freq" data-v="{{ v }}">{{ label }}</button>{% endfor %}
-    </div>
-    <span class="label f-count"></span>
+    {% endif %}
   </div>
-  {% endif %}
-  {{ stage_head() }}
-  {% for r in rows %}
-  <div class="strip-row" data-type="{{ r.route or '' }}" data-freq="{{ r.frequency or '' }}">
-    <div class="name">
-      <a href="{{ root }}drugs/{{ r.id }}.html">{{ r.name }}</a>
-      {% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}
-      {% if r.badge %}<span class="tag">{{ r.badge }}</span>{% endif %}
-      <div class="sub">{{ r.company }} · {{ r.form }}</div>
-    </div>
-    {{ track(r.rank, r.moved) }}
+  {% for g in groups %}
+  <div class="group" data-group>
+    <h3>{{ g.title }} <span class="n" data-count>{{ g.rows|length }}</span></h3>
+    {% for r in g.rows %}
+    <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-type="{{ r.route or '' }}" data-freq="{{ r.frequency or '' }}">
+      <div>
+        <div class="drug-name">{{ r.name }}{{ badge(r.badge) }}{% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}</div>
+        <div class="drug-line">{{ r.form }}{% if r.lowers %}<span class="sep">·</span>lowers {{ r.lowers }}{% endif %}</div>
+      </div>
+      <div class="drug-stage"><span class="words">{{ r.stage_plain }}</span>{{ mini(r.rank, r.moved) }}</div>
+      <span class="go" aria-hidden="true">&rsaquo;</span>
+    </a>
+    {% endfor %}
   </div>
   {% endfor %}
-  {% if filterable %}<p class="empty f-empty" hidden>No drugs on the watchlist match these filters.</p>{% endif %}
-</div>
+  {% if filterable %}<p class="empty f-empty" hidden>Nothing on the list matches. Try setting Type or How often back.</p>{% endif %}
+</section>
 {%- endmacro %}
 
 {% macro changes(list, root, show_drug=true) -%}
 {% for c in list %}
 <div class="change">
   <div class="meta">
-    {% if show_drug and c.drug_name %}<a href="{{ root }}drugs/{{ c.drug }}.html">{{ c.drug_name }}</a> · {{ c.company }} · {% endif %}
+    {% if show_drug and c.drug_name %}<a href="{{ root }}drugs/{{ c.drug }}.html">{{ c.drug_name }}</a> · {% endif %}
     {% if not show_drug and c.week %}<a href="{{ root }}weeks/{{ c.week }}.html">{{ c.week|nice_date }}</a> · {% endif %}
-    <span class="kind">{{ c.kind_label }}</span>
+    {{ c.kind_label }}
   </div>
   <div class="what">{{ c.what }} <a class="src" href="{{ c.url }}" rel="noopener noreferrer">{{ c.source }} &rarr;</a></div>
-  {% if c.why %}<div class="why"><span class="label">Why it matters</span>{{ c.why }}</div>{% endif %}
+  {% if c.why %}<div class="why">{{ c.why }}</div>{% endif %}
 </div>
 {% endfor %}
 {%- endmacro %}
 
-{% macro horizon(items, horizon_days) -%}
-<div class="module">
-  <div class="module-head"><span class="label">On the horizon</span><span class="label">Next {{ horizon_days }} days</span></div>
+{% macro horizon(items) -%}
+<section class="section">
+  <div class="section-head"><h2>Coming up <span class="sub">· next {{ horizon_days }} days</span></h2></div>
   {% for h in items %}
   <div class="h-row">
     <div class="h-when">{{ h.date|horizon_date }}</div>
     <div class="h-what"><b>{{ h.drug }}</b>: {{ h.what }} <a class="src" href="{{ h.url }}" rel="noopener noreferrer">Source &rarr;</a></div>
   </div>
   {% endfor %}
-</div>
+</section>
 {%- endmacro %}
 
-
-
-{% macro week_body(w, root, horizon_days) -%}
-{% if w.errors %}<div class="note">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}
-<div class="module">
-  <div class="module-head"><span class="label">What moved</span></div>
+{# "This week": the changes, or one quiet line. #}
+{% macro this_week(w, root, title) -%}
+<section class="section">
+  <div class="section-head"><h2>{{ title }} <span class="sub">· {{ w.date|nice_date_short }}</span></h2></div>
+  {% if w.errors %}<div class="note" style="margin-top:0.625rem">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}
   {% if w.changes %}{{ changes(w.changes, root) }}
-  {% elif w.baseline %}<p class="empty">First week of tracking. Changes are reported from next week.</p>
-  {% else %}<p class="empty">Nothing changed this week.</p>{% endif %}
-</div>
-{% if w.horizon %}{{ horizon(w.horizon, horizon_days) }}{% endif %}
+  {% else %}<p class="quiet">{{ w.headline }}</p>{% endif %}
+</section>
+{% if w.horizon %}{{ horizon(w.horizon) }}{% endif %}
+{%- endmacro %}
+
+{% macro explainer() -%}
+<details class="explain">
+  <summary>How to read this</summary>
+  <div class="explain-body">
+    <div>
+      <h4>How far along</h4>
+      <dl>
+        <dt>Early safety tests</dt><dd>First tests in people, mainly for safety.</dd>
+        <dt>Mid-stage testing</dt><dd>Does it work, and at what dose?</dd>
+        <dt>Final-stage trials</dt><dd>Large trials, often testing whether it prevents heart attacks. The last step before applying for approval.</dd>
+        <dt>FDA reviewing</dt><dd>The company has applied for approval.</dd>
+        <dt>Approved</dt><dd>Doctors can prescribe it.</dd>
+      </dl>
+      <p style="margin-top:0.75rem">Many drugs stop along the way. Even final-stage drugs are usually a few years from pharmacies.</p>
+    </div>
+    <div>
+      <h4>What they lower</h4>
+      <dl>
+        <dt>LDL</dt><dd>The "bad" cholesterol that statins lower.</dd>
+        <dt>Lp(a)</dt><dd>A cholesterol particle set mostly by your genes. High levels raise heart risk, and statins don't lower it. A one-time blood test measures it.</dd>
+        <dt>Triglycerides</dt><dd>Another blood fat linked to heart risk.</dd>
+      </dl>
+      <p style="margin-top:0.75rem">Everything listed here is a non-statin drug you wouldn't take daily. This is a news tracker, not medical advice.</p>
+    </div>
+  </div>
+</details>
 {%- endmacro %}
 
 {% macro week_list(weeks, prefix) -%}
