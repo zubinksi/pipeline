@@ -40,7 +40,7 @@ python -m digest run                  # the weekly job (needs the env vars below
 
 ## Setup
 
-1. **Site on Vercel:** in Vercel choose *Add New → Project*, then import `zubinksi/pipeline`. Set **Root Directory** to `site` and **Framework Preset** to *Other*, and leave the build command empty. Every commit the workflow makes then deploys automatically. The production branch is the repo's default branch.
+1. **Site on Vercel:** in Vercel choose *Add New → Project*, then import `zubinksi/pipeline` with the default settings (Root Directory left at the repo root). `vercel.json` tells Vercel to serve the prebuilt `site/` folder as static files, with no Python and no build step. Every commit the workflow makes then deploys automatically. The production branch is the repo's default branch.
 2. **Secrets** (GitHub → Settings → Secrets and variables → Actions). All are optional:
    - `ANTHROPIC_API_KEY`: without it, the "why it matters" lines fall back to each drug's `plain` description.
    - `SITE_URL`: your Vercel URL. The email then links to the site.
