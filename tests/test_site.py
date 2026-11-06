@@ -64,7 +64,7 @@ def test_untrusted_text_is_escaped(tmp_path):
 
 def test_empty_site_builds(tmp_path):
     out = site.build(tmp_path / "s", weeks=[], snapshot={"drugs": {}, "trials": {}}, watchlist=WL)
-    assert "Statin alternatives" in (out / "index.html").read_text()
+    assert "Cholesterol Drugs in the Pipeline" in (out / "index.html").read_text()
     assert "No weekly runs yet" in (out / "weeks/index.html").read_text()
 
 
@@ -114,3 +114,10 @@ def test_drugs_grouped_by_closeness(tmp_path):
     a, c, l = html.index("Available now"), html.index("Getting close"), html.index("Further out")
     assert a < c < l
     assert html.index("Lerodalcibep") < c  # approved -> available now
+
+
+def test_past_weeks_button_and_back_links(tmp_path):
+    out, _ = _build(tmp_path)
+    assert 'class="btn" href="weeks/index.html"' in (out / "index.html").read_text()
+    assert 'class="back" href="../index.html"' in (out / "weeks/index.html").read_text()
+    assert 'class="back" href="../index.html"' in (out / "weeks/2026-11-03.html").read_text()

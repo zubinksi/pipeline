@@ -72,9 +72,9 @@
 {%- endmacro %}
 
 {# "This week": the changes, or one quiet line. #}
-{% macro this_week(w, root, title) -%}
+{% macro this_week(w, root, title, past=0) -%}
 <section class="section">
-  <div class="section-head"><h2>{{ title }} <span class="sub">· {{ w.date|nice_date_short }}</span></h2></div>
+  <div class="section-head"><h2>{{ title }} <span class="sub">· {{ w.date|nice_date_short }}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
   {% if w.errors %}<div class="note" style="margin-top:0.625rem">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}
   {% if w.changes %}{{ changes(w.changes, root) }}
   {% else %}<p class="quiet">{{ w.headline }}</p>{% endif %}

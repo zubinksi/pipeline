@@ -66,43 +66,8 @@ a { color: inherit; }
   color: var(--muted);
 }
 
-/* ── masthead: one line, name left, links right ───────── */
-.mast {
-  max-width: 54rem;
-  margin: 0 auto;
-  padding: 1.75rem 2.125rem 0.875rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-}
-.mast-name {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--ink);
-  white-space: nowrap;
-}
-.mast nav { display: flex; gap: 1.25rem; }
-.mast nav a {
-  font-family: var(--mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--muted);
-  white-space: nowrap;
-  padding-bottom: 0.1875rem;
-  border-bottom: 1px solid transparent;
-}
-.mast nav a:hover { color: var(--ink); }
-.mast nav a.is-sel { color: var(--ink); border-bottom-color: var(--accent); }
-
 /* ── the slab ─────────────────────────────────────────── */
-.body { max-width: 54rem; margin: 0 auto; padding: 0 2.125rem 2.5rem; }
+.body { max-width: 54rem; margin: 0 auto; padding: 2.5rem 2.125rem 2.5rem; }
 .slab {
   border-radius: 3px;
   background: var(--slab);
@@ -170,6 +135,20 @@ h1, h2, h3 { font-weight: 400; margin: 0; }
   white-space: nowrap;
 }
 .src:hover { text-decoration: underline; text-underline-offset: 3px; }
+.btn {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink2);
+  border: 1px solid var(--b2);
+  border-radius: 2px;
+  padding: 0.3125rem 0.625rem;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+.btn:hover { color: var(--accent); border-color: var(--accent); }
 .quiet { padding: 0.75rem 0 0.25rem; font-size: 1.0625rem; color: var(--ink3); }
 
 /* coming up */
@@ -203,16 +182,24 @@ h1, h2, h3 { font-weight: 400; margin: 0; }
 .filters select.is-on { border-color: var(--accent); color: var(--accent); background-color: var(--accent-dim); }
 
 /* drug list */
-.group { margin-top: 1rem; }
+.group { margin-top: 1.5rem; }
 .group h3 {
-  font-size: 1.125rem;
-  color: var(--ink);
-  padding: 0.5rem 0 0.375rem;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.5rem;
+  margin: 0 -0.75rem 0.25rem;
+  padding: 0.4375rem 0.75rem;
+  border-radius: 2px;
+  background: var(--accent-dim);
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
-.group h3 .n { font-family: var(--mono); font-size: 0.6875rem; color: var(--muted); }
+.group h3::before { content: ''; width: 0.4375rem; height: 0.4375rem; border-radius: 50%; background: var(--accent); }
+.group h3 .n { margin-left: auto; color: var(--accent); opacity: 0.75; font-size: 0.6875rem; }
+.group .drug:first-of-type { border-top: 0; }
 .drug {
   display: grid;
   grid-template-columns: 1fr 8.5rem 1rem;
@@ -345,11 +332,8 @@ footer {
 
 /* ── phones ───────────────────────────────────────────── */
 @media (max-width: 860px) {
-  .mast, .body, footer { padding-left: 1rem; padding-right: 1rem; }
-  .mast { padding-top: 1.125rem; padding-bottom: 0.75rem; }
-  .mast-name { font-size: 0.6875rem; letter-spacing: 0.12em; }
-  .mast nav { gap: 0.875rem; }
-  .mast nav a { font-size: 0.625rem; letter-spacing: 0.1em; }
+  .body, footer { padding-left: 1rem; padding-right: 1rem; }
+  .body { padding-top: 1rem; }
   .slab { padding: 1.5rem 1.125rem 1.5rem; gap: 1.75rem; }
   .intro h1, .d-head h1 { font-size: 1.625rem; }
   .intro p { font-size: 1rem; }

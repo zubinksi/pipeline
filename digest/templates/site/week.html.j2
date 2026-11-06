@@ -2,6 +2,7 @@
 {% import "_macros.html.j2" as m with context %}
 {% block title %}{{ week.date|nice_date }} · {{ site_title }}{% endblock %}
 {% block content %}
+<a class="back" href="{{ root }}index.html">&larr; This week</a>
 <div class="intro"><h1>Week of {{ week.date|nice_date }}</h1></div>
 <div class="pager">
   <span>{% if older %}<a href="{{ older }}.html">&larr; {{ older|nice_date }}</a>{% endif %}</span>

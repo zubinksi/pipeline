@@ -2,10 +2,9 @@
 {% import "_macros.html.j2" as m with context %}
 {% block content %}
 <div class="intro">
-  <h1>Statin alternatives in the pipeline</h1>
-  <p>Cholesterol drugs you wouldn't take every day: what each one does, how often you'd take it, and how close it is to your pharmacy. Checked every Monday.</p>
+  <h1>Cholesterol Drugs in the Pipeline</h1>
 </div>
-{% if latest %}{{ m.this_week(latest, root, "This week") }}{% endif %}
+{% if latest %}{{ m.this_week(latest, root, "This week", past=n_weeks) }}{% endif %}
 {{ m.drug_list(groups, root, filterable=true) }}
 {{ m.explainer() }}
 {% endblock %}
