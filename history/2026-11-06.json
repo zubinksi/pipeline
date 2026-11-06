@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-06",
+  "headline": "First run: now tracking 11 drugs and 145 trials. From next week, only changes are reported.",
+  "baseline": true,
+  "changes": [],
+  "horizon": [
+    {
+      "date": "2026-11",
+      "drug": "Obicetrapib",
+      "what": "VINCENT (NCT06496243) reaches primary completion (estimated); topline results often follow within a few months.",
+      "url": "https://clinicaltrials.gov/study/NCT06496243"
+    },
+    {
+      "date": "2026-11",
+      "drug": "Obicetrapib",
+      "what": "PREVAIL (NCT05202509) reaches primary completion (estimated); topline results often follow within a few months.",
+      "url": "https://clinicaltrials.gov/study/NCT05202509"
+    },
+    {
+      "date": "2027-01-04",
+      "drug": "Laroprovstat",
+      "what": "AZURE-HeFH (NCT07000136) reaches primary completion (estimated); topline results often follow within a few months.",
+      "url": "https://clinicaltrials.gov/study/NCT07000136"
+    }
+  ],
+  "stages": {
+    "muvalaplin": "phase3",
+    "lepodisiran": "phase3",
+    "pelacarsen": "phase3",
+    "olpasiran": "phase3",
+    "zerlasiran": "phase2",
+    "enlicitide": "approved",
+    "laroprovstat": "phase3",
+    "obicetrapib": "approved",
+    "solbinsiran": "phase2",
+    "verve102": "phase2",
+    "lerodalcibep": "approved"
+  },
+  "moved": [],
+  "errors": [
+    "FDA press announcements"
+  ]
+}

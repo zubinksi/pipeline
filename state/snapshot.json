@@ -1,0 +1,2904 @@
+{
+  "baselined": {
+    "ctgov": [
+      "enlicitide",
+      "laroprovstat",
+      "lepodisiran",
+      "lerodalcibep",
+      "muvalaplin",
+      "obicetrapib",
+      "olpasiran",
+      "pelacarsen",
+      "solbinsiran",
+      "verve102",
+      "zerlasiran"
+    ],
+    "discovery": true,
+    "fda": [
+      "enlicitide",
+      "laroprovstat",
+      "lepodisiran",
+      "lerodalcibep",
+      "muvalaplin",
+      "obicetrapib",
+      "olpasiran",
+      "pelacarsen",
+      "solbinsiran",
+      "verve102",
+      "zerlasiran"
+    ],
+    "news": false
+  },
+  "discovery_seen": [
+    "NCT07894887",
+    "NCT07889245",
+    "NCT07914660"
+  ],
+  "drugs": {
+    "enlicitide": {
+      "basis": "watchlist",
+      "stage": "approved",
+      "url": "https://www.tctmd.com/news/fda-approves-enlicitide-oral-pcsk9-inhibitor-ldl-lowering"
+    },
+    "laroprovstat": {
+      "basis": "watchlist",
+      "stage": "phase3",
+      "url": "https://www.sec.gov/Archives/edgar/data/901832/000110465926019110/tm261135d3_ex99-1.pdf"
+    },
+    "lepodisiran": {
+      "basis": "watchlist",
+      "stage": "phase3",
+      "url": "https://www.clinicaltrialsarena.com/analyst-comment/jpm26-eli-lilly-lpa-drugs/"
+    },
+    "lerodalcibep": {
+      "basis": "watchlist",
+      "stage": "approved",
+      "url": "https://www.tctmd.com/news/fda-approves-lerodalcibep-adults-hypercholesterolemia"
+    },
+    "muvalaplin": {
+      "basis": "watchlist",
+      "stage": "phase3",
+      "url": "https://clinicaltrials.gov/study/NCT07157774"
+    },
+    "obicetrapib": {
+      "basis": "watchlist",
+      "stage": "approved",
+      "url": "https://www.thepharmaletter.com/biotech-news/first-global-regulatory-approval-of-obicetrapib"
+    },
+    "olpasiran": {
+      "basis": "watchlist",
+      "stage": "phase3",
+      "url": "https://clinicaltrials.gov/study/NCT05581303"
+    },
+    "pelacarsen": {
+      "basis": "watchlist",
+      "stage": "phase3",
+      "url": "https://www.tctmd.com/news/lpahorizon-top-line-results-dash-hopes-pelacarsen"
+    },
+    "solbinsiran": {
+      "basis": "watchlist",
+      "stage": "phase2",
+      "url": "https://clinicaltrials.gov/study/NCT07269210"
+    },
+    "verve102": {
+      "basis": "NCT07839936",
+      "stage": "phase2",
+      "url": "https://clinicaltrials.gov/study/NCT07839936"
+    },
+    "zerlasiran": {
+      "basis": "watchlist",
+      "stage": "phase2",
+      "url": "https://www.biospace.com/drug-development/silence-quiets-phase-iii-pace-for-lipoprotein-drug-seeks-partner"
+    }
+  },
+  "errors": [
+    "FDA press announcements"
+  ],
+  "fda": {
+    "enlicitide": {
+      "application": "NDA220848",
+      "approved": true,
+      "brand": "Lipfendra",
+      "date": "2026-07-15",
+      "url": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=220848"
+    },
+    "laroprovstat": {
+      "approved": false
+    },
+    "lepodisiran": {
+      "approved": false
+    },
+    "lerodalcibep": {
+      "application": "BLA761427",
+      "approved": true,
+      "brand": "Lerochol",
+      "date": "2025-12-12",
+      "url": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=761427"
+    },
+    "muvalaplin": {
+      "approved": false
+    },
+    "obicetrapib": {
+      "approved": false
+    },
+    "olpasiran": {
+      "approved": false
+    },
+    "pelacarsen": {
+      "approved": false
+    },
+    "solbinsiran": {
+      "approved": false
+    },
+    "verve102": {
+      "approved": false
+    },
+    "zerlasiran": {
+      "approved": false
+    }
+  },
+  "generated_at": "2026-11-06T16:25:37+00:00",
+  "news_seen": [
+    "news-f87d4dd7d1e4",
+    "news-933f845c31b3",
+    "news-4e20d1786294",
+    "news-8a02e7e1258e",
+    "news-9891920202a5"
+  ],
+  "trials": {
+    "NCT01878474": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2013-06-17",
+      "has_results": false,
+      "last_update": "2013-06-17",
+      "nct": "NCT01878474",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2009-06",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Tanabe Pharma Corporation",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Evaluation of Safety, Tolerability, Pharmacokinetics and Pharmacodynamics of TA-8995 With Single, Escalating Doses in Healthy Subjects",
+      "url": "https://clinicaltrials.gov/study/NCT01878474"
+    },
+    "NCT01879020": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2013-06-17",
+      "has_results": false,
+      "last_update": "2013-06-17",
+      "nct": "NCT01879020",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2010-06",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Tanabe Pharma Corporation",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Evaluation of Safety, Tolerability, Pharmacokinetics and Pharmacodynamics of TA-8995 After Multiple Doses in Healthy Subjects",
+      "url": "https://clinicaltrials.gov/study/NCT01879020"
+    },
+    "NCT01970215": {
+      "acronym": "TULIP",
+      "drug": "obicetrapib",
+      "first_posted": "2013-10-28",
+      "has_results": false,
+      "last_update": "2014-08-21",
+      "nct": "NCT01970215",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2014-07",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Xention Ltd",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "TA-8995: Its Use in Patients With Mild Dyslipidaemia (TULIP)",
+      "url": "https://clinicaltrials.gov/study/NCT01970215"
+    },
+    "NCT02124954": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2014-04-28",
+      "has_results": false,
+      "last_update": "2016-10-03",
+      "nct": "NCT02124954",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2014-07",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Xention Ltd",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Preliminary Drug Drug Interaction Study With TA-8995",
+      "url": "https://clinicaltrials.gov/study/NCT02124954"
+    },
+    "NCT02241759": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2014-09-16",
+      "has_results": false,
+      "last_update": "2015-02-16",
+      "nct": "NCT02241759",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2014-11",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Xention Ltd",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Study of the Electrocardiographic Effects of TA-8995",
+      "url": "https://clinicaltrials.gov/study/NCT02241759"
+    },
+    "NCT02241772": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2014-09-16",
+      "has_results": false,
+      "last_update": "2015-02-16",
+      "nct": "NCT02241772",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "primary_completion": "2015-01",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Xention Ltd",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study on the Effects of TA-8995 on Lp(a) in Subjects With Elevated Lp(a)",
+      "url": "https://clinicaltrials.gov/study/NCT02241772"
+    },
+    "NCT02408055": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2015-04-03",
+      "has_results": false,
+      "last_update": "2016-10-03",
+      "nct": "NCT02408055",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2015-08",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Xention Ltd",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "ADME Study in Healthy Male Subjects With TA-8995",
+      "url": "https://clinicaltrials.gov/study/NCT02408055"
+    },
+    "NCT02414594": {
+      "acronym": "",
+      "drug": "pelacarsen",
+      "first_posted": "2015-04-13",
+      "has_results": false,
+      "last_update": "2018-12-05",
+      "nct": "NCT02414594",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2016-02",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Ionis Pharmaceuticals, Inc.",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of IONIS APO(a)-LRx in Healthy Volunteers With Elevated Lipoprotein(a)",
+      "url": "https://clinicaltrials.gov/study/NCT02414594"
+    },
+    "NCT02523391": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2015-08-14",
+      "has_results": false,
+      "last_update": "2016-01-29",
+      "nct": "NCT02523391",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2015-11",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Xention Ltd",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Bioequivalence Study of Capsule and Tablet Formulations of TA-8995",
+      "url": "https://clinicaltrials.gov/study/NCT02523391"
+    },
+    "NCT03070782": {
+      "acronym": "",
+      "drug": "pelacarsen",
+      "first_posted": "2017-03-06",
+      "has_results": true,
+      "last_update": "2020-10-30",
+      "nct": "NCT03070782",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2018-07-26",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Akcea Therapeutics",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Phase 2 Study of ISIS 681257 (AKCEA-APO(a)-LRx) in Participants With Hyperlipoproteinemia(a) and Cardiovascular Disease",
+      "url": "https://clinicaltrials.gov/study/NCT03070782"
+    },
+    "NCT03545438": {
+      "acronym": "LIB003SAD",
+      "drug": "lerodalcibep",
+      "first_posted": "2018-06-04",
+      "has_results": false,
+      "last_update": "2018-07-27",
+      "nct": "NCT03545438",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2018-05-30",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Study to Evaluate the Safety, PK, and Pharmacodynamics of LIB003",
+      "url": "https://clinicaltrials.gov/study/NCT03545438"
+    },
+    "NCT03549260": {
+      "acronym": "",
+      "drug": "lerodalcibep",
+      "first_posted": "2018-06-07",
+      "has_results": false,
+      "last_update": "2019-02-18",
+      "nct": "NCT03549260",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2018-11-09",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Study to Evaluate Efficacy and Safety of LIB003 in Patients on Lipid-Lowering Therapy Needing Additional LDL-C Reduction",
+      "url": "https://clinicaltrials.gov/study/NCT03549260"
+    },
+    "NCT03626662": {
+      "acronym": "",
+      "drug": "olpasiran",
+      "first_posted": "2018-08-13",
+      "has_results": true,
+      "last_update": "2026-01-28",
+      "nct": "NCT03626662",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-04-18",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Amgen",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Safety, Tolerability, Pharmacokinetics and Pharmacodynamics Study of AMG 890 in Subjects With Elevated Plasma Lipoprotein(a)",
+      "url": "https://clinicaltrials.gov/study/NCT03626662"
+    },
+    "NCT03847974": {
+      "acronym": "",
+      "drug": "lerodalcibep",
+      "first_posted": "2019-02-20",
+      "has_results": true,
+      "last_update": "2022-03-02",
+      "nct": "NCT03847974",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2020-04-07",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Open-Label Extension to Evaluate the Longer Term Efficacy and Safety of LIB003",
+      "url": "https://clinicaltrials.gov/study/NCT03847974"
+    },
+    "NCT04023552": {
+      "acronym": "Lp(a)HORIZON",
+      "drug": "pelacarsen",
+      "first_posted": "2019-07-17",
+      "has_results": false,
+      "last_update": "2026-08-28",
+      "nct": "NCT04023552",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2026-07-16",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Novartis Pharmaceuticals",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Assessing the Impact of Lipoprotein (a) Lowering With Pelacarsen (TQJ230) on Major Cardiovascular Events in Patients With CVD",
+      "url": "https://clinicaltrials.gov/study/NCT04023552"
+    },
+    "NCT04034485": {
+      "acronym": "",
+      "drug": "lerodalcibep",
+      "first_posted": "2019-07-26",
+      "has_results": false,
+      "last_update": "2023-03-29",
+      "nct": "NCT04034485",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2022-09-12",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Phase 3 Study to Evaluate the Efficacy and Safety of LIB003 With Evolocumab in HoFH",
+      "url": "https://clinicaltrials.gov/study/NCT04034485"
+    },
+    "NCT04270760": {
+      "acronym": "",
+      "drug": "olpasiran",
+      "first_posted": "2020-02-17",
+      "has_results": true,
+      "last_update": "2026-03-31",
+      "nct": "NCT04270760",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2021-12-27",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Amgen",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Olpasiran Trials of Cardiovascular Events And LipoproteiN(a) Reduction - DOSE Finding Study",
+      "url": "https://clinicaltrials.gov/study/NCT04270760"
+    },
+    "NCT04472676": {
+      "acronym": "",
+      "drug": "muvalaplin",
+      "first_posted": "2020-07-15",
+      "has_results": false,
+      "last_update": "2021-12-14",
+      "nct": "NCT04472676",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2021-11-09",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of LY3473329 in Healthy Participants",
+      "url": "https://clinicaltrials.gov/study/NCT04472676"
+    },
+    "NCT04606602": {
+      "acronym": "",
+      "drug": "zerlasiran",
+      "first_posted": "2020-10-28",
+      "has_results": false,
+      "last_update": "2024-08-12",
+      "nct": "NCT04606602",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-08-23",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Silence Therapeutics plc",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Study to Investigate Safety, Tolerability, PK and PD Response of SLN360 in Subjects With Elevated Lipoprotein(a)",
+      "url": "https://clinicaltrials.gov/study/NCT04606602"
+    },
+    "NCT04644809": {
+      "acronym": "",
+      "drug": "solbinsiran",
+      "first_posted": "2020-11-25",
+      "has_results": false,
+      "last_update": "2022-08-10",
+      "nct": "NCT04644809",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2022-05-17",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of LY3561774 in Participants With Dyslipidemia",
+      "url": "https://clinicaltrials.gov/study/NCT04644809"
+    },
+    "NCT04753606": {
+      "acronym": "ROSE",
+      "drug": "obicetrapib",
+      "first_posted": "2021-02-15",
+      "has_results": true,
+      "last_update": "2024-07-12",
+      "nct": "NCT04753606",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2021-05-24",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Randomized Study of Obicetrapib as an Adjunct to Statin Therapy",
+      "url": "https://clinicaltrials.gov/study/NCT04753606"
+    },
+    "NCT04770389": {
+      "acronym": "OCEAN",
+      "drug": "obicetrapib",
+      "first_posted": "2021-02-25",
+      "has_results": true,
+      "last_update": "2024-04-24",
+      "nct": "NCT04770389",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2021-05-07",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Randomized Study of Obicetrapib in Combination With Ezetimibe",
+      "url": "https://clinicaltrials.gov/study/NCT04770389"
+    },
+    "NCT04790513": {
+      "acronym": "LIBerate-H2H",
+      "drug": "lerodalcibep",
+      "first_posted": "2021-03-10",
+      "has_results": false,
+      "last_update": "2023-03-29",
+      "nct": "NCT04790513",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2022-09-30",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Trial to Evaluate Efficacy and Safety of LIB003, Evolocumab and Alirocumab in High-risk CVD Patients",
+      "url": "https://clinicaltrials.gov/study/NCT04790513"
+    },
+    "NCT04797104": {
+      "acronym": "LIBerate-FH",
+      "drug": "lerodalcibep",
+      "first_posted": "2021-03-15",
+      "has_results": true,
+      "last_update": "2026-10-27",
+      "nct": "NCT04797104",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2023-07-30",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Study to Assess the Efficacy and Safety of LIB003 in HeFH Patients on Oral Lipid Therapy Needing Further LDL-C Reduction",
+      "url": "https://clinicaltrials.gov/study/NCT04797104"
+    },
+    "NCT04797247": {
+      "acronym": "LIBerate-CVD",
+      "drug": "lerodalcibep",
+      "first_posted": "2021-03-15",
+      "has_results": false,
+      "last_update": "2023-12-11",
+      "nct": "NCT04797247",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2023-11-15",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "UNKNOWN",
+      "title": "Study of Efficacy and Safety of LIB003 in Patient With CVD on Statins Requiring Additional LDL-C Reduction",
+      "url": "https://clinicaltrials.gov/study/NCT04797247"
+    },
+    "NCT04798430": {
+      "acronym": "LIBerate-OLE",
+      "drug": "lerodalcibep",
+      "first_posted": "2021-03-15",
+      "has_results": false,
+      "last_update": "2024-10-22",
+      "nct": "NCT04798430",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2025-07-30",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "UNKNOWN",
+      "title": "Long-term Efficacy and Safety of OLE LIB003 in HoFH, HeFH, and High-risk CVD Patients Requiring Further LDL-C Reduction",
+      "url": "https://clinicaltrials.gov/study/NCT04798430"
+    },
+    "NCT04806893": {
+      "acronym": "LIBerate-HR",
+      "drug": "lerodalcibep",
+      "first_posted": "2021-03-19",
+      "has_results": false,
+      "last_update": "2023-12-11",
+      "nct": "NCT04806893",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2023-11-15",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "UNKNOWN",
+      "title": "Study of Long-Term Efficacy and Safety of LIB003 in CVD or High Risk for CVD Patients Needing Further LDL-C Reduction",
+      "url": "https://clinicaltrials.gov/study/NCT04806893"
+    },
+    "NCT04914546": {
+      "acronym": "",
+      "drug": "lepodisiran",
+      "first_posted": "2021-06-04",
+      "has_results": false,
+      "last_update": "2022-11-21",
+      "nct": "NCT04914546",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2022-11-09",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of LY3819469 in Healthy Participants",
+      "url": "https://clinicaltrials.gov/study/NCT04914546"
+    },
+    "NCT04987320": {
+      "acronym": "",
+      "drug": "olpasiran",
+      "first_posted": "2021-08-03",
+      "has_results": true,
+      "last_update": "2025-02-10",
+      "nct": "NCT04987320",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2021-11-12",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Amgen",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Evaluate the Pharmacokinetics, Pharmacodynamics, Safety and Tolerability of Olpasiran in Chinese Participants With Elevated Serum Lipoprotein(a)",
+      "url": "https://clinicaltrials.gov/study/NCT04987320"
+    },
+    "NCT04993664": {
+      "acronym": "",
+      "drug": "pelacarsen",
+      "first_posted": "2021-08-06",
+      "has_results": false,
+      "last_update": "2022-01-03",
+      "nct": "NCT04993664",
+      "phase_rank": 0,
+      "phases": [
+        "NA"
+      ],
+      "primary_completion": "2022-06-30",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "University Medical Centre Ljubljana",
+      "sponsor_class": "OTHER",
+      "status": "WITHDRAWN",
+      "title": "Influence of Pelacarsen on Patients After Myocardial Infarction With High Lp(a) Values (PEMILA)",
+      "url": "https://clinicaltrials.gov/study/NCT04993664"
+    },
+    "NCT05004675": {
+      "acronym": "LIBerate-VI",
+      "drug": "lerodalcibep",
+      "first_posted": "2021-08-13",
+      "has_results": false,
+      "last_update": "2024-10-23",
+      "nct": "NCT05004675",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2024-05-30",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Trial to Evaluate Efficacy and Safety of LIB003 and Inclisiran in High-risk CVD Patients",
+      "url": "https://clinicaltrials.gov/study/NCT05004675"
+    },
+    "NCT05026996": {
+      "acronym": "",
+      "drug": "pelacarsen",
+      "first_posted": "2021-08-30",
+      "has_results": false,
+      "last_update": "2024-10-09",
+      "nct": "NCT05026996",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2022-10-19",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Novartis Pharmaceuticals",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Study to Assess the Pharmacokinetics of Pelacarsen (TQJ230) in Participants With Mild Hepatic Impairment Compared to Matched Healthy Participants",
+      "url": "https://clinicaltrials.gov/study/NCT05026996"
+    },
+    "NCT05038787": {
+      "acronym": "",
+      "drug": "muvalaplin",
+      "first_posted": "2021-09-09",
+      "has_results": false,
+      "last_update": "2022-06-21",
+      "nct": "NCT05038787",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2022-04-07",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of LY3473329 in Healthy Japanese Participants",
+      "url": "https://clinicaltrials.gov/study/NCT05038787"
+    },
+    "NCT05070390": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2021-10-07",
+      "has_results": true,
+      "last_update": "2026-08-19",
+      "nct": "NCT05070390",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-05-03",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of Enlicitide Chloride (MK-0616 Oral PCSK9 Inhibitor) in Participants With Moderate Renal Impairment (MK-0616-007)",
+      "url": "https://clinicaltrials.gov/study/NCT05070390"
+    },
+    "NCT05142722": {
+      "acronym": "BROADWAY",
+      "drug": "obicetrapib",
+      "first_posted": "2021-12-03",
+      "has_results": true,
+      "last_update": "2025-09-19",
+      "nct": "NCT05142722",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2024-09-26",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Randomized Study to Evaluate the Effect of Obicetrapib on Top of Maximum Tolerated Lipid-Modifying Therapies",
+      "url": "https://clinicaltrials.gov/study/NCT05142722"
+    },
+    "NCT05161715": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2021-12-17",
+      "has_results": true,
+      "last_update": "2025-01-29",
+      "nct": "NCT05161715",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2023-05-09",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Proof-of-concept, Open-label Study in Patients With Early Alzheimer's Disease",
+      "url": "https://clinicaltrials.gov/study/NCT05161715"
+    },
+    "NCT05202509": {
+      "acronym": "PREVAIL",
+      "drug": "obicetrapib",
+      "first_posted": "2022-01-21",
+      "has_results": false,
+      "last_update": "2024-06-04",
+      "nct": "NCT05202509",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2026-11",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Cardiovascular Outcome Study to Evaluate the Effect of Obicetrapib in Patients With Cardiovascular Disease",
+      "url": "https://clinicaltrials.gov/study/NCT05202509"
+    },
+    "NCT05234775": {
+      "acronym": "",
+      "drug": "lerodalcibep",
+      "first_posted": "2022-02-10",
+      "has_results": false,
+      "last_update": "2022-07-14",
+      "nct": "NCT05234775",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2022-06-30",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Cross-Over Study to Compare the Pharmacokinetics and Pharmacodynamics of LIB003 Process 1 and Process 2 Drug Product",
+      "url": "https://clinicaltrials.gov/study/NCT05234775"
+    },
+    "NCT05256654": {
+      "acronym": "PROLONG-ANG3",
+      "drug": "solbinsiran",
+      "first_posted": "2022-02-25",
+      "has_results": true,
+      "last_update": "2025-03-17",
+      "nct": "NCT05256654",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2024-03-04",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of LY3561774 in Participants With Mixed Dyslipidemia",
+      "url": "https://clinicaltrials.gov/study/NCT05256654"
+    },
+    "NCT05261126": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2022-03-02",
+      "has_results": true,
+      "last_update": "2024-12-09",
+      "nct": "NCT05261126",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2022-11-28",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of the Efficacy and Safety of Enclitide Chloride (MK-0616 Oral PCSK9 Inhibitor) in Adults With Hypercholesterolemia (MK-0616-008)",
+      "url": "https://clinicaltrials.gov/study/NCT05261126"
+    },
+    "NCT05266586": {
+      "acronym": "ROSE2",
+      "drug": "obicetrapib",
+      "first_posted": "2022-03-04",
+      "has_results": true,
+      "last_update": "2024-07-03",
+      "nct": "NCT05266586",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2022-08-12",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Study to Evaluate the Effect of Obicetrapib in Combination With Ezetimibe as an Adjunct to HIS Therapy",
+      "url": "https://clinicaltrials.gov/study/NCT05266586"
+    },
+    "NCT05305664": {
+      "acronym": "",
+      "drug": "pelacarsen",
+      "first_posted": "2022-03-31",
+      "has_results": true,
+      "last_update": "2026-07-17",
+      "nct": "NCT05305664",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2025-01-28",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Novartis Pharmaceuticals",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Multicenter Trial Assessing the Impact of Lipoprotein(a) Lowering With Pelacarsen (TQJ230) on the Rate of Weekly Lipoprotein Apheresis Sessions in Patients With Hyperlipoproteinemia(a) and Established Cardiovascular Disease in Germany",
+      "url": "https://clinicaltrials.gov/study/NCT05305664"
+    },
+    "NCT05337878": {
+      "acronym": "",
+      "drug": "pelacarsen",
+      "first_posted": "2022-04-20",
+      "has_results": false,
+      "last_update": "2022-04-20",
+      "nct": "NCT05337878",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2019-12-18",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Ionis Pharmaceuticals, Inc.",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Assess Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of Pelacarsen (ISIS 681257) in Healthy Japanese Participants",
+      "url": "https://clinicaltrials.gov/study/NCT05337878"
+    },
+    "NCT05384262": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2022-05-20",
+      "has_results": false,
+      "last_update": "2026-09-09",
+      "nct": "NCT05384262",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-06-14",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Assess the Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of AZD0780 in Healthy Subjects",
+      "url": "https://clinicaltrials.gov/study/NCT05384262"
+    },
+    "NCT05421078": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2022-06-16",
+      "has_results": true,
+      "last_update": "2024-10-29",
+      "nct": "NCT05421078",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2023-03-24",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Dose-Finding Study in Japanese Patients to Evaluate the Effect of Obicetrapib as an Adjunct to Stable Statin Therapy.",
+      "url": "https://clinicaltrials.gov/study/NCT05421078"
+    },
+    "NCT05425745": {
+      "acronym": "BROOKLYN",
+      "drug": "obicetrapib",
+      "first_posted": "2022-06-21",
+      "has_results": true,
+      "last_update": "2025-06-11",
+      "nct": "NCT05425745",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2024-05-28",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Evaluate the Effect of Obicetrapib in Patients With HeFH on Top of Maximum Tolerated Lipid-Modifying Therapies.",
+      "url": "https://clinicaltrials.gov/study/NCT05425745"
+    },
+    "NCT05481411": {
+      "acronym": "",
+      "drug": "olpasiran",
+      "first_posted": "2022-08-01",
+      "has_results": false,
+      "last_update": "2026-10-28",
+      "nct": "NCT05481411",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-04-05",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Amgen",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Evaluate the Pharmacokinetics, Safety, and Pharmacodynamics of Olpasiran in Participants With Various Degrees of Hepatic Impairment",
+      "url": "https://clinicaltrials.gov/study/NCT05481411"
+    },
+    "NCT05489614": {
+      "acronym": "",
+      "drug": "olpasiran",
+      "first_posted": "2022-08-05",
+      "has_results": false,
+      "last_update": "2026-10-23",
+      "nct": "NCT05489614",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-10-24",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Amgen",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Evaluate the Pharmacokinetics, Safety, and Pharmacodynamics of Olpasiran in Participants With Normal Renal Function and Participants With Various Degrees of Renal Impairment",
+      "url": "https://clinicaltrials.gov/study/NCT05489614"
+    },
+    "NCT05537571": {
+      "acronym": "",
+      "drug": "zerlasiran",
+      "first_posted": "2022-09-13",
+      "has_results": true,
+      "last_update": "2025-07-01",
+      "nct": "NCT05537571",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2024-01-11",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Silence Therapeutics plc",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Evaluate SLN360 in Participants With Elevated Lipoprotein(a) at High Risk of Atherosclerotic Cardiovascular Disease Events",
+      "url": "https://clinicaltrials.gov/study/NCT05537571"
+    },
+    "NCT05563246": {
+      "acronym": "KRAKEN",
+      "drug": "muvalaplin",
+      "first_posted": "2022-10-03",
+      "has_results": true,
+      "last_update": "2025-03-25",
+      "nct": "NCT05563246",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2024-03-14",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of LY3473329 in Adult Participants With Elevated Lipoprotein(a) at High Risk for Cardiovascular Events",
+      "url": "https://clinicaltrials.gov/study/NCT05563246"
+    },
+    "NCT05565742": {
+      "acronym": "",
+      "drug": "lepodisiran",
+      "first_posted": "2022-10-04",
+      "has_results": true,
+      "last_update": "2025-05-28",
+      "nct": "NCT05565742",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2023-10-23",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of LY3819469 in Participants With Elevated Lipoprotein(a) [Lp(a)]",
+      "url": "https://clinicaltrials.gov/study/NCT05565742"
+    },
+    "NCT05581303": {
+      "acronym": "",
+      "drug": "olpasiran",
+      "first_posted": "2022-10-14",
+      "has_results": false,
+      "last_update": "2026-10-27",
+      "nct": "NCT05581303",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2028-03-31",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Amgen",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Olpasiran Trials of Cardiovascular Events and Lipoprotein(a) Reduction (OCEAN(a)) - Outcomes Trial",
+      "url": "https://clinicaltrials.gov/study/NCT05581303"
+    },
+    "NCT05646381": {
+      "acronym": "",
+      "drug": "pelacarsen",
+      "first_posted": "2022-12-12",
+      "has_results": false,
+      "last_update": "2026-06-23",
+      "nct": "NCT05646381",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2030-03-12",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Novartis Pharmaceuticals",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "A Multicenter Trial Assessing the Impact of Lipoprotein(a) Lowering With Pelacarsen (TQJ230) on the Progression of Calcific Aortic Valve Stenosis",
+      "url": "https://clinicaltrials.gov/study/NCT05646381"
+    },
+    "NCT05778864": {
+      "acronym": "",
+      "drug": "muvalaplin",
+      "first_posted": "2023-03-21",
+      "has_results": false,
+      "last_update": "2024-10-28",
+      "nct": "NCT05778864",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-09-06",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of LY3473329 in Participants With Impaired and Normal Renal Function",
+      "url": "https://clinicaltrials.gov/study/NCT05778864"
+    },
+    "NCT05787002": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2023-03-28",
+      "has_results": false,
+      "last_update": "2025-04-27",
+      "nct": "NCT05787002",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-05-15",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Assess the Effect of AZD0780 on the Pharmacokinetics of Rosuvastatin.",
+      "url": "https://clinicaltrials.gov/study/NCT05787002"
+    },
+    "NCT05817461": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2023-04-18",
+      "has_results": false,
+      "last_update": "2025-06-11",
+      "nct": "NCT05817461",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-06-06",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "An ADME Study of [14C]AZD0780 in Healthy Male Subjects",
+      "url": "https://clinicaltrials.gov/study/NCT05817461"
+    },
+    "NCT05841277": {
+      "acronym": "",
+      "drug": "lepodisiran",
+      "first_posted": "2023-05-03",
+      "has_results": false,
+      "last_update": "2024-03-29",
+      "nct": "NCT05841277",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-01-09",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of LY3819469 in Participants With Impaired and Normal Renal Function",
+      "url": "https://clinicaltrials.gov/study/NCT05841277"
+    },
+    "NCT05900141": {
+      "acronym": "OLE",
+      "drug": "pelacarsen",
+      "first_posted": "2023-06-12",
+      "has_results": false,
+      "last_update": "2026-10-14",
+      "nct": "NCT05900141",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2028-08-24",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Novartis Pharmaceuticals",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "An Open Label Extension (OLE) Study to Evaluate Long-term Safety and Tolerability of Pelacarsen (TQJ230)",
+      "url": "https://clinicaltrials.gov/study/NCT05900141"
+    },
+    "NCT05932446": {
+      "acronym": "",
+      "drug": "lepodisiran",
+      "first_posted": "2023-07-06",
+      "has_results": false,
+      "last_update": "2024-01-05",
+      "nct": "NCT05932446",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-11-07",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Compare Two Formulations of LY3819469 in Healthy Participants",
+      "url": "https://clinicaltrials.gov/study/NCT05932446"
+    },
+    "NCT05934292": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2023-07-06",
+      "has_results": true,
+      "last_update": "2026-09-30",
+      "nct": "NCT05934292",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-01-19",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Enlicitide Decanoate (MK-0616 Oral PCSK9 Inhibitor) Renal Impairment Study (MK-0616-020)",
+      "url": "https://clinicaltrials.gov/study/NCT05934292"
+    },
+    "NCT05952856": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2023-07-19",
+      "has_results": true,
+      "last_update": "2026-09-24",
+      "nct": "NCT05952856",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2025-07-28",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of Enlicitide Decanoate (MK-0616 Oral PCSK9 Inhibitor) in Adults With Hypercholesterolemia (MK-0616-013) CORALreef Lipids",
+      "url": "https://clinicaltrials.gov/study/NCT05952856"
+    },
+    "NCT05952869": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2023-07-19",
+      "has_results": true,
+      "last_update": "2026-02-24",
+      "nct": "NCT05952869",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2025-04-07",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of Enlicitide Decanoate (MK-0616 Oral PCSK9 Inhibitor) in Adults With Heterozygous Familial Hypercholesterolemia (MK-0616-017/CORALreef HeFH)",
+      "url": "https://clinicaltrials.gov/study/NCT05952869"
+    },
+    "NCT05972278": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2023-08-02",
+      "has_results": false,
+      "last_update": "2024-09-19",
+      "nct": "NCT05972278",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-09-26",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "UNKNOWN",
+      "title": "Investigating the Effect of Obicetrapib on Lipoprotein Metabolism",
+      "url": "https://clinicaltrials.gov/study/NCT05972278"
+    },
+    "NCT06005597": {
+      "acronym": "TANDEM",
+      "drug": "obicetrapib",
+      "first_posted": "2023-08-22",
+      "has_results": true,
+      "last_update": "2025-10-08",
+      "nct": "NCT06005597",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2024-09-25",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Study of Obicetrapib & Ezetimibe Fixed Dose Combination on Top of Maximum Tolerated Lipid-Modifying Therapies",
+      "url": "https://clinicaltrials.gov/study/NCT06005597"
+    },
+    "NCT06008756": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2023-08-24",
+      "has_results": false,
+      "last_update": "2026-04-23",
+      "nct": "NCT06008756",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2029-11-29",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Enlicitide Decanoate (MK-0616 Oral PCSK9 Inhibitor) Cardiovascular Outcomes Study (MK-0616-015) CORALreef Outcomes",
+      "url": "https://clinicaltrials.gov/study/NCT06008756"
+    },
+    "NCT06048302": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2023-09-21",
+      "has_results": false,
+      "last_update": "2024-09-19",
+      "nct": "NCT06048302",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-03-12",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "PK and Safety in Participants Taking Obicetrapib With Moderate Hepatic Impairment Relative to Normal Hepatic Function",
+      "url": "https://clinicaltrials.gov/study/NCT06048302"
+    },
+    "NCT06050291": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2023-09-22",
+      "has_results": false,
+      "last_update": "2024-06-05",
+      "nct": "NCT06050291",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-04-07",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Investigating the Effect of Food on the Bioavailability of a Fixed Dose Combination of Obicetrapib and Ezetimibe",
+      "url": "https://clinicaltrials.gov/study/NCT06050291"
+    },
+    "NCT06081166": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2023-10-13",
+      "has_results": false,
+      "last_update": "2025-05-22",
+      "nct": "NCT06081166",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-12-02",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Drug-drug Interaction Study Evaluating the PK Effects of Obicetrapib on Atorvastatin and Rosuvastatin",
+      "url": "https://clinicaltrials.gov/study/NCT06081166"
+    },
+    "NCT06164730": {
+      "acronym": "",
+      "drug": "verve102",
+      "first_posted": "2023-12-11",
+      "has_results": false,
+      "last_update": "2026-09-02",
+      "nct": "NCT06164730",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2026-10",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Verve Therapeutics, Inc.",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "A Study of VERVE-102 in Patients With Familial Hypercholesterolemia or Premature Coronary Artery Disease",
+      "url": "https://clinicaltrials.gov/study/NCT06164730"
+    },
+    "NCT06173570": {
+      "acronym": "PURSUIT",
+      "drug": "laroprovstat",
+      "first_posted": "2023-12-15",
+      "has_results": true,
+      "last_update": "2025-11-17",
+      "nct": "NCT06173570",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2024-09-30",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Assess the Efficacy, Safety and Tolerability of Different Doses of AZD0780 in Patients With Dyslipidemia",
+      "url": "https://clinicaltrials.gov/study/NCT06173570"
+    },
+    "NCT06250205": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2024-02-08",
+      "has_results": false,
+      "last_update": "2024-09-19",
+      "nct": "NCT06250205",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-04-25",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Evaluate the Pharmacokinetics of a Combined Oral Contraceptive (COC) With and Without Obicetrapib",
+      "url": "https://clinicaltrials.gov/study/NCT06250205"
+    },
+    "NCT06267560": {
+      "acronym": "",
+      "drug": "pelacarsen",
+      "first_posted": "2024-02-20",
+      "has_results": false,
+      "last_update": "2026-08-10",
+      "nct": "NCT06267560",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2026-03-25",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Novartis Pharmaceuticals",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Lp(a) Lowering Study of Pelacarsen (TQJ230) in US Black/African American and Hispanic Participants With Elevated Lp(a) and Established ASCVD",
+      "url": "https://clinicaltrials.gov/study/NCT06267560"
+    },
+    "NCT06292013": {
+      "acronym": "",
+      "drug": "lepodisiran",
+      "first_posted": "2024-03-04",
+      "has_results": false,
+      "last_update": "2026-10-08",
+      "nct": "NCT06292013",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2029-03",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Study to Investigate the Effect of Lepodisiran on the Reduction of Major Adverse Cardiovascular Events in Adults With Elevated Lipoprotein(a) - ACCLAIM-Lp(a)",
+      "url": "https://clinicaltrials.gov/study/NCT06292013"
+    },
+    "NCT06305559": {
+      "acronym": "REMBRANDT",
+      "drug": "obicetrapib",
+      "first_posted": "2024-03-12",
+      "has_results": false,
+      "last_update": "2026-04-09",
+      "nct": "NCT06305559",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2027-11",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A CCTA Imaging Trial to Evaluate the Effect of Obicetrapib/Ezetimibe on Coronary Plaque",
+      "url": "https://clinicaltrials.gov/study/NCT06305559"
+    },
+    "NCT06342596": {
+      "acronym": "",
+      "drug": "muvalaplin",
+      "first_posted": "2024-04-02",
+      "has_results": false,
+      "last_update": "2024-05-30",
+      "nct": "NCT06342596",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-05-01",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of Carbon-14-Labelled [14C] LY3473329 in Healthy Male Participants",
+      "url": "https://clinicaltrials.gov/study/NCT06342596"
+    },
+    "NCT06411860": {
+      "acronym": "",
+      "drug": "olpasiran",
+      "first_posted": "2024-05-13",
+      "has_results": false,
+      "last_update": "2026-10-23",
+      "nct": "NCT06411860",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-11-29",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Amgen",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Assess the Effect of Olpasiran on QT/QTc Intervals in Healthy Participants",
+      "url": "https://clinicaltrials.gov/study/NCT06411860"
+    },
+    "NCT06450366": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-06-10",
+      "has_results": true,
+      "last_update": "2026-03-27",
+      "nct": "NCT06450366",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2025-02-14",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Evaluate the Efficacy and Safety of Enlicitide (MK-0616, Oral PCSK9 Inhibitor) Compared With Ezetimibe or Bempedoic Acid or Ezetimibe and Bempedoic Acid in Adults With Hypercholesterolemia (MK-0616-018/CORALreef AddOn)",
+      "url": "https://clinicaltrials.gov/study/NCT06450366"
+    },
+    "NCT06492291": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-07-09",
+      "has_results": false,
+      "last_update": "2025-10-07",
+      "nct": "NCT06492291",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2028-10-13",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Open-label Extension Study of Enlicitide Decanoate (MK-0616/Enlicitide Oral PCSK9 Inhibitor) in Adults With Hypercholesterolemia (MK-0616-019) CORALreef Extension",
+      "url": "https://clinicaltrials.gov/study/NCT06492291"
+    },
+    "NCT06496243": {
+      "acronym": "VINCENT",
+      "drug": "obicetrapib",
+      "first_posted": "2024-07-11",
+      "has_results": false,
+      "last_update": "2026-04-09",
+      "nct": "NCT06496243",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2026-11",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "Impact of Obicetrapib and Obicetrapib Plus Repatha on Lp(a) Levels",
+      "url": "https://clinicaltrials.gov/study/NCT06496243"
+    },
+    "NCT06504043": {
+      "acronym": "",
+      "drug": "lerodalcibep",
+      "first_posted": "2024-07-16",
+      "has_results": false,
+      "last_update": "2025-03-14",
+      "nct": "NCT06504043",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2025-01-08",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Hasten Biopharmaceutical Co., Ltd.",
+      "sponsor_class": "INDUSTRY",
+      "status": "ENROLLING_BY_INVITATION",
+      "title": "A Study on Evaluating the Safety of HST101 in Healthy Chinese Participants",
+      "url": "https://clinicaltrials.gov/study/NCT06504043"
+    },
+    "NCT06547359": {
+      "acronym": "",
+      "drug": "obicetrapib",
+      "first_posted": "2024-08-09",
+      "has_results": false,
+      "last_update": "2024-11-14",
+      "nct": "NCT06547359",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-11-12",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Evaluate Drug-Drug Interactions of Obicetrapib Tablets and Ezetimibe Tablets in Healthy Adult Subjects",
+      "url": "https://clinicaltrials.gov/study/NCT06547359"
+    },
+    "NCT06568471": {
+      "acronym": "",
+      "drug": "lerodalcibep",
+      "first_posted": "2024-08-23",
+      "has_results": false,
+      "last_update": "2025-02-06",
+      "nct": "NCT06568471",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2026-02",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Hasten Biopharmaceutical Co., Ltd.",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "A Study on Efficacy and Safety of HST101 in Chinese Patients with Hypercholesterolemia",
+      "url": "https://clinicaltrials.gov/study/NCT06568471"
+    },
+    "NCT06575959": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-08-28",
+      "has_results": true,
+      "last_update": "2026-05-29",
+      "nct": "NCT06575959",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2025-05-01",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Clinical Study of Enlicitide Decanoate in People With Liver Function Problems (MK-0616-030)",
+      "url": "https://clinicaltrials.gov/study/NCT06575959"
+    },
+    "NCT06576765": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2024-08-29",
+      "has_results": false,
+      "last_update": "2025-02-10",
+      "nct": "NCT06576765",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-11-08",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "Study to Investigate the Effect of Hepatic Impairment on the Pharmacokinetics, Safety, and Tolerability of AZD0780",
+      "url": "https://clinicaltrials.gov/study/NCT06576765"
+    },
+    "NCT06592339": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-09-19",
+      "has_results": false,
+      "last_update": "2024-09-19",
+      "nct": "NCT06592339",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2022-12-29",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of MK-0616 in Healthy Adult Participants (MK-0616-009)",
+      "url": "https://clinicaltrials.gov/study/NCT06592339"
+    },
+    "NCT06592482": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2024-09-19",
+      "has_results": false,
+      "last_update": "2025-02-20",
+      "nct": "NCT06592482",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-12-01",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Phase I Study to Investigate the Effect of Renal Impairment on the Pharmacokinetics, Safety, and Tolerability of AZD0780",
+      "url": "https://clinicaltrials.gov/study/NCT06592482"
+    },
+    "NCT06597760": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-09-19",
+      "has_results": false,
+      "last_update": "2024-11-29",
+      "nct": "NCT06597760",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-11-01",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Clinical Study to Assess the Effect of Enlicitide on How the Body Processes Digoxin in Healthy Adult Participants (MK-0616-031)",
+      "url": "https://clinicaltrials.gov/study/NCT06597760"
+    },
+    "NCT06609512": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-09-24",
+      "has_results": false,
+      "last_update": "2025-02-07",
+      "nct": "NCT06609512",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2025-01-13",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Clinical Study of Enlicitide and the Effect of Food in Healthy Adult Participants (MK-0616-033)",
+      "url": "https://clinicaltrials.gov/study/NCT06609512"
+    },
+    "NCT06625814": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-10-03",
+      "has_results": false,
+      "last_update": "2024-10-03",
+      "nct": "NCT06625814",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-08-19",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of Levothyroxine and Enlicitide Decanoate (MK-0616) in Healthy Adult Participants (MK-0616-028)",
+      "url": "https://clinicaltrials.gov/study/NCT06625814"
+    },
+    "NCT06643377": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-10-16",
+      "has_results": true,
+      "last_update": "2026-10-20",
+      "nct": "NCT06643377",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2025-06-25",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Clinical Study of Enlicitide in Participants With Severe Renal Impairment (MK-0616-032)",
+      "url": "https://clinicaltrials.gov/study/NCT06643377"
+    },
+    "NCT06655311": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-10-23",
+      "has_results": false,
+      "last_update": "2024-10-23",
+      "nct": "NCT06655311",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-01-02",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of Enlicitide Chloride (MK-0616) in Healthy Participants and Participants Taking Statins (MK-0616-012)",
+      "url": "https://clinicaltrials.gov/study/NCT06655311"
+    },
+    "NCT06658626": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-10-26",
+      "has_results": false,
+      "last_update": "2024-10-26",
+      "nct": "NCT06658626",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-08-02",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Evaluate the Metabolism, Excretion, and Mass Balance of [\u00b9\u2074C]Enlicitide Chloride ([\u00b9\u2074C]MK-0616) in Healthy Participants (MK-0616-016)",
+      "url": "https://clinicaltrials.gov/study/NCT06658626"
+    },
+    "NCT06658652": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-10-26",
+      "has_results": false,
+      "last_update": "2024-10-26",
+      "nct": "NCT06658652",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-12-26",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "The Effect of Food and Water Volume in Healthy Adult Participants Administered Enlicitide Decanoate (MK-0616) (MK-0616-022)",
+      "url": "https://clinicaltrials.gov/study/NCT06658652"
+    },
+    "NCT06671405": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2024-11-04",
+      "has_results": false,
+      "last_update": "2025-04-27",
+      "nct": "NCT06671405",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2025-02-17",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "An Open-label Study in Healthy Participants to Evaluate AZD0780 as an Object or Precipitant of CYP3A4-mediated Drug-drug Interactions",
+      "url": "https://clinicaltrials.gov/study/NCT06671405"
+    },
+    "NCT06691906": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-11-18",
+      "has_results": false,
+      "last_update": "2024-11-18",
+      "nct": "NCT06691906",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-05-01",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Clinical Study of Enlicitide Decanoate (MK-0616) in Healthy Adult Participants (MK-0616-025)",
+      "url": "https://clinicaltrials.gov/study/NCT06691906"
+    },
+    "NCT06692764": {
+      "acronym": "AZD0780-ABPM",
+      "drug": "laroprovstat",
+      "first_posted": "2024-11-18",
+      "has_results": false,
+      "last_update": "2026-02-18",
+      "nct": "NCT06692764",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2025-04-18",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Assess the Effect of AZD0780 on Ambulatory Blood Pressure",
+      "url": "https://clinicaltrials.gov/study/NCT06692764"
+    },
+    "NCT06699329": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-11-21",
+      "has_results": false,
+      "last_update": "2024-11-21",
+      "nct": "NCT06699329",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-05-24",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of Enlicitide Decanoate (MK-0616) and Semaglutide in Healthy Adult Participants (MK-0616-023)",
+      "url": "https://clinicaltrials.gov/study/NCT06699329"
+    },
+    "NCT06699355": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-11-21",
+      "has_results": false,
+      "last_update": "2024-11-21",
+      "nct": "NCT06699355",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-12-29",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Evaluate the Drug-Drug Interaction Between Enlicitide Decanoate (MK-0616) and Atorvastatin in Healthy Adult Participants (MK-0616-024)",
+      "url": "https://clinicaltrials.gov/study/NCT06699355"
+    },
+    "NCT06719544": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2024-12-06",
+      "has_results": false,
+      "last_update": "2025-02-17",
+      "nct": "NCT06719544",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2025-01-27",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of Lithium and Enlicitide in Healthy Adult Participants (MK-0616-034)",
+      "url": "https://clinicaltrials.gov/study/NCT06719544"
+    },
+    "NCT06742853": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2024-12-19",
+      "has_results": false,
+      "last_update": "2025-11-10",
+      "nct": "NCT06742853",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2025-10-29",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Investigate the Pharmacokinetics, Safety, Tolerability, and Efficacy of AZD0780 With Ezetimibe Combinations in Healthy Adults With Elevated LDL-C.",
+      "url": "https://clinicaltrials.gov/study/NCT06742853"
+    },
+    "NCT06772779": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2025-01-14",
+      "has_results": false,
+      "last_update": "2025-01-15",
+      "nct": "NCT06772779",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-06-04",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of Enlicitide Decanoate (MK-0616), Warfarin, and Lisinopril in Healthy Adult Participants (MK-0616-026)",
+      "url": "https://clinicaltrials.gov/study/NCT06772779"
+    },
+    "NCT06772792": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2025-01-14",
+      "has_results": false,
+      "last_update": "2025-02-18",
+      "nct": "NCT06772792",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2024-06-21",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Evaluate the Drug-Drug Interaction Between Enlicitide Decanoate (MK-0616) and Alendronate in Healthy Adult Participants (MK-0616-027)",
+      "url": "https://clinicaltrials.gov/study/NCT06772792"
+    },
+    "NCT06813911": {
+      "acronym": "ADD-VANTAGE",
+      "drug": "pelacarsen",
+      "first_posted": "2025-02-07",
+      "has_results": false,
+      "last_update": "2026-10-14",
+      "nct": "NCT06813911",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2028-02-03",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Novartis Pharmaceuticals",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Lp(a) Lowering Study of Pelacarsen (TQJ230) With Background Inclisiran in Participants With Elevated Lp(a) and Established ASCVD",
+      "url": "https://clinicaltrials.gov/study/NCT06813911"
+    },
+    "NCT06814106": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2025-02-07",
+      "has_results": false,
+      "last_update": "2025-02-07",
+      "nct": "NCT06814106",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2023-05-08",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Single- and Multiple-Dose Study of Enlicitide Chloride (MK-0616) in Healthy Chinese Adult Participants (MK 0616-010)",
+      "url": "https://clinicaltrials.gov/study/NCT06814106"
+    },
+    "NCT06834932": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2025-02-19",
+      "has_results": false,
+      "last_update": "2026-08-26",
+      "nct": "NCT06834932",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "primary_completion": "2025-07-03",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Study to Evaluate the Efficacy, Safety, and Pharmacokinetics of AZD0780 in Participants With Dyslipidaemia",
+      "url": "https://clinicaltrials.gov/study/NCT06834932"
+    },
+    "NCT06875973": {
+      "acronym": "",
+      "drug": "pelacarsen",
+      "first_posted": "2025-03-14",
+      "has_results": false,
+      "last_update": "2026-10-14",
+      "nct": "NCT06875973",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2030-12-08",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Novartis Pharmaceuticals",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Pelacarsen Roll-over Extension Program",
+      "url": "https://clinicaltrials.gov/study/NCT06875973"
+    },
+    "NCT06880874": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2025-03-18",
+      "has_results": false,
+      "last_update": "2025-06-15",
+      "nct": "NCT06880874",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2025-05-16",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Clinical Study to Evaluate Enlicitide (MK-0616) Formulations in Healthy Adult Participants (MK-0616-035)",
+      "url": "https://clinicaltrials.gov/study/NCT06880874"
+    },
+    "NCT06916078": {
+      "acronym": "",
+      "drug": "lepodisiran",
+      "first_posted": "2025-04-08",
+      "has_results": false,
+      "last_update": "2026-08-19",
+      "nct": "NCT06916078",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2026-07-13",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study of Lepodisiran (LY3819469) in Participants With Normal, Mild, Moderate, or Severe Liver Function",
+      "url": "https://clinicaltrials.gov/study/NCT06916078"
+    },
+    "NCT06982508": {
+      "acronym": "VERMEER",
+      "drug": "obicetrapib",
+      "first_posted": "2025-05-21",
+      "has_results": false,
+      "last_update": "2025-10-20",
+      "nct": "NCT06982508",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2026-09",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "Evaluation of Obicetrapib on Antioxidant Levels in Plasma and HDL Particles of Healthy Volunteers",
+      "url": "https://clinicaltrials.gov/study/NCT06982508"
+    },
+    "NCT07000123": {
+      "acronym": "AZURE-LDL",
+      "drug": "laroprovstat",
+      "first_posted": "2025-06-02",
+      "has_results": false,
+      "last_update": "2026-08-11",
+      "nct": "NCT07000123",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2027-01-11",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Phase III Study to Assess the Effect of AZD0780 on LDL-C in Patients With Clinical ASCVD or at Risk for a First ASCVD Event",
+      "url": "https://clinicaltrials.gov/study/NCT07000123"
+    },
+    "NCT07000136": {
+      "acronym": "AZURE-HeFH",
+      "drug": "laroprovstat",
+      "first_posted": "2025-06-02",
+      "has_results": false,
+      "last_update": "2026-07-16",
+      "nct": "NCT07000136",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2027-01-04",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Phase III Study to Assess the Effect of AZD0780 on LDL-C in Patients With HeFH",
+      "url": "https://clinicaltrials.gov/study/NCT07000136"
+    },
+    "NCT07000357": {
+      "acronym": "AZURE-Outcomes",
+      "drug": "laroprovstat",
+      "first_posted": "2025-06-02",
+      "has_results": false,
+      "last_update": "2026-08-24",
+      "nct": "NCT07000357",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2029-10-26",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "A Phase III Study of AZD0780 on Major Adverse CV Events in Patients With a History of ASCVD Events or at High Risk for a First Event",
+      "url": "https://clinicaltrials.gov/study/NCT07000357"
+    },
+    "NCT07000695": {
+      "acronym": "",
+      "drug": "pelacarsen",
+      "first_posted": "2025-06-03",
+      "has_results": false,
+      "last_update": "2026-10-20",
+      "nct": "NCT07000695",
+      "phase_rank": 0,
+      "phases": [],
+      "primary_completion": "",
+      "primary_completion_type": "",
+      "sponsor": "Novartis Pharmaceuticals",
+      "sponsor_class": "INDUSTRY",
+      "status": "NO_LONGER_AVAILABLE",
+      "title": "Managed Access Programs for TQJ230, Pelacarsen",
+      "url": "https://clinicaltrials.gov/study/NCT07000695"
+    },
+    "NCT07044479": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2025-07-01",
+      "has_results": false,
+      "last_update": "2025-09-03",
+      "nct": "NCT07044479",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2025-08-13",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Clinical Study of How Coffee and Tea Affect Enlicitide in Healthy Volunteers (MK-0616-040)",
+      "url": "https://clinicaltrials.gov/study/NCT07044479"
+    },
+    "NCT07058077": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2025-07-10",
+      "has_results": false,
+      "last_update": "2026-10-07",
+      "nct": "NCT07058077",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "primary_completion": "2033-12-04",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "A Study of Enlicitide Decanoate (MK-0616, an Oral PCSK9 Inhibitor) in Children and Adolescents With Heterozygous Familial Hypercholesterolemia (MK-0616-029)",
+      "url": "https://clinicaltrials.gov/study/NCT07058077"
+    },
+    "NCT07079267": {
+      "acronym": "",
+      "drug": "olpasiran",
+      "first_posted": "2025-07-23",
+      "has_results": false,
+      "last_update": "2025-07-23",
+      "nct": "NCT07079267",
+      "phase_rank": 0,
+      "phases": [],
+      "primary_completion": "",
+      "primary_completion_type": "",
+      "sponsor": "Amgen",
+      "sponsor_class": "INDUSTRY",
+      "status": "AVAILABLE",
+      "title": "Olpasiran Expanded Access Program",
+      "url": "https://clinicaltrials.gov/study/NCT07079267"
+    },
+    "NCT07102511": {
+      "acronym": "LIBerateKids",
+      "drug": "lerodalcibep",
+      "first_posted": "2025-08-03",
+      "has_results": false,
+      "last_update": "2026-07-28",
+      "nct": "NCT07102511",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2028-07-31",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "ENROLLING_BY_INVITATION",
+      "title": "Study to Evaluate the Efficacy and Safety of Lerodalcibep in Children 6 to 17 Years, With Heterozygous FH",
+      "url": "https://clinicaltrials.gov/study/NCT07102511"
+    },
+    "NCT07136012": {
+      "acronym": "",
+      "drug": "olpasiran",
+      "first_posted": "2025-08-22",
+      "has_results": false,
+      "last_update": "2026-08-21",
+      "nct": "NCT07136012",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2031-10-20",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Amgen",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "OCEAN(a)-PreEvent - Olpasiran Trials of Cardiovascular Events And LipoproteiN(a) Reduction to Prevent First Major Cardiovascular Events",
+      "url": "https://clinicaltrials.gov/study/NCT07136012"
+    },
+    "NCT07157774": {
+      "acronym": "MOVE-Lp(a)",
+      "drug": "muvalaplin",
+      "first_posted": "2025-09-05",
+      "has_results": false,
+      "last_update": "2026-09-24",
+      "nct": "NCT07157774",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2031-03",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "Assessing the Impact of Muvalaplin on Major Cardiovascular Events in Adults With Elevated Lipoprotein(a)",
+      "url": "https://clinicaltrials.gov/study/NCT07157774"
+    },
+    "NCT07216131": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2025-10-14",
+      "has_results": false,
+      "last_update": "2026-10-30",
+      "nct": "NCT07216131",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2025-12-30",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Investigate the Effect of AZD0780 on Metformin Pharmacokinetics in Healthy Adult Volunteers Aged 18 to 55 Years",
+      "url": "https://clinicaltrials.gov/study/NCT07216131"
+    },
+    "NCT07216482": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2025-10-14",
+      "has_results": false,
+      "last_update": "2026-09-01",
+      "nct": "NCT07216482",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2026-08-03",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Clinical Study of Enlicitide in Participants With High Cholesterol (MK-0616-037)",
+      "url": "https://clinicaltrials.gov/study/NCT07216482"
+    },
+    "NCT07218900": {
+      "acronym": "LAZURE",
+      "drug": "laroprovstat",
+      "first_posted": "2025-10-21",
+      "has_results": false,
+      "last_update": "2026-10-14",
+      "nct": "NCT07218900",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2026-09-03",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Investigate the Effect of AZD0780 Tablets in Combination With Rosuvastatin Tablets on Low Density Lipoprotein Cholesterol Levels (LDL-C) in Adult Participants With Dyslipidaemia",
+      "url": "https://clinicaltrials.gov/study/NCT07218900"
+    },
+    "NCT07219602": {
+      "acronym": "RUBENS",
+      "drug": "obicetrapib",
+      "first_posted": "2025-10-22",
+      "has_results": false,
+      "last_update": "2026-09-09",
+      "nct": "NCT07219602",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2028-03",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Study to Evaluate the Effect of Obicetrapib/Ezetimibe 10 mg Fixed-Dose Combination or Obicetrapib 10 mg Daily on Top of Guideline-Recommended Lipid-Lowering Therapy in Participants With Type 2 Diabetes and/or Metabolic Syndrome",
+      "url": "https://clinicaltrials.gov/study/NCT07219602"
+    },
+    "NCT07269210": {
+      "acronym": "SOLARIS-1",
+      "drug": "solbinsiran",
+      "first_posted": "2025-12-08",
+      "has_results": false,
+      "last_update": "2026-11-04",
+      "nct": "NCT07269210",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2027-03",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "A Study of Solbinsiran (LY3561774) in Participants With Severe Hypertriglyceridemia",
+      "url": "https://clinicaltrials.gov/study/NCT07269210"
+    },
+    "NCT07293260": {
+      "acronym": "OCEAN(a)-CCTA",
+      "drug": "olpasiran",
+      "first_posted": "2025-12-19",
+      "has_results": false,
+      "last_update": "2026-04-16",
+      "nct": "NCT07293260",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2028-06-15",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Amgen",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "Olpasiran Trials of Cardiovascular Events and Lipoprotein(a) Reduction - Coronary Computed Tomography Angiography Trial",
+      "url": "https://clinicaltrials.gov/study/NCT07293260"
+    },
+    "NCT07300280": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2025-12-23",
+      "has_results": false,
+      "last_update": "2026-11-06",
+      "nct": "NCT07300280",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2026-10-14",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Clinical Trial of Enlicitide and Rosuvastatin in Healthy Adults (MK-0616-039)",
+      "url": "https://clinicaltrials.gov/study/NCT07300280"
+    },
+    "NCT07316608": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2026-01-05",
+      "has_results": false,
+      "last_update": "2026-06-17",
+      "nct": "NCT07316608",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2026-06-05",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Phase I Study Comparing the Relative Bioavailability of a Fixed-Dose Combination of Laroprovstat/Rosuvastatin vs Their Single Therapy Products in Healthy Adults",
+      "url": "https://clinicaltrials.gov/study/NCT07316608"
+    },
+    "NCT07423598": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2026-02-20",
+      "has_results": false,
+      "last_update": "2026-07-07",
+      "nct": "NCT07423598",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2026-06-29",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Investigate Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics With AZD0780 Following Repeated Dose Administration in Healthy Adults With Elevated LDL-C Levels",
+      "url": "https://clinicaltrials.gov/study/NCT07423598"
+    },
+    "NCT07481708": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2026-03-19",
+      "has_results": false,
+      "last_update": "2026-06-02",
+      "nct": "NCT07481708",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2026-05-18",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Clinical Study of the Effect of Enlicitide (MK-0616) Formulations in Healthy Participants (MK-0616-041)",
+      "url": "https://clinicaltrials.gov/study/NCT07481708"
+    },
+    "NCT07513571": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2026-04-07",
+      "has_results": false,
+      "last_update": "2026-08-04",
+      "nct": "NCT07513571",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2026-07-08",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Study to Assess the Effect of AZD0780 on the Pharmacokinetics of AZD4954 and Vice Versa in Healthy Adults",
+      "url": "https://clinicaltrials.gov/study/NCT07513571"
+    },
+    "NCT07517263": {
+      "acronym": "",
+      "drug": "pelacarsen",
+      "first_posted": "2026-04-08",
+      "has_results": false,
+      "last_update": "2026-10-14",
+      "nct": "NCT07517263",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2030-01-09",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Novartis Pharmaceuticals",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "An Open Label Extension (OLE) Study (Following Completion of CTQJ230A12301) to Evaluate Long-term Safety and Tolerability of Pelacarsen (TQJ230)",
+      "url": "https://clinicaltrials.gov/study/NCT07517263"
+    },
+    "NCT07613294": {
+      "acronym": "ACCLAIM-CTA",
+      "drug": "lepodisiran",
+      "first_posted": "2026-05-29",
+      "has_results": false,
+      "last_update": "2026-11-04",
+      "nct": "NCT07613294",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2029-12",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "A Study to See if Lepodisiran Can Reduce Plaque in Coronary Arteries of Adults With Elevated Lp(a) Who Have Had Heart Events or Are at High Risk",
+      "url": "https://clinicaltrials.gov/study/NCT07613294"
+    },
+    "NCT07614958": {
+      "acronym": "MEDICI",
+      "drug": "obicetrapib",
+      "first_posted": "2026-05-29",
+      "has_results": false,
+      "last_update": "2026-06-09",
+      "nct": "NCT07614958",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2027-01",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "A. Menarini International Licensing S.A.",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "Phase 3 Clinical Study Evaluating Efficacy, Safety, and Tolerability of Obicetrapib Vs Bempedoic Acid to Treat Dyslipidemia in Adults With Primary Non-familial Hypercholesterolemia or Mixed Dyslipidemia at High to Very High Cardiovascular Risk, During a Treatment Period of Approximately 84 Days",
+      "url": "https://clinicaltrials.gov/study/NCT07614958"
+    },
+    "NCT07614984": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2026-05-29",
+      "has_results": false,
+      "last_update": "2026-10-23",
+      "nct": "NCT07614984",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2027-10-12",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "A Clinical Trial of MK-7262 and Enlicitide in Participants With High Lipoprotein(a) (MK-7262-004)",
+      "url": "https://clinicaltrials.gov/study/NCT07614984"
+    },
+    "NCT07619118": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2026-06-01",
+      "has_results": false,
+      "last_update": "2026-10-05",
+      "nct": "NCT07619118",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2027-05-28",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "A Phase III Study to Assess the Effect of FDC Laroprovstat/Rosuvastatin Compared With Rosuvastatin on LDL-C in Patients With Hypercholesterolaemia",
+      "url": "https://clinicaltrials.gov/study/NCT07619118"
+    },
+    "NCT07619131": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2026-06-01",
+      "has_results": false,
+      "last_update": "2026-09-10",
+      "nct": "NCT07619131",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2027-07-30",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "A Phase III Study to Assess the Effect of FDC Laroprovstat/Rosuvastatin Compared With Laroprovstat, Rosuvastatin and Placebo on LDL-C in LLT-na\u00efve Patients.",
+      "url": "https://clinicaltrials.gov/study/NCT07619131"
+    },
+    "NCT07619443": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2026-06-02",
+      "has_results": false,
+      "last_update": "2026-09-25",
+      "nct": "NCT07619443",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2026-09-05",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Clinical Study of MK-7262 and Enlicitide in Healthy Participants (MK-7262-003)",
+      "url": "https://clinicaltrials.gov/study/NCT07619443"
+    },
+    "NCT07622433": {
+      "acronym": "",
+      "drug": "laroprovstat",
+      "first_posted": "2026-06-03",
+      "has_results": false,
+      "last_update": "2026-09-28",
+      "nct": "NCT07622433",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2026-09-06",
+      "primary_completion_type": "ACTUAL",
+      "sponsor": "AstraZeneca",
+      "sponsor_class": "INDUSTRY",
+      "status": "COMPLETED",
+      "title": "A Phase I, Cross-over Study Comparing the Relative Bioavailability of Laroprovstat Plus Ezetimibe Fixed Combination Drug Products Versus Their Single Therapy Products in Healthy Adults",
+      "url": "https://clinicaltrials.gov/study/NCT07622433"
+    },
+    "NCT07625306": {
+      "acronym": "",
+      "drug": "pelacarsen",
+      "first_posted": "2026-06-04",
+      "has_results": false,
+      "last_update": "2026-10-14",
+      "nct": "NCT07625306",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2029-01-22",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Novartis Pharmaceuticals",
+      "sponsor_class": "INDUSTRY",
+      "status": "WITHDRAWN",
+      "title": "Lp(a) Lowering Study of Pelacarsen (TQJ230) in Patients in the US With Elevated Lp(a) and Recent ACS (STEMI/NSTEMI) - Lp(a)FRONTIERS PEARL",
+      "url": "https://clinicaltrials.gov/study/NCT07625306"
+    },
+    "NCT07775339": {
+      "acronym": "",
+      "drug": "lerodalcibep",
+      "first_posted": "2026-08-20",
+      "has_results": false,
+      "last_update": "2026-08-25",
+      "nct": "NCT07775339",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2031-07-31",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "LIB Therapeutics LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "NOT_YET_RECRUITING",
+      "title": "Long-Term Efficacy and Safety of Lerodalcibep in Children and Adolescents With Familial Hypercholesterolemia",
+      "url": "https://clinicaltrials.gov/study/NCT07775339"
+    },
+    "NCT07776665": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2026-08-20",
+      "has_results": false,
+      "last_update": "2026-09-18",
+      "nct": "NCT07776665",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2026-12-14",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Clinical Trial of Enlicitide (MK-0616) Formulations in Healthy Participants (MK-0616-044)",
+      "url": "https://clinicaltrials.gov/study/NCT07776665"
+    },
+    "NCT07794670": {
+      "acronym": "SPINOZA",
+      "drug": "obicetrapib",
+      "first_posted": "2026-08-31",
+      "has_results": false,
+      "last_update": "2026-09-28",
+      "nct": "NCT07794670",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2028-09",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "NewAmsterdam Pharma",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "Randomized Study to Evaluate the Effect of Obicetrapib in Participants With Preclinical Alzheimer's Disease",
+      "url": "https://clinicaltrials.gov/study/NCT07794670"
+    },
+    "NCT07821944": {
+      "acronym": "",
+      "drug": "enlicitide",
+      "first_posted": "2026-09-16",
+      "has_results": false,
+      "last_update": "2026-11-02",
+      "nct": "NCT07821944",
+      "phase_rank": 3,
+      "phases": [
+        "PHASE3"
+      ],
+      "primary_completion": "2027-11-26",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "sponsor_class": "INDUSTRY",
+      "status": "RECRUITING",
+      "title": "A Clinical Study of Enlicitide (MK-0616) in Adults With Hyperlipidemia in India (MK-0616-038)",
+      "url": "https://clinicaltrials.gov/study/NCT07821944"
+    },
+    "NCT07839936": {
+      "acronym": "HEART-3",
+      "drug": "verve102",
+      "first_posted": "2026-09-24",
+      "has_results": false,
+      "last_update": "2026-09-24",
+      "nct": "NCT07839936",
+      "phase_rank": 2,
+      "phases": [
+        "PHASE2"
+      ],
+      "primary_completion": "2028-08",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Verve Therapeutics, Inc.",
+      "sponsor_class": "INDUSTRY",
+      "status": "NOT_YET_RECRUITING",
+      "title": "A Study of VERVE-102 (LY4636581) in Adults With or at High Risk for Cardiovascular Disease",
+      "url": "https://clinicaltrials.gov/study/NCT07839936"
+    },
+    "NCT07914738": {
+      "acronym": "",
+      "drug": "lepodisiran",
+      "first_posted": "2026-11-04",
+      "has_results": false,
+      "last_update": "2026-11-04",
+      "nct": "NCT07914738",
+      "phase_rank": 1,
+      "phases": [
+        "PHASE1"
+      ],
+      "primary_completion": "2027-03",
+      "primary_completion_type": "ESTIMATED",
+      "sponsor": "Eli Lilly and Company",
+      "sponsor_class": "INDUSTRY",
+      "status": "NOT_YET_RECRUITING",
+      "title": "A Study of Lepodisiran (LY3819469) in Participants With High Lipoprotein(a)",
+      "url": "https://clinicaltrials.gov/study/NCT07914738"
+    }
+  }
+}
