@@ -1,32 +1,21 @@
 {% extends "base.html.j2" %}
 {% import "_macros.html.j2" as m with context %}
 {% block content %}
-<section class="card">
-  {% if latest %}
-  <div class="eyebrow">Week of {{ latest.date|nice_date }}</div>
-  <h1>{{ latest.headline }}</h1>
-  {% if latest.errors %}<div class="warn">Couldn't reach this week: {{ latest.errors|join(", ") }}.{% if not latest.baseline %} Last week's data was kept for these.{% endif %} They'll be retried next week.</div>{% endif %}
-  {% else %}
-  <h1>No weekly runs yet.</h1>
-  {% endif %}
-</section>
-
-{% if latest %}{{ m.week_body(latest, root, horizon_days) }}{% endif %}
-
-<section class="card">
-  <h2>Pipeline</h2>
-  {{ m.strip(rows, root) }}
-</section>
-
+{% if latest %}
+<div class="d-title"><h1>This week</h1><span class="amt">{{ latest.date|nice_date_short }}</span></div>
+<div class="d-sub"><span>Week of {{ latest.date|nice_date }}</span><span>{{ side.rows|length }} drugs · {{ n_trials }} trials</span></div>
+<p class="headline">{{ latest.headline }}</p>
+{{ m.stat_cards(latest, n_trials, n_approved, side.rows|length) }}
+{{ m.week_body(latest, root, horizon_days) }}
+{% else %}
+<div class="d-title"><h1>This week</h1></div>
+<p class="headline">No weekly runs yet.</p>
+{% endif %}
+{{ m.strip(rows, root) }}
 {% if weeks|length > 1 %}
-<section class="card">
-  <h2>Recent weeks</h2>
-  <ul class="plain weeks">
-  {% for w in weeks[1:] %}
-    <li><span class="when">{{ w.date|nice_date }}</span><a href="weeks/{{ w.date }}.html">{{ w.headline }}</a></li>
-  {% endfor %}
-  </ul>
-  {% if n_weeks > weeks|length %}<p><a href="weeks/index.html">All {{ n_weeks }} weeks &rarr;</a></p>{% endif %}
-</section>
+<div class="module">
+  <div class="module-head"><span class="label">Recent weeks</span>{% if n_weeks > weeks|length %}<a class="src" href="weeks/index.html">All {{ n_weeks }} &rarr;</a>{% endif %}</div>
+  {{ m.week_list(weeks[1:], "weeks/") }}
+</div>
 {% endif %}
 {% endblock %}

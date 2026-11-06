@@ -2,337 +2,337 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Enlicitide · Cholesterol pipeline</title>
 <meta name="robots" content="noindex">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='%230f766e'/></svg>">
-<style>
-:root{
-  --bg:#f6f7f9; --card:#ffffff; --ink:#1f2933; --muted:#6b7280; --rule:#e5e7eb;
-  --accent:#0f766e; --accent-soft:#cce5e2; --past:#99c9c3; --future:#d1d5db;
-  --moved:#b45309; --warn-bg:#fef3c7; --warn-ink:#92400e;
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#111418; --card:#1a1f25; --ink:#e5e7eb; --muted:#9aa3ad; --rule:#2b323a;
-    --accent:#2dd4bf; --accent-soft:#1f4f4a; --past:#2f7f76; --future:#3a434d;
-    --moved:#f59e0b; --warn-bg:#3b2f12; --warn-ink:#fcd34d;
-  }
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
-  font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;}
-a{color:var(--accent)}
-.wrap{max-width:760px;margin:0 auto;padding:0 16px}
-header.site{padding:20px 0 4px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
-header.site a.brand{color:var(--ink);text-decoration:none;font-weight:700;letter-spacing:-.01em}
-header.site nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:14px}
-header.site nav a:hover{color:var(--accent)}
-.card{background:var(--card);border-radius:12px;padding:24px;margin:16px 0}
-.eyebrow{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-h1{font-size:24px;line-height:1.3;margin:6px 0 0;letter-spacing:-.01em}
-h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
-h2 .sub{color:var(--muted);text-transform:none;letter-spacing:0;font-weight:400}
-.change{padding:12px 0;border-top:1px solid var(--rule)}
-.change:first-of-type{border-top:0;padding-top:0}
-.change .meta{font-size:13px;color:var(--muted)}
-.change .meta a{color:inherit;text-decoration:none}
-.change .what{margin-top:2px}
-.change .src{font-size:13px;white-space:nowrap}
-.why{font-size:15px;color:var(--ink);opacity:.85;margin-top:6px;padding-left:10px;border-left:3px solid var(--accent-soft)}
-.why span{color:var(--muted)}
-.tag{display:inline-block;font-size:11px;line-height:1.6;padding:0 6px;border:1px solid var(--rule);border-radius:5px;color:var(--muted);white-space:nowrap;vertical-align:1px}
-.tag.moved{border-color:transparent;color:var(--moved);font-weight:600;padding:0}
-.horizon li{margin:6px 0}
-.horizon .when{color:var(--muted);display:inline-block;min-width:96px;font-variant-numeric:tabular-nums}
-ul.plain{list-style:none;padding:0;margin:0}
-.empty{color:var(--muted)}
-.warn{background:var(--warn-bg);color:var(--warn-ink);border-radius:8px;padding:8px 12px;font-size:14px;margin-top:12px}
-/* pipeline strip */
-.strip-head,.strip-row{display:grid;grid-template-columns:minmax(150px,34%) 1fr;align-items:center;gap:8px}
-.strip-head .stages{display:grid;grid-template-columns:repeat(5,1fr);font-size:11px;color:var(--muted);text-align:center}
-.strip-row{padding:9px 0;border-top:1px solid var(--rule)}
-.strip-row .name a{color:var(--ink);font-weight:600;text-decoration:none}
-.strip-row .name a:hover{color:var(--accent)}
-.strip-row .name .sub{font-size:12px;color:var(--muted)}
-.track{display:grid;grid-template-columns:repeat(5,1fr);position:relative}
-.track .cell{position:relative;height:22px;display:flex;align-items:center;justify-content:center}
-.track .cell::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:var(--future)}
-.track .cell:first-child::before{left:50%}
-.track .cell:last-child::before{right:50%}
-.track .cell.done::before{background:var(--past)}
-.track .cell.now::before{background:linear-gradient(to right,var(--past) 50%,var(--future) 50%)}
-.track .cell.now:first-child::before{background:var(--future)}
-.track .cell.now:last-child::before{background:var(--past)}
-.track .dot{position:relative;width:10px;height:10px;border-radius:50%;background:var(--card);border:2px solid var(--future)}
-.track .done .dot{background:var(--past);border-color:var(--past)}
-.track .now .dot{width:18px;height:18px;background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px var(--card)}
-.track .now.moved .dot{background:var(--moved);border-color:var(--moved)}
-@media (max-width:560px){
-  .card{padding:18px}
-  .strip-head,.strip-row{grid-template-columns:1fr}
-  .strip-head .label{display:none}
-}
-/* tables */
-table.trials{width:100%;border-collapse:collapse;font-size:14px}
-table.trials th{text-align:left;font-size:12px;color:var(--muted);font-weight:500;padding:6px 8px 6px 0;border-bottom:1px solid var(--rule)}
-table.trials td{padding:8px 8px 8px 0;border-bottom:1px solid var(--rule);vertical-align:top}
-.scroll{overflow-x:auto}
-.weeks li{padding:8px 0;border-top:1px solid var(--rule);display:flex;gap:12px}
-.weeks li:first-child{border-top:0}
-.weeks .when{color:var(--muted);min-width:100px;white-space:nowrap;font-variant-numeric:tabular-nums}
-.pager{display:flex;justify-content:space-between;font-size:14px;margin:8px 0 0}
-dl.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:12px 0 0;font-size:15px}
-dl.facts dt{color:var(--muted)}
-dl.facts dd{margin:0}
-footer{color:var(--muted);font-size:12px;padding:8px 0 40px}
-</style>
+<meta name="theme-color" content="#8f9186">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="preload" href="../assets/fonts/GeistSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
-<div class="wrap">
-<header class="site">
-  <a class="brand" href="../index.html">Cholesterol pipeline</a>
-  <nav><a href="../index.html">This week</a><a href="../weeks/index.html">Past weeks</a></nav>
+<header class="mast">
+  <a href="../index.html">
+    <span class="mast-iris" aria-hidden="true"></span>
+    <span>
+      <span class="mast-title" style="display:block">CHOLESTEROL PIPELINE</span>
+      <span class="mast-line2"><span class="mast-of">of</span><span class="mast-title">THE BROWNS</span></span>
+    </span>
+  </a>
 </header>
-<section class="card">
-  <div class="eyebrow">Merck · PCSK9 (LDL)</div>
-  <h1>Enlicitide </h1>
-<p>The first PCSK9 pill. It lowers LDL by about half, similar to the injectable PCSK9 drugs.</p>  <div class="strip-head"><div class="label"></div><div class="stages"><div>Phase 1</div><div>Phase 2</div><div>Phase 3</div><div>Filed</div><div>Approved</div></div></div>
-  <div class="strip-row"><div class="name"><strong>Approved</strong></div><div class="track" role="img" aria-label="Approved">
+<main class="body">
+  <div class="slab">
+    <nav class="sidebar" aria-label="Drugs">
+      <a class="side-top" href="../index.html"><span>Pipeline</span><span>11</span></a>
+      <div class="side-sub">BASELINE · NOV 6</div>
+      <div class="side-rule"></div>
+      <a class="side-row" href="../drugs/muvalaplin.html">
+        <span class="side-name">Muvalaplin</span>
+        <span class="side-bar"><span style="width:60%"></span></span>
+        <span class="side-stage">P3</span>
+      </a>
+      <a class="side-row" href="../drugs/lepodisiran.html">
+        <span class="side-name">Lepodisiran</span>
+        <span class="side-bar"><span style="width:60%"></span></span>
+        <span class="side-stage">P3</span>
+      </a>
+      <a class="side-row" href="../drugs/pelacarsen.html">
+        <span class="side-name">Pelacarsen</span>
+        <span class="side-bar"><span style="width:60%"></span></span>
+        <span class="side-stage">P3</span>
+      </a>
+      <a class="side-row" href="../drugs/olpasiran.html">
+        <span class="side-name">Olpasiran</span>
+        <span class="side-bar"><span style="width:60%"></span></span>
+        <span class="side-stage">P3</span>
+      </a>
+      <a class="side-row" href="../drugs/zerlasiran.html">
+        <span class="side-name">Zerlasiran</span>
+        <span class="side-bar"><span style="width:40%"></span></span>
+        <span class="side-stage">P2</span>
+      </a>
+      <a class="side-row is-sel" href="../drugs/enlicitide.html">
+        <span class="side-name">Enlicitide</span>
+        <span class="side-bar"><span style="width:100%"></span></span>
+        <span class="side-stage">APPR</span>
+      </a>
+      <a class="side-row" href="../drugs/laroprovstat.html">
+        <span class="side-name">Laroprovstat</span>
+        <span class="side-bar"><span style="width:60%"></span></span>
+        <span class="side-stage">P3</span>
+      </a>
+      <a class="side-row" href="../drugs/obicetrapib.html">
+        <span class="side-name">Obicetrapib</span>
+        <span class="side-bar"><span style="width:100%"></span></span>
+        <span class="side-stage">APPR</span>
+      </a>
+      <a class="side-row" href="../drugs/solbinsiran.html">
+        <span class="side-name">Solbinsiran</span>
+        <span class="side-bar"><span style="width:40%"></span></span>
+        <span class="side-stage">P2</span>
+      </a>
+      <a class="side-row" href="../drugs/verve102.html">
+        <span class="side-name">VERVE-102</span>
+        <span class="side-bar"><span style="width:40%"></span></span>
+        <span class="side-stage">P2</span>
+      </a>
+      <a class="side-row" href="../drugs/lerodalcibep.html">
+        <span class="side-name">Lerodalcibep</span>
+        <span class="side-bar"><span style="width:100%"></span></span>
+        <span class="side-stage">APPR</span>
+      </a>
+      <a class="side-foot" href="../weeks/index.html"><span>Past weeks</span><span class="n">1</span></a>
+    </nav>
+    <section class="detail">
+<div class="d-title"><h1>Enlicitide</h1><span class="amt">Approved</span></div>
+<div class="d-sub"><span>Merck · PCSK9 (LDL)</span></div>
+<p class="lede">The first PCSK9 pill. It lowers LDL by about half, similar to the injectable PCSK9 drugs.</p>
+<div class="module">
+  <div class="strip-head"><div class="lbl"></div><div class="stages"><div class="label">Phase 1</div><div class="label">Phase 2</div><div class="label">Phase 3</div><div class="label">Filed</div><div class="label">Approved</div></div></div>
+  <div class="strip-row"><div class="name"><span class="label">Stage</span></div><div class="track" role="img" aria-label="Approved">
   <div class="cell done"><span class="dot"></span></div>
   <div class="cell done"><span class="dot"></span></div>
   <div class="cell done"><span class="dot"></span></div>
   <div class="cell done"><span class="dot"></span></div>
   <div class="cell now"><span class="dot"></span></div>
 </div></div>
-  <dl class="facts">
-<dt>Form</dt><dd>Daily pill</dd><dt>Also known as</dt><dd>MK-0616, Lipfendra</dd><dt>Status note</dt><dd>FDA approved Jul 16 2026 (Lipfendra); CORALreef Outcomes trial ongoing</dd>    <dt>Stage based on</dt><dd>
-watchlist (<a href="https://www.tctmd.com/news/fda-approves-enlicitide-oral-pcsk9-inhibitor-ldl-lowering">source</a>)    </dd>
-  </dl>
-</section>
+</div>
 
-<section class="card">
-  <h2>Updates</h2>
-<p class="empty">No changes recorded since tracking started.</p></section>
+<div class="cards" style="--n:3">
+  <div class="card"><span class="label">Form</span><span class="card-v serif" style="font-size:1.25rem;line-height:1.25">Daily pill</span></div>
+  <div class="card"><span class="label">Trials tracked</span><span class="card-v">34</span><span class="card-d">7 active</span></div>
+  <div class="card"><span class="label">Next primary completion</span><span class="card-v">2027-10-12</span><span class="card-d">NCT07614984</span></div>
+</div>
+
+<dl class="facts">
+<dt>Also known as</dt><dd>MK-0616, Lipfendra</dd><dt>Status note</dt><dd>FDA approved Jul 16 2026 (Lipfendra); CORALreef Outcomes trial ongoing</dd>  <dt>Stage based on</dt><dd>
+Watchlist (<a href="https://www.tctmd.com/news/fda-approves-enlicitide-oral-pcsk9-inhibitor-ldl-lowering">source</a>)  </dd>
+</dl>
+
+<div class="module">
+  <div class="module-head"><span class="label">Updates</span></div>
+<p class="empty">No changes recorded since tracking started.</p></div>
 
 
-<section class="card">
-  <h2>Trials on ClinicalTrials.gov</h2>
+<div class="module">
+  <div class="module-head"><span class="label">Trials on ClinicalTrials.gov</span></div>
   <div class="scroll"><table class="trials">
     <thead><tr><th>Trial</th><th>Phase</th><th>Status</th><th>Primary completion</th></tr></thead>
     <tbody>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06450366">NCT06450366</a> <span class="tag">results</span><div class="sub" style="font-size:12px;color:var(--muted)">A Study to Evaluate the Efficacy and Safety of Enlicitide (MK-0616, Oral PCSK9 Inhibitor) </div></td>
-        <td style="white-space:nowrap">Phase 3</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06450366">NCT06450366</a> <span class="tag">results</span><div class="t-title">A Study to Evaluate the Efficacy and Safety of Enlicitide (MK-0616, Oral PCSK9 Inhibitor) </div></td>
+        <td class="nowrap">Phase 3</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2025-02-14</td>
+        <td class="nowrap">2025-02-14</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT05952869">NCT05952869</a> <span class="tag">results</span><div class="sub" style="font-size:12px;color:var(--muted)">A Study of Enlicitide Decanoate (MK-0616 Oral PCSK9 Inhibitor) in Adults With Heterozygous</div></td>
-        <td style="white-space:nowrap">Phase 3</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT05952869">NCT05952869</a> <span class="tag">results</span><div class="t-title">A Study of Enlicitide Decanoate (MK-0616 Oral PCSK9 Inhibitor) in Adults With Heterozygous</div></td>
+        <td class="nowrap">Phase 3</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2025-04-07</td>
+        <td class="nowrap">2025-04-07</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT05952856">NCT05952856</a> <span class="tag">results</span><div class="sub" style="font-size:12px;color:var(--muted)">A Study of Enlicitide Decanoate (MK-0616 Oral PCSK9 Inhibitor) in Adults With Hypercholest</div></td>
-        <td style="white-space:nowrap">Phase 3</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT05952856">NCT05952856</a> <span class="tag">results</span><div class="t-title">A Study of Enlicitide Decanoate (MK-0616 Oral PCSK9 Inhibitor) in Adults With Hypercholest</div></td>
+        <td class="nowrap">Phase 3</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2025-07-28</td>
+        <td class="nowrap">2025-07-28</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT07216482">NCT07216482</a><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Study of Enlicitide in Participants With High Cholesterol (MK-0616-037)</div></td>
-        <td style="white-space:nowrap">Phase 3</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT07216482">NCT07216482</a><div class="t-title">A Clinical Study of Enlicitide in Participants With High Cholesterol (MK-0616-037)</div></td>
+        <td class="nowrap">Phase 3</td>
         <td>fully enrolled, no longer recruiting</td>
-        <td style="white-space:nowrap">2026-08-03</td>
+        <td class="nowrap">2026-08-03</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT07821944">NCT07821944</a><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Study of Enlicitide (MK-0616) in Adults With Hyperlipidemia in India (MK-0616-0</div></td>
-        <td style="white-space:nowrap">Phase 3</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT07821944">NCT07821944</a><div class="t-title">A Clinical Study of Enlicitide (MK-0616) in Adults With Hyperlipidemia in India (MK-0616-0</div></td>
+        <td class="nowrap">Phase 3</td>
         <td>recruiting</td>
-        <td style="white-space:nowrap">2027-11-26 <span style="color:var(--muted)">(est.)</span></td>
+        <td class="nowrap">2027-11-26 <span class="est">est.</span></td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06492291">NCT06492291</a><div class="sub" style="font-size:12px;color:var(--muted)">Open-label Extension Study of Enlicitide Decanoate (MK-0616/Enlicitide Oral PCSK9 Inhibito</div></td>
-        <td style="white-space:nowrap">Phase 3</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06492291">NCT06492291</a><div class="t-title">Open-label Extension Study of Enlicitide Decanoate (MK-0616/Enlicitide Oral PCSK9 Inhibito</div></td>
+        <td class="nowrap">Phase 3</td>
         <td>fully enrolled, no longer recruiting</td>
-        <td style="white-space:nowrap">2028-10-13 <span style="color:var(--muted)">(est.)</span></td>
+        <td class="nowrap">2028-10-13 <span class="est">est.</span></td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06008756">NCT06008756</a><div class="sub" style="font-size:12px;color:var(--muted)">Enlicitide Decanoate (MK-0616 Oral PCSK9 Inhibitor) Cardiovascular Outcomes Study (MK-0616</div></td>
-        <td style="white-space:nowrap">Phase 3</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06008756">NCT06008756</a><div class="t-title">Enlicitide Decanoate (MK-0616 Oral PCSK9 Inhibitor) Cardiovascular Outcomes Study (MK-0616</div></td>
+        <td class="nowrap">Phase 3</td>
         <td>fully enrolled, no longer recruiting</td>
-        <td style="white-space:nowrap">2029-11-29 <span style="color:var(--muted)">(est.)</span></td>
+        <td class="nowrap">2029-11-29 <span class="est">est.</span></td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT07058077">NCT07058077</a><div class="sub" style="font-size:12px;color:var(--muted)">A Study of Enlicitide Decanoate (MK-0616, an Oral PCSK9 Inhibitor) in Children and Adolesc</div></td>
-        <td style="white-space:nowrap">Phase 2/Phase 3</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT07058077">NCT07058077</a><div class="t-title">A Study of Enlicitide Decanoate (MK-0616, an Oral PCSK9 Inhibitor) in Children and Adolesc</div></td>
+        <td class="nowrap">Phase 2/Phase 3</td>
         <td>recruiting</td>
-        <td style="white-space:nowrap">2033-12-04 <span style="color:var(--muted)">(est.)</span></td>
+        <td class="nowrap">2033-12-04 <span class="est">est.</span></td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT05261126">NCT05261126</a> <span class="tag">results</span><div class="sub" style="font-size:12px;color:var(--muted)">A Study of the Efficacy and Safety of Enclitide Chloride (MK-0616 Oral PCSK9 Inhibitor) in</div></td>
-        <td style="white-space:nowrap">Phase 2</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT05261126">NCT05261126</a> <span class="tag">results</span><div class="t-title">A Study of the Efficacy and Safety of Enclitide Chloride (MK-0616 Oral PCSK9 Inhibitor) in</div></td>
+        <td class="nowrap">Phase 2</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2022-11-28</td>
+        <td class="nowrap">2022-11-28</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT07614984">NCT07614984</a><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Trial of MK-7262 and Enlicitide in Participants With High Lipoprotein(a) (MK-72</div></td>
-        <td style="white-space:nowrap">Phase 2</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT07614984">NCT07614984</a><div class="t-title">A Clinical Trial of MK-7262 and Enlicitide in Participants With High Lipoprotein(a) (MK-72</div></td>
+        <td class="nowrap">Phase 2</td>
         <td>recruiting</td>
-        <td style="white-space:nowrap">2027-10-12 <span style="color:var(--muted)">(est.)</span></td>
+        <td class="nowrap">2027-10-12 <span class="est">est.</span></td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06592339">NCT06592339</a><div class="sub" style="font-size:12px;color:var(--muted)">A Study of MK-0616 in Healthy Adult Participants (MK-0616-009)</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06592339">NCT06592339</a><div class="t-title">A Study of MK-0616 in Healthy Adult Participants (MK-0616-009)</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2022-12-29</td>
+        <td class="nowrap">2022-12-29</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT05070390">NCT05070390</a> <span class="tag">results</span><div class="sub" style="font-size:12px;color:var(--muted)">A Study of Enlicitide Chloride (MK-0616 Oral PCSK9 Inhibitor) in Participants With Moderat</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT05070390">NCT05070390</a> <span class="tag">results</span><div class="t-title">A Study of Enlicitide Chloride (MK-0616 Oral PCSK9 Inhibitor) in Participants With Moderat</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2023-05-03</td>
+        <td class="nowrap">2023-05-03</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06814106">NCT06814106</a><div class="sub" style="font-size:12px;color:var(--muted)">A Single- and Multiple-Dose Study of Enlicitide Chloride (MK-0616) in Healthy Chinese Adul</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06814106">NCT06814106</a><div class="t-title">A Single- and Multiple-Dose Study of Enlicitide Chloride (MK-0616) in Healthy Chinese Adul</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2023-05-08</td>
+        <td class="nowrap">2023-05-08</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06658626">NCT06658626</a><div class="sub" style="font-size:12px;color:var(--muted)">A Study to Evaluate the Metabolism, Excretion, and Mass Balance of [¹⁴C]Enlicitide Chlorid</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06658626">NCT06658626</a><div class="t-title">A Study to Evaluate the Metabolism, Excretion, and Mass Balance of [¹⁴C]Enlicitide Chlorid</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2023-08-02</td>
+        <td class="nowrap">2023-08-02</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06658652">NCT06658652</a><div class="sub" style="font-size:12px;color:var(--muted)">The Effect of Food and Water Volume in Healthy Adult Participants Administered Enlicitide </div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06658652">NCT06658652</a><div class="t-title">The Effect of Food and Water Volume in Healthy Adult Participants Administered Enlicitide </div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2023-12-26</td>
+        <td class="nowrap">2023-12-26</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06699355">NCT06699355</a><div class="sub" style="font-size:12px;color:var(--muted)">A Study to Evaluate the Drug-Drug Interaction Between Enlicitide Decanoate (MK-0616) and A</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06699355">NCT06699355</a><div class="t-title">A Study to Evaluate the Drug-Drug Interaction Between Enlicitide Decanoate (MK-0616) and A</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2023-12-29</td>
+        <td class="nowrap">2023-12-29</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06655311">NCT06655311</a><div class="sub" style="font-size:12px;color:var(--muted)">A Study of Enlicitide Chloride (MK-0616) in Healthy Participants and Participants Taking S</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06655311">NCT06655311</a><div class="t-title">A Study of Enlicitide Chloride (MK-0616) in Healthy Participants and Participants Taking S</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2024-01-02</td>
+        <td class="nowrap">2024-01-02</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT05934292">NCT05934292</a> <span class="tag">results</span><div class="sub" style="font-size:12px;color:var(--muted)">Enlicitide Decanoate (MK-0616 Oral PCSK9 Inhibitor) Renal Impairment Study (MK-0616-020)</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT05934292">NCT05934292</a> <span class="tag">results</span><div class="t-title">Enlicitide Decanoate (MK-0616 Oral PCSK9 Inhibitor) Renal Impairment Study (MK-0616-020)</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2024-01-19</td>
+        <td class="nowrap">2024-01-19</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06691906">NCT06691906</a><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Study of Enlicitide Decanoate (MK-0616) in Healthy Adult Participants (MK-0616-</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06691906">NCT06691906</a><div class="t-title">A Clinical Study of Enlicitide Decanoate (MK-0616) in Healthy Adult Participants (MK-0616-</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2024-05-01</td>
+        <td class="nowrap">2024-05-01</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06699329">NCT06699329</a><div class="sub" style="font-size:12px;color:var(--muted)">A Study of Enlicitide Decanoate (MK-0616) and Semaglutide in Healthy Adult Participants (M</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06699329">NCT06699329</a><div class="t-title">A Study of Enlicitide Decanoate (MK-0616) and Semaglutide in Healthy Adult Participants (M</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2024-05-24</td>
+        <td class="nowrap">2024-05-24</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06772779">NCT06772779</a><div class="sub" style="font-size:12px;color:var(--muted)">A Study of Enlicitide Decanoate (MK-0616), Warfarin, and Lisinopril in Healthy Adult Parti</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06772779">NCT06772779</a><div class="t-title">A Study of Enlicitide Decanoate (MK-0616), Warfarin, and Lisinopril in Healthy Adult Parti</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2024-06-04</td>
+        <td class="nowrap">2024-06-04</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06772792">NCT06772792</a><div class="sub" style="font-size:12px;color:var(--muted)">A Study to Evaluate the Drug-Drug Interaction Between Enlicitide Decanoate (MK-0616) and A</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06772792">NCT06772792</a><div class="t-title">A Study to Evaluate the Drug-Drug Interaction Between Enlicitide Decanoate (MK-0616) and A</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2024-06-21</td>
+        <td class="nowrap">2024-06-21</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06625814">NCT06625814</a><div class="sub" style="font-size:12px;color:var(--muted)">A Study of Levothyroxine and Enlicitide Decanoate (MK-0616) in Healthy Adult Participants </div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06625814">NCT06625814</a><div class="t-title">A Study of Levothyroxine and Enlicitide Decanoate (MK-0616) in Healthy Adult Participants </div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2024-08-19</td>
+        <td class="nowrap">2024-08-19</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06597760">NCT06597760</a><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Study to Assess the Effect of Enlicitide on How the Body Processes Digoxin in H</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06597760">NCT06597760</a><div class="t-title">A Clinical Study to Assess the Effect of Enlicitide on How the Body Processes Digoxin in H</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2024-11-01</td>
+        <td class="nowrap">2024-11-01</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06609512">NCT06609512</a><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Study of Enlicitide and the Effect of Food in Healthy Adult Participants (MK-06</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06609512">NCT06609512</a><div class="t-title">A Clinical Study of Enlicitide and the Effect of Food in Healthy Adult Participants (MK-06</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2025-01-13</td>
+        <td class="nowrap">2025-01-13</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06719544">NCT06719544</a><div class="sub" style="font-size:12px;color:var(--muted)">A Study of Lithium and Enlicitide in Healthy Adult Participants (MK-0616-034)</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06719544">NCT06719544</a><div class="t-title">A Study of Lithium and Enlicitide in Healthy Adult Participants (MK-0616-034)</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2025-01-27</td>
+        <td class="nowrap">2025-01-27</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06575959">NCT06575959</a> <span class="tag">results</span><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Study of Enlicitide Decanoate in People With Liver Function Problems (MK-0616-0</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06575959">NCT06575959</a> <span class="tag">results</span><div class="t-title">A Clinical Study of Enlicitide Decanoate in People With Liver Function Problems (MK-0616-0</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2025-05-01</td>
+        <td class="nowrap">2025-05-01</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06880874">NCT06880874</a><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Study to Evaluate Enlicitide (MK-0616) Formulations in Healthy Adult Participan</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06880874">NCT06880874</a><div class="t-title">A Clinical Study to Evaluate Enlicitide (MK-0616) Formulations in Healthy Adult Participan</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2025-05-16</td>
+        <td class="nowrap">2025-05-16</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT06643377">NCT06643377</a> <span class="tag">results</span><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Study of Enlicitide in Participants With Severe Renal Impairment (MK-0616-032)</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT06643377">NCT06643377</a> <span class="tag">results</span><div class="t-title">A Clinical Study of Enlicitide in Participants With Severe Renal Impairment (MK-0616-032)</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2025-06-25</td>
+        <td class="nowrap">2025-06-25</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT07044479">NCT07044479</a><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Study of How Coffee and Tea Affect Enlicitide in Healthy Volunteers (MK-0616-04</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT07044479">NCT07044479</a><div class="t-title">A Clinical Study of How Coffee and Tea Affect Enlicitide in Healthy Volunteers (MK-0616-04</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2025-08-13</td>
+        <td class="nowrap">2025-08-13</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT07481708">NCT07481708</a><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Study of the Effect of Enlicitide (MK-0616) Formulations in Healthy Participant</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT07481708">NCT07481708</a><div class="t-title">A Clinical Study of the Effect of Enlicitide (MK-0616) Formulations in Healthy Participant</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2026-05-18</td>
+        <td class="nowrap">2026-05-18</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT07619443">NCT07619443</a><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Study of MK-7262 and Enlicitide in Healthy Participants (MK-7262-003)</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT07619443">NCT07619443</a><div class="t-title">A Clinical Study of MK-7262 and Enlicitide in Healthy Participants (MK-7262-003)</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2026-09-05</td>
+        <td class="nowrap">2026-09-05</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT07300280">NCT07300280</a><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Trial of Enlicitide and Rosuvastatin in Healthy Adults (MK-0616-039)</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT07300280">NCT07300280</a><div class="t-title">A Clinical Trial of Enlicitide and Rosuvastatin in Healthy Adults (MK-0616-039)</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>completed</td>
-        <td style="white-space:nowrap">2026-10-14</td>
+        <td class="nowrap">2026-10-14</td>
       </tr>
       <tr>
-        <td><a href="https://clinicaltrials.gov/study/NCT07776665">NCT07776665</a><div class="sub" style="font-size:12px;color:var(--muted)">A Clinical Trial of Enlicitide (MK-0616) Formulations in Healthy Participants (MK-0616-044</div></td>
-        <td style="white-space:nowrap">Phase 1</td>
+        <td><a href="https://clinicaltrials.gov/study/NCT07776665">NCT07776665</a><div class="t-title">A Clinical Trial of Enlicitide (MK-0616) Formulations in Healthy Participants (MK-0616-044</div></td>
+        <td class="nowrap">Phase 1</td>
         <td>fully enrolled, no longer recruiting</td>
-        <td style="white-space:nowrap">2026-12-14 <span style="color:var(--muted)">(est.)</span></td>
+        <td class="nowrap">2026-12-14 <span class="est">est.</span></td>
       </tr>
     </tbody>
   </table></div>
-</section>
-<footer>
-  Built from ClinicalTrials.gov, openFDA, FDA press announcements and news searches, last checked Nov 6, 2026.
-  Every update links to its source. "Why it matters" lines are AI-written from those updates.
-  Informational only, not medical advice.
-</footer>
 </div>
+    </section>
+  </div>
+</main>
+<footer>
+  Built from ClinicalTrials.gov, openFDA and news searches · last checked Nov 6, 2026<br>
+  Every update links to its source · "Why it matters" lines are AI-written from those updates · Informational only, not medical advice
+</footer>
 </body>
 </html>

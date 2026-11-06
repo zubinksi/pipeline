@@ -27,7 +27,18 @@ def _fmt_date(s: str) -> str:
         return s
 
 
+def _fmt_short(s: str) -> str:
+    try:
+        return date.fromisoformat(s).strftime("%b %-d")
+    except ValueError:
+        return s
+
+
 _env.filters["nice_date"] = _fmt_date
+_env.filters["nice_date_short"] = _fmt_short
+STATIC = Path(__file__).parent / "static"
+STAGE_SHORT = {"phase1": "P1", "phase2": "P2", "phase3": "P3", "filed": "FILED", "approved": "APPR"}
+ACTIVE = {"NOT_YET_RECRUITING", "RECRUITING", "ENROLLING_BY_INVITATION", "ACTIVE_NOT_RECRUITING"}
 
 
 def _rows(watchlist: dict, stages: dict, moved: set[str]) -> list[dict]:
@@ -35,7 +46,7 @@ def _rows(watchlist: dict, stages: dict, moved: set[str]) -> list[dict]:
     for d in watchlist["drugs"]:
         stage = stages.get(d["id"], d["stage"])
         rows.append({**d, "rank": STAGE_RANK[stage], "stage_label": STAGE_LABEL[stage],
-                     "moved": d["id"] in moved})
+                     "stage_short": STAGE_SHORT[stage], "moved": d["id"] in moved})
     return rows
 
 
@@ -56,27 +67,39 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
         shutil.rmtree(out)
     (out / "weeks").mkdir(parents=True)
     (out / "drugs").mkdir()
+    shutil.copytree(STATIC, out / "assets")
     drugs = {d["id"]: d for d in watchlist["drugs"]}
     views = [_week_view(w, drugs) for w in weeks]  # newest first
     latest = views[0] if views else None
     stages = {k: v["stage"] for k, v in snapshot.get("drugs", {}).items()}
+    moved = set(latest["moved"]) if latest else set()
+    trials_all = snapshot.get("trials", {})
+    if latest:
+        n = len(latest["changes"])
+        sub = (f"BASELINE · {_fmt_short(latest['date']).upper()}" if latest["baseline"] else
+               f"{n} CHANGE{'S' if n != 1 else ''} · WEEK OF {_fmt_short(latest['date']).upper()}")
+    else:
+        sub = "NO RUNS YET"
     common = {"site_title": site_title, "stages": [label for _, label in STAGES],
               "horizon_days": watchlist["settings"].get("horizon_days", 60),
-              "updated": snapshot.get("generated_at", "")[:10]}
+              "updated": snapshot.get("generated_at", "")[:10],
+              "side": {"rows": _rows(watchlist, stages, moved), "sub": sub, "n_weeks": len(views)},
+              "n_trials": len(trials_all),
+              "n_approved": sum(1 for d in watchlist["drugs"]
+                                if stages.get(d["id"], d["stage"]) == "approved")}
 
-    def write(path: str, template: str, root: str, **ctx):
-        html = _env.get_template(template).render(**common, root=root, **ctx)
+    def write(path: str, template: str, root: str, sel: str = "", **ctx):
+        html = _env.get_template(template).render(**common, root=root, sel=sel, **ctx)
         (out / path).write_text(html)
 
-    moved = set(latest["moved"]) if latest else set()
     write("index.html", "index.html.j2", "", latest=latest, weeks=views[:12], n_weeks=len(views),
           rows=_rows(watchlist, stages, moved))
     for i, w in enumerate(views):
         newer = views[i - 1]["date"] if i > 0 else None
         older = views[i + 1]["date"] if i + 1 < len(views) else None
-        write(f"weeks/{w['date']}.html", "week.html.j2", "../", week=w, newer=newer, older=older,
+        write(f"weeks/{w['date']}.html", "week.html.j2", "../", sel="weeks", week=w, newer=newer, older=older,
               rows=_rows(watchlist, w.get("stages", stages), set(w["moved"])))
-    write("weeks/index.html", "archive.html.j2", "../", weeks=views)
+    write("weeks/index.html", "archive.html.j2", "../", sel="weeks", weeks=views)
 
     trials_by_drug: dict[str, list] = {}
     for t in snapshot.get("trials", {}).values():
@@ -94,10 +117,14 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
         trials = sorted(trials_by_drug.get(d["id"], []),
                         key=lambda t: (-t["phase_rank"], t.get("primary_completion") or ""))
         stage = stages.get(d["id"], d["stage"])
-        write(f"drugs/{d['id']}.html", "drug.html.j2", "../", drug=d,
+        today = date.today().isoformat()[:7]
+        upcoming = [t for t in trials if t["status"] in ACTIVE and t.get("primary_completion")
+                    and t["primary_completion"][:7] >= today and t["phase_rank"] >= 2]
+        next_pcd = min(upcoming, key=lambda t: t["primary_completion"], default=None)
+        write(f"drugs/{d['id']}.html", "drug.html.j2", "../", sel=d["id"], drug=d,
+              n_active=sum(1 for t in trials if t["status"] in ACTIVE), next_pcd=next_pcd,
               row=_rows({"drugs": [d]}, {d["id"]: stage}, moved)[0],
               stage_basis=snapshot.get("drugs", {}).get(d["id"], {}),
               updates=updates, history=history, trials=trials)
 
-    (out / ".nojekyll").write_text("")
     return out

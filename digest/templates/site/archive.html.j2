@@ -1,16 +1,10 @@
 {% extends "base.html.j2" %}
+{% import "_macros.html.j2" as m with context %}
 {% block title %}Past weeks · {{ site_title }}{% endblock %}
 {% block content %}
-<section class="card">
-  <h1>Past weeks</h1>
-</section>
-<section class="card">
-  {% if weeks %}
-  <ul class="plain weeks">
-  {% for w in weeks %}
-    <li><span class="when">{{ w.date|nice_date }}</span><a href="{{ w.date }}.html">{{ w.headline }}</a></li>
-  {% endfor %}
-  </ul>
+<div class="d-title"><h1>Past weeks</h1><span class="amt">{{ weeks|length }}</span></div>
+<div class="module">
+  {% if weeks %}{{ m.week_list(weeks, "") }}
   {% else %}<p class="empty">No weekly runs yet.</p>{% endif %}
-</section>
+</div>
 {% endblock %}

@@ -12,7 +12,7 @@ digest/snapshot.py      builds this week's state; a failed source keeps last wee
 digest/diff.py          last week vs this week -> list of changes (each with a source URL)
 digest/summarize.py     Claude writes the headline + "why it matters" lines from the diff
 digest/render.py        HTML email + plain-text fallback, incl. the pipeline strip
-digest/site.py          static site (templates in digest/templates/site/)
+digest/site.py          static site (templates in digest/templates/site/, CSS/fonts in digest/static/)
 digest/send.py          SMTP (Gmail or Resend), skipped if not configured
 state/snapshot.json     last week's state, committed back by the workflow
 history/*.json          one record per week, the site's archive
@@ -50,6 +50,10 @@ python -m digest run                  # the weekly job (needs the env vars below
 4. After that it runs Mondays at 12:23 UTC. To change the time, edit the `cron` line in `.github/workflows/weekly-digest.yml`. Editing `watchlist.yaml` or the site templates triggers *Rebuild site*, which redeploys without fetching anything.
 
 The site is public, though pages ask search engines not to index them. The first week is a baseline: the pipeline strip and what's coming up. Change reporting starts the following week.
+
+## Design
+
+The site borrows the look of the household finance site (`zubinksi/home`): sage wall, iris masthead, cream paper slab, Geist Serif + Geist Mono (SIL Open Font License, `digest/static/fonts/OFL.txt`). Tokens live at the top of `digest/static/site.css`.
 
 ## Maintaining the watchlist
 

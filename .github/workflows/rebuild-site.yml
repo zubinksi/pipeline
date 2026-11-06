@@ -9,6 +9,7 @@ on:
       - watchlist.yaml
       - digest/site.py
       - digest/templates/site/**
+      - digest/static/**
   workflow_dispatch:
 
 permissions:
