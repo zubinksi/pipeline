@@ -17,16 +17,16 @@
 <section class="section"{% if filterable %} data-filter{% endif %}>
   <div class="section-head">
     <h2>{{ title }} <span class="sub">· {{ n_drugs }}</span></h2>
-    {% if filterable %}
+    {% if filterable and (filters.lowers|length > 1 or filters.freq|length > 1) %}
     <div class="filters" hidden>
-      <select data-k="lowers" aria-label="What it lowers">
+      {% if filters.lowers|length > 1 %}<select data-k="lowers" aria-label="What it lowers">
         <option value="all">Lowers</option>
         {% for v, label in filters.lowers %}<option value="{{ v }}">{{ label }}</option>{% endfor %}
-      </select>
-      <select data-k="freq" aria-label="How often">
+      </select>{% endif %}
+      {% if filters.freq|length > 1 %}<select data-k="freq" aria-label="How often">
         <option value="all">How often</option>
         {% for v, label in filters.freq %}<option value="{{ v }}">{{ label }}</option>{% endfor %}
-      </select>
+      </select>{% endif %}
     </div>
     {% endif %}
   </div>
@@ -107,15 +107,11 @@
       <p style="margin-top:0.75rem">Many drugs stop along the way. Even final-stage drugs are usually a few years from pharmacies.</p>
     </div>
     <div>
-      <h4>What they lower</h4>
-      <dl>
-        <dt>LDL</dt><dd>The "bad" cholesterol that statins lower.</dd>
-        <dt>Lp(a)</dt><dd>A cholesterol particle set mostly by your genes. High levels raise heart risk, and statins don't lower it. A one-time blood test measures it.</dd>
-        <dt>Triglycerides</dt><dd>Another blood fat linked to heart risk.</dd>
-      </dl>
+      <h4>LDL</h4>
+      <p>The "bad" cholesterol that statins lower. Every drug here lowers LDL without being a statin or a daily pill. The percentages are how much LDL fell in trials, on top of whatever people were already taking.</p>
       <h4 style="margin-top:1rem">Heart attacks</h4>
-      <p>Lowering a number isn't the same as preventing heart attacks. "Prevents heart attacks" means a large trial showed fewer heart attacks and strokes. Pelacarsen lowered Lp(a) but didn't.</p>
-      <p style="margin-top:0.75rem">Everything listed is a non-statin drug you wouldn't take daily. This is a news tracker, not medical advice.</p>
+      <p>Lowering LDL isn't automatically the same as preventing heart attacks. "Prevents heart attacks" means a large trial showed fewer heart attacks and strokes; the others haven't been tested that way yet.</p>
+      <p style="margin-top:0.75rem">This is a news tracker, not medical advice.</p>
     </div>
   </div>
 </details>

@@ -16,6 +16,8 @@
 # Not tracked: daily-dosed drugs and drugs approved only outside the US
 # (removed 2026-11-06: muvalaplin, enlicitide, laroprovstat, obicetrapib).
 # Added 2026-11-07: approved non-daily options (evolocumab, alirocumab, inclisiran).
+# Removed 2026-11-07: Lp(a) and triglyceride drugs (lepodisiran, olpasiran,
+# pelacarsen, zerlasiran, solbinsiran); only LDL-lowering drugs are tracked.
 # clinicaltrials.gov itself was not reachable from the build sandbox, so the
 # first real run on GitHub Actions is the first check against the registry.
 
@@ -25,15 +27,16 @@ settings:
   max_news_per_drug: 5
   discovery:                # flag NEW industry Phase 2/3 trials in these conditions that aren't on the watchlist
     enabled: true
-    conditions: ["Hypercholesterolemia", "Lipoprotein(a)", "Hyperlipoproteinemia(a)", "Atherosclerotic Cardiovascular Disease"]
+    conditions: ["Hypercholesterolemia", "Atherosclerotic Cardiovascular Disease"]
     max_items: 5
 
 reader_context: >
-  32 years old, not on cholesterol medication, with a family history of high
-  cholesterol, so expects to need treatment eventually. Would prefer to avoid
-  statins if possible. Most interested in non-statin options that don't need
-  daily dosing (monthly or less often, or one-time), and anything targeting
-  lipoprotein(a).
+  32 years old, not on cholesterol medication. LDL and apoB are moderately
+  high; Lp(a) has been tested and is normal, so Lp(a) drugs aren't relevant.
+  His father has genetic high cholesterol and has been on statins for years;
+  no early heart attacks or strokes in the family. Would prefer to avoid
+  statins if possible and is most interested in LDL-lowering options that
+  don't need daily dosing (monthly or less often, or one-time).
 
 # Extra RSS feeds scanned for any watchlist drug name (in addition to a
 # Google News search per drug, which picks up company press releases).
@@ -153,70 +156,6 @@ drugs:
     sources: [https://www.tctmd.com/news/fda-approves-lerodalcibep-adults-hypercholesterolemia]
 
   # ---- in development ----
-  - id: lepodisiran
-    name: Lepodisiran
-    aliases: [LY3819469]
-    company: Eli Lilly
-    target: Lp(a)
-    lowers: Lp(a)
-    form: Shot, possibly once or twice a year
-    often: "1–2× a year"
-    route: injection
-    frequency: infrequent
-    plain: "A shot that switches off the liver's production of Lp(a) for many months at a time."
-    stage: phase3
-    effect: "Lp(a) down about 94%"
-    effect_short: "Lp(a) ↓ 94%"
-    effect_source: https://www.acc.org/Latest-in-Cardiology/Journal-Scans/2025/03/24/16/30/sun-130pm-alpaca-acc-2025
-    proven: testing
-    proven_note: "A large final-stage trial (ACCLAIM-Lp(a)) is testing whether it prevents heart attacks and strokes. Results are expected around 2029."
-    proven_source: https://www.clinicaltrialsarena.com/analyst-comment/jpm26-eli-lilly-lpa-drugs/
-    note: "In final-stage trials. Results are expected around 2029."
-    sources: [https://www.clinicaltrialsarena.com/analyst-comment/jpm26-eli-lilly-lpa-drugs/]
-
-  - id: olpasiran
-    name: Olpasiran
-    aliases: [AMG 890, AMG890]
-    company: Amgen
-    target: Lp(a)
-    lowers: Lp(a)
-    form: Shot, every 3 months or less often
-    often: "Every 3+ months"
-    route: injection
-    frequency: infrequent
-    plain: "A shot a few times a year that strongly lowers Lp(a)."
-    stage: phase3
-    effect: "Lp(a) down 95%+"
-    effect_short: "Lp(a) ↓ 95%+"
-    effect_source: https://www.amgen.com/newsroom/press-releases/2022/11/amgen-presents-new-phase-2-data-that-show-olpasiran-delivers-significant-reduction-in-lipoproteina-levels
-    proven: testing
-    proven_note: "Its large heart-attack prevention trial (OCEAN(a)-Outcomes) is fully enrolled. Amgen hasn't said when results will come; some sources point to 2028."
-    proven_source: https://clinicaltrials.gov/study/NCT05581303
-    note: "In final-stage trials, fully enrolled."
-    sources: [https://clinicaltrials.gov/study/NCT05581303]
-
-  - id: pelacarsen
-    name: Pelacarsen
-    aliases: [TQJ230, "IONIS-APO(a)-LRx", AKCEA-APO(a)-LRx]
-    company: Novartis / Ionis
-    target: Lp(a)
-    lowers: Lp(a)
-    form: Shot, once a month
-    often: "Monthly"
-    route: injection
-    frequency: monthly
-    plain: "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial."
-    stage: phase3
-    badge: setback
-    effect: "Lp(a) down about 80%"
-    effect_short: "Lp(a) ↓ 80%"
-    effect_source: https://nutrition-evidence.com/article/377243/emerging-rna-therapeutics-to-lower-blood-levels-of-lpa-jacc-focus-seminar-24
-    proven: failed
-    proven_note: "Its large trial (Lp(a)HORIZON, Sep 2026) lowered Lp(a) but did not reduce heart attacks or strokes. Full results are still to be presented."
-    proven_source: https://www.tctmd.com/news/lpahorizon-top-line-results-dash-hopes-pelacarsen
-    note: "Future unclear after its final-stage trial missed its main goal."
-    sources: [https://www.tctmd.com/news/lpahorizon-top-line-results-dash-hopes-pelacarsen]
-
   - id: verve102
     name: VERVE-102
     aliases: ["VERVE 102", LY4636581]
@@ -237,46 +176,3 @@ drugs:
     proven_source: https://www.hcplive.com/view/verve-102-lowers-pcsk9-ldl-c-interim-phase-1b-hypercholesterolemia-data
     note: "Early results (May 2026) lasted up to 18 months so far. A mid-stage trial was registered in Sep 2026 but hasn't started enrolling. The FDA gave it Fast Track status."
     sources: [https://www.hcplive.com/view/verve-102-lowers-pcsk9-ldl-c-interim-phase-1b-hypercholesterolemia-data]
-
-  - id: zerlasiran
-    name: Zerlasiran
-    aliases: [SLN360]
-    company: Silence Therapeutics
-    target: Lp(a)
-    lowers: Lp(a)
-    form: Shot, a few times a year
-    often: "A few times a year"
-    route: injection
-    frequency: infrequent
-    plain: "A shot a few times a year that strongly lowers Lp(a)."
-    stage: phase2
-    badge: on hold
-    effect: "Lp(a) down 80%+"
-    effect_short: "Lp(a) ↓ 80%+"
-    effect_source: https://www.healio.com/news/cardiology/20250117/the-year-in-lipids-progress-in-lpa-management-and-a-blow-to-the-hdl-hypothesis
-    proven: untested
-    proven_note: "No heart-attack trial yet; one is planned once the company finds a partner."
-    proven_source: https://www.biospace.com/drug-development/silence-quiets-phase-iii-pace-for-lipoprotein-drug-seeks-partner
-    note: "Ready for final-stage trials, but the company won't start them until it finds a partner to fund them."
-    sources: [https://www.biospace.com/drug-development/silence-quiets-phase-iii-pace-for-lipoprotein-drug-seeks-partner]
-
-  - id: solbinsiran
-    name: Solbinsiran
-    aliases: [LY3561774]
-    company: Eli Lilly
-    target: ANGPTL3
-    lowers: triglycerides & LDL
-    form: Shot, a few times a year
-    often: "A few times a year"
-    route: injection
-    frequency: infrequent
-    plain: "A shot that mainly lowers triglycerides (another blood fat), with a smaller drop in LDL."
-    stage: phase2
-    effect: "Triglycerides down about 50%, LDL about 17%"
-    effect_short: "Triglycerides ↓ 50%; LDL ↓ 17%"
-    effect_source: https://www.acc.org/latest-in-cardiology/clinical-trials/2025/03/28/03/10/prolong-ang3
-    proven: untested
-    proven_note: "Too early for a heart-attack trial."
-    proven_source: https://www.acc.org/latest-in-cardiology/clinical-trials/2025/03/28/03/10/prolong-ang3
-    note: "In mid-stage testing, mainly in people with very high triglycerides."
-    sources: [https://clinicaltrials.gov/study/NCT07269210]

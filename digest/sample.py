@@ -20,12 +20,12 @@ def before_after(watchlist: dict, today_iso: str = "2026-11-03") -> tuple[dict, 
         "generated_at": "2026-10-27T12:00:00+00:00",
         "drugs": drugs,
         "trials": {
-            "NCT90000001": _trial("NCT90000001", "zerlasiran", ["PHASE2"], "COMPLETED", 2),
-            "NCT90000002": _trial("NCT90000002", "lepodisiran", ["PHASE3"], "RECRUITING", 3,
-                                  acronym="ACCLAIM-EX"),
-            "NCT90000003": _trial("NCT90000003", "solbinsiran", ["PHASE2"], "RECRUITING", 2),
-            "NCT90000004": _trial("NCT90000004", "olpasiran", ["PHASE3"], "ACTIVE_NOT_RECRUITING", 3,
-                                  pcd="2026-12", acronym="OCEAN(a)-Outcomes"),
+            "NCT90000001": _trial("NCT90000001", "verve102", ["PHASE2"], "NOT_YET_RECRUITING", 2),
+            "NCT90000002": _trial("NCT90000002", "inclisiran", ["PHASE3"], "RECRUITING", 3,
+                                  acronym="VICTORION-EX"),
+            "NCT90000003": _trial("NCT90000003", "evolocumab", ["PHASE3"], "RECRUITING", 3),
+            "NCT90000004": _trial("NCT90000004", "lerodalcibep", ["PHASE3"], "ACTIVE_NOT_RECRUITING", 3,
+                                  pcd="2026-12", acronym="LIBERATE-EX"),
         },
         "fda": {d["id"]: {"approved": False} for d in watchlist["drugs"]},
         "news_seen": [],
@@ -34,18 +34,18 @@ def before_after(watchlist: dict, today_iso: str = "2026-11-03") -> tuple[dict, 
     }
     after = copy.deepcopy(before)
     after["generated_at"] = "2026-11-03T12:00:00+00:00"
-    # zerlasiran: a new Phase 3 trial appears -> stage change + new trial
-    after["trials"]["NCT90000010"] = _trial("NCT90000010", "zerlasiran", ["PHASE3"], "NOT_YET_RECRUITING",
+    # verve102: a new Phase 3 trial appears -> stage change + new trial
+    after["trials"]["NCT90000010"] = _trial("NCT90000010", "verve102", ["PHASE3"], "NOT_YET_RECRUITING",
                                             3, acronym="EXAMPLE-3")
-    after["drugs"]["zerlasiran"] = {"stage": "phase3", "basis": "NCT90000010",
+    after["drugs"]["verve102"] = {"stage": "phase3", "basis": "NCT90000010",
                                     "url": "https://clinicaltrials.gov/study/NCT90000010"}
-    # lepodisiran: enrollment closes
+    # inclisiran: enrollment closes
     after["trials"]["NCT90000002"]["status"] = "ACTIVE_NOT_RECRUITING"
-    # solbinsiran: results posted
+    # evolocumab: results posted
     after["trials"]["NCT90000003"]["has_results"] = True
     after["news"] = {
-        "news-aaaaaaaaaaaa": {"id": "news-aaaaaaaaaaaa", "drug": "pelacarsen",
-                              "title": "Example headline: pelacarsen trial expands to new sites",
+        "news-aaaaaaaaaaaa": {"id": "news-aaaaaaaaaaaa", "drug": "alirocumab",
+                              "title": "Example headline: alirocumab trial expands to new sites",
                               "summary": "", "outlet": "Example News", "link": "https://example.com/a",
                               "published": "2026-11-01T09:00:00+00:00"},
     }

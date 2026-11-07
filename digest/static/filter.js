@@ -4,6 +4,7 @@
   var box = document.querySelector('[data-filter]');
   if (!box) return;
   var bar = box.querySelector('.filters');
+  if (!bar) return;
   var selects = Array.prototype.slice.call(bar.querySelectorAll('select'));
   var groups = Array.prototype.slice.call(box.querySelectorAll('[data-group]'));
   var empty = box.querySelector('.f-empty');
