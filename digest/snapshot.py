@@ -111,6 +111,9 @@ def build(watchlist: dict, prev: dict | None, client: httpx.Client | None = None
     # --- news ---
     news_items = collect_news(client, watchlist, errors, now)
     news_ok = "Google News" not in errors  # extra feeds failing shouldn't block news forever
+    n_errors = len(errors)
+    field_items = collect_field(client, watchlist, errors, now, exclude=set(news_items))
+    field_ok = len(errors) == n_errors
 
     stages = {d["id"]: resolve_stage(d, trials, fda.get(d["id"], {})) for d in drugs}
 
@@ -123,9 +126,12 @@ def build(watchlist: dict, prev: dict | None, client: httpx.Client | None = None
         "news_seen": prev.get("news_seen", []),  # updated by finalize()
         "discovery": discovery,
         "discovery_seen": prev.get("discovery_seen", []),
+        "field": field_items,  # this week's field-wide news; diff filters to unseen ones
+        "field_seen": prev.get("field_seen", []),
         "errors": errors,
         "baselined": {"ctgov": sorted(baselined["ctgov"]), "fda": sorted(baselined["fda"]),
-                      "news": baselined["news"] or news_ok, "discovery": baselined["discovery"]},
+                      "news": baselined["news"] or news_ok, "discovery": baselined["discovery"],
+                      "field": bool(pb.get("field")) or field_ok},
     }
 
 
@@ -166,11 +172,38 @@ def collect_news(client: httpx.Client, watchlist: dict, errors: list[str],
     return items
 
 
+def collect_field(client: httpx.Client, watchlist: dict, errors: list[str],
+                  now: datetime | None = None, exclude: set[str] = frozenset()) -> dict[str, dict]:
+    """Field-wide news: a few broad searches, minus anything naming a watchlist drug
+    (that goes in the drug's own news) or already found as drug news."""
+    cfg = watchlist["settings"].get("field_news") or {}
+    if not cfg.get("enabled") or not cfg.get("queries"):
+        return {}
+    cutoff = (now or datetime.now(timezone.utc)) - timedelta(days=10)
+    drugs = watchlist["drugs"]
+    items: dict[str, dict] = {}
+    for q in cfg["queries"]:
+        try:
+            for i in news.fetch_google_news_query(client, q):
+                if (i["id"] in exclude or datetime.fromisoformat(i["published"]) < cutoff
+                        or news.match_drug(i, drugs, search_terms)):
+                    continue
+                items.setdefault(i["id"], {**i, "drug": None, "query": q})
+        except Exception as e:  # noqa: BLE001
+            log.warning("field news %r failed: %s", q, e)
+            if "Google News" not in errors:
+                errors.append("Google News")
+    newest = sorted(items.values(), key=lambda i: i["published"], reverse=True)
+    return {i["id"]: i for i in newest[: cfg.get("max_candidates", 15)]}
+
+
 def finalize(snapshot: dict) -> dict:
-    """Mark this week's news/discovery as seen before saving."""
+    """Mark this week's news, discovery and field items as seen before saving."""
     seen = list(dict.fromkeys(snapshot["news_seen"] + list(snapshot["news"])))
     dseen = list(dict.fromkeys(snapshot["discovery_seen"] + list(snapshot["discovery"])))
-    out = {**snapshot, "news_seen": seen[-NEWS_SEEN_CAP:], "discovery_seen": dseen[-NEWS_SEEN_CAP:]}
-    out.pop("news", None)
-    out.pop("discovery", None)
+    fseen = list(dict.fromkeys(snapshot.get("field_seen", []) + list(snapshot.get("field", {}))))
+    out = {**snapshot, "news_seen": seen[-NEWS_SEEN_CAP:], "discovery_seen": dseen[-NEWS_SEEN_CAP:],
+           "field_seen": fseen[-NEWS_SEEN_CAP:]}
+    for k in ("news", "discovery", "field"):
+        out.pop(k, None)
     return out

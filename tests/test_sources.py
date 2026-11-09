@@ -120,3 +120,14 @@ def test_failing_extra_feed_does_not_block_news_baseline():
     snap = snapshot.build(wl, None, client=mock_client(handler), now=datetime(2026, 11, 3, tzinfo=timezone.utc))
     assert "Blocked feed" in snap["errors"]
     assert snap["baselined"]["news"] is True
+
+
+def test_field_news_skips_watchlist_drugs_and_old_items():
+    rss = (FIX / "gnews.xml").read_bytes()  # one obicetrapib story, one stocks piece, one 2023 story
+    client = mock_client(lambda req: httpx.Response(200, content=rss))
+    wl = _wl([OBI])
+    wl["settings"]["field_news"] = {"enabled": True, "queries": ["PCSK9"], "max_candidates": 10}
+    items = snapshot.collect_field(client, wl, [], now=datetime(2026, 11, 3, tzinfo=timezone.utc))
+    assert [i["title"] for i in items.values()] == ["3 cholesterol stocks to watch"]
+    wl["settings"]["field_news"]["enabled"] = False
+    assert snapshot.collect_field(client, wl, []) == {}

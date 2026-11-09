@@ -32,6 +32,16 @@
 {% endfor %}
 {% endif %}
 
+{% if field %}
+<tr><td style="padding:24px 28px 0 28px;"><div style="{{ label }}padding-bottom:6px;border-bottom:1px solid {{ rule2 }};">In the field · beyond your list</div></td></tr>
+{% for c in field %}
+<tr><td style="padding:12px 28px;{% if not loop.last %}border-bottom:1px solid {{ rule }};{% endif %}">
+  <div style="font-size:16px;line-height:1.45;">{{ c.what }} <a href="{{ c.url }}" style="font-family:{{ mono }};font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:{{ accent }};text-decoration:none;white-space:nowrap;">{{ c.source }} &rarr;</a></div>
+  {% if c.why %}<div style="font-size:15px;line-height:1.45;color:{{ ink2 }};margin-top:6px;">{{ c.why }}</div>{% endif %}
+</td></tr>
+{% endfor %}
+{% endif %}
+
 {% if horizon %}
 <tr><td style="padding:24px 28px 0 28px;"><div style="{{ label }}padding-bottom:6px;border-bottom:1px solid {{ rule2 }};">On the horizon · next {{ horizon_days }} days</div></td></tr>
 {% for h in horizon %}

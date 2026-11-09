@@ -29,6 +29,14 @@ settings:
     enabled: true
     conditions: ["Hypercholesterolemia", "Atherosclerotic Cardiovascular Disease"]
     max_items: 5
+  field_news:               # "In the field": broader LDL-treatment news beyond the watchlist
+    enabled: true
+    queries:                # Google News searches, past week
+      - '"LDL cholesterol" (drug OR trial OR FDA) when:7d'
+      - 'PCSK9 when:7d'
+      - '"cholesterol-lowering" (trial OR approval OR FDA) when:7d'
+      - 'hypercholesterolemia "phase 3" when:7d'
+    max_items: 3            # at most this many shown per week
 
 reader_context: >
   32 years old, not on cholesterol medication. LDL and apoB are moderately

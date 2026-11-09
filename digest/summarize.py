@@ -2,7 +2,7 @@
 
 Claude only ever sees the diff (not raw pages) and can only:
   - write a headline and a short "why" per change id,
-  - drop *news* items that aren't real developments.
+  - drop *news* and *field* items that aren't real developments.
 It cannot add items, change the factual "what" line, or touch links, so
 nothing in the digest can be invented. Without an API key, or on any API
 error, a deterministic fallback is used.
@@ -12,6 +12,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 
 from .diff import KIND_LABEL, Change
 
@@ -31,10 +32,15 @@ Return:
 - headline: one calm sentence, at most 15 words, describing the week, e.g. \
 "Quiet week, one Phase 3 readout." Base it only on items you include.
 - items: one entry per input id.
-  - include: always true for every kind except "news". For "news", true only if the \
-headline reports a concrete development (trial results, phase change, regulatory filing or \
+  - include: always true for every kind except "news" and "field". For "news", true only if \
+the headline reports a concrete development (trial results, phase change, regulatory filing or \
 decision, new or halted trial, discontinuation, major licensing deal). False for stock or \
 analyst commentary, opinion, previews, and rehashes of older events.
+    "field" items are broader news not about a specific tracked drug. Be strict: include at \
+most {field_max}, and only concrete developments in LDL-lowering treatment that could matter to \
+the reader (an approval, a trial result, a filing, a major guideline change, a whole drug class \
+succeeding or failing). Exclude diet and supplement stories, studies about people unlike the \
+reader, stock and business news, opinion, and anything about Lp(a)- or triglyceride-only drugs.
   - why: 1-2 plain-English sentences (at most 40 words) on what this could mean for someone \
 like the reader, e.g. "A once-daily pill that might one day replace injections." Mention \
 form or dosing frequency when it is relevant. Be candid about setbacks. Empty string if \
@@ -73,7 +79,7 @@ def _payload(changes: list[Change], drugs: dict) -> str:
     items = []
     for c in changes:
         item = {"id": c.id, "kind": c.kind, "what": c.what, "source": c.source}
-        if c.kind == "news":
+        if c.kind in ("news", "field"):
             item["news_snippet"] = c.extra.get("summary", "")
         if c.drug in drugs:
             item["drug"] = {k: drugs[c.drug].get(k) for k in PROFILE_KEYS if drugs[c.drug].get(k)}
@@ -90,11 +96,41 @@ def fallback_headline(changes: list[Change]) -> str:
     return f"{n} update{'s' if n != 1 else ''} this week: {', '.join(parts)}."
 
 
-def apply_fallback(changes: list[Change], drugs: dict) -> tuple[str, list[Change]]:
+FIELD_KEYWORDS = re.compile(
+    r"\b(phase (3|iii)|fda|approv\w*|met (its )?primary endpoint|trial results?|"
+    r"outcomes? (trial|study)|guideline)", re.I)
+FIELD_TOPIC = re.compile(r"\b(ldl|cholesterol|pcsk9|hypercholesterol\w*|statin)", re.I)
+
+
+def field_max(watchlist: dict) -> int:
+    return int((watchlist["settings"].get("field_news") or {}).get("max_items", 3))
+
+
+def _cap_field(changes: list[Change], limit: int) -> list[Change]:
+    out, n = [], 0
     for c in changes:
+        if c.kind == "field":
+            if n >= limit:
+                continue
+            n += 1
+        out.append(c)
+    return out
+
+
+def apply_fallback(changes: list[Change], drugs: dict, watchlist: dict | None = None,
+                   screen_field: bool = False) -> tuple[str, list[Change]]:
+    if screen_field:
+        # no Claude to judge field news: keep only headlines that look like concrete
+        # LDL-treatment developments
+        changes = [c for c in changes if c.kind != "field"
+                   or (FIELD_KEYWORDS.search(c.what) and FIELD_TOPIC.search(c.what))]
+        changes = _cap_field(changes, field_max(watchlist) if watchlist else 3)
+    for c in changes:
+        if c.kind == "field":
+            continue  # no stock "why" for broader news
         c.why = c.why or (drugs.get(c.drug, {}).get("plain", "") if c.drug else
                           "A trial not yet on your watchlist; worth a look if the drug is new to you.")
-    return fallback_headline(changes), changes
+    return (fallback_headline(changes) if changes else ""), changes
 
 
 def summarize(changes: list[Change], watchlist: dict, client=None) -> tuple[str, list[Change]]:
@@ -105,23 +141,26 @@ def summarize(changes: list[Change], watchlist: dict, client=None) -> tuple[str,
     if client is None:
         if not os.environ.get("ANTHROPIC_API_KEY"):
             log.info("ANTHROPIC_API_KEY not set; using fallback summary")
-            return apply_fallback(changes, drugs)
+            return apply_fallback(changes, drugs, watchlist, screen_field=True)
         import anthropic
         client = anthropic.Anthropic()
     try:
         result = _call(client, changes, watchlist, drugs)
     except Exception as e:  # noqa: BLE001 - never let the summary layer block the digest
         log.warning("Claude summary failed (%s); using fallback", e)
-        return apply_fallback(changes, drugs)
+        return apply_fallback(changes, drugs, watchlist, screen_field=True)
 
     by_id = {i["id"]: i for i in result.get("items", []) if isinstance(i, dict) and "id" in i}
     kept = []
     for c in changes:
         r = by_id.get(c.id)
-        if c.kind == "news" and r is not None and not r.get("include", True):
-            continue  # only news can be dropped
+        if c.kind in ("news", "field") and r is not None and not r.get("include", True):
+            continue  # only news and field items can be dropped
+        if c.kind == "field" and r is None:
+            continue  # field news needs Claude's explicit yes
         c.why = (r or {}).get("why", "").strip()[:400]
         kept.append(c)
+    kept = _cap_field(kept, field_max(watchlist))
     _, kept = apply_fallback(kept, drugs)  # fill any missing "why"
     if not kept:
         return "", []
@@ -142,7 +181,7 @@ def _call(client, changes, watchlist, drugs) -> dict:
         betas=["server-side-fallback-2026-07-01"],
         fallbacks="default",
         output_config={"effort": "medium", "format": {"type": "json_schema", "schema": SCHEMA}},
-        system=SYSTEM.format(reader=reader_context(watchlist)),
+        system=SYSTEM.format(reader=reader_context(watchlist), field_max=field_max(watchlist)),
         messages=[{"role": "user", "content": _payload(changes, drugs)}],
     )
     if response.stop_reason in ("refusal", "max_tokens"):

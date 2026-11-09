@@ -49,5 +49,11 @@ def before_after(watchlist: dict, today_iso: str = "2026-11-03") -> tuple[dict, 
                               "summary": "", "outlet": "Example News", "link": "https://example.com/a",
                               "published": "2026-11-01T09:00:00+00:00"},
     }
+    after["field"] = {
+        "news-bbbbbbbbbbbb": {"id": "news-bbbbbbbbbbbb", "drug": None,
+                              "title": "Example: new PCSK9 shot meets primary endpoint in Phase 3 trial",
+                              "summary": "", "outlet": "Example Wire", "link": "https://example.com/b",
+                              "published": "2026-11-02T09:00:00+00:00"},
+    }
     after["discovery"] = {}
     return before, after

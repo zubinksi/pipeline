@@ -69,6 +69,13 @@ def fetch_google_news(client: httpx.Client, terms: list[str]) -> list[dict]:
     return parse_feed(r.content, "Google News")
 
 
+def fetch_google_news_query(client: httpx.Client, query: str) -> list[dict]:
+    """A free-text Google News search (used for field-wide news)."""
+    r = client.get(GOOGLE_NEWS, params={"q": query, "hl": "en-US", "gl": "US", "ceid": "US:en"})
+    r.raise_for_status()
+    return parse_feed(r.content, "Google News")
+
+
 def fetch_feed(client: httpx.Client, url: str, name: str) -> list[dict]:
     r = client.get(url)
     r.raise_for_status()

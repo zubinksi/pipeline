@@ -11,6 +11,16 @@ WHAT MOVED
   Source: {{ c.url }}
 {% endfor %}
 {% endif %}
+{% if field %}
+
+IN THE FIELD (beyond your list)
+{% for c in field %}
+- {{ c.what }}
+{% if c.why %}  {{ c.why }}
+{% endif %}
+  Source: {{ c.url }}
+{% endfor %}
+{% endif %}
 {% if horizon %}
 
 ON THE HORIZON (next {{ horizon_days }} days)

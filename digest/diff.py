@@ -10,7 +10,7 @@ from .sources.ctgov import HALTED, STATUS_PLAIN, phase_label
 
 # Display order in the digest: biggest news first.
 KIND_ORDER = ["fda_approval", "stage_change", "trial_halted", "trial_results",
-              "trial_status", "trial_new", "news", "discovery"]
+              "trial_status", "trial_new", "news", "discovery", "field"]
 KIND_LABEL = {  # (singular, plural)
     "fda_approval": ("FDA approval", "FDA approvals"),
     "stage_change": ("phase change", "phase changes"),
@@ -20,6 +20,7 @@ KIND_LABEL = {  # (singular, plural)
     "trial_new": ("new trial", "new trials"),
     "news": ("news item", "news items"),
     "discovery": ("new candidate", "new candidates"),
+    "field": ("in the field", "in the field"),
 }
 
 
@@ -55,7 +56,8 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
     min_phase = watchlist["settings"].get("min_trial_phase", 2)
     known_drugs = set(prev.get("drugs", {}))
     # Snapshots without a "baselined" record (old format, test data) count as fully baselined.
-    b = prev.get("baselined") or {"ctgov": known_drugs, "fda": known_drugs, "news": True, "discovery": True}
+    b = prev.get("baselined") or {"ctgov": known_drugs, "fda": known_drugs, "news": True, "discovery": True,
+                                  "field": True}
     ct_ok, fda_ok = set(b.get("ctgov", [])) & known_drugs, set(b.get("fda", [])) & known_drugs
     changes: list[Change] = []
 
@@ -136,6 +138,16 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
         changes.append(Change(
             id=item_id, kind="news", drug=n["drug"], what=n["title"], url=n["link"], source=n["outlet"],
             extra={"summary": n.get("summary", ""), "published": n.get("published", "")}))
+
+    # --- in the field: broader LDL-treatment news (unseen items only) ---
+    fseen = set(prev.get("field_seen", []))
+    if b.get("field"):
+        for item_id, n in curr.get("field", {}).items():
+            if item_id in fseen or item_id in seen:
+                continue
+            changes.append(Change(
+                id=item_id, kind="field", drug=None, what=n["title"], url=n["link"], source=n["outlet"],
+                extra={"summary": n.get("summary", ""), "published": n.get("published", "")}))
 
     # --- discovery: new candidates not on the watchlist ---
     dseen = set(prev.get("discovery_seen", []))

@@ -62,14 +62,16 @@ def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], 
     if baseline:
         headline = baseline_headline(snapshot, watchlist)
 
+    shown = [{
+        "drug": names[c.drug]["name"] if c.drug in names else "",
+        "company": names[c.drug]["company"] if c.drug in names else "",
+        "what": c.what, "why": c.why, "url": c.url, "source": c.source,
+        "kind": c.kind,
+    } for c in changes]
     ctx = {
         "headline": headline,
-        "changes": [{
-            "drug": names[c.drug]["name"] if c.drug in names else "",
-            "company": names[c.drug]["company"] if c.drug in names else "",
-            "what": c.what, "why": c.why, "url": c.url, "source": c.source,
-            "kind": c.kind,
-        } for c in changes],
+        "changes": [c for c in shown if c["kind"] != "field"],
+        "field": [c for c in shown if c["kind"] == "field"],
         "horizon": horizon,
         "horizon_days": watchlist["settings"].get("horizon_days", 60),
         "stages": [label for _, label in STAGES],

@@ -27,7 +27,7 @@ def test_no_changes_when_identical():
 def test_sample_week():
     before, after = before_after(WL)
     changes = diff.compute(before, after, WL)
-    assert kinds(changes) == ["news", "stage_change", "trial_results", "trial_status"]
+    assert kinds(changes) == ["field", "news", "stage_change", "trial_results", "trial_status"]
     stage = next(c for c in changes if c.kind == "stage_change")
     # the new Phase 3 trial is folded into the stage change, not reported twice
     assert "EXAMPLE-3" in stage.what and stage.url.endswith("NCT90000010")
@@ -137,3 +137,16 @@ def test_horizon_date_format():
     assert diff.fmt_horizon_date("2026-11") == "NOV 2026"
     assert diff.fmt_horizon_date("2027-01-04") == "4 JAN 2027"
     assert diff.fmt_horizon_date("soon") == "soon"
+
+
+def test_field_news_reported_once_and_only_after_baseline():
+    before, after = before_after(WL)
+    field = [c for c in diff.compute(before, after, WL) if c.kind == "field"]
+    assert [c.id for c in field] == ["news-bbbbbbbbbbbb"] and field[0].drug is None
+    before["field_seen"] = ["news-bbbbbbbbbbbb"]
+    assert not [c for c in diff.compute(before, after, WL) if c.kind == "field"]
+    # a snapshot from before field news existed: this week is the baseline
+    before["field_seen"] = []
+    before["baselined"] = {"ctgov": [d["id"] for d in WL["drugs"]], "fda": [d["id"] for d in WL["drugs"]],
+                           "news": True, "discovery": True}
+    assert not [c for c in diff.compute(before, after, WL) if c.kind == "field"]

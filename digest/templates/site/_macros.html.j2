@@ -84,10 +84,24 @@
 {# "This week": the changes, or (on a quiet week) just the heading line. #}
 {% macro this_week(w, root, title, past=0) -%}
 <section class="section">
-  <div class="section-head{{ ' quiet-head' if not w.changes }}"><h2>{{ title }} <span class="sub">· {{ w.date|nice_date_short }}{% if not w.changes and w.quiet %} · {{ w.quiet }}{% endif %}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
+  {% set n_drug_changes = w.changes|rejectattr("kind", "equalto", "field")|list|length %}
+  <div class="section-head{{ ' quiet-head' if not n_drug_changes }}"><h2>{{ title }} <span class="sub">· {{ w.date|nice_date_short }}{% if not n_drug_changes and w.quiet %} · {{ w.quiet }}{% endif %}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
   {% if w.errors %}<div class="note" style="margin-top:0.625rem">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}
-  {% if w.changes %}{{ changes(w.changes, root) }}{% endif %}
+  {% set drug_changes = w.changes|rejectattr("kind", "equalto", "field")|list %}
+  {% if drug_changes %}{{ changes(drug_changes, root) }}{% endif %}
 </section>
+{% set field = w.changes|selectattr("kind", "equalto", "field")|list %}
+{% if field %}
+<section class="section">
+  <div class="section-head"><h2>In the field <span class="sub">· beyond your list</span></h2></div>
+  {% for c in field %}
+  <div class="change">
+    <div class="what">{{ c.what }} <a class="src" href="{{ c.url }}" rel="noopener noreferrer">{{ c.source }} &rarr;</a></div>
+    {% if c.why %}<div class="why">{{ c.why }}</div>{% endif %}
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
 {% if w.horizon %}{{ horizon(w.horizon) }}{% endif %}
 {%- endmacro %}
 
