@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-09",
+  "headline": "",
+  "baseline": false,
+  "changes": [],
+  "horizon": [
+    {
+      "date": "2026-11",
+      "drug": "Evolocumab",
+      "what": "VINCENT (NCT06496243) reaches primary completion (estimated); topline results often follow within a few months.",
+      "url": "https://clinicaltrials.gov/study/NCT06496243"
+    },
+    {
+      "date": "2026-11-27",
+      "drug": "Inclisiran",
+      "what": "LATAM LOWERS LDL-C (NCT06501443) reaches primary completion (estimated); topline results often follow within a few months.",
+      "url": "https://clinicaltrials.gov/study/NCT06501443"
+    },
+    {
+      "date": "2026-12-29",
+      "drug": "Alirocumab",
+      "what": "ASCEND-QW (NCT07477704) reaches primary completion (estimated); topline results often follow within a few months.",
+      "url": "https://clinicaltrials.gov/study/NCT07477704"
+    },
+    {
+      "date": "2026-12-30",
+      "drug": "Inclisiran",
+      "what": "V-ACCELERATE (NCT06372925) reaches primary completion (estimated); topline results often follow within a few months.",
+      "url": "https://clinicaltrials.gov/study/NCT06372925"
+    },
+    {
+      "date": "2026-12-30",
+      "drug": "Inclisiran",
+      "what": "SOLVE-LDL-C (NCT06865885) reaches primary completion (estimated); topline results often follow within a few months.",
+      "url": "https://clinicaltrials.gov/study/NCT06865885"
+    },
+    {
+      "date": "2026-12-31",
+      "drug": "Inclisiran",
+      "what": "V-INCLUSION (NCT06249165) reaches primary completion (estimated); topline results often follow within a few months.",
+      "url": "https://clinicaltrials.gov/study/NCT06249165"
+    }
+  ],
+  "stages": {
+    "evolocumab": "approved",
+    "alirocumab": "approved",
+    "inclisiran": "approved",
+    "lerodalcibep": "approved",
+    "verve102": "phase2"
+  },
+  "moved": [],
+  "errors": []
+}
