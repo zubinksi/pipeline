@@ -79,7 +79,7 @@
   {% set r = drug_rows.get(h.drug_id) if drug_rows and h.drug_id else none %}
   <details class="tl-item{{ ' due' if due }}">
     <summary class="tl">
-      <span class="tl-when">{{ "Due now" if due else when }}</span>
+      <span class="tl-when">{{ when }}</span>
       <span class="tl-what"><b>{{ h.drug }}</b> {{ h.short or h.what }}{% if due %}<span class="tl-hint">Results expected any week.</span>{% endif %}</span>
       <span class="go" aria-hidden="true">&rsaquo;</span>
     </summary>
