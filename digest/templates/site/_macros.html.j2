@@ -74,6 +74,7 @@
 <section class="section">
   <div class="section-head"><h2>Coming up</h2></div>
   <div class="tl-list">
+  <div class="tl tl-h" aria-hidden="true"><span>Date</span><span>Drug · Event</span><span></span></div>
   {% for h in items %}
   {% set when = h.when or (h.date|horizon_date) %}
   {% if h.drug_id %}<a class="tl" href="{{ root }}drugs/{{ h.drug_id }}.html">{% else %}<a class="tl" href="{{ h.url }}" rel="noopener noreferrer">{% endif %}
@@ -108,6 +109,15 @@
   {% endfor %}
 </section>
 {% endif %}
+{%- endmacro %}
+
+{# A lab-report style header strip, like the patient / specimen boxes on a lab sheet. #}
+{% macro report_head(subject) -%}
+<div class="rhead">
+  <div><span class="label">Subject</span><span class="v">{{ subject }}</span></div>
+  <div><span class="label">Collected</span><span class="v">{{ updated|nice_date if updated else "–" }}</span></div>
+  <div><span class="label">Report status</span><span class="v">Final · weekly</span></div>
+</div>
 {%- endmacro %}
 
 {# News / Drugs as folder tabs on top of the panel. #}

@@ -5,6 +5,7 @@
 <div class="intro">
   <h1 class="one-line">Cholesterol Drugs Pipeline</h1>
 </div>
+{{ m.report_head("LDL-lowering drugs · news") }}
 {% if latest %}{{ m.this_week(latest, root, "This week", past=n_weeks) }}
 {% else %}<p class="empty">No weekly runs yet.</p>{% endif %}
 {% endblock %}

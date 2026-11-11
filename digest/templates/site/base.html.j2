@@ -20,7 +20,7 @@
   </div>
 </main>
 <footer>
-  Built from ClinicalTrials.gov, openFDA and news searches{% if updated %}, last checked {{ updated|nice_date }}{% endif %}.
+  Report generated{% if updated %} {{ updated|nice_date }}{% endif %} · Sources: ClinicalTrials.gov, openFDA, news searches
 </footer>
 <script src="{{ root }}assets/filter.js" defer></script>
 </body>
