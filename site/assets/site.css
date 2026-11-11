@@ -166,10 +166,10 @@ h1, h2, h3 { font-weight: 400; margin: 0; }
 .btn:hover { color: var(--accent); }
 .quiet { padding: 0.75rem 0 0.25rem; font-size: 1.0625rem; color: var(--ink3); }
 
-/* News / Drugs: folder tabs along the bottom of the header band, filling its
-   width. Outer edges sit flush with the panel; inner edges slant, like the
-   tabs of a row of file folders. */
-.folders { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3125rem; margin: 0 -2.75rem -1px; position: relative; z-index: 2; }
+/* News / Drugs: folder tabs along the bottom of the header band, like the tabs
+   of a row of file folders. */
+/* three slots, so a third section can be added later; both sides of every tab slant */
+.folders { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.25rem; margin: 0 -2.75rem -1px; position: relative; z-index: 2; }
 .folder {
   position: relative;
   display: block;
@@ -191,11 +191,10 @@ h1, h2, h3 { font-weight: 400; margin: 0; }
   z-index: -1;
   border-radius: 0.75rem 0.75rem 0 0;
   background: var(--tab);
-  transform: perspective(4rem) rotateX(2deg);
+  transform: perspective(4rem) rotateX(3deg);
+  transform-origin: center bottom;
   transition: background-color 0.15s, filter 0.15s;
 }
-.folders .folder:first-child::before { transform-origin: left bottom; border-top-left-radius: 0.5rem; }
-.folders .folder:last-child::before { transform-origin: right bottom; border-top-right-radius: 0.5rem; }
 .folder span { position: relative; }
 .f-news { --tab: #7c705e; }
 .f-drugs { --tab: #34558a; }
