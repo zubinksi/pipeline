@@ -148,6 +148,48 @@ h1, h2, h3 { font-weight: 400; margin: 0; }
 .btn:hover { color: var(--accent); }
 .quiet { padding: 0.75rem 0 0.25rem; font-size: 1.0625rem; color: var(--ink3); }
 
+/* News / Drugs tabs */
+.tabs { display: flex; gap: 0.25rem; margin-top: -0.75rem; border-bottom: 1px solid var(--b2); }
+.tabs a {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted);
+  padding: 0.5rem 0.875rem 0.625rem;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tabs a:first-child { padding-left: 0; }
+.tabs a:hover { color: var(--ink); }
+.tabs a.on { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* coming up: one line each */
+.tl-list { display: flex; flex-direction: column; }
+.tl {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr) 0.75rem;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  margin: 0 -0.75rem;
+  border-bottom: 1px solid var(--b3);
+  border-radius: 2px;
+  text-decoration: none;
+  color: var(--ink2);
+  transition: background-color 0.15s;
+}
+.tl:last-child { border-bottom: 0; }
+.tl:hover { background: var(--hover); }
+.tl:hover .go { color: var(--accent); }
+.tl-when { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.08em; color: var(--ink3); white-space: nowrap; }
+.tl-when.due { color: var(--accent); font-weight: 600; }
+.tl-what { font-size: 1rem; line-height: 1.35; }
+.tl-what b { font-weight: 400; color: var(--ink); }
+.tl-what .sep { color: var(--b4); margin: 0 0.375rem; }
+
 /* coming up */
 .h-row { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--b3); }
 .h-row:last-child { border-bottom: 0; }
@@ -395,7 +437,7 @@ footer {
   .c-line { grid-area: line; display: block; font-size: 0.9375rem; line-height: 1.35; }
   .c-proof { grid-area: proof; margin-top: 0.125rem; }
   .c-stage { grid-area: stage; align-self: center; }
-  .go { grid-area: go; align-self: center; }
+  .drug .go { grid-area: go; align-self: center; }
   .drug-name { font-size: 1.125rem; }
   .mini { width: 5.25rem; }
   .c-stage .words { font-size: 0.5rem; letter-spacing: 0.04em; white-space: normal; text-align: right; max-width: 5.25rem; }

@@ -63,7 +63,7 @@ def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
     # a baseline week's stored headline counts drugs at the time; say it plainly instead
     headline = ("Tracking started this week. Changes show up here from next week." if rec.get("baseline")
                 else rec["headline"] or "Nothing changed this week.")
-    quiet = "" if rec.get("baseline") else "no changes"
+    quiet = ""
     return {**rec, "headline": headline, "changes": changes, "quiet": quiet,
             # only hand-picked milestones (new style, with a `when`); older weeks stored routine trial dates
             "horizon": [h for h in rec.get("horizon", []) if h["drug"] in names and h.get("when")],
@@ -99,8 +99,10 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
         html = _env.get_template(template).render(**common, root=root, sel=sel, **ctx)
         (out / path).write_text(html)
 
-    write("index.html", "index.html.j2", "", sel="home", latest=latest, weeks=views[:12], n_weeks=len(views),
+    write("index.html", "index.html.j2", "", sel="news", latest=latest, weeks=views[:12], n_weeks=len(views))
+    write("drugs.html", "drugs.html.j2", "", sel="drugs",
           groups=_groups(_rows(watchlist, stages, moved)), n_drugs=len(watchlist["drugs"]))
+    upcoming_all = diff.horizon(snapshot, watchlist)
     for i, w in enumerate(views):
         newer = views[i - 1]["date"] if i > 0 else None
         older = views[i + 1]["date"] if i + 1 < len(views) else None
@@ -133,6 +135,7 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
               n_active=sum(1 for t in trials if t["status"] in ACTIVE), next_pcd=next_pcd,
               row=_rows({"drugs": [d]}, {d["id"]: stage}, moved)[0],
               stage_basis=snapshot.get("drugs", {}).get(d["id"], {}),
+              milestones=[h for h in upcoming_all if h.drug_id == d["id"]],
               updates=updates, history=history, trials=trials)
 
     return out

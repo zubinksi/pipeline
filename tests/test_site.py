@@ -34,7 +34,8 @@ def test_site_pages_exist(tmp_path):
 def test_index_shows_latest_week_and_sources(tmp_path):
     out, changes = _build(tmp_path)
     html = (out / "index.html").read_text()
-    assert "This week" in html and "Watching for" in html and "How to read this" in html
+    assert "This week" in html and "Coming up" in html and "In the field" in html
+    assert "How to read this" in (out / "drugs.html").read_text()
     for c in changes:
         assert c.url in html
     assert 'href="drugs/verve102.html"' in html  # relative links work on any host
@@ -70,7 +71,7 @@ def test_empty_site_builds(tmp_path):
 
 def test_pipeline_rows_carry_filter_data(tmp_path):
     out, _ = _build(tmp_path)
-    html = (out / "index.html").read_text()
+    html = (out / "drugs.html").read_text()
     assert "data-filter" in html and 'data-k="lowers"' not in html  # one option only: no dropdown
     assert '<option value="monthly">Monthly</option>' in html
     assert 'value="daily"' not in html  # filter options only for values on the watchlist
@@ -83,7 +84,7 @@ def test_pipeline_rows_carry_filter_data(tmp_path):
 
 def test_rows_show_evidence_and_only_unusual_stage_words(tmp_path):
     out, _ = _build(tmp_path)
-    html = (out / "index.html").read_text()
+    html = (out / "drugs.html").read_text()
     assert "Prevents heart attacks" in html and "Heart-attack trial underway" in html
     assert "LDL ↓ 60%" in html and "Twice a year" in html and "Heart attacks?" in html
     close = html[html.index("Getting close"):html.index("How to read this")]
@@ -115,12 +116,12 @@ def test_dropped_drugs_and_retired_sources_are_hidden(tmp_path):
 
 def test_drug_page_has_back_link(tmp_path):
     out, _ = _build(tmp_path)
-    assert 'class="back" href="../index.html"' in (out / "drugs/inclisiran.html").read_text()
+    assert 'class="back" href="../drugs.html"' in (out / "drugs/inclisiran.html").read_text()
 
 
 def test_drugs_grouped_by_closeness(tmp_path):
     out, _ = _build(tmp_path)
-    html = (out / "index.html").read_text()
+    html = (out / "drugs.html").read_text()
     a, c = html.index("Available now"), html.index("Getting close")  # sample moves VERVE-102 to final stage
     assert a < c and "Further out" not in html  # empty groups aren't shown
     assert html.index("Lerochol") < c  # approved -> available now
@@ -134,7 +135,19 @@ def test_past_weeks_button_and_back_links(tmp_path):
 
 def test_approved_drugs_show_brand_first(tmp_path):
     out, _ = _build(tmp_path)
-    html = (out / "index.html").read_text()
+    html = (out / "drugs.html").read_text()
     assert '<span class="drug-name">Repatha</span><span class="generic">evolocumab</span>' in html
     assert '<span class="drug-name">VERVE-102</span>' in html  # no brand yet: unchanged
     assert "Leqvio" in (out / "drugs/inclisiran.html").read_text()
+
+
+def test_news_and_drugs_tabs_and_compact_coming_up(tmp_path):
+    out, _ = _build(tmp_path)
+    news, drugs = (out / "index.html").read_text(), (out / "drugs.html").read_text()
+    assert 'class="on" aria-current="page">News' in news and 'class="on" aria-current="page">Drugs' in drugs
+    assert 'class="drug"' not in news and 'class="drug"' in drugs  # the list lives on its own tab
+    # one short line per milestone, linking to the drug page; the full sentence is on the drug page
+    assert 'href="drugs/inclisiran.html"' in news and "Heart-attack trial results" in news
+    assert "If positive" not in news
+    assert "If positive" in (out / "drugs/inclisiran.html").read_text()
+    assert "no changes" not in news.lower()

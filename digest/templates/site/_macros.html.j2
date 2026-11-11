@@ -69,27 +69,33 @@
 {% endfor %}
 {%- endmacro %}
 
-{% macro horizon(items) -%}
+{# A compact look-ahead: one line per milestone, linking to the drug's page. #}
+{% macro horizon(items, root) -%}
 <section class="section">
-  <div class="section-head"><h2>Watching for</h2></div>
+  <div class="section-head"><h2>Coming up</h2></div>
+  <div class="tl-list">
   {% for h in items %}
-  <div class="h-row">
-    <div class="h-when">{{ h.when or (h.date|horizon_date) }}</div>
-    <div class="h-what"><b>{{ h.drug }}</b>: {{ h.what }} <a class="src" href="{{ h.url }}" rel="noopener noreferrer">Source &rarr;</a></div>
-  </div>
+  {% set when = h.when or (h.date|horizon_date) %}
+  {% if h.drug_id %}<a class="tl" href="{{ root }}drugs/{{ h.drug_id }}.html">{% else %}<a class="tl" href="{{ h.url }}" rel="noopener noreferrer">{% endif %}
+    <span class="tl-when{{ ' due' if when == 'DUE NOW' }}">{{ when }}</span>
+    <span class="tl-what"><b>{{ h.drug }}</b><span class="sep">·</span>{{ h.short or h.what }}</span>
+    <span class="go" aria-hidden="true">&rsaquo;</span>
+  </a>
   {% endfor %}
+  </div>
 </section>
 {%- endmacro %}
 
-{# "This week": the changes, or (on a quiet week) just the heading line. #}
+{# "This week": the drug changes (or just the dated heading), then what's coming up,
+   then broader news. #}
 {% macro this_week(w, root, title, past=0) -%}
+{% set drug_changes = w.changes|rejectattr("kind", "equalto", "field")|list %}
 <section class="section">
-  {% set n_drug_changes = w.changes|rejectattr("kind", "equalto", "field")|list|length %}
-  <div class="section-head{{ ' quiet-head' if not n_drug_changes }}"><h2>{{ title }} <span class="sub">· {{ w.date|nice_date_short }}{% if not n_drug_changes and w.quiet %} · {{ w.quiet }}{% endif %}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
+  <div class="section-head{{ ' quiet-head' if not drug_changes }}"><h2>{{ title }} <span class="sub">· {{ w.date|nice_date_short }}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
   {% if w.errors %}<div class="note" style="margin-top:0.625rem">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}
-  {% set drug_changes = w.changes|rejectattr("kind", "equalto", "field")|list %}
   {% if drug_changes %}{{ changes(drug_changes, root) }}{% endif %}
 </section>
+{% if w.horizon %}{{ horizon(w.horizon, root) }}{% endif %}
 {% set field = w.changes|selectattr("kind", "equalto", "field")|list %}
 {% if field %}
 <section class="section">
@@ -102,7 +108,14 @@
   {% endfor %}
 </section>
 {% endif %}
-{% if w.horizon %}{{ horizon(w.horizon) }}{% endif %}
+{%- endmacro %}
+
+{# News / Drugs switch under the title. #}
+{% macro tabs(active) -%}
+<nav class="tabs" aria-label="Sections">
+  <a href="{{ root }}index.html"{% if active == 'news' %} class="on" aria-current="page"{% endif %}>News</a>
+  <a href="{{ root }}drugs.html"{% if active == 'drugs' %} class="on" aria-current="page"{% endif %}>Drugs</a>
+</nav>
 {%- endmacro %}
 
 {% macro explainer() -%}

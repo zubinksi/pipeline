@@ -2,7 +2,7 @@
 {% import "_macros.html.j2" as m with context %}
 {% block title %}{{ drug.brand ~ " (" ~ drug.name ~ ")" if drug.brand else drug.name }} · {{ site_title }}{% endblock %}
 {% block content %}
-<a class="back" href="{{ root }}index.html">&larr; All drugs</a>
+<a class="back" href="{{ root }}drugs.html">&larr; All drugs</a>
 <div class="intro">
   <div class="d-head"><h1>{{ drug.brand or drug.name }}{% if drug.brand %} <span class="generic">{{ drug.name|lower }}</span>{% endif %}{{ m.badge(drug.badge) }}{% if row.moved %}<span class="tag moved">&#9650; moved this week</span>{% endif %}</h1></div>
   {% if drug.plain %}<p>{{ drug.plain }}</p>{% endif %}
@@ -30,6 +30,18 @@
   <div class="section-head"><h2>Does it prevent heart attacks?</h2></div>
   <div style="padding-top:0.875rem">{{ m.proven(row) }}</div>
   {% if drug.proven_note %}<p class="prose" style="padding-top:0.5rem">{{ drug.proven_note }}{% if drug.proven_source %} <a class="src" href="{{ drug.proven_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
+</section>
+{% endif %}
+
+{% if milestones %}
+<section class="section">
+  <div class="section-head"><h2>Coming up</h2></div>
+  {% for h in milestones %}
+  <div class="h-row">
+    <div class="h-when">{{ h.when }}</div>
+    <div class="h-what">{{ h.what }} <a class="src" href="{{ h.url }}" rel="noopener noreferrer">Source &rarr;</a></div>
+  </div>
+  {% endfor %}
 </section>
 {% endif %}
 

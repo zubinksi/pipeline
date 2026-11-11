@@ -43,6 +43,8 @@ class HorizonItem:
     what: str
     url: str
     when: str = ""     # plain timing label, e.g. "DUE NOW" or "MAY 2027"
+    short: str = ""    # a few words for the look-ahead list, e.g. "Heart-attack trial results"
+    drug_id: str = ""  # watchlist id, for linking to the drug's page
 
 
 def _trial_name(t: dict) -> str:
@@ -203,12 +205,14 @@ def horizon(curr: dict, watchlist: dict, today: date | None = None) -> list[Hori
                 when = ("DUE NOW" if pd <= today else fmt_horizon_date(iso[:7])) if pd else iso
                 url = m.get("source", "")
             if url:
-                items.append(HorizonItem(date=iso, drug=label, what=m["what"], url=url, when=when))
+                items.append(HorizonItem(date=iso, drug=label, what=m["what"], url=url, when=when,
+                                         short=m.get("short", ""), drug_id=d["id"]))
     for ev in watchlist.get("events", []):
         d = _parse_partial_date(str(ev.get("date", "")))
         if d and d >= today and ev.get("url"):
             items.append(HorizonItem(date=str(ev["date"]), drug=ev["drug"], what=ev["what"],
-                                     url=ev["url"], when=fmt_horizon_date(str(ev["date"]))))
+                                     url=ev["url"], when=fmt_horizon_date(str(ev["date"])),
+                                     short=ev.get("short", ""), drug_id=ev.get("drug_id", "")))
     return sorted(items, key=lambda h: h.date)
 
 

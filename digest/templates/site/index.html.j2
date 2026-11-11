@@ -4,7 +4,7 @@
 <div class="intro">
   <h1 class="one-line">Cholesterol Drugs Pipeline</h1>
 </div>
-{% if latest %}{{ m.this_week(latest, root, "This week", past=n_weeks) }}{% endif %}
-{{ m.drug_list(groups, root, filterable=true) }}
-{{ m.explainer() }}
+{{ m.tabs("news") }}
+{% if latest %}{{ m.this_week(latest, root, "This week", past=n_weeks) }}
+{% else %}<p class="empty">No weekly runs yet.</p>{% endif %}
 {% endblock %}

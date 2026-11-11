@@ -57,9 +57,9 @@ The site is written for a non-specialist: "Statin alternatives in the pipeline",
 
 The look is light and matches the email: cream paper on a pale grid, slate ink, navy accent. Fonts are Geist Serif and Geist Mono (SIL Open Font License, `digest/static/fonts/OFL.txt`). Colors are set at the top of `digest/static/site.css`. The plain-language text comes from the `lowers`, `form`, `plain`, `effect`, `proven`, `note` and `badge` fields in `watchlist.yaml`. `effect` (how much it lowers) and `proven` (did a large trial show fewer heart attacks: yes / testing / failed / untested) each carry a source URL. The list is filtered by "How often" (a "Lowers" filter appears automatically if drugs lowering something other than LDL are added). Only LDL-lowering, non-daily drugs are tracked. `digest/display.py` holds the shared wording used by both the site and the email.
 
-## Watching for
+## Coming up
 
-Instead of every trial's completion date, the site and email list only the milestones in each drug's `milestones` in `watchlist.yaml` (for example Leqvio's ORION-4 heart-attack trial), in plain words. Trial-linked milestones are dated live from ClinicalTrials.gov and show "DUE NOW", "Finished" or "Stopped" as things change. Dated `events` (e.g. an FDA decision date) also appear here.
+The site has two tabs: **News** (this week, coming up, in the field) and **Drugs** (the list, filter and "How to read this"). Under Coming up, instead of every trial's completion date, the site and email list only the milestones in each drug's `milestones` in `watchlist.yaml` (for example Leqvio's ORION-4 heart-attack trial), in plain words: one short line each (`short`) on the News tab, with the full sentence (`what`) on the drug's page. Trial-linked milestones are dated live from ClinicalTrials.gov and show "DUE NOW", "Finished" or "Stopped" as things change. Dated `events` (e.g. an FDA decision date) also appear here.
 
 ## Less noise from approved drugs
 

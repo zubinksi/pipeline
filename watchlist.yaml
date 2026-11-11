@@ -74,7 +74,8 @@ drugs:
   #   badge   optional short flag
   #   brand   the name it's sold under (approved drugs); shown first
   #   milestones  the few events worth watching ("Watching for"): a trial (nct) dated
-  #           live from ClinicalTrials.gov, or a `when` date, with a plain `what`
+  #           live from ClinicalTrials.gov, or a `when` date; `short` for the look-ahead
+  #           list and a plain `what` sentence for the drug's page
 
   # ---- approved ----
   - id: evolocumab
@@ -144,8 +145,10 @@ drugs:
     sources: [https://www.pharmacytimes.com/view/inclisiran-shows-promise-treating-hyperlipidemia-in-phase-3-clinical-trials]
     milestones:             # "Watching for": the few events that would change things
       - nct: NCT03705234
+        short: "Heart-attack trial results"
         what: "Results of its large heart-attack prevention trial (ORION-4). If positive, it becomes a twice-a-year shot with proven heart benefit."
       - nct: NCT05030428
+        short: "2nd heart-attack trial results"
         what: "Results of a second heart-attack prevention trial (VICTORION-2 PREVENT)."
 
   - id: lerodalcibep
@@ -193,4 +196,5 @@ drugs:
     sources: [https://www.hcplive.com/view/verve-102-lowers-pcsk9-ldl-c-interim-phase-1b-hypercholesterolemia-data]
     milestones:
       - nct: NCT07839936
+        short: "Mid-stage trial results"
         what: "Results from its mid-stage trial (HEART-3), the next step toward a one-time treatment."
