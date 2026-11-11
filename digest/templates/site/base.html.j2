@@ -14,7 +14,7 @@
 </head>
 <body>
 <main class="body">
-  <div class="slab{{ ' tabbed' if sel in ('news', 'drugs', 'weeks') }}">
+  <div class="slab{{ ' tabbed' if sel in ('news', 'drugs', 'weeks') }}" data-theme="{{ 'drugs' if sel == 'drugs' else 'news' }}">
     {% block head %}{% endblock %}
     <div class="slab-body">
     {% block content %}{% endblock %}

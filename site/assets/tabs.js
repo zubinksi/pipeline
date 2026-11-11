@@ -6,7 +6,9 @@
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.folder[data-tab]'));
   var titles = { news: document.title.replace(/^Drugs · /, ''), drugs: 'Drugs · ' + document.title.replace(/^Drugs · /, '') };
 
+  var slab = document.querySelector('.slab');
   function show(name) {
+    if (slab) slab.dataset.theme = name;  // the page takes the selected tab's color
     panels.forEach(function (p) { p.hidden = p.dataset.panel !== name; });
     tabs.forEach(function (t) {
       var on = t.dataset.tab === name;

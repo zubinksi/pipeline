@@ -642,3 +642,33 @@ footer { font-family: var(--serif); font-size: 0.875rem; letter-spacing: 0; text
   .c-stage .words { font-size: 0.5625rem; }
   .filters { width: auto; }
 }
+
+/* ══ tab colors ═══════════════════════════════════════════════════════════
+   Each tab keeps its own color: a light shade when selected, a deeper shade of
+   the same hue when behind. The page under the tabs takes the selected tab's
+   color, and each theme has accents chosen for its own paper. */
+.f-news { --tab: #d9cfbb; }            /* cream, behind */
+.f-news.on { --tab: #fbf9f3; }         /* cream, selected = the news paper */
+.f-drugs { --tab: #b6c3d6; }           /* slate blue, behind */
+.f-drugs.on { --tab: #e2e8f1; }        /* slate blue, selected = the drugs paper */
+.folder { color: var(--ink3); }
+.folder.on { color: var(--ink); }
+.folder.on::before, .folder.on::after { background: var(--tab); }
+.slab, .slab-body { transition: background-color 0.2s; }
+
+.slab[data-theme="drugs"] {
+  --slab: #e2e8f1;
+  --raised: #eef2f7;
+  --zebra: #eef2f7;
+  --hover: #d5deea;
+  --b1: #c6d0de;
+  --b2: #c2ccdb;
+  --b3: #d1d9e5;
+  --b4: #a9b6c9;
+  --track: #bcc7d6;
+  --done: #8a9dbb;
+  --accent-dim: #f6f8fb;               /* group bands and active chips: paper strips on the blue */
+}
+.slab[data-theme="drugs"] .slab-body { background: var(--slab); }
+/* the header band is shared by both tabs, so it keeps the neutral paper borders */
+.slab-head { --b4: #c4bdac; }
