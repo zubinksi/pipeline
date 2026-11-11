@@ -111,16 +111,16 @@
 {% endif %}
 {%- endmacro %}
 
-{# A lab-report style header strip, like the patient / specimen boxes on a lab sheet. #}
-{% macro report_head(subject) -%}
-<div class="rhead">
-  <div><span class="label">Subject</span><span class="v">{{ subject }}</span></div>
-  <div><span class="label">Collected</span><span class="v">{{ updated|nice_date if updated else "–" }}</span></div>
-  <div><span class="label">Report status</span><span class="v">Final · weekly</span></div>
-</div>
+{# The panel's header band: a line of report details, the title, then the folder tabs. #}
+{% macro slab_head(active) -%}
+<header class="slab-head">
+  <div class="head-meta"><span>Weekly report · Final</span><span>Collected {{ updated|nice_date if updated else "–" }}</span></div>
+  <h1 class="one-line">Cholesterol Drugs Pipeline</h1>
+  {{ tabs(active) }}
+</header>
 {%- endmacro %}
 
-{# News / Drugs as folder tabs on top of the panel. #}
+{# News / Drugs as folder tabs at the bottom of the header band. #}
 {% macro tabs(active) -%}
 <nav class="folders" aria-label="Sections">
   <a class="folder f-news{{ ' on' if active == 'news' }}" href="{{ root }}index.html"{% if active == 'news' %} aria-current="page"{% endif %}><span>News</span></a>

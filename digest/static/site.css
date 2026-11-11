@@ -26,6 +26,7 @@
   --b2: #ddd8ca;
   --b3: #ece8dc;
   --b4: #c4bdac;
+  --head: #e4ddcd;     /* the panel's header band, a shade darker than the paper */
   --ink: #1f2933;
   --ink2: #374151;
   --ink3: #4b5563;
@@ -74,11 +75,27 @@ a { color: inherit; }
   background: var(--slab);
   border: 1px solid var(--b1);
   box-shadow: var(--shadow);
+}
+.slab-body {
   padding: 2.5rem 2.75rem 2.25rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
+.slab.tabbed .slab-body { padding-top: 2rem; }
+/* header band: report details, title, folder tabs along its bottom edge */
+.slab-head { background: var(--head); padding: 1.25rem 2.75rem 0; border-bottom: 1px solid var(--b4); }
+.head-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+.slab-head h1 { font-size: 2.125rem; line-height: 1.15; margin: 1.25rem 0 1.5rem; }
 h1, h2, h3 { font-weight: 400; margin: 0; }
 .intro h1 { font-size: 2.125rem; line-height: 1.15; letter-spacing: 0.005em; }
 .intro p { margin: 0.625rem 0 0; font-size: 1.125rem; line-height: 1.45; color: var(--ink3); max-width: 38rem; }
@@ -149,15 +166,8 @@ h1, h2, h3 { font-weight: 400; margin: 0; }
 .btn:hover { color: var(--accent); }
 .quiet { padding: 0.75rem 0 0.25rem; font-size: 1.0625rem; color: var(--ink3); }
 
-/* lab-report header strip */
-.rhead { display: grid; grid-template-columns: 1.4fr 1fr 1fr; border: 1px solid var(--b4); margin-top: -0.75rem; }
-.rhead > div { padding: 0.5rem 0.75rem 0.5625rem; display: flex; flex-direction: column; gap: 0.1875rem; }
-.rhead > div + div { border-left: 1px solid var(--b4); }
-.rhead .label { font-size: 0.5625rem; }
-.rhead .v { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.04em; color: var(--ink); }
-
 /* News / Drugs: folder tabs sitting on top of the panel */
-.folders { display: flex; gap: 0.375rem; padding: 0; position: relative; z-index: 2; }
+.folders { display: flex; gap: 0.375rem; margin: 0 -2.75rem -1px; position: relative; z-index: 2; }
 .folder {
   position: relative;
   display: block;
@@ -192,7 +202,7 @@ h1, h2, h3 { font-weight: 400; margin: 0; }
 .folder:not(.on):hover::before { filter: brightness(1.1); }
 .folder.on { color: var(--ink); }
 .folder.on::before { background: var(--slab); }
-.slab.tabbed { border-top-left-radius: 0; border-top: 0; padding-top: 2.25rem; }
+
 
 /* coming up: one line each */
 .tl-list { display: flex; flex-direction: column; }
@@ -452,12 +462,16 @@ footer {
 @media (max-width: 860px) {
   .body, footer { padding-left: 1rem; padding-right: 1rem; }
   .body { padding-top: 1rem; }
-  .slab { padding: 1.5rem 1.125rem 1.5rem; gap: 1.75rem; }
+  .slab-body { padding: 1.5rem 1.125rem 1.5rem; gap: 1.75rem; }
+  .slab.tabbed .slab-body { padding-top: 1.5rem; }
+  .slab-head { padding: 1rem 1.125rem 0; }
+  .slab-head h1 { font-size: clamp(1.125rem, 6.4vw, 1.75rem); white-space: nowrap; margin: 1rem 0 1.25rem; }
+  .head-meta { font-size: 0.5625rem; letter-spacing: 0.1em; }
   .intro h1, .d-head h1 { font-size: 1.625rem; }
   .intro h1.one-line { white-space: nowrap; font-size: clamp(1.125rem, 6.4vw, 1.75rem); }
-  .folders { gap: 0.25rem; }
+  .folders { gap: 0.25rem; margin: 0 -1.125rem -1px; }
   .folder { width: 7.5rem; font-size: 0.6875rem; padding: 0.75rem 0 0.6875rem; }
-  .slab.tabbed { padding-top: 1.5rem; }
+
   .intro p { font-size: 1rem; }
   .dhead { display: none; }
   .drug {
@@ -477,9 +491,6 @@ footer {
   .mini { width: 5.25rem; }
   .c-stage .words { font-size: 0.5rem; letter-spacing: 0.04em; white-space: normal; text-align: right; max-width: 5.25rem; }
   .pf { font-size: 0.8125rem; }
-  .rhead { grid-template-columns: 1fr 1fr; }
-  .rhead > div:first-child { grid-column: 1 / -1; border-bottom: 1px solid var(--b4); }
-  .rhead > div:nth-child(2) { border-left: 0; }
   .pf-short { display: none; }
   .pf-long { display: inline; }
   .h-row, .w-row { grid-template-columns: 1fr; gap: 0.125rem; }
