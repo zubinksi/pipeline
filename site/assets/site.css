@@ -485,6 +485,8 @@ footer {
   .intro h1.one-line { white-space: nowrap; font-size: clamp(1.125rem, 6.4vw, 1.75rem); }
   .folders { gap: 0.25rem; margin: 0 -1.125rem -1px; }
   .folder { font-size: 0.75rem; padding: 0.875rem 0 0.8125rem; letter-spacing: 0.18em; }
+  /* narrower tabs: smaller corners and a gentler flare, so they keep the desktop shape */
+  .folder::before { border-radius: 0.4375rem 0.4375rem 0 0; transform: perspective(6rem) rotateX(3deg); }
   .tl-more { padding-left: 0; }
   .panel { gap: 1.75rem; }
 
