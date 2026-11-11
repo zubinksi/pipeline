@@ -144,7 +144,8 @@ def test_approved_drugs_show_brand_first(tmp_path):
 def test_news_and_drugs_tabs_and_compact_coming_up(tmp_path):
     out, _ = _build(tmp_path)
     news, drugs = (out / "index.html").read_text(), (out / "drugs.html").read_text()
-    assert 'class="on" aria-current="page">News' in news and 'class="on" aria-current="page">Drugs' in drugs
+    assert 'class="folder f-news on"' in news and 'class="folder f-drugs on"' in drugs
+    assert 'class="slab tabbed"' in news and 'class="slab"' in (out / "drugs/inclisiran.html").read_text()
     assert 'class="drug"' not in news and 'class="drug"' in drugs  # the list lives on its own tab
     # one short line per milestone, linking to the drug page; the full sentence is on the drug page
     assert 'href="drugs/inclisiran.html"' in news and "Heart-attack trial results" in news

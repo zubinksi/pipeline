@@ -14,7 +14,8 @@
 </head>
 <body>
 <main class="body">
-  <div class="slab">
+  {% block folders %}{% endblock %}
+  <div class="slab{{ ' tabbed' if sel in ('news', 'drugs') }}">
     {% block content %}{% endblock %}
   </div>
 </main>

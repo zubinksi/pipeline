@@ -110,11 +110,11 @@
 {% endif %}
 {%- endmacro %}
 
-{# News / Drugs switch under the title. #}
+{# News / Drugs as folder tabs on top of the panel. #}
 {% macro tabs(active) -%}
-<nav class="tabs" aria-label="Sections">
-  <a href="{{ root }}index.html"{% if active == 'news' %} class="on" aria-current="page"{% endif %}>News</a>
-  <a href="{{ root }}drugs.html"{% if active == 'drugs' %} class="on" aria-current="page"{% endif %}>Drugs</a>
+<nav class="folders" aria-label="Sections">
+  <a class="folder f-news{{ ' on' if active == 'news' }}" href="{{ root }}index.html"{% if active == 'news' %} aria-current="page"{% endif %}><span>News</span></a>
+  <a class="folder f-drugs{{ ' on' if active == 'drugs' }}" href="{{ root }}drugs.html"{% if active == 'drugs' %} aria-current="page"{% endif %}><span>Drugs</span></a>
 </nav>
 {%- endmacro %}
 

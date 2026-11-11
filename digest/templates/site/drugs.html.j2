@@ -1,11 +1,11 @@
 {% extends "base.html.j2" %}
 {% import "_macros.html.j2" as m with context %}
 {% block title %}Drugs · {{ site_title }}{% endblock %}
+{% block folders %}{{ m.tabs("drugs") }}{% endblock %}
 {% block content %}
 <div class="intro">
   <h1 class="one-line">Cholesterol Drugs Pipeline</h1>
 </div>
-{{ m.tabs("drugs") }}
 {{ m.drug_list(groups, root, filterable=true) }}
 {{ m.explainer() }}
 {% endblock %}
