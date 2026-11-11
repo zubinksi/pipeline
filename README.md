@@ -61,6 +61,10 @@ The look is light and matches the email: cream paper on a pale grid, slate ink, 
 
 Instead of every trial's completion date, the site and email list only the milestones in each drug's `milestones` in `watchlist.yaml` (for example Leqvio's ORION-4 heart-attack trial), in plain words. Trial-linked milestones are dated live from ClinicalTrials.gov and show "DUE NOW", "Finished" or "Stopped" as things change. Dated `events` (e.g. an FDA decision date) also appear here.
 
+## Less noise from approved drugs
+
+Approved drugs have hundreds of routine trials on ClinicalTrials.gov. For them, "What moved" only reports status changes, halts and posted results for their watched trials (`milestones`), plus new final-stage (Phase 3+) trials. Drugs still in testing report every Phase 2+ trial change, and halts at any phase.
+
 ## In the field
 
 Besides the watchlist, each run does a few broad Google News searches (`settings.field_news.queries` in `watchlist.yaml`) for LDL-lowering treatment news. Items that name a watchlist drug are left out, since they belong in that drug's own news. Claude keeps at most `max_items` (default 3), and only concrete developments: approvals, trial results, filings, guideline changes, or a whole drug class succeeding or failing. Without an API key, a strict keyword filter stands in. The first run after this is switched on records a baseline and shows nothing.

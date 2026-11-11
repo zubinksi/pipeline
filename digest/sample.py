@@ -21,9 +21,9 @@ def before_after(watchlist: dict, today_iso: str = "2026-11-03") -> tuple[dict, 
         "drugs": drugs,
         "trials": {
             "NCT90000001": _trial("NCT90000001", "verve102", ["PHASE2"], "NOT_YET_RECRUITING", 2),
-            "NCT90000002": _trial("NCT90000002", "inclisiran", ["PHASE3"], "RECRUITING", 3,
-                                  acronym="VICTORION-EX"),
-            "NCT90000003": _trial("NCT90000003", "evolocumab", ["PHASE3"], "RECRUITING", 3),
+            "NCT90000002": _trial("NCT90000002", "verve102", ["PHASE2"], "RECRUITING", 2,
+                                  acronym="HEART-EX"),
+            "NCT90000003": _trial("NCT90000003", "verve102", ["PHASE1"], "COMPLETED", 1),
             "NCT90000004": _trial("NCT90000004", "lerodalcibep", ["PHASE3"], "ACTIVE_NOT_RECRUITING", 3,
                                   pcd="2026-12", acronym="LIBERATE-EX"),
             "NCT03705234": _trial("NCT03705234", "inclisiran", ["PHASE3"], "ACTIVE_NOT_RECRUITING", 3,
@@ -41,9 +41,9 @@ def before_after(watchlist: dict, today_iso: str = "2026-11-03") -> tuple[dict, 
                                             3, acronym="EXAMPLE-3")
     after["drugs"]["verve102"] = {"stage": "phase3", "basis": "NCT90000010",
                                     "url": "https://clinicaltrials.gov/study/NCT90000010"}
-    # inclisiran: enrollment closes
+    # verve102: a mid-stage trial closes enrollment
     after["trials"]["NCT90000002"]["status"] = "ACTIVE_NOT_RECRUITING"
-    # evolocumab: results posted
+    # verve102: early trial results posted
     after["trials"]["NCT90000003"]["has_results"] = True
     after["news"] = {
         "news-aaaaaaaaaaaa": {"id": "news-aaaaaaaaaaaa", "drug": "alirocumab",

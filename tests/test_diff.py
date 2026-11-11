@@ -51,7 +51,7 @@ def test_phase1_noise_is_ignored():
 
 def test_new_phase2_trial_reported():
     before, after = before_after(WL)
-    after["trials"]["NCT3"] = _trial("NCT3", "alirocumab", ["PHASE2"], "NOT_YET_RECRUITING", 2)
+    after["trials"]["NCT3"] = _trial("NCT3", "verve102", ["PHASE2"], "NOT_YET_RECRUITING", 2)  # still in testing
     new = [c for c in diff.compute(before, after, WL) if c.kind == "trial_new"]
     assert len(new) == 1 and "NCT3" in new[0].what
 
@@ -153,3 +153,20 @@ def test_field_news_reported_once_and_only_after_baseline():
     before["baselined"] = {"ctgov": [d["id"] for d in WL["drugs"]], "fda": [d["id"] for d in WL["drugs"]],
                            "news": True, "discovery": True}
     assert not [c for c in diff.compute(before, after, WL) if c.kind == "field"]
+
+
+def test_approved_drugs_only_report_watched_trials():
+    before, after = before_after(WL)
+    approved = {"stage": "approved", "basis": "watchlist", "url": "u"}
+    before["drugs"]["evolocumab"] = after["drugs"]["evolocumab"] = approved
+    # a routine Repatha trial changes status and posts results: not reported
+    before["trials"]["NCT7"] = _trial("NCT7", "evolocumab", ["PHASE3"], "RECRUITING", 3)
+    after["trials"]["NCT7"] = dict(_trial("NCT7", "evolocumab", ["PHASE3"], "TERMINATED", 3), has_results=True)
+    # new routine trials: Phase 2 skipped, Phase 3 reported
+    after["trials"]["NCT8"] = _trial("NCT8", "evolocumab", ["PHASE2"], "RECRUITING", 2)
+    after["trials"]["NCT9"] = _trial("NCT9", "evolocumab", ["PHASE3"], "RECRUITING", 3)
+    # the watched Leqvio trial (ORION-4) still reports
+    after["trials"]["NCT03705234"] = dict(after["trials"]["NCT03705234"], status="COMPLETED")
+    ids = {c.id for c in diff.compute(before, after, WL)}
+    assert not {i for i in ids if "NCT7" in i or "NCT8" in i}
+    assert "new-NCT9" in ids and "status-NCT03705234-COMPLETED" in ids

@@ -98,6 +98,11 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
                 source="ClinicalTrials.gov" if s.get("basis", "").startswith("NCT") else s.get("basis", "")))
 
     # --- trials ---
+    # Approved drugs have hundreds of routine trials. For them, only their watched
+    # trials (milestones) report status changes, halts and results, and only new
+    # final-stage trials are reported. Drugs still in testing get every Phase 2+ change.
+    watched = {m.get("nct") for d in watchlist["drugs"] for m in (d.get("milestones") or []) if m.get("nct")}
+    approved = {k for k, v in curr.get("drugs", {}).items() if v.get("stage") == "approved"}
     prev_trials = prev.get("trials", {})
     for nct, t in curr.get("trials", {}).items():
         drug_id = t.get("drug")
@@ -105,7 +110,8 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
             continue  # new to the watchlist, or never fetched successfully: this is its baseline
         drug = names.get(drug_id, drug_id)
         old = prev_trials.get(nct)
-        big_enough = t["phase_rank"] >= min_phase
+        routine = drug_id in approved and nct not in watched
+        big_enough = t["phase_rank"] >= (3 if routine else min_phase)
         if old is None:
             if big_enough and nct not in stage_trials:
                 changes.append(Change(
@@ -114,6 +120,8 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
                          f", sponsor {t['sponsor']}.",
                     url=t["url"], source="ClinicalTrials.gov"))
             continue
+        if routine:
+            continue  # a routine trial of an approved drug: only its registration is news
         if t["status"] != old.get("status"):
             halted = t["status"] in HALTED
             if halted or big_enough:
