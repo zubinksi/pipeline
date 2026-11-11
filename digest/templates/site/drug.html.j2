@@ -1,65 +1,61 @@
 {% extends "base.html.j2" %}
 {% import "_macros.html.j2" as m with context %}
 {% block title %}{{ drug.brand ~ " (" ~ drug.name ~ ")" if drug.brand else drug.name }} · {{ site_title }}{% endblock %}
+{% block head %}{{ m.slab_head("drugs") }}{% endblock %}
 {% block content %}
 <a class="back" href="{{ root }}drugs.html">&larr; All drugs</a>
-<div class="intro">
-  <div class="d-head"><h1>{{ drug.brand or drug.name }}{% if drug.brand %} <span class="generic">{{ drug.name|lower }}</span>{% endif %}{{ m.badge(drug.badge) }}{% if row.moved %}<span class="tag moved">&#9650; moved this week</span>{% endif %}</h1></div>
-  {% if drug.plain %}<p>{{ drug.plain }}</p>{% endif %}
+
+<div class="dtop">
+  <h2 class="dname">{{ drug.brand or drug.name }}{% if drug.brand %}<span class="generic">{{ drug.name|lower }}</span>{% endif %}{{ m.badge(drug.badge) }}{% if row.moved %}<span class="tag moved">&#9650; moved this week</span>{% endif %}</h2>
+  {% if drug.plain %}<p class="dsum">{{ drug.plain }}</p>{% endif %}
 </div>
 
-<div class="glance">
-  <div><span class="label">How you'd take it</span><div class="v">{{ drug.form or "–" }}</div></div>
-  <div><span class="label">What it does</span><div class="v">{{ drug.effect or ("Lowers " ~ drug.lowers if drug.lowers else "–") }}</div>{% if drug.effect_source %}<a class="src" href="{{ drug.effect_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</div>
-  <div><span class="label">Made by</span><div class="v">{{ drug.company }}</div></div>
-</div>
-
+{# The essentials, laid out like a results table: one fact per line. #}
 <section class="section">
-  <div class="section-head"><h2>How far along</h2></div>
-  <div class="stage-box" style="padding-top:0.875rem">
-    <div class="v" style="font-size:1.25rem">{{ row.stage_plain }}</div>
-    <div>{{ m.mini(row.rank, row.moved, big=true) }}
-      <div class="mini-labels">{% for s in ["Early", "Mid", "Final", "FDA", "Approved"] %}<span{% if loop.index == row.rank %} class="on"{% endif %}>{{ s }}</span>{% endfor %}</div>
-    </div>
-    <p class="explain-line">{{ row.stage_explain }}</p>
-  </div>
+  <div class="section-head"><h2>At a glance</h2></div>
+  <dl class="gl">
+    <div><dt>How you take it</dt><dd>{{ drug.form or "–" }}</dd></div>
+    <div><dt>What it does</dt><dd>{{ drug.effect or ("Lowers " ~ drug.lowers if drug.lowers else "–") }}{% if drug.effect_source %} <a class="src" href="{{ drug.effect_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</dd></div>
+    {% if drug.proven %}<div><dt>Prevents heart attacks?</dt><dd><span class="pf pf-{{ drug.proven }}">{% if drug.proven == 'yes' %}&#10003; {% elif drug.proven == 'failed' %}&#10007; {% endif %}{{ row.proven_label }}</span></dd></div>{% endif %}
+    <div><dt>Status</dt><dd class="gl-stage"><span>{{ row.stage_plain }}</span>{{ m.mini(row.rank, row.moved) }}<span class="gl-note">{{ row.stage_explain }}</span></dd></div>
+    <div><dt>Made by</dt><dd>{{ drug.company }}</dd></div>
+  </dl>
 </section>
-
-{% if drug.proven %}
-<section class="section">
-  <div class="section-head"><h2>Does it prevent heart attacks?</h2></div>
-  <div style="padding-top:0.875rem">{{ m.proven(row) }}</div>
-  {% if drug.proven_note %}<p class="prose" style="padding-top:0.5rem">{{ drug.proven_note }}{% if drug.proven_source %} <a class="src" href="{{ drug.proven_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
-</section>
-{% endif %}
 
 {% if milestones %}
 <section class="section">
-  <div class="section-head"><h2>Coming up</h2></div>
+  <div class="section-head"><h2>What's next</h2></div>
   {% for h in milestones %}
-  <div class="h-row">
-    <div class="h-when">{{ h.when }}</div>
-    <div class="h-what">{{ h.what }} <a class="src" href="{{ h.url }}" rel="noopener noreferrer">Source &rarr;</a></div>
+  <div class="nx">
+    <span class="tl-when{{ ' due' if h.when == 'DUE NOW' }}">{{ h.when }}</span>
+    <span>{{ h.what }} <a class="src" href="{{ h.url }}" rel="noopener noreferrer">Source &rarr;</a></span>
   </div>
   {% endfor %}
 </section>
 {% endif %}
 
-{% if drug.note %}
+{# For a drug whose heart-attack trials are listed under "What's next", the
+   evidence note would only repeat them. #}
+{% set show_proof_note = drug.proven_note and not (drug.proven == "testing" and milestones) %}
+{% if show_proof_note or drug.note %}
 <section class="section">
-  <div class="section-head"><h2>Where it stands</h2></div>
-  <p class="prose" style="padding-top:0.75rem">{{ drug.note }}{% if drug.sources %} <a class="src" href="{{ drug.sources[0] }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>
+  <div class="section-head"><h2>In plain terms</h2></div>
+  <div class="plain-terms">
+    {% if show_proof_note %}<p><span class="label">Heart attacks</span>{{ drug.proven_note }}{% if drug.proven_source %} <a class="src" href="{{ drug.proven_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
+    {% if drug.note %}<p><span class="label">Where it stands</span>{{ drug.note }}{% if drug.sources %} <a class="src" href="{{ drug.sources[0] }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
+  </div>
 </section>
 {% endif %}
 
+{% if updates %}
 <section class="section">
-  <div class="section-head"><h2>News since tracking started</h2></div>
-  {% if updates %}{{ m.changes(updates, root, show_drug=false) }}
-  {% else %}<p class="quiet">Nothing new yet. Changes will appear here as they happen.</p>{% endif %}
+  <div class="section-head"><h2>News</h2></div>
+  {{ m.changes(updates, root, show_drug=false) }}
 </section>
+{% endif %}
 
 <details class="more">
-  <summary>Clinical trials and details ({{ trials|length }} trials)</summary>
+  <summary>Trials and technical details ({{ trials|length }})</summary>
   <div>
     <dl class="facts">
       {% if drug.aliases %}<dt>Also known as</dt><dd>{{ drug.aliases|join(", ") }}</dd>{% endif %}

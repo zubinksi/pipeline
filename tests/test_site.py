@@ -149,7 +149,7 @@ def test_news_and_drugs_tabs_and_compact_coming_up(tmp_path):
     out, _ = _build(tmp_path)
     news, drugs = (out / "index.html").read_text(), (out / "drugs.html").read_text()
     assert 'class="folder f-news on"' in news and 'class="folder f-drugs on"' in drugs
-    assert 'class="slab tabbed"' in news and 'class="slab"' in (out / "drugs/inclisiran.html").read_text()
+    assert 'class="slab tabbed"' in news
     # one page, two panels: each file just opens a different one (tabs.js switches in place)
     assert '<div class="panel" data-panel="news">' in news and '<div class="panel" data-panel="drugs" hidden>' in news
     assert '<div class="panel" data-panel="news" hidden>' in drugs and '<div class="panel" data-panel="drugs">' in drugs
@@ -159,3 +159,18 @@ def test_news_and_drugs_tabs_and_compact_coming_up(tmp_path):
     more = news[news.index('class="tl-more"'):]
     assert "If positive" in more and "Twice a year" in more and 'href="drugs/inclisiran.html"' in more
     assert "no changes" not in news.lower()
+
+
+def test_drug_page_is_consolidated_for_a_layperson(tmp_path):
+    out, _ = _build(tmp_path)
+    html = (out / "drugs/inclisiran.html").read_text()
+    # under the same header and tabs, with Drugs selected
+    assert 'class="slab tabbed"' in html and 'class="folder f-drugs on"' in html
+    # the essentials in one "At a glance" table
+    glance = html[html.index("At a glance"):html.index("</dl>")]
+    for label in ("How you take it", "What it does", "Prevents heart attacks?", "Status", "Made by"):
+        assert label in glance
+    assert "LDL down about 50%" in glance and "Heart-attack trial underway" in glance and "Novartis" in glance
+    assert "What's next" in html and "If positive" in html          # milestone in plain words
+    assert "In plain terms" in html and "Where it stands" in html
+    assert "Trials and technical details" in html                   # detail tucked away

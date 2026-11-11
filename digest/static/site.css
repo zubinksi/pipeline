@@ -432,6 +432,24 @@ a.w-row:hover .w-head { color: var(--accent); }
 .pager a:hover { color: var(--accent); }
 
 /* drug page */
+.dtop { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.25rem; }
+.dname { font-size: 1.875rem; line-height: 1.15; }
+.dname .generic { font-size: 1rem; }
+.dsum { margin: 0; font-size: 1.0625rem; line-height: 1.45; color: var(--ink2); max-width: 40rem; }
+/* "At a glance": label | result, one fact per line, like a lab sheet */
+.gl { margin: 0; display: flex; flex-direction: column; }
+.gl > div { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 1rem; padding: 0.6875rem 0; border-bottom: 1px solid var(--b3); align-items: baseline; }
+.gl > div:last-child { border-bottom: 0; }
+.gl dt { font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.gl dd { margin: 0; font-family: var(--mono); font-size: 0.875rem; letter-spacing: 0.02em; color: var(--ink); line-height: 1.45; }
+.gl dd .pf { font-size: 0.875rem; }
+.gl-stage { display: flex; align-items: center; flex-wrap: wrap; gap: 0.25rem 0.875rem; }
+.gl-note { flex-basis: 100%; font-family: var(--serif); font-size: 0.9375rem; letter-spacing: 0; color: var(--ink3); }
+.nx { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 0.75rem; align-items: baseline; padding: 0.625rem 0; border-bottom: 1px solid var(--b3); font-size: 1rem; color: var(--ink2); line-height: 1.45; }
+.nx:last-child { border-bottom: 0; }
+.plain-terms { display: flex; flex-direction: column; gap: 0.875rem; padding-top: 0.625rem; }
+.plain-terms p { margin: 0; font-size: 1.0625rem; line-height: 1.5; color: var(--ink2); max-width: 42rem; }
+.plain-terms .label { display: block; margin-bottom: 0.1875rem; }
 .d-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
 .d-head h1 { font-size: 2.125rem; line-height: 1.15; }
 .glance { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--b1); border-radius: 2px; }
@@ -517,6 +535,8 @@ footer {
   .filters select { font-size: 0.625rem; letter-spacing: 0.02em; padding: 0.3125rem 1.25rem 0.3125rem 0.5rem; background-position: calc(100% - 0.7rem) 52%, calc(100% - 0.45rem) 52%; }
   .explain-body { grid-template-columns: 1fr; }
   .glance { grid-template-columns: 1fr; }
+  .gl > div { grid-template-columns: 1fr; gap: 0.1875rem; }
+  .dname { font-size: 1.5rem; }
   .glance > div + div { border-left: 0; border-top: 1px solid var(--b1); }
   .facts { grid-template-columns: 1fr; gap: 0.125rem; }
   .facts dd { margin-bottom: 0.5rem; }

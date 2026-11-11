@@ -89,7 +89,7 @@ drugs:
     often: "Every 2–4 weeks"
     route: injection
     frequency: monthly
-    plain: "A shot every 2 weeks or once a month that lowers LDL. Sold as Repatha; on the market since 2015."
+    plain: "A shot every 2 weeks or once a month that lowers LDL. On the market since 2015."
     stage: approved
     effect: "LDL down about 60%"
     effect_short: "LDL ↓ 60%"
@@ -111,7 +111,7 @@ drugs:
     often: "Every 2–4 weeks"
     route: injection
     frequency: monthly
-    plain: "A shot every 2 weeks or once a month that lowers LDL. Sold as Praluent."
+    plain: "A shot every 2 weeks or once a month that lowers LDL."
     stage: approved
     effect: "LDL down about 50%"
     effect_short: "LDL ↓ 50%"
@@ -133,7 +133,7 @@ drugs:
     often: "Twice a year"
     route: injection
     frequency: infrequent
-    plain: "A shot twice a year that lowers LDL by switching off PCSK9 in the liver. Sold as Leqvio."
+    plain: "A shot twice a year that lowers LDL by switching off PCSK9 in the liver."
     stage: approved
     effect: "LDL down about 50%"
     effect_short: "LDL ↓ 50%"

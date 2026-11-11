@@ -135,7 +135,7 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
         upcoming = [t for t in trials if t["status"] in ACTIVE and t.get("primary_completion")
                     and t["primary_completion"][:7] >= today and t["phase_rank"] >= 2]
         next_pcd = min(upcoming, key=lambda t: t["primary_completion"], default=None)
-        write(f"drugs/{d['id']}.html", "drug.html.j2", "../", drug=d,
+        write(f"drugs/{d['id']}.html", "drug.html.j2", "../", sel="drugs", drug=d,
               n_active=sum(1 for t in trials if t["status"] in ACTIVE), next_pcd=next_pcd,
               row=_rows({"drugs": [d]}, {d["id"]: stage}, moved)[0],
               stage_basis=snapshot.get("drugs", {}).get(d["id"], {}),
