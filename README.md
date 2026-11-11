@@ -59,7 +59,7 @@ The look is light and matches the email: cream paper on a pale grid, slate ink, 
 
 ## Coming up
 
-The site has two tabs: **News** (this week, coming up, in the field) and **Drugs** (the list, filter and "How to read this"). Under Coming up, instead of every trial's completion date, the site and email list only the milestones in each drug's `milestones` in `watchlist.yaml` (for example Leqvio's ORION-4 heart-attack trial), in plain words: one short line each (`short`) on the News tab, with the full sentence (`what`) on the drug's page. Trial-linked milestones are dated live from ClinicalTrials.gov and show "DUE NOW", "Finished" or "Stopped" as things change. Dated `events` (e.g. an FDA decision date) also appear here.
+The site has two folder tabs: **News** (this week, coming up, in the field) and **Drugs** (the list, filter and "How to read this"). Both are on one page (`index.html` and `drugs.html` differ only in which opens first), and `digest/static/tabs.js` switches between them without reloading, updating the address. Past weeks sit under the same header with News selected. Each Coming up row opens to show the full sentence, the drug's dosing, LDL effect and evidence, and links to its overview and source. Under Coming up, instead of every trial's completion date, the site and email list only the milestones in each drug's `milestones` in `watchlist.yaml` (for example Leqvio's ORION-4 heart-attack trial), in plain words: one short line each (`short`) on the News tab, with the full sentence (`what`) on the drug's page. Trial-linked milestones are dated live from ClinicalTrials.gov and show "DUE NOW", "Finished" or "Stopped" as things change. Dated `events` (e.g. an FDA decision date) also appear here.
 
 ## Less noise from approved drugs
 

@@ -99,14 +99,18 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
         html = _env.get_template(template).render(**common, root=root, sel=sel, **ctx)
         (out / path).write_text(html)
 
-    write("index.html", "index.html.j2", "", sel="news", latest=latest, weeks=views[:12], n_weeks=len(views))
-    write("drugs.html", "drugs.html.j2", "", sel="drugs",
-          groups=_groups(_rows(watchlist, stages, moved)), n_drugs=len(watchlist["drugs"]))
+    rows_now = _rows(watchlist, stages, moved)
+    home = dict(latest=latest, n_weeks=len(views), groups=_groups(rows_now), n_drugs=len(watchlist["drugs"]),
+                drug_rows={r["id"]: r for r in rows_now})
+    # News and Drugs are one page with both panels; the two files differ only in which is open
+    write("index.html", "home.html.j2", "", sel="news", active="news", **home)
+    write("drugs.html", "home.html.j2", "", sel="drugs", active="drugs", **home)
     upcoming_all = diff.horizon(snapshot, watchlist)
     for i, w in enumerate(views):
         newer = views[i - 1]["date"] if i > 0 else None
         older = views[i + 1]["date"] if i + 1 < len(views) else None
         write(f"weeks/{w['date']}.html", "week.html.j2", "../", sel="weeks", week=w, newer=newer, older=older,
+              drug_rows={r["id"]: r for r in rows_now},
               groups=_groups(_rows(watchlist, w.get("stages", stages), set(w["moved"]))),
               n_drugs=len(watchlist["drugs"]))
     write("weeks/index.html", "archive.html.j2", "../", sel="weeks", weeks=views)

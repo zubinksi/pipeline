@@ -1,9 +1,10 @@
 {% extends "base.html.j2" %}
 {% import "_macros.html.j2" as m with context %}
 {% block title %}{{ week.date|nice_date }} · {{ site_title }}{% endblock %}
+{% block head %}{{ m.slab_head("news") }}{% endblock %}
 {% block content %}
-<a class="back" href="{{ root }}index.html">&larr; This week</a>
-<div class="intro"><h1>Week of {{ week.date|nice_date }}</h1></div>
+<a class="back" href="{{ root }}weeks/index.html">&larr; Past weeks</a>
+<h2 class="page-title">Week of {{ week.date|nice_date }}</h2>
 <div class="pager">
   <span>{% if older %}<a href="{{ older }}.html">&larr; {{ older|nice_date }}</a>{% endif %}</span>
   <span>{% if newer %}<a href="{{ newer }}.html">{{ newer|nice_date }} &rarr;</a>{% endif %}</span>

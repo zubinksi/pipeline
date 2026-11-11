@@ -166,43 +166,42 @@ h1, h2, h3 { font-weight: 400; margin: 0; }
 .btn:hover { color: var(--accent); }
 .quiet { padding: 0.75rem 0 0.25rem; font-size: 1.0625rem; color: var(--ink3); }
 
-/* News / Drugs: folder tabs sitting on top of the panel */
-.folders { display: flex; gap: 0.375rem; margin: 0 -2.75rem -1px; position: relative; z-index: 2; }
+/* News / Drugs: folder tabs along the bottom of the header band, filling its
+   width. Outer edges sit flush with the panel; inner edges slant, like the
+   tabs of a row of file folders. */
+.folders { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3125rem; margin: 0 -2.75rem -1px; position: relative; z-index: 2; }
 .folder {
   position: relative;
   display: block;
-  width: 9.5rem;
   text-align: center;
-  padding: 0.8125rem 0 0.75rem;
-  margin-bottom: -1px;
+  padding: 1rem 0 0.9375rem;
   font-family: var(--mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   text-decoration: none;
-  color: #f4f1e8;
+  color: #f6f2ea;
   transition: color 0.15s;
 }
-/* the tab shape: rounded on top, sides slanting out toward the panel */
 .folder::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  border-radius: 0.625rem 0.625rem 0 0;
+  border-radius: 0.75rem 0.75rem 0 0;
   background: var(--tab);
-  transform: perspective(3rem) rotateX(4deg);
-  transform-origin: bottom;
+  transform: perspective(4rem) rotateX(2deg);
   transition: background-color 0.15s, filter 0.15s;
 }
+.folders .folder:first-child::before { transform-origin: left bottom; border-top-left-radius: 0.5rem; }
+.folders .folder:last-child::before { transform-origin: right bottom; border-top-right-radius: 0.5rem; }
 .folder span { position: relative; }
-.f-news { --tab: #8b7e68; }
-.f-drugs { --tab: #3f6398; }
-.folder:not(.on):hover::before { filter: brightness(1.1); }
-.folder.on { color: var(--ink); }
+.f-news { --tab: #7c705e; }
+.f-drugs { --tab: #34558a; }
+.folder:not(.on):hover::before { filter: brightness(1.08); }
+.folder.on { color: var(--ink2); }
 .folder.on::before { background: var(--slab); }
-
 
 /* coming up: one line each */
 .tl-list { display: flex; flex-direction: column; }
@@ -226,6 +225,22 @@ h1, h2, h3 { font-weight: 400; margin: 0; }
 .tl-when.due { color: var(--accent); font-weight: 600; }
 .tl-what { font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.02em; line-height: 1.4; }
 .tl-what b { font-family: var(--serif); font-size: 1.0625rem; letter-spacing: 0; font-weight: 400; color: var(--ink); }
+.tl-item { border-bottom: 1px solid var(--b3); }
+.tl-item:last-child { border-bottom: 0; }
+.tl-item .tl { border-bottom: 0; cursor: pointer; list-style: none; }
+.tl-item .tl::-webkit-details-marker { display: none; }
+.tl-item .tl::before { content: none; }
+.tl-item .go { display: inline-block; transition: transform 0.2s, color 0.15s; }
+.tl-item[open] .go { transform: rotate(90deg); color: var(--accent); }
+.tl-item[open] .tl { background: var(--hover); }
+.tl-more { padding: 0.25rem 0 1rem calc(5.5rem + 0.75rem); display: flex; flex-direction: column; gap: 0.5rem; }
+.tl-more p { margin: 0; font-size: 1rem; line-height: 1.45; color: var(--ink2); max-width: 36rem; }
+.tl-facts { display: flex; flex-direction: column; gap: 0.25rem; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.02em; color: var(--ink2); }
+.tl-facts .sep { color: var(--b4); margin: 0 0.5rem; }
+.tl-facts .pf { font-size: 0.75rem; }
+.tl-links { display: flex; gap: 1.25rem; }
+.page-title { font-size: 1.5rem; line-height: 1.2; margin: 0; }
+.panel { display: flex; flex-direction: column; gap: 2rem; }
 .tl-h { padding-top: 0.25rem; padding-bottom: 0.375rem; font-family: var(--mono); font-size: 0.5625rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .tl-h:hover { background: none; }
 .tl-what .sep { color: var(--b4); margin: 0 0.375rem; }
@@ -470,7 +485,9 @@ footer {
   .intro h1, .d-head h1 { font-size: 1.625rem; }
   .intro h1.one-line { white-space: nowrap; font-size: clamp(1.125rem, 6.4vw, 1.75rem); }
   .folders { gap: 0.25rem; margin: 0 -1.125rem -1px; }
-  .folder { width: 7.5rem; font-size: 0.6875rem; padding: 0.75rem 0 0.6875rem; }
+  .folder { font-size: 0.75rem; padding: 0.875rem 0 0.8125rem; letter-spacing: 0.18em; }
+  .tl-more { padding-left: 0; }
+  .panel { gap: 1.75rem; }
 
   .intro p { font-size: 1rem; }
   .dhead { display: none; }

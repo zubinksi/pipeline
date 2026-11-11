@@ -69,7 +69,8 @@
 {% endfor %}
 {%- endmacro %}
 
-{# A compact look-ahead: one line per milestone, linking to the drug's page. #}
+{# A compact look-ahead: one line per milestone; tap to open a short summary, with
+   links on to the drug's overview and the source. #}
 {% macro horizon(items, root) -%}
 <section class="section">
   <div class="section-head"><h2>Coming up</h2></div>
@@ -77,11 +78,19 @@
   <div class="tl tl-h" aria-hidden="true"><span>Date</span><span>Drug · Event</span><span></span></div>
   {% for h in items %}
   {% set when = h.when or (h.date|horizon_date) %}
-  {% if h.drug_id %}<a class="tl" href="{{ root }}drugs/{{ h.drug_id }}.html">{% else %}<a class="tl" href="{{ h.url }}" rel="noopener noreferrer">{% endif %}
-    <span class="tl-when{{ ' due' if when == 'DUE NOW' }}">{{ when }}</span>
-    <span class="tl-what"><b>{{ h.drug }}</b><span class="sep">·</span>{{ h.short or h.what }}</span>
-    <span class="go" aria-hidden="true">&rsaquo;</span>
-  </a>
+  {% set r = drug_rows.get(h.drug_id) if drug_rows and h.drug_id else none %}
+  <details class="tl-item">
+    <summary class="tl">
+      <span class="tl-when{{ ' due' if when == 'DUE NOW' }}">{{ when }}</span>
+      <span class="tl-what"><b>{{ h.drug }}</b><span class="sep">·</span>{{ h.short or h.what }}</span>
+      <span class="go" aria-hidden="true">&rsaquo;</span>
+    </summary>
+    <div class="tl-more">
+      {% if h.short %}<p>{{ h.what }}</p>{% endif %}
+      {% if r %}<div class="tl-facts"><span>{{ r.often or r.form }}<span class="sep">·</span>{{ r.effect_short or r.effect }}</span>{% if r.proven_label %}<span class="pf pf-{{ r.proven }}">{{ r.proven_label }}</span>{% endif %}</div>{% endif %}
+      <div class="tl-links">{% if h.drug_id %}<a class="src" href="{{ root }}drugs/{{ h.drug_id }}.html">Drug overview &rarr;</a>{% endif %}<a class="src" href="{{ h.url }}" rel="noopener noreferrer">Source &rarr;</a></div>
+    </div>
+  </details>
   {% endfor %}
   </div>
 </section>
@@ -120,11 +129,12 @@
 </header>
 {%- endmacro %}
 
-{# News / Drugs as folder tabs at the bottom of the header band. #}
+{# News / Drugs as folder tabs at the bottom of the header band. On the home page
+   both panels are on the page and tabs.js switches between them in place. #}
 {% macro tabs(active) -%}
 <nav class="folders" aria-label="Sections">
-  <a class="folder f-news{{ ' on' if active == 'news' }}" href="{{ root }}index.html"{% if active == 'news' %} aria-current="page"{% endif %}><span>News</span></a>
-  <a class="folder f-drugs{{ ' on' if active == 'drugs' }}" href="{{ root }}drugs.html"{% if active == 'drugs' %} aria-current="page"{% endif %}><span>Drugs</span></a>
+  <a class="folder f-news{{ ' on' if active == 'news' }}" data-tab="news" href="{{ root }}index.html"{% if active == 'news' %} aria-current="page"{% endif %}><span>News</span></a>
+  <a class="folder f-drugs{{ ' on' if active == 'drugs' }}" data-tab="drugs" href="{{ root }}drugs.html"{% if active == 'drugs' %} aria-current="page"{% endif %}><span>Drugs</span></a>
 </nav>
 {%- endmacro %}
 

@@ -1,8 +1,0 @@
-{% extends "base.html.j2" %}
-{% import "_macros.html.j2" as m with context %}
-{% block title %}Drugs · {{ site_title }}{% endblock %}
-{% block head %}{{ m.slab_head("drugs") }}{% endblock %}
-{% block content %}
-{{ m.drug_list(groups, root, filterable=true) }}
-{{ m.explainer() }}
-{% endblock %}

@@ -14,7 +14,7 @@
 </head>
 <body>
 <main class="body">
-  <div class="slab{{ ' tabbed' if sel in ('news', 'drugs') }}">
+  <div class="slab{{ ' tabbed' if sel in ('news', 'drugs', 'weeks') }}">
     {% block head %}{% endblock %}
     <div class="slab-body">
     {% block content %}{% endblock %}
@@ -25,5 +25,6 @@
   Report generated{% if updated %} {{ updated|nice_date }}{% endif %} · Sources: ClinicalTrials.gov, openFDA, news searches
 </footer>
 <script src="{{ root }}assets/filter.js" defer></script>
+<script src="{{ root }}assets/tabs.js" defer></script>
 </body>
 </html>

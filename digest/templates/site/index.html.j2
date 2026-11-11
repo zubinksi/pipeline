@@ -1,7 +1,0 @@
-{% extends "base.html.j2" %}
-{% import "_macros.html.j2" as m with context %}
-{% block head %}{{ m.slab_head("news") }}{% endblock %}
-{% block content %}
-{% if latest %}{{ m.this_week(latest, root, "This week", past=n_weeks) }}
-{% else %}<p class="empty">No weekly runs yet.</p>{% endif %}
-{% endblock %}

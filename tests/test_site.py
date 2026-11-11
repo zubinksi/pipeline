@@ -130,7 +130,11 @@ def test_past_weeks_button_and_back_links(tmp_path):
     out, _ = _build(tmp_path)
     assert 'class="btn" href="weeks/index.html"' in (out / "index.html").read_text()
     assert 'class="back" href="../index.html"' in (out / "weeks/index.html").read_text()
-    assert 'class="back" href="../index.html"' in (out / "weeks/2026-11-03.html").read_text()
+    week = (out / "weeks/2026-11-03.html").read_text()
+    assert 'class="back" href="../weeks/index.html"' in week
+    # past weeks sit under the same header and tabs, with News selected
+    assert 'class="folder f-news on"' in week and 'class="slab tabbed"' in week
+    assert 'class="folder f-news on"' in (out / "weeks/index.html").read_text()
 
 
 def test_approved_drugs_show_brand_first(tmp_path):
@@ -146,9 +150,12 @@ def test_news_and_drugs_tabs_and_compact_coming_up(tmp_path):
     news, drugs = (out / "index.html").read_text(), (out / "drugs.html").read_text()
     assert 'class="folder f-news on"' in news and 'class="folder f-drugs on"' in drugs
     assert 'class="slab tabbed"' in news and 'class="slab"' in (out / "drugs/inclisiran.html").read_text()
-    assert 'class="drug"' not in news and 'class="drug"' in drugs  # the list lives on its own tab
-    # one short line per milestone, linking to the drug page; the full sentence is on the drug page
-    assert 'href="drugs/inclisiran.html"' in news and "Heart-attack trial results" in news
-    assert "If positive" not in news
-    assert "If positive" in (out / "drugs/inclisiran.html").read_text()
+    # one page, two panels: each file just opens a different one (tabs.js switches in place)
+    assert '<div class="panel" data-panel="news">' in news and '<div class="panel" data-panel="drugs" hidden>' in news
+    assert '<div class="panel" data-panel="news" hidden>' in drugs and '<div class="panel" data-panel="drugs">' in drugs
+    assert (out / "assets/tabs.js").exists()
+    # Coming up: a short line that opens to the full sentence, the drug's facts and links
+    assert '<details class="tl-item">' in news and "Heart-attack trial results" in news
+    more = news[news.index('class="tl-more"'):]
+    assert "If positive" in more and "Twice a year" in more and 'href="drugs/inclisiran.html"' in more
     assert "no changes" not in news.lower()
