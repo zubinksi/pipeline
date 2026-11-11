@@ -691,3 +691,22 @@ footer { font-family: var(--serif); font-size: 0.875rem; letter-spacing: 0; text
 /* the shared header band keeps its own (light) ink and borders */
 .slab-head { --ink: #1f2933; --ink2: #374151; --ink3: #4b5563; --muted: #6b7280; --accent: #2c4a7a; }
 .slab-body { color: var(--ink); }   /* inherit the panel's ink, so plain text follows the theme */
+
+/* ══ header: arrow + cabinet label; tabs flush with the page ═════════════ */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.slab-head { border-bottom: 0; padding-top: 0.875rem; }
+.head-meta { justify-content: flex-start; gap: 0.5rem; margin-bottom: 1.25rem; }
+.hplace { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink2); cursor: default; }
+.folders { margin-bottom: 0; }
+.folder:not(.on)::before, .folder:not(.on)::after { bottom: 0; }
+.folder:not(.on) span { top: 0; }
+/* quiet week: date and Past weeks on one line, the sentence under it */
+.weekline { display: block; }
+.weekline-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.375rem; }
+.weekline .sub { margin-right: 0; }
+/* tab switch: a short fade and lift, skipped if the reader prefers less motion */
+@keyframes panel-in { from { opacity: 0; transform: translateY(0.375rem); } to { opacity: 1; transform: none; } }
+.panel.enter { animation: panel-in 0.22s ease-out; }
+@media (prefers-reduced-motion: reduce) { .panel.enter { animation: none; } .slab, .slab-body { transition: none; } }
+@media (max-width: 860px) { .head-meta { margin-bottom: 1rem; } }
+.tl-when.due { color: var(--ink); font-weight: 700; }

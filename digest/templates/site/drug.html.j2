@@ -28,7 +28,7 @@
   {% for h in milestones %}
   <details class="tl-item">
     <summary class="tl tl-2">
-      <span class="tl-when{{ ' due' if h.when == 'DUE NOW' }}">{{ h.when }}</span>
+      <span class="tl-when{{ ' due' if h.when == 'DUE NOW' }}">{{ "ANY WEEK NOW" if h.when == 'DUE NOW' else h.when }}</span>
       <span class="tl-what">{{ h.short or h.what }}</span>
       <span class="go" aria-hidden="true">&rsaquo;</span>
     </summary>

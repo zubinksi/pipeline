@@ -65,7 +65,7 @@ def test_untrusted_text_is_escaped(tmp_path):
 
 def test_empty_site_builds(tmp_path):
     out = site.build(tmp_path / "s", weeks=[], snapshot={"drugs": {}, "trials": {}}, watchlist=WL)
-    assert "Your Drugs Pipeline" in (out / "index.html").read_text()
+    assert "Your Drugs Pipeline" in (out / "index.html").read_text() and "Your cabinet" in (out / "index.html").read_text()
     assert "No weekly runs yet" in (out / "weeks/index.html").read_text()
 
 
@@ -157,7 +157,7 @@ def test_news_and_drugs_tabs_and_compact_coming_up(tmp_path):
     assert '<div class="panel" data-panel="news" hidden>' in drugs and '<div class="panel" data-panel="drugs">' in drugs
     assert (out / "assets/tabs.js").exists()
     # Coming up: a short line that opens to the full sentence, the drug's facts and links
-    assert '<details class="tl-item due">' in news and "Results expected any week." in news
+    assert '<details class="tl-item due">' in news and "ANY WEEK NOW" in news
     assert "Heart-attack trial results" in news
     more = news[news.index('class="tl-more"'):]
     assert "If positive" in more and "Twice a year" in more and 'href="drugs/inclisiran.html"' in more

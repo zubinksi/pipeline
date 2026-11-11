@@ -79,8 +79,8 @@
   {% set r = drug_rows.get(h.drug_id) if drug_rows and h.drug_id else none %}
   <details class="tl-item{{ ' due' if due }}">
     <summary class="tl">
-      <span class="tl-when">{{ when }}</span>
-      <span class="tl-what"><b>{{ h.drug }}</b> {{ h.short or h.what }}{% if due %}<span class="tl-hint">Results expected any week.</span>{% endif %}</span>
+      <span class="tl-when">{{ "ANY WEEK NOW" if due else when }}</span>
+      <span class="tl-what"><b>{{ h.drug }}</b> {{ h.short or h.what }}</span>
       <span class="go" aria-hidden="true">&rsaquo;</span>
     </summary>
     <div class="tl-more">
@@ -104,8 +104,8 @@
   <div class="section-head"><h2>{{ title }} <span class="sub">{{ w.date|nice_date_short }}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
   {% else %}
   <div class="weekline">
-    <p><span class="sub">{{ w.date|nice_date_short }}</span>{% if w.baseline %}Tracking started this week.{% else %}Nothing changed this week.{% endif %}{% if n_due %} {{ n_due }} result{{ "s" if n_due != 1 }} due now.{% endif %}</p>
-    {% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}
+    <div class="weekline-top"><span class="sub">{{ w.date|nice_date_short }}</span>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
+    <p>{% if w.baseline %}Tracking started this week.{% else %}Nothing changed this week.{% endif %}{% if n_due %} {{ n_due }} result{{ "s" if n_due != 1 }} due now.{% endif %}</p>
   </div>
   {% endif %}
   {% if w.errors %}<div class="note">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}
@@ -129,12 +129,12 @@
 {# The panel's header band: a line of report details, the title, then the folder tabs. #}
 {% macro slab_head(active, back=none) -%}
 <header class="slab-head">
+  <h1 class="sr-only">Your Drugs Pipeline</h1>
   <div class="head-meta">
     {% if back %}<a class="hback" href="{{ back }}" aria-label="Back">&larr;</a>{% else %}<span class="hback off" aria-hidden="true">&larr;</span>{% endif %}
-    {# placeholder: choosing which drugs you track comes later #}
-    <span class="hsettings" aria-disabled="true" title="Coming soon: choose which drugs you track">Settings</span>
+    {# placeholder: the cabinet will hold your folders (which drugs you track) #}
+    <span class="hplace" aria-disabled="true" title="Coming soon: choose which drugs you track">Your cabinet</span>
   </div>
-  <h1 class="one-line">Your Drugs Pipeline</h1>
   {{ tabs(active) }}
 </header>
 {%- endmacro %}

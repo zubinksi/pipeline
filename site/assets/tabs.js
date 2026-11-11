@@ -9,7 +9,11 @@
   var slab = document.querySelector('.slab');
   function show(name) {
     if (slab) slab.dataset.theme = name;  // the page takes the selected tab's color
-    panels.forEach(function (p) { p.hidden = p.dataset.panel !== name; });
+    panels.forEach(function (p) {
+      var on = p.dataset.panel === name;
+      p.hidden = !on;
+      if (on) { p.classList.remove('enter'); void p.offsetWidth; p.classList.add('enter'); }  // replay the fade-in
+    });
     tabs.forEach(function (t) {
       var on = t.dataset.tab === name;
       t.classList.toggle('on', on);
