@@ -168,7 +168,7 @@ def test_drug_page_is_consolidated_for_a_layperson(tmp_path):
     assert 'class="slab tabbed"' in html and 'class="folder f-drugs on"' in html
     # the essentials in one "At a glance" table
     glance = html[html.index("At a glance"):html.index("</dl>")]
-    for label in ("How you take it", "What it does", "Prevents heart attacks?", "Status", "Made by"):
+    for label in ("How often", "Effect", "Heart attacks", "Status", "Made by"):
         assert label in glance
     assert "LDL down about 50%" in glance and "Heart-attack trial underway" in glance and "Novartis" in glance
     assert "What's next" in html and "If positive" in html          # milestone in plain words

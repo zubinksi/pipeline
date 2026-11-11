@@ -227,6 +227,7 @@ h1, h2, h3 { font-weight: 400; margin: 0; }
 .tl-item { border-bottom: 1px solid var(--b3); }
 .tl-item:last-child { border-bottom: 0; }
 .tl-item .tl { border-bottom: 0; cursor: pointer; list-style: none; }
+.tl-2 .tl-what { font-family: var(--mono); }
 .tl-item .tl::-webkit-details-marker { display: none; }
 .tl-item .tl::before { content: none; }
 .tl-item .go { display: inline-block; transition: transform 0.2s, color 0.15s; }
@@ -438,7 +439,7 @@ a.w-row:hover .w-head { color: var(--accent); }
 .dsum { margin: 0; font-size: 1.0625rem; line-height: 1.45; color: var(--ink2); max-width: 40rem; }
 /* "At a glance": label | result, one fact per line, like a lab sheet */
 .gl { margin: 0; display: flex; flex-direction: column; }
-.gl > div { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 1rem; padding: 0.6875rem 0; border-bottom: 1px solid var(--b3); align-items: baseline; }
+.gl > div { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1rem; padding: 0.625rem 0; border-bottom: 1px solid var(--b3); align-items: baseline; }
 .gl > div:last-child { border-bottom: 0; }
 .gl dt { font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .gl dd { margin: 0; font-family: var(--mono); font-size: 0.875rem; letter-spacing: 0.02em; color: var(--ink); line-height: 1.45; }
@@ -535,8 +536,15 @@ footer {
   .filters select { font-size: 0.625rem; letter-spacing: 0.02em; padding: 0.3125rem 1.25rem 0.3125rem 0.5rem; background-position: calc(100% - 0.7rem) 52%, calc(100% - 0.45rem) 52%; }
   .explain-body { grid-template-columns: 1fr; }
   .glance { grid-template-columns: 1fr; }
-  .gl > div { grid-template-columns: 1fr; gap: 0.1875rem; }
+  /* label beside its value, not above it, so the table stays short */
+  .gl > div { grid-template-columns: 6.25rem minmax(0, 1fr); gap: 0.625rem; padding: 0.5rem 0; }
+  .gl dd, .gl dd .pf { font-size: 0.8125rem; }
+  .gl dt { font-size: 0.5625rem; letter-spacing: 0.08em; padding-top: 0.125rem; }
   .dname { font-size: 1.5rem; }
+  .dsum { font-size: 1rem; }
+  .dtop { margin-top: 0; gap: 0.25rem; }
+  .slab-head { padding-top: 0.75rem; }
+  .slab-head h1 { margin: 0.625rem 0 0.875rem; }
   .glance > div + div { border-left: 0; border-top: 1px solid var(--b1); }
   .facts { grid-template-columns: 1fr; gap: 0.125rem; }
   .facts dd { margin-bottom: 0.5rem; }

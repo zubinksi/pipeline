@@ -14,10 +14,10 @@
 <section class="section">
   <div class="section-head"><h2>At a glance</h2></div>
   <dl class="gl">
-    <div><dt>How you take it</dt><dd>{{ drug.form or "–" }}</dd></div>
-    <div><dt>What it does</dt><dd>{{ drug.effect or ("Lowers " ~ drug.lowers if drug.lowers else "–") }}{% if drug.effect_source %} <a class="src" href="{{ drug.effect_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</dd></div>
-    {% if drug.proven %}<div><dt>Prevents heart attacks?</dt><dd><span class="pf pf-{{ drug.proven }}">{% if drug.proven == 'yes' %}&#10003; {% elif drug.proven == 'failed' %}&#10007; {% endif %}{{ row.proven_label }}</span></dd></div>{% endif %}
-    <div><dt>Status</dt><dd class="gl-stage"><span>{{ row.stage_plain }}</span>{{ m.mini(row.rank, row.moved) }}<span class="gl-note">{{ row.stage_explain }}</span></dd></div>
+    <div><dt>How often</dt><dd>{{ drug.form or "–" }}</dd></div>
+    <div><dt>Effect</dt><dd>{{ drug.effect or ("Lowers " ~ drug.lowers if drug.lowers else "–") }}{% if drug.effect_source %} <a class="src" href="{{ drug.effect_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</dd></div>
+    {% if drug.proven %}<div><dt>Heart attacks</dt><dd><span class="pf pf-{{ drug.proven }}">{% if drug.proven == 'yes' %}&#10003; {% elif drug.proven == 'failed' %}&#10007; {% endif %}{{ row.proven_label }}</span></dd></div>{% endif %}
+    <div><dt>Status</dt><dd class="gl-stage"><span>{{ row.stage_plain }}</span>{{ m.mini(row.rank, row.moved) }}</dd></div>
     <div><dt>Made by</dt><dd>{{ drug.company }}</dd></div>
   </dl>
 </section>
@@ -25,12 +25,21 @@
 {% if milestones %}
 <section class="section">
   <div class="section-head"><h2>What's next</h2></div>
+  <div class="tl-list">
   {% for h in milestones %}
-  <div class="nx">
-    <span class="tl-when{{ ' due' if h.when == 'DUE NOW' }}">{{ h.when }}</span>
-    <span>{{ h.what }} <a class="src" href="{{ h.url }}" rel="noopener noreferrer">Source &rarr;</a></span>
-  </div>
+  <details class="tl-item">
+    <summary class="tl tl-2">
+      <span class="tl-when{{ ' due' if h.when == 'DUE NOW' }}">{{ h.when }}</span>
+      <span class="tl-what">{{ h.short or h.what }}</span>
+      <span class="go" aria-hidden="true">&rsaquo;</span>
+    </summary>
+    <div class="tl-more">
+      {% if h.short %}<p>{{ h.what }}</p>{% endif %}
+      <div class="tl-links"><a class="src" href="{{ h.url }}" rel="noopener noreferrer">Source &rarr;</a></div>
+    </div>
+  </details>
   {% endfor %}
+  </div>
 </section>
 {% endif %}
 
