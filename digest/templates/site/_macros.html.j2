@@ -16,17 +16,15 @@
 {% macro drug_list(groups, root, title="The drugs", filterable=false) -%}
 <section class="section"{% if filterable %} data-filter{% endif %}>
   <div class="section-head">
-    <h2>{{ title }} <span class="sub">· {{ n_drugs }}</span></h2>
+    <h2>{{ title }} <span class="sub">{{ n_drugs }}</span></h2>
     {% if filterable and (filters.lowers|length > 1 or filters.freq|length > 1) %}
     <div class="filters" hidden>
-      {% if filters.lowers|length > 1 %}<select data-k="lowers" aria-label="What it lowers">
-        <option value="all">Lowers</option>
-        {% for v, label in filters.lowers %}<option value="{{ v }}">{{ label }}</option>{% endfor %}
-      </select>{% endif %}
-      {% if filters.freq|length > 1 %}<select data-k="freq" aria-label="How often">
-        <option value="all">How often</option>
-        {% for v, label in filters.freq %}<option value="{{ v }}">{{ label }}</option>{% endfor %}
-      </select>{% endif %}
+      {% for k, opts in [("lowers", filters.lowers), ("freq", filters.freq)] if opts|length > 1 %}
+      <div class="chips" role="group" aria-label="{{ 'What it lowers' if k == 'lowers' else 'How often' }}">
+        <button type="button" class="chip" data-k="{{ k }}" data-v="all" aria-pressed="true">All</button>
+        {% for v, label in opts %}<button type="button" class="chip" data-k="{{ k }}" data-v="{{ v }}" aria-pressed="false">{{ label }}</button>{% endfor %}
+      </div>
+      {% endfor %}
     </div>
     {% endif %}
   </div>
@@ -43,15 +41,15 @@
         <span class="c-line"><span class="nb">{{ r.often or r.form }}</span><span class="sep">·</span>{% for part in (r.effect_short or r.effect or r.lowers).split("; ") %}<span class="nb">{{ part }}</span>{% if not loop.last %}, {% endif %}{% endfor %}</span>
         <span class="c-often">{{ r.often or r.form }}</span>
         <span class="c-effect">{{ r.effect_short or r.effect or r.lowers }}</span>
-        <span class="c-proof">{% if r.proven %}<span class="pf pf-{{ r.proven }}"><span class="pf-i" aria-hidden="true">{% if r.proven == 'yes' %}&#10003;{% elif r.proven == 'failed' %}&#10007;{% elif r.proven == 'testing' %}&#8230;{% else %}&ndash;{% endif %}</span><span class="pf-short">{{ r.proven_short }}</span><span class="pf-long">{{ r.proven_label }}</span></span>{% endif %}</span>
-        <span class="c-stage">{% if r.show_stage %}<span class="words">{{ r.stage_plain }}</span>{% endif %}{{ mini(r.rank, r.moved) }}</span>
+        <span class="c-proof">{% if r.proven %}<span class="pf pf-{{ r.proven }}">{% if r.proven == 'yes' %}<span class="pf-i" aria-hidden="true">&#10003;</span>{% elif r.proven == 'failed' %}<span class="pf-i" aria-hidden="true">&#10007;</span>{% endif %}<span class="pf-short">{{ r.proven_short }}</span><span class="pf-long">{{ r.proven_label }}</span></span>{% endif %}</span>
+        <span class="c-stage">{% if r.show_dots %}{{ mini(r.rank, r.moved) }}<span class="words">{{ r.stage_plain }}</span>{% endif %}</span>
         <span class="go" aria-hidden="true">&rsaquo;</span>
       </a>
       {% endfor %}
     </div>
     {% endfor %}
   </div>
-  {% if filterable %}<p class="empty f-empty" hidden>Nothing on the list matches. Try setting Lowers or How often back.</p>{% endif %}
+  {% if filterable %}<p class="empty f-empty" hidden>Nothing on the list matches. Try "All".</p>{% endif %}
 </section>
 {%- endmacro %}
 
@@ -75,19 +73,19 @@
 <section class="section">
   <div class="section-head"><h2>Coming up</h2></div>
   <div class="tl-list">
-  <div class="tl tl-h" aria-hidden="true"><span>Date</span><span>Drug · Event</span><span></span></div>
   {% for h in items %}
   {% set when = h.when or (h.date|horizon_date) %}
+  {% set due = when == 'DUE NOW' %}
   {% set r = drug_rows.get(h.drug_id) if drug_rows and h.drug_id else none %}
-  <details class="tl-item">
+  <details class="tl-item{{ ' due' if due }}">
     <summary class="tl">
-      <span class="tl-when{{ ' due' if when == 'DUE NOW' }}">{{ when }}</span>
-      <span class="tl-what"><b>{{ h.drug }}</b><span class="sep">·</span>{{ h.short or h.what }}</span>
+      <span class="tl-when">{{ "Due now" if due else when }}</span>
+      <span class="tl-what"><b>{{ h.drug }}</b> {{ h.short or h.what }}{% if due %}<span class="tl-hint">Results expected any week.</span>{% endif %}</span>
       <span class="go" aria-hidden="true">&rsaquo;</span>
     </summary>
     <div class="tl-more">
       {% if h.short %}<p>{{ h.what }}</p>{% endif %}
-      {% if r %}<div class="tl-facts"><span>{{ r.often or r.form }}<span class="sep">·</span>{{ r.effect_short or r.effect }}</span>{% if r.proven_label %}<span class="pf pf-{{ r.proven }}">{{ r.proven_label }}</span>{% endif %}</div>{% endif %}
+      {% if r %}<div class="tl-facts"><span class="mono">{{ r.often or r.form }}<span class="sep">·</span>{{ r.effect_short or r.effect }}</span>{% if r.proven_label %}<span class="pf pf-{{ r.proven }}">{% if r.proven == 'yes' %}&#10003; {% elif r.proven == 'failed' %}&#10007; {% endif %}{{ r.proven_label }}</span>{% endif %}</div>{% endif %}
       <div class="tl-links">{% if h.drug_id %}<a class="src" href="{{ root }}drugs/{{ h.drug_id }}.html">Drug overview &rarr;</a>{% endif %}<a class="src" href="{{ h.url }}" rel="noopener noreferrer">Source &rarr;</a></div>
     </div>
   </details>
@@ -100,16 +98,24 @@
    then broader news. #}
 {% macro this_week(w, root, title, past=0) -%}
 {% set drug_changes = w.changes|rejectattr("kind", "equalto", "field")|list %}
+{% set n_due = w.horizon|selectattr("when", "equalto", "DUE NOW")|list|length if w.horizon else 0 %}
 <section class="section">
-  <div class="section-head{{ ' quiet-head' if not drug_changes }}"><h2>{{ title }} <span class="sub">· {{ w.date|nice_date_short }}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
-  {% if w.errors %}<div class="note" style="margin-top:0.625rem">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}
+  {% if drug_changes %}
+  <div class="section-head"><h2>{{ title }} <span class="sub">{{ w.date|nice_date_short }}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
+  {% else %}
+  <div class="weekline">
+    <p><span class="sub">{{ w.date|nice_date_short }}</span>{% if w.baseline %}Tracking started this week.{% else %}Nothing changed this week.{% endif %}{% if n_due %} {{ n_due }} result{{ "s" if n_due != 1 }} due now.{% endif %}</p>
+    {% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}
+  </div>
+  {% endif %}
+  {% if w.errors %}<div class="note">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}
   {% if drug_changes %}{{ changes(drug_changes, root) }}{% endif %}
 </section>
 {% if w.horizon %}{{ horizon(w.horizon, root) }}{% endif %}
 {% set field = w.changes|selectattr("kind", "equalto", "field")|list %}
 {% if field %}
 <section class="section">
-  <div class="section-head"><h2>In the field <span class="sub">· beyond your list</span></h2></div>
+  <div class="section-head"><h2>In the field <span class="sub">beyond your list</span></h2></div>
   {% for c in field %}
   <div class="change">
     <div class="what">{{ c.what }} <a class="src" href="{{ c.url }}" rel="noopener noreferrer">{{ c.source }} &rarr;</a></div>
@@ -121,10 +127,14 @@
 {%- endmacro %}
 
 {# The panel's header band: a line of report details, the title, then the folder tabs. #}
-{% macro slab_head(active) -%}
+{% macro slab_head(active, back=none) -%}
 <header class="slab-head">
-  <div class="head-meta"><span>Weekly report · Final</span><span>Collected {{ updated|nice_date if updated else "–" }}</span></div>
-  <h1 class="one-line">Cholesterol Drugs Pipeline</h1>
+  <div class="head-meta">
+    {% if back %}<a class="hback" href="{{ back }}" aria-label="Back">&larr;</a>{% else %}<span class="hback off" aria-hidden="true">&larr;</span>{% endif %}
+    {# placeholder: choosing which drugs you track comes later #}
+    <span class="hsettings" aria-disabled="true" title="Coming soon: choose which drugs you track">Settings</span>
+  </div>
+  <h1 class="one-line">Your Drugs Pipeline</h1>
   {{ tabs(active) }}
 </header>
 {%- endmacro %}

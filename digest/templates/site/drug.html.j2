@@ -1,9 +1,8 @@
 {% extends "base.html.j2" %}
 {% import "_macros.html.j2" as m with context %}
 {% block title %}{{ drug.brand ~ " (" ~ drug.name ~ ")" if drug.brand else drug.name }} · {{ site_title }}{% endblock %}
-{% block head %}{{ m.slab_head("drugs") }}{% endblock %}
+{% block head %}{{ m.slab_head("drugs", back=root ~ "drugs.html") }}{% endblock %}
 {% block content %}
-<a class="back" href="{{ root }}drugs.html">&larr; All drugs</a>
 
 <div class="dtop">
   <h2 class="dname">{{ drug.brand or drug.name }}{% if drug.brand %}<span class="generic">{{ drug.name|lower }}</span>{% endif %}{{ m.badge(drug.badge) }}{% if row.moved %}<span class="tag moved">&#9650; moved this week</span>{% endif %}</h2>

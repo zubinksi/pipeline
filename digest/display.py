@@ -23,14 +23,14 @@ PROVEN_LABEL = {
     "yes": "Prevents heart attacks",
     "testing": "Heart-attack trial underway",
     "failed": "Didn't prevent heart attacks",
-    "untested": "No heart-attack trial yet",
+    "untested": "No heart-attack data yet",
 }
 # The same, short enough for a table column headed "Prevents heart attacks?"
 PROVEN_SHORT = {
     "yes": "Proven",
     "testing": "Trial underway",
     "failed": "Didn't prevent",
-    "untested": "No trial yet",
+    "untested": "No data yet",
 }
 LOWERS_LABEL = {"ldl": "LDL", "lpa": "Lp(a)", "tg": "Triglycerides"}
 
@@ -70,5 +70,7 @@ def groups(all_rows: list[dict]) -> list[dict]:
         members = sorted((r for r in all_rows if r["stage"] in stages), key=lambda r: -r["rank"])
         if members:
             out.append({"key": key, "title": title, "usual": usual,
-                        "rows": [{**r, "show_stage": r["stage"] != usual} for r in members]})
+                        "rows": [{**r, "show_stage": r["stage"] != usual,
+                                  # in "Available now" every drug is approved: dots would add nothing
+                                  "show_dots": key != "now"} for r in members]})
     return out

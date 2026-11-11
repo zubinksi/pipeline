@@ -41,7 +41,7 @@ _env.filters["nice_date"] = _fmt_date
 _env.filters["nice_date_short"] = _fmt_short
 _env.filters["horizon_date"] = fmt_horizon_date
 STATIC = Path(__file__).parent / "static"
-FREQ_LABEL = {"daily": "Daily", "monthly": "Monthly", "infrequent": "Less than monthly", "once": "One-time"}
+FREQ_LABEL = {"daily": "Daily", "monthly": "Monthly", "infrequent": "Less often", "once": "Once"}
 ACTIVE = {"NOT_YET_RECRUITING", "RECRUITING", "ENROLLING_BY_INVITATION", "ACTIVE_NOT_RECRUITING"}
 
 
@@ -71,7 +71,7 @@ def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
 
 
 def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict,
-          site_title: str = "Cholesterol pipeline") -> Path:
+          site_title: str = "Your Drugs Pipeline") -> Path:
     out = Path(out)
     if out.exists():
         shutil.rmtree(out)

@@ -1,9 +1,8 @@
 {% extends "base.html.j2" %}
 {% import "_macros.html.j2" as m with context %}
 {% block title %}Past weeks · {{ site_title }}{% endblock %}
-{% block head %}{{ m.slab_head("news") }}{% endblock %}
+{% block head %}{{ m.slab_head("news", back=root ~ "index.html") }}{% endblock %}
 {% block content %}
-<a class="back" href="{{ root }}index.html">&larr; This week</a>
 <section class="section">
   <div class="section-head"><h2>Past weeks <span class="sub">· {{ weeks|length }}</span></h2></div>
   {% if weeks %}{{ m.week_list(weeks, "") }}

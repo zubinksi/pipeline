@@ -549,3 +549,96 @@ footer {
   .facts { grid-template-columns: 1fr; gap: 0.125rem; }
   .facts dd { margin-bottom: 0.5rem; }
 }
+
+/* ══ design pass ══════════════════════════════════════════════════════════
+   Hierarchy: serif sentence-case section titles; mono caps only for metadata.
+   One double rule (under the header band); whitespace elsewhere. */
+.slab-body, .panel { gap: 2.25rem; }
+.section-head { border-bottom: 0; padding-bottom: 0; margin-bottom: 0.375rem; align-items: baseline; }
+.section-head h2 { font-family: var(--serif); font-size: 1.375rem; line-height: 1.2; letter-spacing: 0; text-transform: none; color: var(--ink); }
+.section-head h2 .sub { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-left: 0.5rem; }
+.note { margin-top: 0.5rem; }
+
+/* header band: back arrow + settings placeholder, title, tabs on a double rule */
+.slab-head { padding-top: 1rem; border-bottom: 3px double var(--b4); }
+.head-meta { align-items: center; }
+.hback { font-family: var(--mono); font-size: 1.125rem; line-height: 1; color: var(--ink2); text-decoration: none; padding: 0.25rem 0.5rem 0.25rem 0; }
+.hback:hover { color: var(--accent); }
+.hback.off { opacity: 0.3; }
+.hsettings { font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--b4); border-radius: 2px; padding: 0.3125rem 0.625rem; cursor: default; }
+.slab-head h1 { margin: 0.75rem 0 1.25rem; }
+
+/* folder tabs: each tab is two mirrored 2D-skewed halves, so the slanted sides
+   render crisply; tabs take ~30% each, leaving deliberate room for a third */
+.folders { grid-template-columns: repeat(3, minmax(0, 30%)); gap: 0.375rem; margin-bottom: -3px; }
+.folder::before, .folder::after {
+  content: ''; position: absolute; top: 0; bottom: 0; z-index: -1; width: calc(50% + 1px);
+  background: var(--tab); border-radius: 0; transition: background-color 0.15s, filter 0.15s;
+}
+.folder::before { inset: 0 auto 0 0; transform: skewX(-8deg); transform-origin: left bottom; border-top-left-radius: 0.5rem; }
+.folder::after { inset: 0 0 0 auto; transform: skewX(8deg); transform-origin: right bottom; border-top-right-radius: 0.5rem; }
+.folder:not(.on):hover::after { filter: brightness(1.08); }
+.folder.on::after { background: var(--slab); }
+
+/* this week, on a quiet week: one calm line */
+.weekline { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.weekline p { margin: 0; font-size: 1.0625rem; line-height: 1.4; color: var(--ink2); }
+.weekline .sub { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-right: 0.625rem; }
+
+/* coming up: serif events; "Due now" is the hero row */
+.tl-what, .tl-2 .tl-what { font-family: var(--serif); font-size: 1rem; letter-spacing: 0; color: var(--ink2); }
+.tl-what b { font-size: 1rem; }
+.tl-when { font-size: 0.6875rem; }
+.tl-item.due { border-left: 3px solid var(--accent); background: var(--accent-dim); margin: 0.25rem 0 0.375rem; border-bottom: 0; }
+.tl-item.due .tl { margin-left: 0; padding-left: 0.75rem; }
+.tl-item.due .tl-when { color: var(--accent); font-weight: 600; }
+.tl-item.due .tl:hover, .tl-item.due[open] .tl { background: transparent; }
+.tl-item.due .tl-more { padding-left: calc(5.5rem + 1.5rem); padding-right: 0.75rem; }
+.tl-hint { display: block; margin-top: 0.125rem; font-size: 0.9375rem; font-style: italic; color: var(--ink3); }
+.tl-facts .mono { font-family: var(--mono); }
+.go { color: var(--ink3); font-size: 1.125rem; }
+
+/* drug list: chips filter; quieter bands with more space above than below */
+.filters { display: flex; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.375rem; }
+.chip {
+  font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink3); background: transparent; border: 1px solid var(--b2); border-radius: 999px;
+  padding: 0.3125rem 0.75rem; cursor: pointer; transition: color 0.15s, border-color 0.15s, background-color 0.15s;
+}
+.chip:hover { color: var(--ink); border-color: var(--muted); }
+.chip[aria-pressed='true'] { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+.group { margin-top: 1.75rem; }
+.dhead + .group { margin-top: 0.5rem; }
+.group h3 { margin-bottom: 0.125rem; }
+.group h3::before { content: none; }
+.c-stage { gap: 0.25rem; }
+.c-stage .words { color: var(--muted); }
+
+/* heart-attack evidence: plain words in the serif */
+.pf, .gl dd .pf, .tl-facts .pf { font-family: var(--serif); font-size: 0.9688rem; letter-spacing: 0; }
+.pf-i { font-family: var(--serif); }
+
+footer { font-family: var(--serif); font-size: 0.875rem; letter-spacing: 0; text-transform: none; color: rgba(255, 255, 255, 0.55); }
+
+@media (max-width: 860px) {
+  .slab-body, .panel { gap: 2rem; }
+  .slab-head { padding-top: 0.625rem; }
+  .slab-head h1 { font-size: clamp(1.25rem, 7vw, 1.75rem); margin: 0.375rem 0 1rem; }
+  .section-head h2 { font-size: 1.25rem; }
+  .folders { gap: 0.25rem; }
+  .folder::before { border-top-left-radius: 0.375rem; transform: skewX(-7deg); }
+  .folder::after { border-top-right-radius: 0.375rem; transform: skewX(7deg); }
+  .weekline { flex-wrap: wrap; }
+  /* coming up: date above, event below, full width */
+  .tl { grid-template-columns: minmax(0, 1fr) 0.75rem; row-gap: 0.1875rem; }
+  .tl-when { grid-column: 1; grid-row: 1; }
+  .tl-what { grid-column: 1; grid-row: 2; }
+  .tl .go { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+  .tl-item.due .tl-more { padding-left: 0.75rem; }
+  /* drug rows: name with the stage dots on one line, then two full-width lines */
+  .drug { grid-template-areas: "name stage go" "line line line" "proof proof proof"; row-gap: 0.25rem; }
+  .c-stage { align-self: center; }
+  .c-stage .words { font-size: 0.5625rem; }
+  .filters { width: auto; }
+}

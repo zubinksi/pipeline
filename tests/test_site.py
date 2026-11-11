@@ -65,15 +65,15 @@ def test_untrusted_text_is_escaped(tmp_path):
 
 def test_empty_site_builds(tmp_path):
     out = site.build(tmp_path / "s", weeks=[], snapshot={"drugs": {}, "trials": {}}, watchlist=WL)
-    assert "Cholesterol Drugs Pipeline" in (out / "index.html").read_text()
+    assert "Your Drugs Pipeline" in (out / "index.html").read_text()
     assert "No weekly runs yet" in (out / "weeks/index.html").read_text()
 
 
 def test_pipeline_rows_carry_filter_data(tmp_path):
     out, _ = _build(tmp_path)
     html = (out / "drugs.html").read_text()
-    assert "data-filter" in html and 'data-k="lowers"' not in html  # one option only: no dropdown
-    assert '<option value="monthly">Monthly</option>' in html
+    assert "data-filter" in html and 'data-k="lowers"' not in html  # one option only: no chips
+    assert 'data-k="freq" data-v="monthly" aria-pressed="false">Monthly</button>' in html
     assert 'value="daily"' not in html  # filter options only for values on the watchlist
     assert html.count('class="drug"') == len(WL["drugs"])
     for d in WL["drugs"]:
@@ -87,8 +87,10 @@ def test_rows_show_evidence_and_only_unusual_stage_words(tmp_path):
     html = (out / "drugs.html").read_text()
     assert "Prevents heart attacks" in html and "Heart-attack trial underway" in html
     assert "LDL ↓ 60%" in html and "Twice a year" in html and "Heart attacks?" in html
+    now = html[html.index("Available now"):html.index("Getting close")]
     close = html[html.index("Getting close"):html.index("How to read this")]
-    assert "Final-stage trials" not in close  # same as the group, so not repeated
+    assert 'class="mini' not in now                 # all approved: no stage dots
+    assert 'class="mini' in close and "Final-stage trials" in close  # dots with a label
 
 def test_watchlist_rejects_unknown_route(tmp_path):
     import pytest, yaml
@@ -116,7 +118,7 @@ def test_dropped_drugs_and_retired_sources_are_hidden(tmp_path):
 
 def test_drug_page_has_back_link(tmp_path):
     out, _ = _build(tmp_path)
-    assert 'class="back" href="../drugs.html"' in (out / "drugs/inclisiran.html").read_text()
+    assert 'class="hback" href="../drugs.html"' in (out / "drugs/inclisiran.html").read_text()
 
 
 def test_drugs_grouped_by_closeness(tmp_path):
@@ -129,9 +131,9 @@ def test_drugs_grouped_by_closeness(tmp_path):
 def test_past_weeks_button_and_back_links(tmp_path):
     out, _ = _build(tmp_path)
     assert 'class="btn" href="weeks/index.html"' in (out / "index.html").read_text()
-    assert 'class="back" href="../index.html"' in (out / "weeks/index.html").read_text()
+    assert 'class="hback" href="../index.html"' in (out / "weeks/index.html").read_text()
     week = (out / "weeks/2026-11-03.html").read_text()
-    assert 'class="back" href="../weeks/index.html"' in week
+    assert 'class="hback" href="../weeks/index.html"' in week
     # past weeks sit under the same header and tabs, with News selected
     assert 'class="folder f-news on"' in week and 'class="slab tabbed"' in week
     assert 'class="folder f-news on"' in (out / "weeks/index.html").read_text()
@@ -155,7 +157,8 @@ def test_news_and_drugs_tabs_and_compact_coming_up(tmp_path):
     assert '<div class="panel" data-panel="news" hidden>' in drugs and '<div class="panel" data-panel="drugs">' in drugs
     assert (out / "assets/tabs.js").exists()
     # Coming up: a short line that opens to the full sentence, the drug's facts and links
-    assert '<details class="tl-item">' in news and "Heart-attack trial results" in news
+    assert '<details class="tl-item due">' in news and "Results expected any week." in news
+    assert "Heart-attack trial results" in news
     more = news[news.index('class="tl-more"'):]
     assert "If positive" in more and "Twice a year" in more and 'href="drugs/inclisiran.html"' in more
     assert "no changes" not in news.lower()
