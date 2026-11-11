@@ -34,7 +34,7 @@ def test_site_pages_exist(tmp_path):
 def test_index_shows_latest_week_and_sources(tmp_path):
     out, changes = _build(tmp_path)
     html = (out / "index.html").read_text()
-    assert "This week" in html and "Coming up" in html and "How to read this" in html
+    assert "This week" in html and "Watching for" in html and "How to read this" in html
     for c in changes:
         assert c.url in html
     assert 'href="drugs/verve102.html"' in html  # relative links work on any host
@@ -102,12 +102,14 @@ def test_watchlist_rejects_unknown_route(tmp_path):
 def test_dropped_drugs_and_retired_sources_are_hidden(tmp_path):
     rec = {"date": "2026-11-06", "headline": "h", "baseline": True, "moved": [], "stages": {},
            "changes": [{"id": "x", "kind": "news", "drug": "obicetrapib", "what": "gone", "url": "u", "source": "s", "why": ""}],
-           "horizon": [{"date": "2026-11", "drug": "Obicetrapib", "what": "gone", "url": "u"},
-                       {"date": "2026-12", "drug": "Inclisiran", "what": "kept", "url": "u"}],
+           "horizon": [{"date": "2026-11", "drug": "Obicetrapib", "what": "gone", "url": "u", "when": "NOV 2026"},
+                       {"date": "2026-12", "drug": "Inclisiran", "what": "kept", "url": "u", "when": "DEC 2026"},
+                       {"date": "2026-12", "drug": "Inclisiran", "what": "old-style routine", "url": "u"}],
            "errors": ["FDA press announcements", "openFDA"]}
     out = site.build(tmp_path / "s", weeks=[rec], snapshot={"drugs": {}, "trials": {}}, watchlist=WL)
-    html = (out / "index.html").read_text()
+    html = (out / "weeks/2026-11-06.html").read_text()  # a past week shows what was stored, filtered
     assert "Obicetrapib" not in html and "gone" not in html and "kept" in html and "DEC 2026" in html
+    assert "old-style routine" not in html
     assert "FDA press announcements" not in html and "openFDA" in html
 
 

@@ -57,6 +57,10 @@ The site is written for a non-specialist: "Statin alternatives in the pipeline",
 
 The look is light and matches the email: cream paper on a pale grid, slate ink, navy accent. Fonts are Geist Serif and Geist Mono (SIL Open Font License, `digest/static/fonts/OFL.txt`). Colors are set at the top of `digest/static/site.css`. The plain-language text comes from the `lowers`, `form`, `plain`, `effect`, `proven`, `note` and `badge` fields in `watchlist.yaml`. `effect` (how much it lowers) and `proven` (did a large trial show fewer heart attacks: yes / testing / failed / untested) each carry a source URL. The list is filtered by "How often" (a "Lowers" filter appears automatically if drugs lowering something other than LDL are added). Only LDL-lowering, non-daily drugs are tracked. `digest/display.py` holds the shared wording used by both the site and the email.
 
+## Watching for
+
+Instead of every trial's completion date, the site and email list only the milestones in each drug's `milestones` in `watchlist.yaml` (for example Leqvio's ORION-4 heart-attack trial), in plain words. Trial-linked milestones are dated live from ClinicalTrials.gov and show "DUE NOW", "Finished" or "Stopped" as things change. Dated `events` (e.g. an FDA decision date) also appear here.
+
 ## In the field
 
 Besides the watchlist, each run does a few broad Google News searches (`settings.field_news.queries` in `watchlist.yaml`) for LDL-lowering treatment news. Items that name a watchlist drug are left out, since they belong in that drug's own news. Claude keeps at most `max_items` (default 3), and only concrete developments: approvals, trial results, filings, guideline changes, or a whole drug class succeeding or failing. Without an API key, a strict keyword filter stands in. The first run after this is switched on records a baseline and shows nothing.

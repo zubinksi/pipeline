@@ -42,6 +42,7 @@ class HorizonItem:
     drug: str
     what: str
     url: str
+    when: str = ""     # plain timing label, e.g. "DUE NOW" or "MAY 2027"
 
 
 def _trial_name(t: dict) -> str:
@@ -168,27 +169,38 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
 
 
 def horizon(curr: dict, watchlist: dict, today: date | None = None) -> list[HorizonItem]:
+    """"Watching for": the hand-picked milestones in the watchlist (each drug's
+    `milestones`), dated live from ClinicalTrials.gov when tied to a trial, plus any
+    dated `events`. Routine trial completion dates are deliberately left out."""
     today = today or date.today()
-    end = today + timedelta(days=watchlist["settings"].get("horizon_days", 60))
-    names = {d["id"]: d["name"] for d in watchlist["drugs"]}
-    min_phase = watchlist["settings"].get("min_trial_phase", 2)
+    trials = curr.get("trials", {})
     items = []
-    for t in curr.get("trials", {}).values():
-        if t["phase_rank"] < min_phase or t["status"] in HALTED | {"COMPLETED"}:
-            continue
-        d = _parse_partial_date(t.get("primary_completion", ""))
-        if d and today <= d <= end:
-            items.append(HorizonItem(
-                date=t["primary_completion"], drug=names.get(t["drug"], t["drug"]),
-                what=f"{_trial_name(t)} reaches primary completion"
-                     f"{' (estimated)' if t.get('primary_completion_type') == 'ESTIMATED' else ''}; "
-                     "topline results often follow within a few months.",
-                url=t["url"]))
+    for d in watchlist["drugs"]:
+        label = d.get("brand") or d["name"]
+        for m in d.get("milestones", []) or []:
+            t = trials.get(m.get("nct", ""))
+            if t:
+                if t["status"] in HALTED:
+                    when, iso = "Stopped", t.get("primary_completion") or "0000"
+                elif t["status"] == "COMPLETED" or t.get("has_results"):
+                    when, iso = "Finished", t.get("primary_completion") or "0000"
+                else:
+                    iso = t.get("primary_completion", "")
+                    pd = _parse_partial_date(iso)
+                    when = "DUE NOW" if pd and pd <= today else (fmt_horizon_date(iso[:7]) if iso else "")
+                url = t["url"]
+            else:
+                iso = str(m.get("when", ""))
+                pd = _parse_partial_date(iso)
+                when = ("DUE NOW" if pd <= today else fmt_horizon_date(iso[:7])) if pd else iso
+                url = m.get("source", "")
+            if url:
+                items.append(HorizonItem(date=iso, drug=label, what=m["what"], url=url, when=when))
     for ev in watchlist.get("events", []):
         d = _parse_partial_date(str(ev.get("date", "")))
-        if d and today <= d <= end and ev.get("url"):
-            items.append(HorizonItem(date=str(ev["date"]), drug=names.get(ev["drug"], ev["drug"]),
-                                     what=ev["what"], url=ev["url"]))
+        if d and d >= today and ev.get("url"):
+            items.append(HorizonItem(date=str(ev["date"]), drug=ev["drug"], what=ev["what"],
+                                     url=ev["url"], when=fmt_horizon_date(str(ev["date"]))))
     return sorted(items, key=lambda h: h.date)
 
 

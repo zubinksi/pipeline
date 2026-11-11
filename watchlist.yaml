@@ -73,6 +73,8 @@ drugs:
   #   note    where it stands, in plain words
   #   badge   optional short flag
   #   brand   the name it's sold under (approved drugs); shown first
+  #   milestones  the few events worth watching ("Watching for"): a trial (nct) dated
+  #           live from ClinicalTrials.gov, or a `when` date, with a plain `what`
 
   # ---- approved ----
   - id: evolocumab
@@ -140,6 +142,11 @@ drugs:
     proven_source: https://clinicaltrials.gov/study/NCT03705234
     note: "Approved in the US and widely available. The least frequent cholesterol drug on the market today."
     sources: [https://www.pharmacytimes.com/view/inclisiran-shows-promise-treating-hyperlipidemia-in-phase-3-clinical-trials]
+    milestones:             # "Watching for": the few events that would change things
+      - nct: NCT03705234
+        what: "Results of its large heart-attack prevention trial (ORION-4). If positive, it becomes a twice-a-year shot with proven heart benefit."
+      - nct: NCT05030428
+        what: "Results of a second heart-attack prevention trial (VICTORION-2 PREVENT)."
 
   - id: lerodalcibep
     name: Lerodalcibep
@@ -184,3 +191,6 @@ drugs:
     proven_source: https://www.hcplive.com/view/verve-102-lowers-pcsk9-ldl-c-interim-phase-1b-hypercholesterolemia-data
     note: "Early results (May 2026) lasted up to 18 months so far. A mid-stage trial was registered in Sep 2026 but hasn't started enrolling. The FDA gave it Fast Track status."
     sources: [https://www.hcplive.com/view/verve-102-lowers-pcsk9-ldl-c-interim-phase-1b-hypercholesterolemia-data]
+    milestones:
+      - nct: NCT07839936
+        what: "Results from its mid-stage trial (HEART-3), the next step toward a one-time treatment."

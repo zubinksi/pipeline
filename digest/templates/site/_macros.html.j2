@@ -71,10 +71,10 @@
 
 {% macro horizon(items) -%}
 <section class="section">
-  <div class="section-head"><h2>Coming up <span class="sub">· next {{ horizon_days }} days</span></h2></div>
+  <div class="section-head"><h2>Watching for</h2></div>
   {% for h in items %}
   <div class="h-row">
-    <div class="h-when">{{ h.date|horizon_date }}</div>
+    <div class="h-when">{{ h.when or (h.date|horizon_date) }}</div>
     <div class="h-what"><b>{{ h.drug }}</b>: {{ h.what }} <a class="src" href="{{ h.url }}" rel="noopener noreferrer">Source &rarr;</a></div>
   </div>
   {% endfor %}
@@ -119,6 +119,8 @@
         <dt>Approved</dt><dd>Doctors can prescribe it.</dd>
       </dl>
       <p style="margin-top:0.75rem">Many drugs stop along the way. Even final-stage drugs are usually a few years from pharmacies.</p>
+      <h4 style="margin-top:1rem">Watching for</h4>
+      <p>A short, hand-picked list of results that would change the picture. Dates are when a trial is expected to finish collecting data (they often slip); results usually follow within a few months.</p>
     </div>
     <div>
       <h4>LDL</h4>

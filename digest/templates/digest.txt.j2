@@ -23,9 +23,9 @@ IN THE FIELD (beyond your list)
 {% endif %}
 {% if horizon %}
 
-ON THE HORIZON (next {{ horizon_days }} days)
+WATCHING FOR
 {% for h in horizon %}
-- {{ h.date|horizon_date }}  {{ h.drug }}: {{ h.what }}
+- {{ h.when or (h.date|horizon_date) }}  {{ h.drug }}: {{ h.what }}
   Source: {{ h.url }}
 {% endfor %}
 {% endif %}

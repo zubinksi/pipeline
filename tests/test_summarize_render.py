@@ -75,7 +75,7 @@ def test_render_full_digest():
     d = render.render(headline=headline, changes=changes,
                       horizon=diff.horizon(after, WL, today=date(2026, 11, 3)),
                       snapshot=after, watchlist=WL, today=date(2026, 11, 3))
-    for section in ("WHAT MOVED", "ON THE HORIZON", "THE DRUGS", "AVAILABLE NOW", "GETTING CLOSE"):
+    for section in ("WHAT MOVED", "WATCHING FOR", "THE DRUGS", "AVAILABLE NOW", "GETTING CLOSE"):
         assert section in d.text
     assert "▲ moved" in d.text and "&#9650; MOVED" in d.html
     for c in changes:

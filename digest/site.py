@@ -12,7 +12,9 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from . import STAGE_LABEL, STAGE_RANK, STAGES
-from . import display
+from dataclasses import asdict
+
+from . import diff, display
 from .diff import KIND_LABEL, fmt_horizon_date
 from .sources.ctgov import STATUS_PLAIN, phase_label
 
@@ -50,7 +52,7 @@ _groups = display.groups
 def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
     """A week's record as shown today: drugs since dropped from the watchlist are
     left out, and so are errors from sources no longer used."""
-    names = {d["name"] for d in drugs.values()}
+    names = {d["name"] for d in drugs.values()} | {d["brand"] for d in drugs.values() if d.get("brand")}
     changes = []
     for c in rec["changes"]:
         if c.get("drug") and c["drug"] not in drugs:
@@ -63,7 +65,8 @@ def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
                 else rec["headline"] or "Nothing changed this week.")
     quiet = "" if rec.get("baseline") else "no changes"
     return {**rec, "headline": headline, "changes": changes, "quiet": quiet,
-            "horizon": [h for h in rec.get("horizon", []) if h["drug"] in names],
+            # only hand-picked milestones (new style, with a `when`); older weeks stored routine trial dates
+            "horizon": [h for h in rec.get("horizon", []) if h["drug"] in names and h.get("when")],
             "errors": [e for e in rec.get("errors", []) if e.split(" (")[0] in sources]}
 
 
@@ -79,6 +82,8 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
     sources = {"ClinicalTrials.gov", "openFDA", "Google News", *(f["name"] for f in watchlist.get("feeds", []))}
     views = [_week_view(w, drugs, sources) for w in weeks]  # newest first
     latest = views[0] if views else None
+    if latest:  # "Watching for" on the home page is always worked out from today's watchlist
+        latest = {**latest, "horizon": [asdict(h) for h in diff.horizon(snapshot, watchlist)]}
     stages = {k: v["stage"] for k, v in snapshot.get("drugs", {}).items()}
     moved = set(latest["moved"]) if latest else set()
     present = lambda key: {d.get(key) for d in watchlist["drugs"]}

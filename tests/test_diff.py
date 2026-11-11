@@ -99,12 +99,15 @@ def test_resolve_stage_uses_highest_evidence():
     assert snapshot.resolve_stage(dict(drug, stage="filed"), trials, {})["stage"] == "filed"
 
 
-def test_horizon_window():
+def test_watching_for_uses_milestones_only():
     _, after = before_after(WL)
     h = diff.horizon(after, WL, today=date(2026, 11, 3))
-    assert [i.drug for i in h] == ["Lerodalcibep"]  # 2026-12 inside 60 days; 2031 trials outside
-    assert diff.horizon(after, WL, today=date(2027, 3, 1)) == []
-
+    # only the hand-picked milestone trial in the data; routine trial dates (NCT90000004 etc.) are left out
+    assert [(i.drug, i.when) for i in h] == [("Leqvio", "DUE NOW")]  # ORION-4 was due Oct 2026
+    assert "heart-attack prevention trial (ORION-4)" in h[0].what
+    assert diff.horizon(after, WL, today=date(2026, 9, 1))[0].when == "OCT 2026"
+    after["trials"]["NCT03705234"]["status"] = "COMPLETED"
+    assert diff.horizon(after, WL, today=date(2026, 11, 3))[0].when == "Finished"
 
 def test_finalize_marks_seen():
     _, after = before_after(WL)
