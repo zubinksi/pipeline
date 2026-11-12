@@ -73,8 +73,8 @@
 
 {% macro changes(list, root, show_drug=true) -%}
 {% for c in list %}
-<div class="change"{% if c.drug %} data-drug="{{ c.drug }}"{% elif c.topic %} data-topic="{{ c.topic }}"{% endif %}>
-  <div class="meta">
+<div class="change"{% if c.drug %} data-drug="{{ c.drug }}"{% elif c.topic %} data-topic="{{ c.topic }}"{% endif %}{% if c.found %} data-found="{{ c.found }}"{% endif %}>
+  <div class="meta">{% if c.found %}<span class="found">{{ c.found|found_day }}</span> · {% endif %}<span class="new-tag" hidden>New</span>
     {% if show_drug and c.drug_name %}<a href="{{ root }}drugs/{{ c.drug }}.html">{{ c.drug_name }}</a> · {% endif %}
     {% if not show_drug and c.week %}<a href="{{ root }}weeks/{{ c.week }}.html">{{ c.week|nice_date }}</a> · {% endif %}
     {{ c.kind_label }}
@@ -119,10 +119,11 @@
 {% set drug_changes = w.changes|rejectattr("kind", "equalto", "field")|list %}
 <section class="section">
   <div class="weekline">
-    <div class="weekline-top"><span class="sub">{{ w.date|nice_date_short }}</span>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
+    <div class="weekline-top"><span class="sub">{% if w.in_progress %}This week so far{% if w.started %} · since {{ w.started|nice_date_short }}{% endif %}{% else %}{{ w.date|nice_date_short }}{% endif %}</span>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
     {% if w.lead %}<p class="w-lead">{{ w.lead }}</p>
     {% elif drug_changes %}<p>{{ w.headline }}</p>
     {% elif w.baseline %}<p>Tracking started this week.</p>
+    {% elif w.in_progress %}<p>Nothing new yet this week.</p>
     {% else %}<p>A quiet week: nothing on the list moved.</p>{% endif %}
   </div>
   {% if w.errors %}<div class="note">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}
@@ -139,8 +140,8 @@
 <section class="section">
   <div class="section-head"><h2>In the field <span class="sub">beyond your list</span></h2></div>
   {% for c in field %}
-  <div class="change"{% if c.topic %} data-topic="{{ c.topic }}"{% endif %}>
-    {% if c.topic in topics and topics|length > 1 %}<div class="meta">{{ topics[c.topic].title }}</div>{% endif %}
+  <div class="change"{% if c.topic %} data-topic="{{ c.topic }}"{% endif %}{% if c.found %} data-found="{{ c.found }}"{% endif %}>
+    <div class="meta">{% if c.found %}<span class="found">{{ c.found|found_day }}</span>{% if c.topic in topics and topics|length > 1 %} · {% endif %}{% endif %}{% if c.topic in topics and topics|length > 1 %}{{ topics[c.topic].title }}{% endif %}<span class="new-tag" hidden>New</span></div>
     <div class="what">{{ c.what }} <a class="src" href="{{ c.url }}" rel="noopener noreferrer">{{ c.source }} &rarr;</a></div>
     {% if c.why %}<div class="why">{{ c.why }}</div>{% endif %}
   </div>

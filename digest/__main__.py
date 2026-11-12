@@ -3,9 +3,11 @@
   python -m digest fetch            # fetch all sources and print what was found
   python -m digest preview          # dummy data -> out/preview.html + out/site/
   python -m digest site             # rebuild site/ from history/ + state (no fetching)
-  python -m digest run              # the weekly job: fetch, diff, summarize, render, build site, send, save
+  python -m digest daily            # the daily job: fetch, diff, filter, add to the week in progress, build site
+  python -m digest run              # the weekly close (Mondays): the daily step, then the week's lead,
+                                    #   email, history record, and a fresh week
   python -m digest run --no-send    # same, but only write out/digest.html / .txt
-  python -m digest run --dry-run    # don't send and don't update state/snapshot.json
+  python -m digest run --dry-run    # don't send and don't save state
 """
 from __future__ import annotations
 
@@ -15,7 +17,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from . import STAGE_LABEL, diff, history, render, site, snapshot, summarize, watchlist as wl
+from . import STAGE_LABEL, diff, history, render, site, snapshot, summarize, week, watchlist as wl
 from .sources.ctgov import phase_label
 
 
@@ -74,13 +76,47 @@ def cmd_preview(args) -> int:
     return 0
 
 
-def cmd_run(args) -> int:
-    w = wl.load(args.watchlist)
+def _daily_step(args, w: dict) -> tuple[dict, dict, bool]:
+    """Fetch, diff against the last run, filter and summarise what's new, and add it to
+    the week in progress. Returns (snapshot, week, first_run)."""
     prev = snapshot.load(args.state)
     curr = snapshot.build(w, prev)
-    baseline = prev is None
+    wk = week.load(args.week) or week.new(date.today())
+    if prev is None:  # the very first run is a baseline
+        return curr, wk, True
     changes = diff.compute(prev, curr, w)
-    headline, lead, changes = summarize.summarize_full(changes, w)
+    _, _, kept = summarize.summarize_full(changes, w)
+    week.add(wk, kept, curr["generated_at"], curr.get("errors", []))
+    return curr, wk, False
+
+
+def _current_view(wk: dict, curr: dict, w: dict) -> dict:
+    """The week in progress, shaped like a history record for the site."""
+    changes = week.changes(wk)
+    return history.record(day=date.today(), headline=summarize.fallback_headline(changes) if changes else "",
+                          changes=changes, horizon=diff.horizon(curr, w), snapshot=curr,
+                          baseline=False) | {"in_progress": True, "started": wk.get("started", "")}
+
+
+def cmd_daily(args) -> int:
+    w = wl.load(args.watchlist)
+    curr, wk, first = _daily_step(args, w)
+    weeks = history.load_all(args.history)
+    site.build(args.site, weeks=weeks, snapshot=curr, watchlist=w,
+               current=None if first or not wk["changes"] else _current_view(wk, curr, w))
+    print(f"Week so far: {len(wk['changes'])} items. Built site in {args.site}/")
+    if not args.dry_run:
+        snapshot.save(snapshot.finalize(curr), args.state)
+        week.save(wk, args.week)
+    return 0
+
+
+def cmd_run(args) -> int:
+    """The weekly close: today's daily step, then the whole week becomes one record."""
+    w = wl.load(args.watchlist)
+    curr, wk, baseline = _daily_step(args, w)
+    changes = week.changes(wk)
+    headline, lead, changes = summarize.summarize_full(changes, w, keep_all=True)
     horizon = diff.horizon(curr, w)
     d = render.render(headline=headline, lead=lead, changes=changes, horizon=horizon,
                       snapshot=curr, watchlist=w, baseline=baseline)
@@ -105,7 +141,8 @@ def cmd_run(args) -> int:
     if not args.dry_run:  # only after a successful send
         history.save(rec, args.history)
         snapshot.save(snapshot.finalize(curr), args.state)
-        print(f"Saved {args.state} and {args.history}/{rec['date']}.json")
+        week.save(week.new(date.today()), args.week)
+        print(f"Saved {args.state} and {args.history}/{rec['date']}.json; started a new week")
     return 0
 
 
@@ -113,7 +150,10 @@ def cmd_site(args) -> int:
     """Rebuild the site from saved history + state (no fetching)."""
     w = wl.load(args.watchlist)
     snap = snapshot.load(args.state) or {"drugs": {}, "trials": {}}
-    out = site.build(args.site, weeks=history.load_all(args.history), snapshot=snap, watchlist=w)
+    wk = week.load(args.week)
+    # until the new week has something in it, the home page shows the last closed week
+    current = _current_view(wk, snap, w) if wk and wk.get("changes") and snap.get("generated_at") else None
+    out = site.build(args.site, weeks=history.load_all(args.history), snapshot=snap, watchlist=w, current=current)
     print(f"Wrote {out}/index.html")
     return 0
 
@@ -126,10 +166,14 @@ def main(argv=None) -> int:
     p.add_argument("--out", default="out")
     p.add_argument("--history", default="history")
     p.add_argument("--site", default="site")
+    p.add_argument("--week", default="state/week.json")
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("fetch").set_defaults(fn=cmd_fetch)
     sub.add_parser("preview").set_defaults(fn=cmd_preview)
     sub.add_parser("site").set_defaults(fn=cmd_site)
+    dly = sub.add_parser("daily")
+    dly.add_argument("--dry-run", action="store_true")
+    dly.set_defaults(fn=cmd_daily)
     r = sub.add_parser("run")
     r.add_argument("--no-send", action="store_true")
     r.add_argument("--dry-run", action="store_true")

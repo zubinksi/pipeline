@@ -151,15 +151,21 @@ def summarize(changes: list[Change], watchlist: dict, client=None) -> tuple[str,
     return headline, kept
 
 
-def summarize_full(changes: list[Change], watchlist: dict, client=None) -> tuple[str, str, list[Change]]:
+def summarize_full(changes: list[Change], watchlist: dict, client=None,
+                   keep_all: bool = False) -> tuple[str, str, list[Change]]:
     """Returns (headline, lead, kept_changes). The lead is Claude's short editor's note
-    for the week; without Claude there is no lead."""
+    for the week; without Claude there is no lead. With keep_all (the weekly close, over
+    items the daily runs already filtered), nothing is dropped and existing "why" lines stay."""
+    if keep_all:
+        kept_whys = {c.id: c.why for c in changes}
     drugs = {d["id"]: d for d in watchlist["drugs"]}
     if not changes:
         return "", "", []
     if client is None:
         if not os.environ.get("ANTHROPIC_API_KEY"):
             log.info("ANTHROPIC_API_KEY not set; using fallback summary")
+            if keep_all:
+                return fallback_headline(changes), "", changes
             h, kept = apply_fallback(changes, drugs, watchlist, screen_field=True)
             return h, "", kept
         import anthropic
@@ -168,9 +174,17 @@ def summarize_full(changes: list[Change], watchlist: dict, client=None) -> tuple
         result = _call(client, changes, watchlist, drugs)
     except Exception as e:  # noqa: BLE001 - never let the summary layer block the digest
         log.warning("Claude summary failed (%s); using fallback", e)
+        if keep_all:
+            return fallback_headline(changes), "", changes
         h, kept = apply_fallback(changes, drugs, watchlist, screen_field=True)
         return h, "", kept
 
+    if keep_all:
+        by_id = {i["id"]: i for i in result.get("items", []) if isinstance(i, dict) and "id" in i}
+        for c in changes:
+            c.why = kept_whys.get(c.id) or (by_id.get(c.id) or {}).get("why", "").strip()[:400]
+        headline = (result.get("headline") or "").strip()[:200] or fallback_headline(changes)
+        return headline, (result.get("lead") or "").strip()[:600], changes
     by_id = {i["id"]: i for i in result.get("items", []) if isinstance(i, dict) and "id" in i}
     kept = []
     for c in changes:

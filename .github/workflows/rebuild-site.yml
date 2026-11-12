@@ -1,7 +1,7 @@
 name: Rebuild site
 
 # When you edit the watchlist or the site templates, rebuild site/ from the
-# saved history (no fetching, no email). Commits made by this workflow use
+# saved history and the week in progress (no fetching, no email). Commits made by this workflow use
 # GITHUB_TOKEN, which doesn't trigger workflows, so there's no loop.
 on:
   push:

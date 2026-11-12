@@ -21,6 +21,9 @@ history/*.json          one record per week, the site's archive
 site/                   the built site; Vercel serves this folder
 ```
 
+
+**Daily and weekly.** Every day (except Monday) a GitHub Action checks all sources and adds anything new to the week in progress (`state/week.json`), which the site shows as "This week so far", each item dated by the day it was found. On Monday the weekly run does the same, then closes the week: Claude writes the headline and lead over the whole week, the email goes out, the week is saved to `history/`, and a new week starts. A drug added to the watchlist has its news from the past week (two items at most) reported on its first run; older news is treated as already seen.
+
 ## Guardrails, as implemented
 
 - **Nothing can be invented.** Code builds every "what happened" line from source data, and each line carries its source link. Claude only writes the headline and the "why it matters" text, and it can drop news items that aren't real developments. It can't add items, edit facts, or touch links. Without an API key, or if the API call fails, a plain fallback summary is used.

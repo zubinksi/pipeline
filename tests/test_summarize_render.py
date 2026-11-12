@@ -169,3 +169,27 @@ def test_lead_paragraph_flows_to_email_history_and_site(tmp_path):
     # without Claude there's no lead
     _, no_lead, _ = summarize.summarize_full(changes, WL, client=FakeClient({}, stop_reason="refusal"))
     assert no_lead == ""
+
+
+def test_daily_runs_build_the_week_and_monday_closes_it(tmp_path):
+    from digest import week, site
+    from digest.__main__ import _current_view
+    changes, after = _changes()
+    payload = {"headline": "h", "lead": "", "items": [{"id": c.id, "include": True, "why": "w"} for c in changes]}
+    _, _, kept = summarize.summarize_full(changes, WL, client=FakeClient(payload))
+    wk = week.new(date(2026, 11, 10))
+    week.add(wk, kept[:2], "2026-11-11T13:07:00+00:00", [])
+    week.add(wk, kept, "2026-11-12T13:07:00+00:00", [])          # repeats are skipped
+    assert len(wk["changes"]) == len(kept)
+    assert [c["found"][:10] for c in wk["changes"][:3]] == ["2026-11-11", "2026-11-11", "2026-11-12"]
+    p = tmp_path / "week.json"; week.save(wk, p); wk = week.load(p)
+    # the site shows the week in progress, each item with the day it was found
+    cur = _current_view(wk, after, WL)
+    out = site.build(tmp_path / "site", weeks=[], snapshot=after, watchlist=WL, current=cur)
+    news = (out / "index.html").read_text()
+    assert "This week so far" in news and "Wed 11 Nov" in news and 'data-found="2026-11-12' in news
+    assert (out / "assets/newmark.js").exists()
+    # Monday: the whole week, nothing dropped, the daily why lines kept, plus a lead
+    close = {"headline": "Week", "lead": "A lead.", "items": [{"id": c["id"], "include": False, "why": "x"} for c in wk["changes"]]}
+    headline, lead, all_ = summarize.summarize_full(week.changes(wk), WL, client=FakeClient(close), keep_all=True)
+    assert lead == "A lead." and len(all_) == len(kept) and all(c.why == "w" for c in all_)

@@ -39,6 +39,15 @@ def _fmt_short(s: str) -> str:
         return s
 
 
+def _found_day(s: str) -> str:
+    """'2026-11-12T13:07:00+00:00' -> 'Thu 12 Nov'."""
+    try:
+        return date.fromisoformat(s[:10]).strftime("%a %-d %b")
+    except (ValueError, TypeError):
+        return ""
+
+
+_env.filters["found_day"] = _found_day
 _env.filters["nice_date"] = _fmt_date
 _env.filters["nice_date_short"] = _fmt_short
 _env.filters["horizon_date"] = fmt_horizon_date
@@ -126,7 +135,9 @@ _MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT",
 
 
 def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict,
-          site_title: str = "Readout") -> Path:
+          site_title: str = "Readout", current: dict | None = None) -> Path:
+    """`weeks` are the closed weeks (newest first); `current` is the week in progress,
+    which the home page shows when there is one."""
     out = Path(out)
     if out.exists():
         shutil.rmtree(out)
@@ -136,7 +147,7 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
     drugs = {d["id"]: d for d in watchlist["drugs"]}
     sources = {"ClinicalTrials.gov", "openFDA", "Google News", *(f["name"] for f in watchlist.get("feeds", []))}
     views = [_week_view(w, drugs, sources) for w in weeks]  # newest first
-    latest = views[0] if views else None
+    latest = _week_view(current, drugs, sources) if current else (views[0] if views else None)
     if latest:  # "Watching for" on the home page is always worked out from today's watchlist
         latest = {**latest, "horizon": [asdict(h) for h in diff.horizon(snapshot, watchlist)]}
     stages = {k: v["stage"] for k, v in snapshot.get("drugs", {}).items()}

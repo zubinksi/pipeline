@@ -35,6 +35,7 @@ class Change:
     why: str = ""             # filled by the summarizer
     extra: dict = field(default_factory=dict)
     topic: str = ""           # for changes not tied to a drug (field news, discovery)
+    found: str = ""           # when a daily run first found it (ISO timestamp)
 
 
 @dataclass
