@@ -4,5 +4,17 @@
   "installCommand": "echo 'static site, nothing to install'",
   "buildCommand": "echo 'site/ is prebuilt by GitHub Actions'",
   "outputDirectory": "site",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/cabinet",
+      "destination": "/panel",
+      "permanent": true
+    },
+    {
+      "source": "/cabinet.html",
+      "destination": "/panel",
+      "permanent": true
+    }
+  ]
 }

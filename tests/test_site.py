@@ -65,7 +65,7 @@ def test_untrusted_text_is_escaped(tmp_path):
 
 def test_empty_site_builds(tmp_path):
     out = site.build(tmp_path / "s", weeks=[], snapshot={"drugs": {}, "trials": {}}, watchlist=WL)
-    assert "Your Drugs Pipeline" in (out / "index.html").read_text() and "Your cabinet" in (out / "index.html").read_text()
+    assert "Your Drugs Pipeline" in (out / "index.html").read_text() and "Your panel" in (out / "index.html").read_text()
     assert "No weekly runs yet" in (out / "weeks/index.html").read_text()
 
 
@@ -189,13 +189,13 @@ def test_drug_page_is_consolidated_for_a_layperson(tmp_path):
     assert "Trials and technical details" in html                   # detail tucked away
 
 
-def test_cabinet_page_chooses_what_to_follow(tmp_path):
+def test_panel_page_chooses_what_to_follow(tmp_path):
     out, _ = _build(tmp_path)
     news = (out / "index.html").read_text()
-    assert '<a class="hcab" href="cabinet.html">' in news  # the header label opens the cabinet
-    assert 'href="../cabinet.html"' in (out / "drugs/inclisiran.html").read_text()
-    cab = (out / "cabinet.html").read_text()
-    assert 'class="hcab on" aria-current="page"' in cab and "data-cabinet" in cab
+    assert '<a class="hcab" href="panel.html">' in news  # the header label opens the panel
+    assert 'href="../panel.html"' in (out / "drugs/inclisiran.html").read_text()
+    cab = (out / "panel.html").read_text()
+    assert 'class="hcab on" aria-current="page"' in cab and "data-panel-form" in cab
     # topics, each with its drugs; a company to follow across topics
     for t in ("heart", "obesity", "alzheimers", "cancer"):
         assert f'data-topic-box="{t}"' in cab
@@ -203,7 +203,7 @@ def test_cabinet_page_chooses_what_to_follow(tmp_path):
         assert f'data-drug-box="{d["id"]}"' in cab
     assert 'data-company-box="lilly"' in cab and "By company" in cab
     assert '"verve102":{"t":"heart","c":["lilly"]}' in news  # each page knows topics and companies
-    assert (out / "assets/cabinet.js").exists() and "assets/cabinet.js" in news
+    assert (out / "assets/panel.js").exists() and "assets/panel.js" in news
     # rows carry their drug so untracked ones can be hidden
     assert 'data-drug="evolocumab"' in (out / "drugs.html").read_text()
 
@@ -223,10 +223,10 @@ def test_drugs_page_is_split_by_topic_with_topic_words(tmp_path):
 
 def test_welcome_lpa_groups_and_sponsor_tag(tmp_path):
     out, _ = _build(tmp_path)
-    news, cab = (out / "index.html").read_text(), (out / "cabinet.html").read_text()
-    assert 'location.replace("cabinet.html?welcome")' in news  # first visit starts with the welcome
+    news, cab = (out / "index.html").read_text(), (out / "panel.html").read_text()
+    assert 'location.replace("panel.html?welcome")' in news  # first visit starts with the welcome
     assert "Welcome" in cab and "data-done" in cab
-    # Heart & cholesterol splits into LDL and Lp(a) in the cabinet
+    # Heart & cholesterol splits into LDL and Lp(a) in the panel
     assert 'id="g-heart-ldl"' in cab and 'id="g-heart-lpa"' in cab and ">Lp(a)-lowering<" in cab
     lp = (out / "drugs/lepodisiran.html").read_text()
     assert "<dt>Lp(a) reduction</dt>" in lp and '<span class="sponsor">Eli Lilly</span>' in lp

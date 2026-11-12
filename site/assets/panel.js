@@ -1,13 +1,13 @@
-// The cabinet: what you follow. Saved in this browser as
+// The panel: what you follow. Saved in this browser as
 //   {v: 2, topics: [...], companies: [...], off: [...]}
 // A drug shows if its topic or one of its companies is followed, and it isn't
-// switched off. With nothing saved, every topic is followed. On the cabinet page
+// switched off. With nothing saved, every topic is followed. On the panel page
 // the checkboxes edit this; on other pages, rows for drugs (and topic news) you
 // don't follow are hidden (data-untracked tells filter.js to leave them hidden).
 (function () {
-  var KEY = 'cabinet';
+  var KEY = 'cabinet';  // storage key kept from the old name, so saved choices survive
   var data = {};
-  try { data = JSON.parse(document.getElementById('cabinet-data').textContent); } catch (e) { return; }
+  try { data = JSON.parse(document.getElementById('panel-data').textContent); } catch (e) { return; }
   var drugs = data.drugs || {}, ids = Object.keys(drugs);
 
   function load() {
@@ -37,7 +37,7 @@
   function inTopic(t) { return ids.filter(function (id) { return drugs[id].t === t; }); }
   function topicShown(t) { return has(st.topics, t) || ids.some(function (id) { return drugs[id].t === t && shown(id); }); }
 
-  var form = document.querySelector('[data-cabinet]');
+  var form = document.querySelector('[data-panel-form]');
   if (form) {
     var q = function (sel) { return Array.prototype.slice.call(form.querySelectorAll(sel)); };
     function sync() {

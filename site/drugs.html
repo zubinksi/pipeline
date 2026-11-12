@@ -11,7 +11,7 @@
 <link rel="preload" href="assets/fonts/GeistSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
-<script>try{if(!localStorage.getItem("cabinet")){localStorage.setItem("cabinet-probe","1");localStorage.removeItem("cabinet-probe");location.replace("cabinet.html?welcome")}}catch(e){}</script>
+<script>try{if(!localStorage.getItem("cabinet")){localStorage.setItem("panel-probe","1");localStorage.removeItem("panel-probe");location.replace("panel.html?welcome")}}catch(e){}</script>
 </head>
 <body>
 <main class="body">
@@ -19,7 +19,7 @@
 <header class="slab-head">
   <h1 class="sr-only">Your Drugs Pipeline</h1>
   <div class="head-meta">
-<a class="hcab" href="cabinet.html"><span class="hback" aria-hidden="true">&larr;</span>Your cabinet</a>  </div>
+<a class="hcab" href="panel.html"><span class="hback" aria-hidden="true">&larr;</span>Your panel</a>  </div>
 <nav class="folders" aria-label="Sections">
   <a class="folder f-news" data-tab="news" href="index.html"><span>News</span></a>
   <a class="folder f-drugs on" data-tab="drugs" href="drugs.html" aria-current="page"><span>Drugs</span></a>
@@ -399,7 +399,7 @@
       </div>
     </div>
   </div>
-  <p class="empty cab-empty" hidden>Nothing here from your cabinet. <a href="cabinet.html">Choose what to follow &rarr;</a></p>
+  <p class="empty cab-empty" hidden>Nothing here from your panel. <a href="panel.html">Choose what to follow &rarr;</a></p>
 <p class="empty f-empty" hidden>Nothing on the list matches. Try "All".</p></section>
 <details class="explain">
   <summary>How to read this</summary>
@@ -441,8 +441,8 @@
 <footer>
   Report generated Nov 9, 2026 · Sources: ClinicalTrials.gov, openFDA, news searches
 </footer>
-<script type="application/json" id="cabinet-data">{"topics":["heart","obesity","alzheimers","cancer"],"drugs":{"evolocumab":{"t":"heart","c":[]},"alirocumab":{"t":"heart","c":[]},"inclisiran":{"t":"heart","c":[]},"lerodalcibep":{"t":"heart","c":[]},"verve102":{"t":"heart","c":["lilly"]},"lepodisiran":{"t":"heart","c":["lilly"]},"olpasiran":{"t":"heart","c":[]},"pelacarsen":{"t":"heart","c":[]},"zerlasiran":{"t":"heart","c":[]},"muvalaplin":{"t":"heart","c":["lilly"]},"tirzepatide":{"t":"obesity","c":["lilly"]},"semaglutide":{"t":"obesity","c":[]},"orforglipron":{"t":"obesity","c":["lilly"]},"retatrutide":{"t":"obesity","c":["lilly"]},"maritide":{"t":"obesity","c":[]},"donanemab":{"t":"alzheimers","c":["lilly"]},"lecanemab":{"t":"alzheimers","c":[]},"remternetug":{"t":"alzheimers","c":["lilly"]},"trontinemab":{"t":"alzheimers","c":[]},"imlunestrant":{"t":"cancer","c":["lilly"]},"olomorasib":{"t":"cancer","c":["lilly"]},"ivonescimab":{"t":"cancer","c":[]}}}</script>
-<script src="assets/cabinet.js" defer></script>
+<script type="application/json" id="panel-data">{"topics":["heart","obesity","alzheimers","cancer"],"drugs":{"evolocumab":{"t":"heart","c":[]},"alirocumab":{"t":"heart","c":[]},"inclisiran":{"t":"heart","c":[]},"lerodalcibep":{"t":"heart","c":[]},"verve102":{"t":"heart","c":["lilly"]},"lepodisiran":{"t":"heart","c":["lilly"]},"olpasiran":{"t":"heart","c":[]},"pelacarsen":{"t":"heart","c":[]},"zerlasiran":{"t":"heart","c":[]},"muvalaplin":{"t":"heart","c":["lilly"]},"tirzepatide":{"t":"obesity","c":["lilly"]},"semaglutide":{"t":"obesity","c":[]},"orforglipron":{"t":"obesity","c":["lilly"]},"retatrutide":{"t":"obesity","c":["lilly"]},"maritide":{"t":"obesity","c":[]},"donanemab":{"t":"alzheimers","c":["lilly"]},"lecanemab":{"t":"alzheimers","c":[]},"remternetug":{"t":"alzheimers","c":["lilly"]},"trontinemab":{"t":"alzheimers","c":[]},"imlunestrant":{"t":"cancer","c":["lilly"]},"olomorasib":{"t":"cancer","c":["lilly"]},"ivonescimab":{"t":"cancer","c":[]}}}</script>
+<script src="assets/panel.js" defer></script>
 <script src="assets/filter.js" defer></script>
 <script src="assets/tabs.js" defer></script>
 </body>

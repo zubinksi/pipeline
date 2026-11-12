@@ -692,7 +692,7 @@ footer { font-family: var(--serif); font-size: 0.875rem; letter-spacing: 0; text
 .slab-head { --ink: #1f2933; --ink2: #374151; --ink3: #4b5563; --muted: #6b7280; --accent: #2c4a7a; }
 .slab-body { color: var(--ink); }   /* inherit the panel's ink, so plain text follows the theme */
 
-/* ══ header: arrow + cabinet label; tabs flush with the page ═════════════ */
+/* ══ header: arrow + panel label; tabs flush with the page ═════════════ */
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .slab-head { border-bottom: 0; padding-top: 0.875rem; }
 .head-meta { justify-content: flex-start; gap: 0.5rem; margin-bottom: 1.25rem; }
@@ -811,19 +811,19 @@ a.tl:hover .tl-what b { color: var(--accent); }
 .dtop + .strip-wrap { margin-top: -0.25rem; }
 .strip-head { padding-bottom: 0.5rem; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
 
-/* header: a little more air above the tabs; "Your cabinet" is a link */
+/* header: a little more air above the tabs; "Your panel" is a link */
 .head-meta { margin-bottom: 2.25rem; }
 @media (max-width: 860px) { .head-meta { margin-bottom: 1.75rem; } }
-/* the cabinet sits above the folders: no tabs, just the label */
-.slab[data-page="cabinet"] .slab-head { padding-bottom: 0.875rem; border-bottom: 1px solid var(--b4); }
-.slab[data-page="cabinet"] .head-meta { margin-bottom: 0; }
+/* the panel sits above the folders: no tabs, just the label */
+.slab[data-page="panel"] .slab-head { padding-bottom: 0.875rem; border-bottom: 1px solid var(--b4); }
+.slab[data-page="panel"] .head-meta { margin-bottom: 0; }
 .hcab { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink2); text-decoration: none; }
 .hcab .hback { padding: 0; font-size: 1.125rem; color: inherit; }
 a.hcab:hover { color: var(--accent); }
 .hcab.on { color: var(--ink); }
 .hcab.on .hback { opacity: 0.3; }
 
-/* the cabinet page */
+/* the panel page */
 .cab-top { display: flex; flex-direction: column; gap: 0.375rem; }
 .cab-lede { margin: 0; color: var(--muted); }
 .cab { display: flex; flex-direction: column; gap: 1.75rem; }
@@ -848,7 +848,7 @@ a.hcab:hover { color: var(--accent); }
   .cab-line { grid-column: 2; }
 }
 
-/* cabinet: one line per drug; a select-all per group */
+/* panel: one line per drug; a select-all per group */
 .cab-group { position: relative; }
 .cab-all { position: absolute; right: 0; top: 0; padding: 0; border: 0; background: none; cursor: pointer; font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); line-height: 1.6; }
 .cab-all:hover { text-decoration: underline; }
@@ -866,7 +866,7 @@ a.hcab:hover { color: var(--accent); }
 .tsec-head { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 0.75rem; font-family: var(--serif); font-size: 1.375rem; line-height: 1.2; color: var(--ink); }
 .tsec-head .n { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.1em; color: var(--muted); }
 
-/* cabinet v2: topics (each opens to its drugs) and companies */
+/* panel v2: topics (each opens to its drugs) and companies */
 .cab-lede { margin: 0; }
 .cab-sec { display: flex; flex-direction: column; }
 .cab-head { display: block; }
@@ -903,7 +903,7 @@ a.hcab:hover { color: var(--accent); }
 /* drug page: sponsor as a tag beside the name */
 .dname .sponsor { display: inline-block; padding: 0.25rem 0.5rem 0.1875rem; border-radius: 3px; background: var(--b2, rgba(0,0,0,0.06)); background: color-mix(in srgb, var(--ink) 7%, transparent); color: var(--ink2); line-height: 1.2; transform: translateY(-0.25rem); }
 
-/* cabinet: LDL / Lp(a) sub-groups, welcome, full-width done */
+/* panel: LDL / Lp(a) sub-groups, welcome, full-width done */
 .cab-subhead { padding: 0.75rem 0 0.375rem; }
 .cab-subhead .cab-name { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink2); cursor: pointer; }
 .cab-subhead .cab-line { font-size: 0.6875rem; }

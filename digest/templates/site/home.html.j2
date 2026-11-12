@@ -3,7 +3,7 @@
 {% block title %}{{ "Drugs · " if active == "drugs" }}{{ site_title }}{% endblock %}
 {% block headextra %}
 {# First visit: nothing chosen yet, so start with the welcome (only if this browser can save the choice) #}
-<script>try{if(!localStorage.getItem("cabinet")){localStorage.setItem("cabinet-probe","1");localStorage.removeItem("cabinet-probe");location.replace("cabinet.html?welcome")}}catch(e){}</script>
+<script>try{if(!localStorage.getItem("cabinet")){localStorage.setItem("panel-probe","1");localStorage.removeItem("panel-probe");location.replace("panel.html?welcome")}}catch(e){}</script>
 {% endblock %}
 {% block head %}{{ m.slab_head(active) }}{% endblock %}
 {% block content %}

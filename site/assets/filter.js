@@ -39,7 +39,7 @@
       total += shown;
     });
     box.querySelectorAll('[data-topic-sec]').forEach(function (s) {
-      if (s.dataset.untracked) return;  // the cabinet hid it
+      if (s.dataset.untracked) return;  // the panel hid it
       var n = s.querySelectorAll('.drug:not([hidden])').length;
       var c = s.querySelector('[data-tcount]'); if (c) c.textContent = n;
       s.hidden = n === 0;

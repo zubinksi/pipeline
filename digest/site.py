@@ -102,8 +102,8 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
                                  if any(stages.get(d["id"], d["stage"]) in sts for d in watchlist["drugs"])]},
               "has_lpa": any("lpa" in display.lowers_keys(d.get("lowers", "")) for d in watchlist["drugs"]),
               "topics": topics_by_id(watchlist),
-              # what cabinet.js needs to know on every page: each drug's topic and companies
-              "cabinet_data": json.dumps({
+              # what panel.js needs to know on every page: each drug's topic and companies
+              "panel_data": json.dumps({
                   "topics": [t["id"] for t in topics_of(watchlist)],
                   "drugs": {d["id"]: {"t": d.get("topic", ""), "c": companies_of(d, watchlist)}
                             for d in watchlist["drugs"]}}, separators=(",", ":"))}
@@ -127,7 +127,7 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
               sections=display.sections(_rows(watchlist, w.get("stages", stages), set(w["moved"])), watchlist),
               n_drugs=len(watchlist["drugs"]))
     write("weeks/index.html", "archive.html.j2", "../", sel="weeks", weeks=views)
-    write("cabinet.html", "cabinet.html.j2", "", sel="cabinet", sections=display.sections(rows_now, watchlist),
+    write("panel.html", "panel.html.j2", "", sel="panel", sections=display.sections(rows_now, watchlist),
           companies=[{**c, "rows": [r for r in rows_now if c["id"] in r["companies"]]}
                      for c in watchlist.get("companies", [])])
 

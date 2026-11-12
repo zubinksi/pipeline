@@ -76,7 +76,7 @@ def sections(all_rows: list[dict], watchlist: dict) -> list[dict]:
     for t in topics_of(watchlist):
         members = [r for r in all_rows if r["topic"] == t["id"]]
         if members:
-            # the topic's own finer groups (e.g. LDL / Lp(a)), for the cabinet
+            # the topic's own finer groups (e.g. LDL / Lp(a)), for the panel
             subs = [{**g, "rows": [r for r in members if r["group"] == g["id"]]} for g in t.get("groups") or []]
             out.append({**t, "n": len(members), "groups": groups(members),
                         "subgroups": [g for g in subs if g["rows"]]})

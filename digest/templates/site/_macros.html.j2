@@ -66,7 +66,7 @@
     </div>
   </div>
   {% endfor %}
-  <p class="empty cab-empty" hidden>Nothing here from your cabinet. <a href="{{ root }}cabinet.html">Choose what to follow &rarr;</a></p>
+  <p class="empty cab-empty" hidden>Nothing here from your panel. <a href="{{ root }}panel.html">Choose what to follow &rarr;</a></p>
   {% if filterable %}<p class="empty f-empty" hidden>Nothing on the list matches. Try "All".</p>{% endif %}
 </section>
 {%- endmacro %}
@@ -142,11 +142,11 @@
 <header class="slab-head">
   <h1 class="sr-only">Your Drugs Pipeline</h1>
   <div class="head-meta">
-    {# the cabinet is where you choose which drugs you follow #}
-    {% if active == "cabinet" %}<span class="hcab on" aria-current="page">Your cabinet</span>
-    {% else %}<a class="hcab" href="{{ root }}cabinet.html"><span class="hback" aria-hidden="true">&larr;</span>Your cabinet</a>{% endif %}
+    {# the panel is where you choose which drugs you follow #}
+    {% if active == "panel" %}<span class="hcab on" aria-current="page">Your panel</span>
+    {% else %}<a class="hcab" href="{{ root }}panel.html"><span class="hback" aria-hidden="true">&larr;</span>Your panel</a>{% endif %}
   </div>
-  {% if active != "cabinet" %}{{ tabs(active) }}{% endif %}
+  {% if active != "panel" %}{{ tabs(active) }}{% endif %}
 </header>
 {%- endmacro %}
 
