@@ -1,47 +1,49 @@
-"""Render the iris as a blind deboss: the paper's own colour, pressed in, with a
-shade along the upper-left inside edges and light along the lower-right. Done as
-an image (not CSS filters) so it looks the same in every browser.
+"""Render the iris as a blind emboss, like the one in the home project: the
+paper's own colour, raised, with a crisp light edge along the upper left and a
+soft shade along the lower right. Done as an image (not CSS filters) so it looks
+the same in every browser.
 
-    python3 scripts/emboss_iris.py   # writes digest/static/iris-deboss.png
+    python3 scripts/emboss_iris.py   # writes digest/static/iris-emboss.png
 """
 from pathlib import Path
 
 from PIL import Image, ImageChops, ImageFilter
 
 SRC = Path(__file__).resolve().parent.parent / "digest/static/iris-white.png"
-OUT = SRC.with_name("iris-deboss.png")
-SCALE = 2          # render larger than the source, for crisp edges on phones
-DEPTH = 8          # how far the edge reaches, in rendered pixels
-PAD = 8
+OUT = SRC.with_name("iris-emboss.png")
+PAPER = (251, 249, 243)   # --slab on the welcome page
+SCALE = 2                 # rendered at 2x the source; shown at ~96 CSS px
+K = 5.5                   # rendered pixels per CSS pixel at that size
+PAD = 48
 
 
 def main():
     src = Image.open(SRC).convert("RGBA")
     a = src.getchannel("A").resize((src.width * SCALE, src.height * SCALE), Image.LANCZOS)
-    w, h = a.size
-    canvas = Image.new("L", (w + 2 * PAD, h + 2 * PAD), 0)
+    canvas = Image.new("L", (a.width + 2 * PAD, a.height + 2 * PAD), 0)
     canvas.paste(a, (PAD, PAD))
     a = canvas
+    off = lambda img, dx, dy: ImageChops.offset(img, round(dx), round(dy))
+    alpha = lambda img, k: img.point(lambda v: min(255, int(v * k)))
 
-    def shift(img, dx, dy):
-        return ImageChops.offset(img, dx, dy)
-
-    # inside the shape, where the neighbour up-left is outside: the shaded wall
-    shade = ImageChops.subtract(a, shift(a, DEPTH, DEPTH)).filter(ImageFilter.GaussianBlur(2.0))
-    # inside the shape, where the neighbour down-right is outside: the lit wall
-    light = ImageChops.subtract(a, shift(a, -DEPTH, -DEPTH)).filter(ImageFilter.GaussianBlur(2.0))
+    def layer(rgb, mask):
+        l = Image.new("RGBA", a.size, (*rgb, 0))
+        l.putalpha(mask)
+        return l
 
     out = Image.new("RGBA", a.size, (0, 0, 0, 0))
-    # the pressed floor: a whisper darker than the paper
-    floor = Image.new("RGBA", a.size, (110, 92, 60, 0))
-    floor.putalpha(a.point(lambda v: v * 14 // 255))
-    out = Image.alpha_composite(out, floor)
-    dark = Image.new("RGBA", a.size, (90, 72, 45, 0))
-    dark.putalpha(shade.point(lambda v: min(255, v * 120 // 255)))
-    out = Image.alpha_composite(out, dark)
-    lit = Image.new("RGBA", a.size, (255, 255, 255, 0))
-    lit.putalpha(light.point(lambda v: min(255, v * 235 // 255)))
-    out = Image.alpha_composite(out, lit)
+    # 1. a soft lift: the whole shape's shadow, a little down and to the right
+    lift = off(a, 1.2 * K, 1.8 * K).filter(ImageFilter.GaussianBlur(2.2 * K))
+    out = Image.alpha_composite(out, layer((80, 60, 30), alpha(lift, 0.16)))
+    # 2. the contact shade hugging the lower-right edges
+    contact = off(a, 0.9 * K, 0.9 * K).filter(ImageFilter.GaussianBlur(0.7 * K))
+    out = Image.alpha_composite(out, layer((80, 60, 30), alpha(contact, 0.30)))
+    # 3. the light catching the upper-left edges, just outside the shape
+    rim = off(a, -0.6 * K, -0.6 * K).filter(ImageFilter.GaussianBlur(0.25 * K))
+    out = Image.alpha_composite(out, layer((255, 255, 255), alpha(rim, 0.95)))
+    # 4. the shape itself, in the paper's colour, on top
+    out = Image.alpha_composite(out, layer(PAPER, a))
+    out = out.crop(out.getbbox())
     out.save(OUT, optimize=True)
     print(f"wrote {OUT} {out.size}")
 
