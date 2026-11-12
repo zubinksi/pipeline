@@ -171,7 +171,8 @@ def test_drug_page_is_consolidated_for_a_layperson(tmp_path):
     # stage and sponsor under the name; key results in one strip
     assert "A shot twice a year" in html
     assert '<span class="sponsor">Novartis</span>' in html
-    assert html.index('class="dsum"') < html.index('class="dmeta"')  # stage under the description
+    head = html[html.index('class="strip-head"'):html.index('class="strip"')]
+    assert "Approved" in head and 'class="mini' not in head  # stage titles the strip, no dots
     strip = html[html.index('class="strip"'):html.index("</dl>")]
     for label in ("LDL reduction", "<dt>Shot</dt>", "CV outcomes"):
         assert label in strip

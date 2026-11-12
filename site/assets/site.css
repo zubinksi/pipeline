@@ -806,3 +806,7 @@ a.tl:hover .tl-what b { color: var(--accent); }
 .dtop + .strip { margin-top: -0.75rem; }
 .strip-src { color: inherit; text-decoration: underline dotted var(--b4); text-underline-offset: 0.25em; }
 .strip-src:hover { color: var(--accent); }
+
+/* the stage is the strip's title */
+.dtop + .strip-wrap { margin-top: -0.25rem; }
+.strip-head { padding-bottom: 0.5rem; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
