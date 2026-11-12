@@ -98,8 +98,21 @@ def calendar(items: list[dict], drugs: dict, topics: dict, today: date | None = 
             pass
         drug = drugs.get(h.get("drug_id", ""), {})
         t = topics.get(drug.get("topic", ""), {})
+        # how precise the date is, for the month grids
+        iso = h.get("date", "")
+        if key == "due":
+            precision, ym = "due", (today.year, today.month)
+        elif day:
+            precision, ym = "day", (int(iso[:4]), int(iso[5:7]))
+        elif len(parts) == 2 and parts[0][:1].isalpha() and parts[1].isdigit() and parts[0] in _MONTHS:
+            precision, ym = "month", (int(parts[1]), _MONTHS.index(parts[0]) + 1)
+        elif len(iso) >= 7 and iso[:4].isdigit() and iso[5:7].isdigit():
+            precision, ym = "approx", (int(iso[:4]), int(iso[5:7]))   # e.g. "EARLY 2027", filed under its sort date
+        else:
+            precision, ym = "loose", None
         item = {**h, "day": day, "rel": rel, "topic": drug.get("topic", ""),
-                "topic_short": t.get("short") or t.get("title", "")}
+                "topic_short": t.get("short") or t.get("title", ""), "precision": precision, "ym": ym,
+                "dom": int(iso[8:10]) if precision == "day" else 0}
         if groups and groups[-1]["key"] == key:
             groups[-1]["items"].append(item)
         else:
@@ -107,17 +120,35 @@ def calendar(items: list[dict], drugs: dict, topics: dict, today: date | None = 
     return groups
 
 
-def spotlight(watchlist: dict, rows: dict, on: date) -> list[dict]:
-    """Every drug, in this week's rotation order: the first one the reader follows is the
-    quiet-week spotlight (the panel hides the rest)."""
-    drugs = watchlist["drugs"]
-    if not drugs:
-        return []
-    start = on.isocalendar()[1] % len(drugs)
-    out = []
-    for d in drugs[start:] + drugs[:start]:
-        out.append({**rows[d["id"]], "watch": d.get("note") or d.get("proven_note", "")})
-    return out
+_MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+
+
+def calendar_months(groups: list[dict], today: date | None = None, n: int = 6) -> dict:
+    """The calendar view: the next `n` months as small month grids. Items with a day sit
+    on that day; items known only to the month (or due any week now) sit under the
+    month's name; looser or later ones are listed after the grids."""
+    import calendar as cal
+    today = today or date.today()
+    months, index = [], {}
+    y, m = today.year, today.month
+    for _ in range(n):
+        weeks = cal.Calendar(firstweekday=6).monthdayscalendar(y, m)  # weeks start on Sunday
+        entry = {"label": f"{_MONTHS[m - 1].title()} {y}", "y": y, "m": m, "weeks": weeks,
+                 "days": {}, "month_items": [], "today": today.day if (y, m) == (today.year, today.month) else 0}
+        months.append(entry)
+        index[(y, m)] = entry
+        y, m = (y + 1, 1) if m == 12 else (y, m + 1)
+    later = []
+    for g in groups:
+        for it in g["items"]:
+            mo = index.get(tuple(it["ym"])) if it.get("ym") else None
+            if mo is None:
+                later.append({**it, "group": g["label"]})
+            elif it["precision"] == "day":
+                mo["days"].setdefault(it["dom"], []).append(it)
+            else:
+                mo["month_items"].append(it)
+    return {"months": months, "later": later}
 
 
 def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict,
@@ -164,8 +195,8 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
     drug_map = {d["id"]: d for d in watchlist["drugs"]}
     rows_by_id = {r["id"]: r for r in rows_now}
     if latest:
-        latest = {**latest, "calendar": calendar(latest["horizon"], drug_map, topics),
-                  "spotlight": spotlight(watchlist, rows_by_id, date.fromisoformat(latest["date"]))}
+        cal_groups = calendar(latest["horizon"], drug_map, topics)
+        latest = {**latest, "calendar": cal_groups, "months": calendar_months(cal_groups)}
     home = dict(latest=latest, n_weeks=len(views), sections=display.sections(rows_now, watchlist),
                 n_drugs=len(watchlist["drugs"]), drug_rows={r["id"]: r for r in rows_now})
     # News and Drugs are one page with both panels; the two files differ only in which is open

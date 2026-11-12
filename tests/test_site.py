@@ -163,8 +163,10 @@ def test_news_and_drugs_tabs_and_compact_coming_up(tmp_path):
     assert '<div class="panel" data-panel="news" hidden>' in drugs and '<div class="panel" data-panel="drugs">' in drugs
     assert (out / "assets/tabs.js").exists()
     # Coming up: a calendar across topics; each entry links to the drug's overview
-    assert '<a class="cal-item" href="drugs/inclisiran.html" data-drug="inclisiran">' in news and "Any week now" in news
-    assert '<span class="cal-topic">Heart</span>' in news and '<span class="cal-topic">Cancer</span>' in news
+    assert '<a class="cal-item first" href="drugs/inclisiran.html" data-drug="inclisiran">' in news and "Any week now" in news
+    assert '<span class="pill pill-heart">Heart</span>' in news and '<span class="pill pill-cancer">Cancer</span>' in news
+    # a list | calendar toggle; the calendar shows the next six months with a dot per dated item
+    assert 'data-cal-toggle' in news and news.count('class="month"') == 6
     assert "Heart-attack trial results" in news and "twice-a-year shot proven to prevent them" in news
     assert "Twice a year" not in news[news.index("Coming up"):news.index('data-panel="drugs"')]  # no dosing facts in the list
     assert "no changes" not in news.lower()
@@ -233,17 +235,10 @@ def test_welcome_lpa_groups_and_sponsor_tag(tmp_path):
     assert "<dt>Lp(a) reduction</dt>" in lp and '<span class="sponsor">Eli Lilly</span>' in lp
 
 
-def test_quiet_week_spotlight_and_lead(tmp_path):
-    out, _ = _build(tmp_path)
-    news = (out / "index.html").read_text()
-    # the sample week has drug changes, so no spotlight; a quiet week gets one
+def test_calendar_groups_by_period_with_topics(tmp_path):
     from digest import site as site_mod
     import datetime as dt
     wl = WL
-    rows = {r["id"]: r for r in site_mod._rows(wl, {}, set())}
-    spot = site_mod.spotlight(wl, rows, dt.date(2026, 11, 9))
-    assert len(spot) == len(wl["drugs"]) and spot[0]["id"] != spot[1]["id"]
-    assert all("watch" in s for s in spot)
     cal = site_mod.calendar([{"date": "2026-11-14", "when": "14 NOV 2026", "drug": "X", "drug_id": "ivonescimab",
                               "short": "FDA decision", "what": "", "url": "u"}],
                             {d["id"]: d for d in wl["drugs"]}, {t["id"]: t for t in wl["topics"]}, dt.date(2026, 11, 12))
@@ -253,7 +248,7 @@ def test_quiet_week_spotlight_and_lead(tmp_path):
 def test_drug_page_explains_how_it_works(tmp_path):
     out, _ = _build(tmp_path)
     html = (out / "drugs/inclisiran.html").read_text()
-    assert ">How it works<" in html and "Silencing the PCSK9 message" in html
+    assert '<details class="more how">' in html and "Silencing the PCSK9 message" in html  # collapsed by default
     assert html.count('class="flow-step') == 4 and 'class="flow-step acts"' in html
     for d in WL["drugs"]:
         assert d.get("approach"), d["id"]  # every drug has a diagram

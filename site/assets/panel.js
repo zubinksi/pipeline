@@ -155,7 +155,14 @@
   });
   // calendar periods with nothing left in them
   document.querySelectorAll('[data-cal-group]').forEach(function (g) {
-    if (!g.querySelector('.cal-item:not([hidden])')) g.hidden = true;
+    var items = g.querySelectorAll('.cal-item:not([hidden])');
+    if (!items.length) { g.hidden = true; return; }
+    // the period label sits on the group's first visible entry
+    var label = g.querySelector('.cal-item.first .cal-when');
+    if (label && items[0] !== label.parentNode) { items[0].querySelector('.cal-when').innerHTML = label.innerHTML; }
+  });
+  document.querySelectorAll('.m-cell.has').forEach(function (c) {
+    if (!c.querySelector('.m-dot:not([hidden])')) c.classList.remove('has');
   });
   document.querySelectorAll('.tl-list, .section').forEach(function (l) {
     var sec = l.closest('.section') || l;

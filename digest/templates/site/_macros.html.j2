@@ -85,49 +85,72 @@
 {% endfor %}
 {%- endmacro %}
 
-{# The look-ahead as a calendar across topics: grouped by period, each item tagged with
-   its topic; the row opens the drug's overview. #}
-{% macro horizon(groups, root) -%}
-<section class="section">
-  <div class="section-head"><h2>Coming up</h2></div>
-  <div class="cal">
+{# The look-ahead across topics, as a list grouped by period or (with the toggle) as
+   the next six months' calendars with a dot per item. Each entry opens the drug's page. #}
+{% macro topic_pill(h) -%}
+{% if h.topic_short %}<span class="pill pill-{{ h.topic }}">{{ h.topic_short }}</span>{% endif %}
+{%- endmacro %}
+{% macro horizon(groups, root, months=none) -%}
+<section class="section" data-cal-sec>
+  <div class="section-head"><h2>Coming up</h2>
+    {% if months %}<div class="seg" role="group" aria-label="View" hidden data-cal-toggle>
+      <button type="button" class="seg-b" data-view="list" aria-pressed="true">List</button>
+      <button type="button" class="seg-b" data-view="cal" aria-pressed="false">Calendar</button>
+    </div>{% endif %}
+  </div>
+  <div class="cal" data-cal-view="list">
   {% for g in groups %}
   <div class="cal-group{{ ' due' if g.key == 'due' }}" data-cal-group>
-    <div class="cal-when">{% if g.key == 'due' %}<span class="due-dot" aria-hidden="true"></span>{% endif %}{{ g.label }}</div>
     {% for h in g["items"] %}
-    <a class="cal-item" href="{{ root ~ 'drugs/' ~ h.drug_id ~ '.html' if h.drug_id else h.url }}"{% if h.drug_id %} data-drug="{{ h.drug_id }}"{% endif %}>
-      <span class="cal-meta">{% if h.topic_short %}<span class="cal-topic">{{ h.topic_short }}</span>{% endif %}{% if h.day %}<span class="cal-day">{{ h.day }}</span>{% endif %}{% if h.rel %}<span class="cal-rel">{{ h.rel }}</span>{% endif %}</span>
-      <span class="cal-what"><b>{{ h.drug }}</b> {{ h.short or h.what }}</span>
-      {% if h.context %}<span class="cal-ctx">{{ h.context }}</span>{% endif %}
+    <a class="cal-item{{ ' first' if loop.first }}" href="{{ root ~ 'drugs/' ~ h.drug_id ~ '.html' if h.drug_id else h.url }}"{% if h.drug_id %} data-drug="{{ h.drug_id }}"{% endif %}>
+      <span class="cal-when">{% if loop.first %}{% if g.key == 'due' %}<span class="due-dot" aria-hidden="true"></span>{% endif %}{{ g.label }}{% endif %}</span>
+      <span class="cal-body">
+        {% if h.day or h.rel %}<span class="cal-meta">{% if h.day %}<span class="cal-day">{{ h.day }}</span>{% endif %}{% if h.rel %}<span class="cal-rel">{{ h.rel }}</span>{% endif %}</span>{% endif %}
+        <span class="cal-what"><b>{{ h.drug }}</b> {{ h.short or h.what }}</span>
+        {% if h.context %}<span class="cal-ctx">{{ h.context }}</span>{% endif %}
+      </span>
+      {{ topic_pill(h) }}
     </a>
     {% endfor %}
   </div>
   {% endfor %}
   </div>
+  {% if months %}
+  <div class="months" data-cal-view="cal" hidden>
+    <div class="mgrid">
+    {% for mo in months.months %}
+    <div class="month">
+      <div class="m-name">{{ mo.label }}</div>
+      <div class="m-days" aria-hidden="true"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+      <div class="m-weeks">
+      {% for wk in mo.weeks %}{% for d in wk %}
+        <span class="m-cell{{ ' today' if d and d == mo.today }}{{ ' has' if d in mo.days }}">{% if d %}<span class="m-num">{{ d }}</span>{% for h in mo.days.get(d, []) %}<a class="m-dot dot-{{ h.topic }}" href="{{ root }}drugs/{{ h.drug_id }}.html" data-drug="{{ h.drug_id }}" title="{{ h.day }} · {{ h.drug }}: {{ h.short or h.what }}"><span class="sr-only">{{ h.drug }}: {{ h.short or h.what }}</span></a>{% endfor %}{% endif %}</span>
+      {% endfor %}{% endfor %}
+      </div>
+      {% if mo.month_items or mo.days %}
+      <ul class="m-list">
+        {% for d, hs in mo.days|dictsort %}{% for h in hs %}<li data-drug="{{ h.drug_id }}"><a href="{{ root }}drugs/{{ h.drug_id }}.html"><span class="m-dot dot-{{ h.topic }}" aria-hidden="true"></span><span class="m-when">{{ d }}</span>{{ h.drug }} <span class="m-what">{{ h.short or h.what }}</span></a></li>{% endfor %}{% endfor %}
+        {% for h in mo.month_items %}<li data-drug="{{ h.drug_id }}"><a href="{{ root }}drugs/{{ h.drug_id }}.html"><span class="m-dot dot-{{ h.topic }}{{ ' due' if h.precision == 'due' }}" aria-hidden="true"></span><span class="m-when">{{ 'Any week' if h.precision == 'due' else (h.when|title if h.precision == 'approx' else 'This month') }}</span>{{ h.drug }} <span class="m-what">{{ h.short or h.what }}</span></a></li>{% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% endfor %}
+    </div>
+    {% if months.later %}
+    <div class="m-later">
+      <div class="m-name">Later</div>
+      <ul class="m-list">
+        {% for h in months.later %}<li data-drug="{{ h.drug_id }}"><a href="{{ root }}drugs/{{ h.drug_id }}.html"><span class="m-dot dot-{{ h.topic }}" aria-hidden="true"></span><span class="m-when">{{ h.group }}</span>{{ h.drug }} <span class="m-what">{{ h.short or h.what }}</span></a></li>{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
 </section>
 {%- endmacro %}
 
-{# Quiet week: one drug in the spotlight (the first on this week's rotation that's on
-   the reader's panel; the panel script hides the others). #}
-{% macro spotlight(list, root) -%}
-{% if list %}
-<section class="section spot-sec">
-  <div class="section-head"><h2>Spotlight</h2></div>
-  {% for r in list %}
-  <a class="spot" href="{{ root }}drugs/{{ r.id }}.html" data-drug="{{ r.id }}">
-    <span class="spot-name">{{ r.display_name }}{% if r.generic %}<span class="generic">{{ r.generic|lower }}</span>{% endif %}<span class="spot-topic">{{ r.topic_title }}</span></span>
-    {% if r.plain %}<span class="spot-plain">{{ r.plain }}</span>{% endif %}
-    <span class="spot-facts"><span>{{ r.stage_plain }}</span><span>{{ (r.effect_short or r.effect or r.lowers).split("; ")[0] }}</span><span>{{ r.often or r.form }}</span></span>
-    {% if r.watch %}<span class="spot-watch"><span class="label">Where it stands</span>{{ r.watch }}</span>{% endif %}
-    <span class="spot-more">Read more &rarr;</span>
-  </a>
-  {% endfor %}
-</section>
-{% endif %}
-{%- endmacro %}
-
-{# "This week": the date, the week's lead, the drug changes; in a quiet week a spotlight
-   instead. Then what's coming up, then broader news. #}
+{# "This week": the date, the week's lead, the drug changes, then what's coming up,
+   then broader news. #}
 {% macro this_week(w, root, title, past=0) -%}
 {% set drug_changes = w.changes|rejectattr("kind", "equalto", "field")|list %}
 <section class="section">
@@ -145,8 +168,8 @@
   <div class="section-head"><h2>{{ title }}</h2></div>
   {{ changes(drug_changes, root) }}
 </section>
-{% elif w.spotlight %}{{ spotlight(w.spotlight, root) }}{% endif %}
-{% if w.calendar %}{{ horizon(w.calendar, root) }}{% endif %}
+{% endif %}
+{% if w.calendar %}{{ horizon(w.calendar, root, w.months) }}{% endif %}
 {% set field = w.changes|selectattr("kind", "equalto", "field")|list %}
 {% if field %}
 <section class="section">
