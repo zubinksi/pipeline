@@ -195,7 +195,7 @@ def test_panel_page_chooses_what_to_follow(tmp_path):
     assert '<a class="hcab" href="panel.html">' in news  # the header label opens the panel
     assert 'href="../panel.html"' in (out / "drugs/inclisiran.html").read_text()
     cab = (out / "panel.html").read_text()
-    assert 'class="hcab on" aria-current="page"' in cab and "data-panel-form" in cab
+    assert 'class="hcab on p-only" aria-current="page"' in cab and "data-panel-form" in cab
     # topics, each with its drugs; a company to follow across topics
     for t in ("heart", "obesity", "alzheimers", "cancer"):
         assert f'data-topic-box="{t}"' in cab
@@ -225,7 +225,7 @@ def test_welcome_lpa_groups_and_sponsor_tag(tmp_path):
     out, _ = _build(tmp_path)
     news, cab = (out / "index.html").read_text(), (out / "panel.html").read_text()
     assert 'location.replace("panel.html?welcome")' in news  # first visit starts with the welcome
-    assert "Welcome" in cab and "data-done" in cab
+    assert "Welcome" in cab and "data-done" in cab and "data-wgo" in cab and 'classList.add("is-welcome")' in cab
     # Heart & cholesterol splits into LDL and Lp(a) in the panel
     assert 'id="g-heart-ldl"' in cab and 'id="g-heart-lpa"' in cab and ">Lp(a)-lowering<" in cab
     lp = (out / "drugs/lepodisiran.html").read_text()

@@ -929,3 +929,26 @@ a.hcab:hover { color: var(--accent); }
   .cab-row.cab-sub { column-gap: 0.625rem; }
   .cab-sub .cab-line { font-size: 0.625rem; letter-spacing: 0; }
 }
+
+/* welcome: a real first page (step 1), then the choices (step 2) */
+.w-only { display: none; }
+.is-welcome .w-only { display: block; }
+.is-welcome .p-only { display: none; }
+.is-welcome .head-meta .hcab.w-only { display: inline-flex; }
+.is-welcome[data-wstep="1"] .w-choose-head, .is-welcome[data-wstep="1"] .cab, .is-welcome[data-wstep="1"] .cab-foot { display: none; }
+.is-welcome[data-wstep="2"] .wintro { display: none; }
+.wintro { padding: 0.5rem 0 0.25rem; }
+.w-kicker { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink3); }
+.w-title { margin: 0; font-size: 2.5rem; line-height: 1.1; letter-spacing: -0.005em; }
+.w-lede { margin: 0.875rem 0 0; font-size: 1.1875rem; line-height: 1.45; color: var(--ink2); max-width: 34rem; }
+.w-steps { list-style: none; margin: 2rem 0 0; padding: 0; border-top: 3px double var(--b4); }
+.w-steps li { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 0.5rem; padding: 0.9375rem 0; border-bottom: 1px solid var(--b3); }
+.w-n { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; color: var(--accent); padding-top: 0.25rem; }
+.w-steps b { display: block; font-weight: 400; font-size: 1.125rem; }
+.w-steps span:not(.w-n) { display: block; margin-top: 0.25rem; font-size: 0.9375rem; line-height: 1.45; color: var(--muted); }
+.w-go { width: 100%; margin-top: 2rem; border: 0; cursor: pointer; font-family: var(--mono); text-transform: uppercase; }
+.w-fine { margin: 0.875rem 0 0; text-align: center; font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.w-choose-head { display: none; }
+.is-welcome[data-wstep="2"] .w-choose-head { display: flex; flex-direction: column; gap: 0.5rem; }
+.w-back { align-self: flex-start; margin: 0 0 0.75rem; padding: 0; border: 0; background: none; cursor: pointer; }
+@media (max-width: 860px) { .w-title { font-size: 2.125rem; } .w-lede { font-size: 1.0625rem; } }

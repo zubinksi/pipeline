@@ -77,9 +77,13 @@
     }
     var done = document.querySelector('[data-done]'), need = document.querySelector('.cab-need');
     if (welcome) {
-      document.querySelector('.cab-welcome').hidden = false;
-      document.querySelector('.cab-usual').hidden = true;
+      var root = document.documentElement;
+      root.classList.add('is-welcome');
+      if (!root.dataset.wstep) root.dataset.wstep = '1';
       done.textContent = 'Start reading';
+      var step = function (n) { root.dataset.wstep = n; window.scrollTo(0, 0); };
+      document.querySelector('[data-wgo]').addEventListener('click', function () { step('2'); });
+      document.querySelector('[data-wback]').addEventListener('click', function () { step('1'); });
     }
     done.addEventListener('click', function (e) {
       if (!ids.some(shown)) { e.preventDefault(); if (need) need.hidden = false; return; }

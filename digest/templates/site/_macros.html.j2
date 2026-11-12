@@ -143,7 +143,7 @@
   <h1 class="sr-only">Your Drugs Pipeline</h1>
   <div class="head-meta">
     {# the panel is where you choose which drugs you follow #}
-    {% if active == "panel" %}<span class="hcab on" aria-current="page">Your panel</span>
+    {% if active == "panel" %}<span class="hcab on p-only" aria-current="page">Your panel</span><span class="hcab on w-only">Welcome</span>
     {% else %}<a class="hcab" href="{{ root }}panel.html"><span class="hback" aria-hidden="true">&larr;</span>Your panel</a>{% endif %}
   </div>
   {% if active != "panel" %}{{ tabs(active) }}{% endif %}

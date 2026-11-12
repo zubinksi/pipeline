@@ -1,6 +1,10 @@
 {% extends "base.html.j2" %}
 {% import "_macros.html.j2" as m with context %}
 {% block title %}Your panel · {{ site_title }}{% endblock %}
+{% block headextra %}
+{# First visit (sent here from News/Drugs with ?welcome, nothing saved yet): show the welcome, not the settings view #}
+<script>try{if(/[?&]welcome\b/.test(location.search)&&!localStorage.getItem("cabinet")){document.documentElement.classList.add("is-welcome");document.documentElement.dataset.wstep="1"}}catch(e){}</script>
+{% endblock %}
 {% block head %}{{ m.slab_head("panel") }}{% endblock %}
 {% macro drug_row(r) -%}
 <label class="cab-row cab-sub">
@@ -11,11 +15,23 @@
 </label>
 {%- endmacro %}
 {% block content %}
-<div class="cab-welcome" hidden>
-  <h2 class="page-title">Welcome</h2>
-  <p class="cab-lede">Choose what goes on your panel: whole topics, parts of them, or everything a company is working on. You can change it any time from Your panel at the top.</p>
+<section class="wintro w-only" aria-labelledby="w-title">
+  <h2 class="w-title" id="w-title">{{ site_title }}</h2>
+  <p class="w-lede">A calm weekly read on new medicines, the ones still in trials and the ones just approved, for the health topics you care about.</p>
+  <ol class="w-steps">
+    <li><span class="w-n">01</span><div><b>Choose what to follow</b><span>Heart and cholesterol, weight, Alzheimer's, cancer, or everything a company like Eli Lilly is working on.</span></div></li>
+    <li><span class="w-n">02</span><div><b>Read only what changed</b><span>Each Monday: trial results, approvals and setbacks, in plain English. Quiet weeks stay quiet.</span></div></li>
+    <li><span class="w-n">03</span><div><b>Check the source</b><span>Every item links to where it came from.</span></div></li>
+  </ol>
+  <button type="button" class="cab-done w-go" data-wgo>Get started</button>
+  <p class="w-fine">A news tracker, not medical advice.</p>
+</section>
+<div class="w-choose-head w-only">
+  <button type="button" class="back w-back" data-wback>&larr; Back</button>
+  <h2 class="page-title">What would you like to follow?</h2>
+  <p class="cab-lede">Pick whole topics, parts of them, or a company. You can change this any time from Your panel.</p>
 </div>
-<p class="cab-lede cab-usual">Choose what's on your panel.</p>
+<p class="cab-lede cab-usual p-only">Choose what's on your panel.</p>
 <form class="cab" data-panel-form>
   <section class="cab-sec">
     <div class="cab-head">Topics</div>
