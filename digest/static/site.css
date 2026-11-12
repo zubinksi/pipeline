@@ -952,3 +952,21 @@ a.hcab:hover { color: var(--accent); }
 .is-welcome[data-wstep="2"] .w-choose-head { display: flex; flex-direction: column; gap: 0.5rem; }
 .w-back { align-self: flex-start; margin: 0 0 0.75rem; padding: 0; border: 0; background: none; cursor: pointer; }
 @media (max-width: 860px) { .w-title { font-size: 2.125rem; } .w-lede { font-size: 1.0625rem; } }
+
+/* welcome, simplified: the iris embossed in white, the name, one line, the button */
+.wintro { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 2.5rem 0 1rem; }
+.is-welcome .wintro.w-only { display: flex; }
+.w-iris {
+  width: 6rem; aspect-ratio: 256 / 233;
+  background: #fff;
+  -webkit-mask: url('iris-white.png') center / contain no-repeat;
+  mask: url('iris-white.png') center / contain no-repeat;
+}
+/* the iris pressed up from the sheet: white, a light edge above, a soft shade below */
+.wintro { --emboss: drop-shadow(-0.75px -0.75px 0 rgba(255,255,255,1)) drop-shadow(1px 1.5px 1px rgba(80,60,30,0.28)) drop-shadow(0 0 0.5px rgba(80,60,30,0.18)); }
+.w-iris-wrap { filter: var(--emboss); }
+.w-title { margin-top: 1.5rem; }
+.w-lede { margin-left: auto; margin-right: auto; max-width: 26rem; }
+.w-go { max-width: 22rem; margin-top: 2.25rem; }
+.w-iris-wrap { display: block; filter: drop-shadow(-0.5px -0.5px 0 #fff) drop-shadow(0 1.5px 1.5px rgba(70, 55, 30, 0.30)) drop-shadow(0 0 0.75px rgba(70, 55, 30, 0.35)); }
+.w-iris { display: block; }
