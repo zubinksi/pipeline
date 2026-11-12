@@ -48,7 +48,7 @@
       </div>
       {% for g in t.groups %}
       <div class="group" data-group>
-        <h3>{{ g.title }} <span class="n" data-count>{{ g.rows|length }}</span></h3>
+        <h3>{{ g.title }}</h3>
         {% for r in g.rows %}
         <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-drug="{{ r.id }}" data-tp="{{ r.topic }}" data-st="{{ g.key }}" data-lowers="{{ r.lowers_keys|join(' ') }}" data-freq="{{ r.frequency or '' }}">
           <span class="c-name"><span class="drug-name">{{ r.display_name }}</span>{% if r.generic %}<span class="generic">{{ r.generic|lower }}</span>{% endif %}{{ badge(r.badge) }}{% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}</span>

@@ -35,7 +35,7 @@
         if (ok) shown++;
       });
       g.hidden = shown === 0;
-      g.querySelector('[data-count]').textContent = shown;
+      var gc = g.querySelector('[data-count]'); if (gc) gc.textContent = shown;
       total += shown;
     });
     box.querySelectorAll('[data-topic-sec]').forEach(function (s) {

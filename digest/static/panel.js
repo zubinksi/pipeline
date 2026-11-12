@@ -138,7 +138,7 @@
   // tidy up: group and topic counts, empty groups and sections, the total
   document.querySelectorAll('[data-group]').forEach(function (g) {
     var n = g.querySelectorAll('.drug:not([data-untracked])').length;
-    g.querySelector('[data-count]').textContent = n;
+    var gc = g.querySelector('[data-count]'); if (gc) gc.textContent = n;
     g.hidden = n === 0;
   });
   document.querySelectorAll('[data-topic-sec]').forEach(function (s) {
