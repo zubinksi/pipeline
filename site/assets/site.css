@@ -1025,3 +1025,37 @@ html:not(.is-welcome) .w-only { display: none !important; }
 
 /* the welcome sheet is warmer, like the home project's paper (the iris is rendered in this colour) */
 .is-welcome[data-wstep="1"] .slab { background: #f1e9d8; }
+
+/* ══ warm paper ═══════════════════════════════════════════════════════════
+   The warmer cream from the welcome (and the home project) is now the paper
+   everywhere; the drugs paper, header band and rules are re-tuned around it. */
+:root {
+  --slab: #f1e9d8;
+  --raised: #ebe2cf;
+  --hover: #e9dfca;
+  --zebra: #ebe2cf;
+  --b1: #ddd1ba;
+  --b2: #d9ccb4;
+  --b3: #e3d8c3;
+  --b4: #b9ab90;
+  --head: #d6c8ad;
+  --track: #cdc1a8;
+  --muted: #6b6458;
+  --ink3: #4b4639;
+}
+.f-news { --tab: #f1e9d8; }
+.f-drugs { --tab: #e3d6bd; }
+.slab[data-theme="drugs"] {
+  --slab: #e3d6bd;
+  --raised: #e7dbc4;
+  --zebra: #e6dac3;
+  --hover: #d9cbaf;
+  --b1: #cbbc9f;
+  --b2: #cbbc9f;
+  --b3: #d5c7ac;
+  --b4: #a39376;
+  --track: #b2a488;
+  --accent-dim: #ece3d2;
+}
+.slab-head { --b4: #ad9e82; }
+.is-welcome[data-wstep="1"] .slab { background: var(--slab); }
