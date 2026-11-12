@@ -1115,3 +1115,4 @@ html:not(.is-welcome) .w-only { display: none !important; }
 .mini .done .dot, .slab[data-theme="drugs"] .mini .done .dot { background: #8fa3c4; border-color: #8fa3c4; }
 .mini.big .dot, .mini.big .now .dot { height: 0.5625rem; }
 @media (max-width: 860px) { .mini { width: 4.5rem; } }
+.mini .done .dot, .slab[data-theme="drugs"] .mini .done .dot { background: #b3c0d4; border-color: #b3c0d4; }
