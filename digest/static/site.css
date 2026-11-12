@@ -1109,3 +1109,9 @@ html:not(.is-welcome) .w-only { display: none !important; }
 .mini.big .dot { height: 0.4375rem; }
 .mini.big .now .dot { height: 0.625rem; }
 @media (max-width: 860px) { .mini { width: 3.75rem; } }
+/* gauge, refined: pill segments, one height, earlier stages in a muted blue */
+.mini { gap: 3px; width: 5rem; }
+.mini .dot, .mini .now .dot, .mini.big .dot, .mini.big .now .dot { height: 0.4375rem; border-radius: 999px; }
+.mini .done .dot, .slab[data-theme="drugs"] .mini .done .dot { background: #8fa3c4; border-color: #8fa3c4; }
+.mini.big .dot, .mini.big .now .dot { height: 0.5625rem; }
+@media (max-width: 860px) { .mini { width: 4.5rem; } }
