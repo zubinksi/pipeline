@@ -763,8 +763,6 @@ a.tl:hover .tl-what b { color: var(--accent); }
 /* coming up: the context line sits back from its title */
 .tl-ctx { color: var(--muted); font-size: 0.9062rem; }
 
-/* heart icon for short evidence labels */
-.heart { width: 0.75em; height: 0.75em; vertical-align: -0.0625em; }
 
 /* desktop table: no chevrons; the row highlights its drug name on hover */
 @media (min-width: 861px) {
@@ -777,7 +775,6 @@ a.tl:hover .tl-what b { color: var(--accent); }
   .c-stage .words { display: none; }
   .c-stage { align-self: center; justify-content: center; }
   .drug { align-items: center; }
-  .c-one .pf { white-space: nowrap; }
 }
 
 /* drug page profile: tighter rows */
