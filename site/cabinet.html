@@ -21,7 +21,11 @@
 <span class="hcab on" aria-current="page">Your cabinet</span>
   </div>
 </header>    <div class="slab-body">
-<p class="cab-lede">Choose what you follow. News and Drugs show only these.</p>
+<div class="cab-welcome" hidden>
+  <h2 class="page-title">Welcome</h2>
+  <p class="cab-lede">Pick what you'd like to follow: whole topics, parts of them, or everything a company is working on. You can change this any time from Your cabinet.</p>
+</div>
+<p class="cab-lede cab-usual">Choose what you follow. News and Drugs show only these.</p>
 <form class="cab" data-cabinet>
   <section class="cab-sec">
     <div class="cab-head">Topics</div>
@@ -30,40 +34,72 @@
         <input type="checkbox" id="t-heart" data-topic-box="heart" checked>
         <label class="cab-box" for="t-heart" aria-hidden="true"></label>
         <label class="cab-name" for="t-heart">Heart &amp; cholesterol</label>
-        <button type="button" class="cab-more" aria-expanded="false" aria-controls="d-heart"><span data-shown>5</span> of 5<span class="chev" aria-hidden="true"></span></button>
+        <button type="button" class="cab-more" aria-expanded="false" aria-controls="d-heart"><span data-shown>10</span> of 10<span class="chev" aria-hidden="true"></span></button>
       </div>
       <div class="cab-drugs" id="d-heart" hidden>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="evolocumab" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Repatha</span>
-          <span class="cab-line">↓ 60% · Every 2–4 weeks</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="alirocumab" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Praluent</span>
-          <span class="cab-line">↓ 50% · Every 2–4 weeks</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="inclisiran" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Leqvio</span>
-          <span class="cab-line">↓ 50% · Twice a year</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="lerodalcibep" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Lerochol</span>
-          <span class="cab-line">↓ 60% · Monthly</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="verve102" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">VERVE-102</span>
-          <span class="cab-line">↓ up to 62% · Once</span>
-        </label>
-      </div>
+        <div class="cab-row cab-subhead">
+          <input type="checkbox" id="g-heart-ldl" data-set-box="evolocumab alirocumab inclisiran lerodalcibep verve102" data-set-topic="heart" checked>
+          <label class="cab-box" for="g-heart-ldl" aria-hidden="true"></label>
+          <label class="cab-name" for="g-heart-ldl">LDL-lowering</label>
+          <span class="cab-line">5</span>
+        </div>
+<label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="evolocumab" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Repatha</span>
+  <span class="cab-line">↓ 60% · Every 2–4 weeks</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="alirocumab" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Praluent</span>
+  <span class="cab-line">↓ 50% · Every 2–4 weeks</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="inclisiran" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Leqvio</span>
+  <span class="cab-line">↓ 50% · Twice a year</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="lerodalcibep" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Lerochol</span>
+  <span class="cab-line">↓ 60% · Monthly</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="verve102" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">VERVE-102</span>
+  <span class="cab-line">↓ up to 62% · Once</span>
+</label>        <div class="cab-row cab-subhead">
+          <input type="checkbox" id="g-heart-lpa" data-set-box="lepodisiran olpasiran pelacarsen zerlasiran muvalaplin" data-set-topic="heart" checked>
+          <label class="cab-box" for="g-heart-lpa" aria-hidden="true"></label>
+          <label class="cab-name" for="g-heart-lpa">Lp(a)-lowering</label>
+          <span class="cab-line">5</span>
+        </div>
+<label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="lepodisiran" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Lepodisiran</span>
+  <span class="cab-line">↓ 94% · 1–2× a year</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="olpasiran" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Olpasiran</span>
+  <span class="cab-line">↓ 95%+ · Every 3+ months</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="pelacarsen" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Pelacarsen</span>
+  <span class="cab-line">↓ 80% · Monthly</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="zerlasiran" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Zerlasiran</span>
+  <span class="cab-line">↓ 80%+ · A few times a year</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="muvalaplin" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Muvalaplin</span>
+  <span class="cab-line">↓ up to 85% · Daily pill</span>
+</label>      </div>
     </div>
     <div class="cab-drawer" data-topic="obesity">
       <div class="cab-row cab-top">
@@ -73,37 +109,32 @@
         <button type="button" class="cab-more" aria-expanded="false" aria-controls="d-obesity"><span data-shown>5</span> of 5<span class="chev" aria-hidden="true"></span></button>
       </div>
       <div class="cab-drugs" id="d-obesity" hidden>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="tirzepatide" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Zepbound</span>
-          <span class="cab-line">Weight ↓ 21% · Weekly</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="semaglutide" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Wegovy</span>
-          <span class="cab-line">Weight ↓ 15% · Weekly shot or daily pill</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="orforglipron" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Foundayo</span>
-          <span class="cab-line">Weight ↓ 12% · Daily pill</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="retatrutide" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Retatrutide</span>
-          <span class="cab-line">Weight ↓ 28% · Weekly</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="maritide" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">MariTide</span>
-          <span class="cab-line">Weight ↓ up to 20% · Monthly or less</span>
-        </label>
-      </div>
+<label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="tirzepatide" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Zepbound</span>
+  <span class="cab-line">↓ 21% · Weekly</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="semaglutide" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Wegovy</span>
+  <span class="cab-line">↓ 15% · Weekly shot or daily pill</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="orforglipron" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Foundayo</span>
+  <span class="cab-line">↓ 12% · Daily pill</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="retatrutide" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Retatrutide</span>
+  <span class="cab-line">↓ 28% · Weekly</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="maritide" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">MariTide</span>
+  <span class="cab-line">↓ up to 20% · Monthly or less</span>
+</label>      </div>
     </div>
     <div class="cab-drawer" data-topic="alzheimers">
       <div class="cab-row cab-top">
@@ -113,31 +144,27 @@
         <button type="button" class="cab-more" aria-expanded="false" aria-controls="d-alzheimers"><span data-shown>4</span> of 4<span class="chev" aria-hidden="true"></span></button>
       </div>
       <div class="cab-drugs" id="d-alzheimers" hidden>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="donanemab" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Kisunla</span>
-          <span class="cab-line">Slowed 22–35% · Monthly infusion</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="lecanemab" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Leqembi</span>
-          <span class="cab-line">Slowed 27% · Weekly shot or infusion</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="remternetug" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Remternetug</span>
-          <span class="cab-line">No results yet · Self-injected shot</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="trontinemab" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Trontinemab</span>
-          <span class="cab-line">Not yet tested · Every 4–12 weeks</span>
-        </label>
-      </div>
+<label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="donanemab" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Kisunla</span>
+  <span class="cab-line">Slowed 22–35% · Monthly infusion</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="lecanemab" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Leqembi</span>
+  <span class="cab-line">Slowed 27% · Weekly shot or infusion</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="remternetug" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Remternetug</span>
+  <span class="cab-line">No results yet · Self-injected shot</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="trontinemab" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Trontinemab</span>
+  <span class="cab-line">Not yet tested · Every 4–12 weeks</span>
+</label>      </div>
     </div>
     <div class="cab-drawer" data-topic="cancer">
       <div class="cab-row cab-top">
@@ -147,25 +174,22 @@
         <button type="button" class="cab-more" aria-expanded="false" aria-controls="d-cancer"><span data-shown>3</span> of 3<span class="chev" aria-hidden="true"></span></button>
       </div>
       <div class="cab-drugs" id="d-cancer" hidden>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="imlunestrant" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Inluriyo</span>
-          <span class="cab-line">Progression ↓ 38% · Daily pill</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="ivonescimab" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Ivonescimab</span>
-          <span class="cab-line">Progression ↓ 48% · Infusion</span>
-        </label>
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="olomorasib" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">Olomorasib</span>
-          <span class="cab-line">Early data only · Twice-daily pill</span>
-        </label>
-      </div>
+<label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="imlunestrant" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Inluriyo</span>
+  <span class="cab-line">Progression ↓ 38% · Daily pill</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="ivonescimab" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Ivonescimab</span>
+  <span class="cab-line">Progression ↓ 48% · Infusion</span>
+</label><label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="olomorasib" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">Olomorasib</span>
+  <span class="cab-line">Early data only · Twice-daily pill</span>
+</label>      </div>
     </div>
   </section>
   <section class="cab-sec">
@@ -176,12 +200,22 @@
         <input type="checkbox" id="c-lilly" data-company-box="lilly">
         <label class="cab-box" for="c-lilly" aria-hidden="true"></label>
         <label class="cab-name" for="c-lilly">Eli Lilly</label>
-        <button type="button" class="cab-more" aria-expanded="false" aria-controls="cd-lilly">8 drugs<span class="chev" aria-hidden="true"></span></button>
+        <button type="button" class="cab-more" aria-expanded="false" aria-controls="cd-lilly">10 drugs<span class="chev" aria-hidden="true"></span></button>
       </div>
       <div class="cab-drugs" id="cd-lilly" hidden>
         <div class="cab-row cab-sub cab-ro">
           <span></span>
           <span class="cab-name">VERVE-102</span>
+          <span class="cab-line">Heart &amp; cholesterol</span>
+        </div>
+        <div class="cab-row cab-sub cab-ro">
+          <span></span>
+          <span class="cab-name">Lepodisiran</span>
+          <span class="cab-line">Heart &amp; cholesterol</span>
+        </div>
+        <div class="cab-row cab-sub cab-ro">
+          <span></span>
+          <span class="cab-name">Muvalaplin</span>
           <span class="cab-line">Heart &amp; cholesterol</span>
         </div>
         <div class="cab-row cab-sub cab-ro">
@@ -224,8 +258,8 @@
   </section>
 </form>
 <div class="cab-foot">
-  <span class="cab-note">Saved on this device</span>
-  <a class="cab-done" href="index.html">Done &rarr;</a>
+  <a class="cab-done" href="index.html" data-done>Done</a>
+  <span class="cab-note">Saved on this device<span class="cab-need" hidden> · choose at least one to start</span></span>
 </div>
     </div>
   </div>
@@ -233,7 +267,7 @@
 <footer>
   Report generated Nov 9, 2026 · Sources: ClinicalTrials.gov, openFDA, news searches
 </footer>
-<script type="application/json" id="cabinet-data">{"topics":["heart","obesity","alzheimers","cancer"],"drugs":{"evolocumab":{"t":"heart","c":[]},"alirocumab":{"t":"heart","c":[]},"inclisiran":{"t":"heart","c":[]},"lerodalcibep":{"t":"heart","c":[]},"verve102":{"t":"heart","c":["lilly"]},"tirzepatide":{"t":"obesity","c":["lilly"]},"semaglutide":{"t":"obesity","c":[]},"orforglipron":{"t":"obesity","c":["lilly"]},"retatrutide":{"t":"obesity","c":["lilly"]},"maritide":{"t":"obesity","c":[]},"donanemab":{"t":"alzheimers","c":["lilly"]},"lecanemab":{"t":"alzheimers","c":[]},"remternetug":{"t":"alzheimers","c":["lilly"]},"trontinemab":{"t":"alzheimers","c":[]},"imlunestrant":{"t":"cancer","c":["lilly"]},"olomorasib":{"t":"cancer","c":["lilly"]},"ivonescimab":{"t":"cancer","c":[]}}}</script>
+<script type="application/json" id="cabinet-data">{"topics":["heart","obesity","alzheimers","cancer"],"drugs":{"evolocumab":{"t":"heart","c":[]},"alirocumab":{"t":"heart","c":[]},"inclisiran":{"t":"heart","c":[]},"lerodalcibep":{"t":"heart","c":[]},"verve102":{"t":"heart","c":["lilly"]},"lepodisiran":{"t":"heart","c":["lilly"]},"olpasiran":{"t":"heart","c":[]},"pelacarsen":{"t":"heart","c":[]},"zerlasiran":{"t":"heart","c":[]},"muvalaplin":{"t":"heart","c":["lilly"]},"tirzepatide":{"t":"obesity","c":["lilly"]},"semaglutide":{"t":"obesity","c":[]},"orforglipron":{"t":"obesity","c":["lilly"]},"retatrutide":{"t":"obesity","c":["lilly"]},"maritide":{"t":"obesity","c":[]},"donanemab":{"t":"alzheimers","c":["lilly"]},"lecanemab":{"t":"alzheimers","c":[]},"remternetug":{"t":"alzheimers","c":["lilly"]},"trontinemab":{"t":"alzheimers","c":[]},"imlunestrant":{"t":"cancer","c":["lilly"]},"olomorasib":{"t":"cancer","c":["lilly"]},"ivonescimab":{"t":"cancer","c":[]}}}</script>
 <script src="assets/cabinet.js" defer></script>
 <script src="assets/filter.js" defer></script>
 <script src="assets/tabs.js" defer></script>

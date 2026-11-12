@@ -44,7 +44,7 @@ python -m digest run                  # the weekly job (needs the env vars below
 2. **Secrets** (GitHub → Settings → Secrets and variables → Actions). All are optional:
    - `ANTHROPIC_API_KEY`: without it, the "why it matters" lines fall back to each drug's `plain` description.
    - `SITE_URL`: your Vercel URL. The email then links to the site.
-   - `READER_CONTEXT`: overrides `reader_context` in `watchlist.yaml`, so your personal details don't have to sit in a public repo.
+   - `READER_CONTEXT`: who the summaries are written for (your own context). It overrides the generic `reader_context` in `watchlist.yaml`, so personal details stay out of this public repo.
    - Email via **Gmail**: `SMTP_USER` (your address), `SMTP_PASSWORD` (a Gmail [app password](https://myaccount.google.com/apppasswords)), `DIGEST_TO`. Via **Resend**: `SMTP_HOST=smtp.resend.com`, `SMTP_USER=resend`, `SMTP_PASSWORD` (API key), `DIGEST_FROM` (an address on your verified domain), `DIGEST_TO`. With no email secrets set, the run just updates the site.
 3. **First run:** go to Actions → *Weekly digest* → *Run workflow*. Mode **dry-run** builds everything and saves nothing (download the `digest-N` artifact to look). Mode **send** saves the baseline and publishes the site.
 4. After that it runs Mondays at 12:23 UTC. To change the time, edit the `cron` line in `.github/workflows/weekly-digest.yml`. Editing `watchlist.yaml` or the site templates triggers *Rebuild site*, which redeploys without fetching anything.

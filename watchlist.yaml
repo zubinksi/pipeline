@@ -13,11 +13,11 @@
 # summary and as the "why it matters" fallback when the Claude API is off.
 #
 # Verified by web search on 2026-11-03 (sources listed per drug).
-# Not tracked: daily-dosed drugs and drugs approved only outside the US
-# (removed 2026-11-06: muvalaplin, enlicitide, laroprovstat, obicetrapib).
+# Not tracked: daily LDL pills and drugs approved only outside the US
+# (removed 2026-11-06: enlicitide, laroprovstat, obicetrapib).
 # Added 2026-11-07: approved non-daily options (evolocumab, alirocumab, inclisiran).
-# Removed 2026-11-07: Lp(a) and triglyceride drugs (lepodisiran, olpasiran,
-# pelacarsen, zerlasiran, solbinsiran); only LDL-lowering drugs are tracked.
+# Lp(a) drugs were removed 2026-11-07 and restored 2026-11-12 as their own group
+# under Heart & cholesterol. Not tracked: triglyceride-only drugs (solbinsiran).
 # clinicaltrials.gov itself was not reachable from the build sandbox, so the
 # first real run on GitHub Actions is the first check against the registry.
 
@@ -40,6 +40,9 @@ settings:
 topics:
   - id: heart
     title: Heart & cholesterol
+    groups:                 # optional finer choices in the cabinet; drugs say which with `group`
+      - {id: ldl, title: "LDL-lowering", effect_label: "LDL reduction"}
+      - {id: lpa, title: "Lp(a)-lowering", effect_label: "Lp(a) reduction"}
     effect_label: LDL reduction
     effect_col: Lowers
     outcome:
@@ -59,10 +62,12 @@ topics:
     field_focus: "concrete developments in LDL-lowering treatment (not Lp(a)- or triglyceride-only drugs)"
     field_match: '\b(ldl|cholesterol|pcsk9|hypercholesterol\w*|statin)'
     explain: >
-      LDL is the "bad" cholesterol that statins lower. Every drug here lowers LDL
-      without being a statin or a daily pill. Lowering LDL isn't automatically the
-      same as preventing heart attacks: "Prevents heart attacks" means a large trial
-      showed fewer heart attacks and strokes.
+      LDL is the "bad" cholesterol that statins lower; the LDL drugs here do it
+      without being a statin or a daily pill. Lp(a) is a separate, mostly inherited
+      cholesterol particle that diet and statins barely touch; no Lp(a) drug is
+      approved yet. Lowering either isn't automatically the same as preventing heart
+      attacks: "Prevents heart attacks" means a large trial showed fewer heart
+      attacks and strokes.
 
   - id: obesity
     title: Obesity & metabolism
@@ -142,14 +147,10 @@ companies:
     title: Eli Lilly
     match: ["Lilly"]
 
+# Who the summaries are written for. Personal details belong in the READER_CONTEXT
+# GitHub secret, which overrides this; keep only a generic description here.
 reader_context: >
-  A curious layperson. Heart & cholesterol is personal: 32 years old, not on
-  cholesterol medication, LDL and apoB moderately high, Lp(a) tested and normal
-  (so Lp(a) drugs aren't relevant). Their father has genetic high cholesterol and
-  has been on statins for years; no early heart attacks or strokes in the family.
-  Would prefer to avoid statins and is most interested in LDL-lowering options
-  that don't need daily dosing. The other topics (obesity, Alzheimer's, cancer)
-  and the Eli Lilly pipeline are followed out of general interest.
+  A curious layperson following these topics; not a clinician.
 
 # Extra RSS feeds scanned for any watchlist drug name (in addition to a
 # Google News search per drug, which picks up company press releases).
@@ -187,6 +188,7 @@ drugs:
   # ---- approved ----
   - id: evolocumab
     topic: heart
+    group: ldl
     name: Evolocumab
     brand: Repatha
     aliases: [Repatha, AMG 145]
@@ -210,6 +212,7 @@ drugs:
 
   - id: alirocumab
     topic: heart
+    group: ldl
     name: Alirocumab
     brand: Praluent
     aliases: [Praluent, SAR236553, REGN727]
@@ -233,6 +236,7 @@ drugs:
 
   - id: inclisiran
     topic: heart
+    group: ldl
     name: Inclisiran
     brand: Leqvio
     aliases: [Leqvio, ALN-PCSsc, KJX839]
@@ -265,6 +269,7 @@ drugs:
 
   - id: lerodalcibep
     topic: heart
+    group: ldl
     name: Lerodalcibep
     brand: Lerochol
     aliases: [Lerochol, LIB003]
@@ -289,6 +294,7 @@ drugs:
   # ---- in development ----
   - id: verve102
     topic: heart
+    group: ldl
     name: VERVE-102
     aliases: ["VERVE 102", LY4636581]
     company: Eli Lilly (Verve)
@@ -313,6 +319,124 @@ drugs:
         short: "Mid-stage trial results"
         what: "Results from its mid-stage trial (HEART-3), the next step toward a one-time treatment."
         context: "The first larger test of a one-time treatment meant to lower LDL for life. Good results would move it toward final-stage trials."
+
+  # ---- Lp(a) (restored 2026-11-12; verified 2026-11-03, muvalaplin 2026-11-12) ----
+  - id: lepodisiran
+    topic: heart
+    group: lpa
+    name: Lepodisiran
+    aliases: [LY3819469]
+    company: Eli Lilly
+    target: Lp(a)
+    lowers: Lp(a)
+    form: Shot, possibly once or twice a year
+    often: "1–2× a year"
+    route: injection
+    frequency: infrequent
+    plain: "A shot that switches off the liver's production of Lp(a) for many months at a time."
+    stage: phase3
+    effect: "Lp(a) down about 94%"
+    effect_short: "Lp(a) ↓ 94%"
+    effect_source: https://www.acc.org/Latest-in-Cardiology/Journal-Scans/2025/03/24/16/30/sun-130pm-alpaca-acc-2025
+    proven: testing
+    proven_note: "A large final-stage trial (ACCLAIM-Lp(a)) is testing whether it prevents heart attacks and strokes. Results are expected around 2029."
+    proven_source: https://www.clinicaltrialsarena.com/analyst-comment/jpm26-eli-lilly-lpa-drugs/
+    note: "In final-stage trials. Results are expected around 2029."
+    sources: [https://www.clinicaltrialsarena.com/analyst-comment/jpm26-eli-lilly-lpa-drugs/]
+
+  - id: olpasiran
+    topic: heart
+    group: lpa
+    name: Olpasiran
+    aliases: [AMG 890, AMG890]
+    company: Amgen
+    target: Lp(a)
+    lowers: Lp(a)
+    form: Shot, every 3 months or less often
+    often: "Every 3+ months"
+    route: injection
+    frequency: infrequent
+    plain: "A shot a few times a year that strongly lowers Lp(a)."
+    stage: phase3
+    effect: "Lp(a) down 95%+"
+    effect_short: "Lp(a) ↓ 95%+"
+    effect_source: https://www.amgen.com/newsroom/press-releases/2022/11/amgen-presents-new-phase-2-data-that-show-olpasiran-delivers-significant-reduction-in-lipoproteina-levels
+    proven: testing
+    proven_note: "Its large heart-attack prevention trial (OCEAN(a)-Outcomes) is fully enrolled. Amgen hasn't said when results will come; some sources point to 2028."
+    proven_source: https://clinicaltrials.gov/study/NCT05581303
+    note: "In final-stage trials, fully enrolled."
+    sources: [https://clinicaltrials.gov/study/NCT05581303]
+
+  - id: pelacarsen
+    topic: heart
+    group: lpa
+    name: Pelacarsen
+    aliases: [TQJ230, "IONIS-APO(a)-LRx", AKCEA-APO(a)-LRx]
+    company: Novartis / Ionis
+    target: Lp(a)
+    lowers: Lp(a)
+    form: Shot, once a month
+    often: "Monthly"
+    route: injection
+    frequency: monthly
+    plain: "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial."
+    stage: phase3
+    badge: setback
+    effect: "Lp(a) down about 80%"
+    effect_short: "Lp(a) ↓ 80%"
+    effect_source: https://nutrition-evidence.com/article/377243/emerging-rna-therapeutics-to-lower-blood-levels-of-lpa-jacc-focus-seminar-24
+    proven: failed
+    proven_note: "Its large trial (Lp(a)HORIZON, Sep 2026) lowered Lp(a) but did not reduce heart attacks or strokes. Full results are still to be presented."
+    proven_source: https://www.tctmd.com/news/lpahorizon-top-line-results-dash-hopes-pelacarsen
+    note: "Future unclear after its final-stage trial missed its main goal."
+    sources: [https://www.tctmd.com/news/lpahorizon-top-line-results-dash-hopes-pelacarsen]
+
+  - id: zerlasiran
+    topic: heart
+    group: lpa
+    name: Zerlasiran
+    aliases: [SLN360]
+    company: Silence Therapeutics
+    target: Lp(a)
+    lowers: Lp(a)
+    form: Shot, a few times a year
+    often: "A few times a year"
+    route: injection
+    frequency: infrequent
+    plain: "A shot a few times a year that strongly lowers Lp(a)."
+    stage: phase2
+    badge: on hold
+    effect: "Lp(a) down 80%+"
+    effect_short: "Lp(a) ↓ 80%+"
+    effect_source: https://www.healio.com/news/cardiology/20250117/the-year-in-lipids-progress-in-lpa-management-and-a-blow-to-the-hdl-hypothesis
+    proven: untested
+    proven_note: "No heart-attack trial yet; one is planned once the company finds a partner."
+    proven_source: https://www.biospace.com/drug-development/silence-quiets-phase-iii-pace-for-lipoprotein-drug-seeks-partner
+    note: "Ready for final-stage trials, but the company won't start them until it finds a partner to fund them."
+    sources: [https://www.biospace.com/drug-development/silence-quiets-phase-iii-pace-for-lipoprotein-drug-seeks-partner]
+
+  - id: muvalaplin
+    topic: heart
+    group: lpa
+    name: Muvalaplin
+    aliases: [LY3473329]
+    company: Eli Lilly
+    target: Lp(a)
+    lowers: Lp(a)
+    form: Pill, once a day
+    often: "Daily pill"
+    route: pill
+    frequency: daily
+    plain: "A once-daily pill that blocks Lp(a) from forming. It would be the first Lp(a) pill."
+    stage: phase3
+    effect: "Lp(a) down up to 85% at the highest dose in a 12-week mid-stage trial"
+    effect_short: "Lp(a) ↓ up to 85%"
+    effect_source: https://oleantimesherald.com/2024/11/18/lillys-muvalaplin-lowered-lipoproteina-levels-in-adults-with-high-risk-for-cardiovascular-events-by-up-to-85-at-highest-tested-dose
+    proven: testing
+    proven_note: "A heart-attack prevention trial (MOVE-Lp(a)) is recruiting; main results are estimated around 2031."
+    proven_source: https://clinicaltrials.gov/study/NCT07157774
+    note: "In final-stage trials."
+    sources: [https://clinicaltrials.gov/study/NCT07157774]
 
   # ======== Obesity & metabolism ========  (verified by web search 2026-11-12)
   - id: tirzepatide

@@ -2,8 +2,20 @@
 {% import "_macros.html.j2" as m with context %}
 {% block title %}Your cabinet · {{ site_title }}{% endblock %}
 {% block head %}{{ m.slab_head("cabinet") }}{% endblock %}
+{% macro drug_row(r) -%}
+<label class="cab-row cab-sub">
+  <input type="checkbox" data-drug-box="{{ r.id }}" checked>
+  <span class="cab-box" aria-hidden="true"></span>
+  <span class="cab-name">{{ r.display_name }}</span>
+  <span class="cab-line">{{ (r.effect_short or r.effect or r.lowers).split("; ")[0]|replace("LDL ", "")|replace("Lp(a) ", "")|replace("Weight ", "") }} · {{ r.often or r.form }}</span>
+</label>
+{%- endmacro %}
 {% block content %}
-<p class="cab-lede">Choose what you follow. News and Drugs show only these.</p>
+<div class="cab-welcome" hidden>
+  <h2 class="page-title">Welcome</h2>
+  <p class="cab-lede">Pick what you'd like to follow: whole topics, parts of them, or everything a company is working on. You can change this any time from Your cabinet.</p>
+</div>
+<p class="cab-lede cab-usual">Choose what you follow. News and Drugs show only these.</p>
 <form class="cab" data-cabinet>
   <section class="cab-sec">
     <div class="cab-head">Topics</div>
@@ -16,14 +28,19 @@
         <button type="button" class="cab-more" aria-expanded="false" aria-controls="d-{{ t.id }}"><span data-shown>{{ t.n }}</span> of {{ t.n }}<span class="chev" aria-hidden="true"></span></button>
       </div>
       <div class="cab-drugs" id="d-{{ t.id }}" hidden>
-        {% for g in t.groups %}{% for r in g.rows %}
-        <label class="cab-row cab-sub">
-          <input type="checkbox" data-drug-box="{{ r.id }}" checked>
-          <span class="cab-box" aria-hidden="true"></span>
-          <span class="cab-name">{{ r.display_name }}</span>
-          <span class="cab-line">{{ (r.effect_short or r.effect or r.lowers).split("; ")[0]|replace("LDL ", "") }} · {{ r.often or r.form }}</span>
-        </label>
-        {% endfor %}{% endfor %}
+        {% if t.subgroups %}
+        {% for sg in t.subgroups %}
+        <div class="cab-row cab-subhead">
+          <input type="checkbox" id="g-{{ t.id }}-{{ sg.id }}" data-set-box="{{ sg.rows|map(attribute='id')|join(' ') }}" data-set-topic="{{ t.id }}" checked>
+          <label class="cab-box" for="g-{{ t.id }}-{{ sg.id }}" aria-hidden="true"></label>
+          <label class="cab-name" for="g-{{ t.id }}-{{ sg.id }}">{{ sg.title }}</label>
+          <span class="cab-line">{{ sg.rows|length }}</span>
+        </div>
+        {% for r in sg.rows %}{{ drug_row(r) }}{% endfor %}
+        {% endfor %}
+        {% else %}
+        {% for g in t.groups %}{% for r in g.rows %}{{ drug_row(r) }}{% endfor %}{% endfor %}
+        {% endif %}
       </div>
     </div>
     {% endfor %}
@@ -55,7 +72,7 @@
   {% endif %}
 </form>
 <div class="cab-foot">
-  <span class="cab-note">Saved on this device</span>
-  <a class="cab-done" href="{{ root }}index.html">Done &rarr;</a>
+  <a class="cab-done" href="{{ root }}index.html" data-done>Done</a>
+  <span class="cab-note">Saved on this device<span class="cab-need" hidden> · choose at least one to start</span></span>
 </div>
 {% endblock %}

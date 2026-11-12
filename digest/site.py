@@ -95,7 +95,11 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
               "updated": snapshot.get("generated_at", "")[:10],
               "filters": {"lowers": [(k, v) for k, v in display.LOWERS_LABEL.items()
                                      if any(k in display.lowers_keys(d.get("lowers", "")) for d in watchlist["drugs"])],
-                          "freq": [(k, v) for k, v in FREQ_LABEL.items() if k in present("frequency")]},
+                          "freq": [(k, v) for k, v in FREQ_LABEL.items() if k in present("frequency")],
+                          "tp": [(t["id"], t.get("title", t["id"])) for t in topics_of(watchlist)
+                                 if t["id"] in present("topic")],
+                          "st": [(key, title) for key, title, sts, _ in display.GROUPS
+                                 if any(stages.get(d["id"], d["stage"]) in sts for d in watchlist["drugs"])]},
               "has_lpa": any("lpa" in display.lowers_keys(d.get("lowers", "")) for d in watchlist["drugs"]),
               "topics": topics_by_id(watchlist),
               # what cabinet.js needs to know on every page: each drug's topic and companies
@@ -150,7 +154,10 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
         write(f"drugs/{d['id']}.html", "drug.html.j2", "../", sel="drugs", drug=d,
               n_active=sum(1 for t in trials if t["status"] in ACTIVE), next_pcd=next_pcd,
               row=next(r for r in _rows(watchlist, {**stages, d["id"]: stage}, moved) if r["id"] == d["id"]),
-              topic=topics_by_id(watchlist).get(d.get("topic")) or topics_of(watchlist)[0],
+              topic=(t := topics_by_id(watchlist).get(d.get("topic")) or topics_of(watchlist)[0]),
+              effect_label=next((g.get("effect_label") for g in t.get("groups") or []
+                                 if g["id"] == d.get("group") and g.get("effect_label")),
+                                t.get("effect_label") or "Effect"),
               stage_basis=snapshot.get("drugs", {}).get(d["id"], {}),
               milestones=[h for h in upcoming_all if h.drug_id == d["id"]],
               updates=updates, history=history, trials=trials)

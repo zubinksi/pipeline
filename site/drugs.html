@@ -11,6 +11,7 @@
 <link rel="preload" href="assets/fonts/GeistSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
+<script>try{if(!localStorage.getItem("cabinet")){localStorage.setItem("cabinet-probe","1");localStorage.removeItem("cabinet-probe");location.replace("cabinet.html?welcome")}}catch(e){}</script>
 </head>
 <body>
 <main class="body">
@@ -79,13 +80,31 @@
 <div class="panel" data-panel="drugs">
 <section class="section" data-filter>
   <div class="section-head">
-    <h2>The drugs <span class="sub" data-total>17</span></h2>
+    <h2>The drugs <span class="sub" data-total>22</span></h2>
     <button type="button" class="ficon" aria-expanded="false" aria-controls="fpanel" aria-label="Filter" hidden>
       <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 3.5h12M4.5 8h7M7 12.5h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg>
       <span class="fcount" hidden></span>
     </button>
   </div>
   <div class="fpanel" id="fpanel" hidden>
+    <div class="fgroup">
+      <span class="label">Topic</span>
+      <div class="chips" role="group" aria-label="Topic">
+        <button type="button" class="chip" data-k="tp" data-v="all" aria-pressed="true">All</button>
+<button type="button" class="chip" data-k="tp" data-v="heart" aria-pressed="false">Heart &amp; cholesterol</button><button type="button" class="chip" data-k="tp" data-v="obesity" aria-pressed="false">Obesity &amp; metabolism</button><button type="button" class="chip" data-k="tp" data-v="alzheimers" aria-pressed="false">Alzheimer&#39;s &amp; the brain</button><button type="button" class="chip" data-k="tp" data-v="cancer" aria-pressed="false">Cancer</button>      </div>
+    </div>
+    <div class="fgroup">
+      <span class="label">Stage</span>
+      <div class="chips" role="group" aria-label="Stage">
+        <button type="button" class="chip" data-k="st" data-v="all" aria-pressed="true">All</button>
+<button type="button" class="chip" data-k="st" data-v="now" aria-pressed="false">Available now</button><button type="button" class="chip" data-k="st" data-v="close" aria-pressed="false">Getting close</button><button type="button" class="chip" data-k="st" data-v="later" aria-pressed="false">Further out</button>      </div>
+    </div>
+    <div class="fgroup">
+      <span class="label">Cholesterol</span>
+      <div class="chips" role="group" aria-label="Cholesterol">
+        <button type="button" class="chip" data-k="lowers" data-v="all" aria-pressed="true">All</button>
+<button type="button" class="chip" data-k="lowers" data-v="ldl" aria-pressed="false">LDL</button><button type="button" class="chip" data-k="lowers" data-v="lpa" aria-pressed="false">Lp(a)</button>      </div>
+    </div>
     <div class="fgroup">
       <span class="label">How often</span>
       <div class="chips" role="group" aria-label="How often">
@@ -94,13 +113,13 @@
     </div>
   </div>
   <div class="tsec" data-topic-sec="heart">
-<h3 class="tsec-head">Heart &amp; cholesterol <span class="n" data-tcount>5</span></h3>    <div class="dtable">
+<h3 class="tsec-head">Heart &amp; cholesterol <span class="n" data-tcount>10</span></h3>    <div class="dtable">
       <div class="dhead" aria-hidden="true">
         <span>Drug</span><span>Lowers</span><span>How often</span><span>Heart attacks?</span><span class="c-stage">Stage</span><span></span>
       </div>
       <div class="group" data-group>
         <h3>Available now <span class="n" data-count>4</span></h3>
-        <a class="drug" href="drugs/evolocumab.html" data-drug="evolocumab" data-lowers="ldl" data-freq="monthly">
+        <a class="drug" href="drugs/evolocumab.html" data-drug="evolocumab" data-tp="heart" data-st="now" data-lowers="ldl" data-freq="monthly">
           <span class="c-name"><span class="drug-name">Repatha</span><span class="generic">evolocumab</span></span>
           <span class="c-line"><span class="nb">Every 2–4 weeks</span><span class="sep">·</span><span class="nb">LDL ↓ 60%</span></span>
           <span class="c-one"><span>LDL ↓ 60%</span><span class="sep">·</span><span>Every 2–4 weeks</span></span>
@@ -110,7 +129,7 @@
           <span class="c-stage"></span>
           <span class="go" aria-hidden="true">&rsaquo;</span>
         </a>
-        <a class="drug" href="drugs/alirocumab.html" data-drug="alirocumab" data-lowers="ldl" data-freq="monthly">
+        <a class="drug" href="drugs/alirocumab.html" data-drug="alirocumab" data-tp="heart" data-st="now" data-lowers="ldl" data-freq="monthly">
           <span class="c-name"><span class="drug-name">Praluent</span><span class="generic">alirocumab</span></span>
           <span class="c-line"><span class="nb">Every 2–4 weeks</span><span class="sep">·</span><span class="nb">LDL ↓ 50%</span></span>
           <span class="c-one"><span>LDL ↓ 50%</span><span class="sep">·</span><span>Every 2–4 weeks</span></span>
@@ -120,7 +139,7 @@
           <span class="c-stage"></span>
           <span class="go" aria-hidden="true">&rsaquo;</span>
         </a>
-        <a class="drug" href="drugs/inclisiran.html" data-drug="inclisiran" data-lowers="ldl" data-freq="infrequent">
+        <a class="drug" href="drugs/inclisiran.html" data-drug="inclisiran" data-tp="heart" data-st="now" data-lowers="ldl" data-freq="infrequent">
           <span class="c-name"><span class="drug-name">Leqvio</span><span class="generic">inclisiran</span></span>
           <span class="c-line"><span class="nb">Twice a year</span><span class="sep">·</span><span class="nb">LDL ↓ 50%</span></span>
           <span class="c-one"><span>LDL ↓ 50%</span><span class="sep">·</span><span>Twice a year</span></span>
@@ -130,7 +149,7 @@
           <span class="c-stage"></span>
           <span class="go" aria-hidden="true">&rsaquo;</span>
         </a>
-        <a class="drug" href="drugs/lerodalcibep.html" data-drug="lerodalcibep" data-lowers="ldl" data-freq="monthly">
+        <a class="drug" href="drugs/lerodalcibep.html" data-drug="lerodalcibep" data-tp="heart" data-st="now" data-lowers="ldl" data-freq="monthly">
           <span class="c-name"><span class="drug-name">Lerochol</span><span class="generic">lerodalcibep</span></span>
           <span class="c-line"><span class="nb">Monthly</span><span class="sep">·</span><span class="nb">LDL ↓ 60%</span></span>
           <span class="c-one"><span>LDL ↓ 60%</span><span class="sep">·</span><span>Monthly</span></span>
@@ -142,13 +161,71 @@
         </a>
       </div>
       <div class="group" data-group>
-        <h3>Further out <span class="n" data-count>1</span></h3>
-        <a class="drug" href="drugs/verve102.html" data-drug="verve102" data-lowers="ldl" data-freq="once">
+        <h3>Getting close <span class="n" data-count>4</span></h3>
+        <a class="drug" href="drugs/lepodisiran.html" data-drug="lepodisiran" data-tp="heart" data-st="close" data-lowers="lpa" data-freq="infrequent">
+          <span class="c-name"><span class="drug-name">Lepodisiran</span></span>
+          <span class="c-line"><span class="nb">1–2× a year</span><span class="sep">·</span><span class="nb">Lp(a) ↓ 94%</span></span>
+          <span class="c-one"><span>Lp(a) ↓ 94%</span><span class="sep">·</span><span>1–2× a year</span></span>
+          <span class="c-effect">Lp(a) ↓ 94%</span>
+          <span class="c-often">1–2× a year</span>
+          <span class="c-proof"><span class="pf pf-testing"><span class="pf-short">Trial underway</span><span class="pf-long">Heart-attack trial underway</span></span></span>
+          <span class="c-stage"><div class="mini" role="img" aria-label="Step 3 of 5: Phase 3">
+<div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div><span class="words">Final-stage trials</span></span>
+          <span class="go" aria-hidden="true">&rsaquo;</span>
+        </a>
+        <a class="drug" href="drugs/olpasiran.html" data-drug="olpasiran" data-tp="heart" data-st="close" data-lowers="lpa" data-freq="infrequent">
+          <span class="c-name"><span class="drug-name">Olpasiran</span></span>
+          <span class="c-line"><span class="nb">Every 3+ months</span><span class="sep">·</span><span class="nb">Lp(a) ↓ 95%+</span></span>
+          <span class="c-one"><span>Lp(a) ↓ 95%+</span><span class="sep">·</span><span>Every 3+ months</span></span>
+          <span class="c-effect">Lp(a) ↓ 95%+</span>
+          <span class="c-often">Every 3+ months</span>
+          <span class="c-proof"><span class="pf pf-testing"><span class="pf-short">Trial underway</span><span class="pf-long">Heart-attack trial underway</span></span></span>
+          <span class="c-stage"><div class="mini" role="img" aria-label="Step 3 of 5: Phase 3">
+<div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div><span class="words">Final-stage trials</span></span>
+          <span class="go" aria-hidden="true">&rsaquo;</span>
+        </a>
+        <a class="drug" href="drugs/pelacarsen.html" data-drug="pelacarsen" data-tp="heart" data-st="close" data-lowers="lpa" data-freq="monthly">
+          <span class="c-name"><span class="drug-name">Pelacarsen</span><span class="tag setback">setback</span></span>
+          <span class="c-line"><span class="nb">Monthly</span><span class="sep">·</span><span class="nb">Lp(a) ↓ 80%</span></span>
+          <span class="c-one"><span>Lp(a) ↓ 80%</span><span class="sep">·</span><span>Monthly</span></span>
+          <span class="c-effect">Lp(a) ↓ 80%</span>
+          <span class="c-often">Monthly</span>
+          <span class="c-proof"><span class="pf pf-failed"><span class="pf-i" aria-hidden="true">&#10007;</span><span class="pf-short">Didn&#39;t prevent</span><span class="pf-long">Didn&#39;t prevent heart attacks</span></span></span>
+          <span class="c-stage"><div class="mini" role="img" aria-label="Step 3 of 5: Phase 3">
+<div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div><span class="words">Final-stage trials</span></span>
+          <span class="go" aria-hidden="true">&rsaquo;</span>
+        </a>
+        <a class="drug" href="drugs/muvalaplin.html" data-drug="muvalaplin" data-tp="heart" data-st="close" data-lowers="lpa" data-freq="daily">
+          <span class="c-name"><span class="drug-name">Muvalaplin</span></span>
+          <span class="c-line"><span class="nb">Daily pill</span><span class="sep">·</span><span class="nb">Lp(a) ↓ up to 85%</span></span>
+          <span class="c-one"><span>Lp(a) ↓ up to 85%</span><span class="sep">·</span><span>Daily pill</span></span>
+          <span class="c-effect">Lp(a) ↓ up to 85%</span>
+          <span class="c-often">Daily pill</span>
+          <span class="c-proof"><span class="pf pf-testing"><span class="pf-short">Trial underway</span><span class="pf-long">Heart-attack trial underway</span></span></span>
+          <span class="c-stage"><div class="mini" role="img" aria-label="Step 3 of 5: Phase 3">
+<div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div><span class="words">Final-stage trials</span></span>
+          <span class="go" aria-hidden="true">&rsaquo;</span>
+        </a>
+      </div>
+      <div class="group" data-group>
+        <h3>Further out <span class="n" data-count>2</span></h3>
+        <a class="drug" href="drugs/verve102.html" data-drug="verve102" data-tp="heart" data-st="later" data-lowers="ldl" data-freq="once">
           <span class="c-name"><span class="drug-name">VERVE-102</span></span>
           <span class="c-line"><span class="nb">Once</span><span class="sep">·</span><span class="nb">LDL ↓ up to 62%</span></span>
           <span class="c-one"><span>LDL ↓ up to 62%</span><span class="sep">·</span><span>Once</span></span>
           <span class="c-effect">LDL ↓ up to 62%</span>
           <span class="c-often">Once</span>
+          <span class="c-proof"><span class="pf pf-untested"><span class="pf-short">No data yet</span><span class="pf-long">No heart-attack data yet</span></span></span>
+          <span class="c-stage"><div class="mini" role="img" aria-label="Step 2 of 5: Phase 2">
+<div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div><span class="words">Mid-stage testing</span></span>
+          <span class="go" aria-hidden="true">&rsaquo;</span>
+        </a>
+        <a class="drug" href="drugs/zerlasiran.html" data-drug="zerlasiran" data-tp="heart" data-st="later" data-lowers="lpa" data-freq="infrequent">
+          <span class="c-name"><span class="drug-name">Zerlasiran</span><span class="tag">on hold</span></span>
+          <span class="c-line"><span class="nb">A few times a year</span><span class="sep">·</span><span class="nb">Lp(a) ↓ 80%+</span></span>
+          <span class="c-one"><span>Lp(a) ↓ 80%+</span><span class="sep">·</span><span>A few times a year</span></span>
+          <span class="c-effect">Lp(a) ↓ 80%+</span>
+          <span class="c-often">A few times a year</span>
           <span class="c-proof"><span class="pf pf-untested"><span class="pf-short">No data yet</span><span class="pf-long">No heart-attack data yet</span></span></span>
           <span class="c-stage"><div class="mini" role="img" aria-label="Step 2 of 5: Phase 2">
 <div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div><span class="words">Mid-stage testing</span></span>
@@ -164,7 +241,7 @@
       </div>
       <div class="group" data-group>
         <h3>Available now <span class="n" data-count>3</span></h3>
-        <a class="drug" href="drugs/tirzepatide.html" data-drug="tirzepatide" data-lowers="" data-freq="weekly">
+        <a class="drug" href="drugs/tirzepatide.html" data-drug="tirzepatide" data-tp="obesity" data-st="now" data-lowers="" data-freq="weekly">
           <span class="c-name"><span class="drug-name">Zepbound</span><span class="generic">tirzepatide</span></span>
           <span class="c-line"><span class="nb">Weekly</span><span class="sep">·</span><span class="nb">Weight ↓ 21%</span></span>
           <span class="c-one"><span>Weight ↓ 21%</span><span class="sep">·</span><span>Weekly</span></span>
@@ -174,7 +251,7 @@
           <span class="c-stage"></span>
           <span class="go" aria-hidden="true">&rsaquo;</span>
         </a>
-        <a class="drug" href="drugs/semaglutide.html" data-drug="semaglutide" data-lowers="" data-freq="weekly">
+        <a class="drug" href="drugs/semaglutide.html" data-drug="semaglutide" data-tp="obesity" data-st="now" data-lowers="" data-freq="weekly">
           <span class="c-name"><span class="drug-name">Wegovy</span><span class="generic">semaglutide</span></span>
           <span class="c-line"><span class="nb">Weekly shot or daily pill</span><span class="sep">·</span><span class="nb">Weight ↓ 15%</span></span>
           <span class="c-one"><span>Weight ↓ 15%</span><span class="sep">·</span><span>Weekly shot or daily pill</span></span>
@@ -184,7 +261,7 @@
           <span class="c-stage"></span>
           <span class="go" aria-hidden="true">&rsaquo;</span>
         </a>
-        <a class="drug" href="drugs/orforglipron.html" data-drug="orforglipron" data-lowers="" data-freq="daily">
+        <a class="drug" href="drugs/orforglipron.html" data-drug="orforglipron" data-tp="obesity" data-st="now" data-lowers="" data-freq="daily">
           <span class="c-name"><span class="drug-name">Foundayo</span><span class="generic">orforglipron</span></span>
           <span class="c-line"><span class="nb">Daily pill</span><span class="sep">·</span><span class="nb">Weight ↓ 12%</span></span>
           <span class="c-one"><span>Weight ↓ 12%</span><span class="sep">·</span><span>Daily pill</span></span>
@@ -197,7 +274,7 @@
       </div>
       <div class="group" data-group>
         <h3>Getting close <span class="n" data-count>2</span></h3>
-        <a class="drug" href="drugs/retatrutide.html" data-drug="retatrutide" data-lowers="" data-freq="weekly">
+        <a class="drug" href="drugs/retatrutide.html" data-drug="retatrutide" data-tp="obesity" data-st="close" data-lowers="" data-freq="weekly">
           <span class="c-name"><span class="drug-name">Retatrutide</span></span>
           <span class="c-line"><span class="nb">Weekly</span><span class="sep">·</span><span class="nb">Weight ↓ 28%</span></span>
           <span class="c-one"><span>Weight ↓ 28%</span><span class="sep">·</span><span>Weekly</span></span>
@@ -208,7 +285,7 @@
 <div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div><span class="words">Final-stage trials</span></span>
           <span class="go" aria-hidden="true">&rsaquo;</span>
         </a>
-        <a class="drug" href="drugs/maritide.html" data-drug="maritide" data-lowers="" data-freq="monthly">
+        <a class="drug" href="drugs/maritide.html" data-drug="maritide" data-tp="obesity" data-st="close" data-lowers="" data-freq="monthly">
           <span class="c-name"><span class="drug-name">MariTide</span></span>
           <span class="c-line"><span class="nb">Monthly or less</span><span class="sep">·</span><span class="nb">Weight ↓ up to 20%</span></span>
           <span class="c-one"><span>Weight ↓ up to 20%</span><span class="sep">·</span><span>Monthly or less</span></span>
@@ -229,7 +306,7 @@
       </div>
       <div class="group" data-group>
         <h3>Available now <span class="n" data-count>2</span></h3>
-        <a class="drug" href="drugs/donanemab.html" data-drug="donanemab" data-lowers="" data-freq="monthly">
+        <a class="drug" href="drugs/donanemab.html" data-drug="donanemab" data-tp="alzheimers" data-st="now" data-lowers="" data-freq="monthly">
           <span class="c-name"><span class="drug-name">Kisunla</span><span class="generic">donanemab</span></span>
           <span class="c-line"><span class="nb">Monthly infusion</span><span class="sep">·</span><span class="nb">Slowed 22–35%</span></span>
           <span class="c-one"><span>Slowed 22–35%</span><span class="sep">·</span><span>Monthly infusion</span></span>
@@ -239,7 +316,7 @@
           <span class="c-stage"></span>
           <span class="go" aria-hidden="true">&rsaquo;</span>
         </a>
-        <a class="drug" href="drugs/lecanemab.html" data-drug="lecanemab" data-lowers="" data-freq="weekly">
+        <a class="drug" href="drugs/lecanemab.html" data-drug="lecanemab" data-tp="alzheimers" data-st="now" data-lowers="" data-freq="weekly">
           <span class="c-name"><span class="drug-name">Leqembi</span><span class="generic">lecanemab</span></span>
           <span class="c-line"><span class="nb">Weekly shot or infusion</span><span class="sep">·</span><span class="nb">Slowed 27%</span></span>
           <span class="c-one"><span>Slowed 27%</span><span class="sep">·</span><span>Weekly shot or infusion</span></span>
@@ -252,7 +329,7 @@
       </div>
       <div class="group" data-group>
         <h3>Getting close <span class="n" data-count>2</span></h3>
-        <a class="drug" href="drugs/remternetug.html" data-drug="remternetug" data-lowers="" data-freq="">
+        <a class="drug" href="drugs/remternetug.html" data-drug="remternetug" data-tp="alzheimers" data-st="close" data-lowers="" data-freq="">
           <span class="c-name"><span class="drug-name">Remternetug</span></span>
           <span class="c-line"><span class="nb">Self-injected shot</span><span class="sep">·</span><span class="nb">No results yet</span></span>
           <span class="c-one"><span>No results yet</span><span class="sep">·</span><span>Self-injected shot</span></span>
@@ -263,7 +340,7 @@
 <div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div><span class="words">Final-stage trials</span></span>
           <span class="go" aria-hidden="true">&rsaquo;</span>
         </a>
-        <a class="drug" href="drugs/trontinemab.html" data-drug="trontinemab" data-lowers="" data-freq="monthly">
+        <a class="drug" href="drugs/trontinemab.html" data-drug="trontinemab" data-tp="alzheimers" data-st="close" data-lowers="" data-freq="monthly">
           <span class="c-name"><span class="drug-name">Trontinemab</span></span>
           <span class="c-line"><span class="nb">Every 4–12 weeks</span><span class="sep">·</span><span class="nb">Not yet tested</span></span>
           <span class="c-one"><span>Not yet tested</span><span class="sep">·</span><span>Every 4–12 weeks</span></span>
@@ -284,7 +361,7 @@
       </div>
       <div class="group" data-group>
         <h3>Available now <span class="n" data-count>1</span></h3>
-        <a class="drug" href="drugs/imlunestrant.html" data-drug="imlunestrant" data-lowers="" data-freq="daily">
+        <a class="drug" href="drugs/imlunestrant.html" data-drug="imlunestrant" data-tp="cancer" data-st="now" data-lowers="" data-freq="daily">
           <span class="c-name"><span class="drug-name">Inluriyo</span><span class="generic">imlunestrant</span></span>
           <span class="c-line"><span class="nb">Daily pill</span><span class="sep">·</span><span class="nb">Progression ↓ 38%</span></span>
           <span class="c-one"><span>Progression ↓ 38%</span><span class="sep">·</span><span>Daily pill</span></span>
@@ -297,7 +374,7 @@
       </div>
       <div class="group" data-group>
         <h3>Getting close <span class="n" data-count>2</span></h3>
-        <a class="drug" href="drugs/ivonescimab.html" data-drug="ivonescimab" data-lowers="" data-freq="">
+        <a class="drug" href="drugs/ivonescimab.html" data-drug="ivonescimab" data-tp="cancer" data-st="close" data-lowers="" data-freq="">
           <span class="c-name"><span class="drug-name">Ivonescimab</span></span>
           <span class="c-line"><span class="nb">Infusion</span><span class="sep">·</span><span class="nb">Progression ↓ 48%</span></span>
           <span class="c-one"><span>Progression ↓ 48%</span><span class="sep">·</span><span>Infusion</span></span>
@@ -308,7 +385,7 @@
 <div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell done"><span class="dot"></span></div><div class="cell now"><span class="dot"></span></div><div class="cell "><span class="dot"></span></div></div><span class="words">FDA reviewing</span></span>
           <span class="go" aria-hidden="true">&rsaquo;</span>
         </a>
-        <a class="drug" href="drugs/olomorasib.html" data-drug="olomorasib" data-lowers="" data-freq="daily">
+        <a class="drug" href="drugs/olomorasib.html" data-drug="olomorasib" data-tp="cancer" data-st="close" data-lowers="" data-freq="daily">
           <span class="c-name"><span class="drug-name">Olomorasib</span></span>
           <span class="c-line"><span class="nb">Twice-daily pill</span><span class="sep">·</span><span class="nb">Early data only</span></span>
           <span class="c-one"><span>Early data only</span><span class="sep">·</span><span>Twice-daily pill</span></span>
@@ -342,7 +419,7 @@
     </div>
     <div>
       <h4>Heart &amp; cholesterol</h4>
-      <p>LDL is the &#34;bad&#34; cholesterol that statins lower. Every drug here lowers LDL without being a statin or a daily pill. Lowering LDL isn&#39;t automatically the same as preventing heart attacks: &#34;Prevents heart attacks&#34; means a large trial showed fewer heart attacks and strokes.
+      <p>LDL is the &#34;bad&#34; cholesterol that statins lower; the LDL drugs here do it without being a statin or a daily pill. Lp(a) is a separate, mostly inherited cholesterol particle that diet and statins barely touch; no Lp(a) drug is approved yet. Lowering either isn&#39;t automatically the same as preventing heart attacks: &#34;Prevents heart attacks&#34; means a large trial showed fewer heart attacks and strokes.
 </p>
       <h4 style="margin-top:1rem">Obesity &amp; metabolism</h4>
       <p>Weight loss is the average drop in body weight in the main trials, usually over about a year and a half, on top of diet and exercise advice. Trials differ, so close numbers aren&#39;t a real difference. &#34;Prevents heart attacks&#34; means a large trial showed fewer heart attacks and strokes, not just weight loss.
@@ -364,7 +441,7 @@
 <footer>
   Report generated Nov 9, 2026 · Sources: ClinicalTrials.gov, openFDA, news searches
 </footer>
-<script type="application/json" id="cabinet-data">{"topics":["heart","obesity","alzheimers","cancer"],"drugs":{"evolocumab":{"t":"heart","c":[]},"alirocumab":{"t":"heart","c":[]},"inclisiran":{"t":"heart","c":[]},"lerodalcibep":{"t":"heart","c":[]},"verve102":{"t":"heart","c":["lilly"]},"tirzepatide":{"t":"obesity","c":["lilly"]},"semaglutide":{"t":"obesity","c":[]},"orforglipron":{"t":"obesity","c":["lilly"]},"retatrutide":{"t":"obesity","c":["lilly"]},"maritide":{"t":"obesity","c":[]},"donanemab":{"t":"alzheimers","c":["lilly"]},"lecanemab":{"t":"alzheimers","c":[]},"remternetug":{"t":"alzheimers","c":["lilly"]},"trontinemab":{"t":"alzheimers","c":[]},"imlunestrant":{"t":"cancer","c":["lilly"]},"olomorasib":{"t":"cancer","c":["lilly"]},"ivonescimab":{"t":"cancer","c":[]}}}</script>
+<script type="application/json" id="cabinet-data">{"topics":["heart","obesity","alzheimers","cancer"],"drugs":{"evolocumab":{"t":"heart","c":[]},"alirocumab":{"t":"heart","c":[]},"inclisiran":{"t":"heart","c":[]},"lerodalcibep":{"t":"heart","c":[]},"verve102":{"t":"heart","c":["lilly"]},"lepodisiran":{"t":"heart","c":["lilly"]},"olpasiran":{"t":"heart","c":[]},"pelacarsen":{"t":"heart","c":[]},"zerlasiran":{"t":"heart","c":[]},"muvalaplin":{"t":"heart","c":["lilly"]},"tirzepatide":{"t":"obesity","c":["lilly"]},"semaglutide":{"t":"obesity","c":[]},"orforglipron":{"t":"obesity","c":["lilly"]},"retatrutide":{"t":"obesity","c":["lilly"]},"maritide":{"t":"obesity","c":[]},"donanemab":{"t":"alzheimers","c":["lilly"]},"lecanemab":{"t":"alzheimers","c":[]},"remternetug":{"t":"alzheimers","c":["lilly"]},"trontinemab":{"t":"alzheimers","c":[]},"imlunestrant":{"t":"cancer","c":["lilly"]},"olomorasib":{"t":"cancer","c":["lilly"]},"ivonescimab":{"t":"cancer","c":[]}}}</script>
 <script src="assets/cabinet.js" defer></script>
 <script src="assets/filter.js" defer></script>
 <script src="assets/tabs.js" defer></script>

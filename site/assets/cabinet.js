@@ -21,7 +21,10 @@
     try { localStorage.setItem(KEY, JSON.stringify({ v: 2, topics: s.topics, companies: s.companies, off: s.off })); } catch (e) {}
   }
   var saved = load();
-  var st = saved || { topics: (data.topics || []).slice(), companies: [], off: [] };
+  var welcome = !saved && /[?&]welcome\b/.test(location.search);
+  // first visit: start with nothing chosen; otherwise, with nothing saved, everything is followed
+  var st = saved || (welcome ? { topics: [], companies: [], off: [] }
+                             : { topics: (data.topics || []).slice(), companies: [], off: [] });
   function has(a, x) { return a.indexOf(x) !== -1; }
   function add(a, x) { if (!has(a, x)) a.push(x); }
   function drop(a, x) { var i = a.indexOf(x); if (i !== -1) a.splice(i, 1); }
@@ -30,6 +33,7 @@
     var on = has(st.topics, d.t) || d.c.some(function (c) { return has(st.companies, c); });
     return on && !has(st.off, id);
   }
+  function viaCompany(id) { return drugs[id].c.some(function (c) { return has(st.companies, c); }); }
   function inTopic(t) { return ids.filter(function (id) { return drugs[id].t === t; }); }
   function topicShown(t) { return has(st.topics, t) || ids.some(function (id) { return drugs[id].t === t && shown(id); }); }
 
@@ -46,19 +50,47 @@
         if (lab) lab.textContent = n;
         drawer.classList.toggle('off', n === 0);
       });
+      q('[data-set-box]').forEach(function (b) {
+        var set = b.dataset.setBox.split(' '), n = set.filter(shown).length;
+        b.checked = n === set.length; b.indeterminate = n > 0 && n < set.length;
+      });
       q('[data-company-box]').forEach(function (b) { b.checked = has(st.companies, b.dataset.companyBox); });
+      var any = ids.some(shown);
+      done.classList.toggle('disabled', !any);
+      done.setAttribute('aria-disabled', String(!any));
+      if (need) need.hidden = any;
     }
+    // switch a set of drugs (a topic, or part of one) on or off together
+    function toggleSet(set, t) {
+      if (set.some(shown)) {
+        set.forEach(function (id) { if (shown(id)) add(st.off, id); });
+        if (!inTopic(t).some(shown)) {  // nothing left: unfollow the topic, keeping company-followed drugs off
+          drop(st.topics, t);
+          inTopic(t).forEach(function (id) { if (!viaCompany(id)) drop(st.off, id); });
+        }
+      } else {
+        var before = inTopic(t).filter(shown);
+        add(st.topics, t);
+        inTopic(t).forEach(function (id) { if (!has(set, id) && !has(before, id)) add(st.off, id); });
+        set.forEach(function (id) { drop(st.off, id); });
+      }
+    }
+    var done = document.querySelector('[data-done]'), need = document.querySelector('.cab-need');
+    if (welcome) {
+      document.querySelector('.cab-welcome').hidden = false;
+      document.querySelector('.cab-usual').hidden = true;
+      done.textContent = 'Start reading';
+    }
+    done.addEventListener('click', function (e) {
+      if (!ids.some(shown)) { e.preventDefault(); if (need) need.hidden = false; return; }
+      save(st);  // even if nothing was changed, so the welcome isn't shown again
+    });
     form.addEventListener('change', function (e) {
       var b = e.target;
       if (b.dataset.topicBox) {
-        var t = b.dataset.topicBox, all = inTopic(t), any = all.some(shown);
-        if (any) {  // switch the whole topic off (even drugs a followed company would show)
-          drop(st.topics, t);
-          all.forEach(function (id) { if (shown(id)) add(st.off, id); });
-        } else {
-          add(st.topics, t);
-          all.forEach(function (id) { drop(st.off, id); });
-        }
+        toggleSet(inTopic(b.dataset.topicBox), b.dataset.topicBox);
+      } else if (b.dataset.setBox) {
+        toggleSet(b.dataset.setBox.split(' '), b.dataset.setTopic);
       } else if (b.dataset.drugBox) {
         var id = b.dataset.drugBox, d = drugs[id];
         if (shown(id)) add(st.off, id);
@@ -94,6 +126,9 @@
   if (!saved) return;  // following everything: nothing to hide
 
   function hide(el) { el.hidden = true; el.dataset.untracked = '1'; }
+  document.querySelectorAll('.chip[data-k="tp"]').forEach(function (c) {
+    if (c.dataset.v !== 'all' && !topicShown(c.dataset.v)) c.remove();
+  });
   document.querySelectorAll('[data-drug]').forEach(function (el) { if (!shown(el.dataset.drug)) hide(el); });
   document.querySelectorAll('[data-topic]').forEach(function (el) { if (!topicShown(el.dataset.topic)) hide(el); });
   // tidy up: group and topic counts, empty groups and sections, the total

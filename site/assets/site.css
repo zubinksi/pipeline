@@ -895,3 +895,37 @@ a.hcab:hover { color: var(--accent); }
   .cab-sub .cab-line { font-size: 0.6875rem; }
 }
 .dtable .tsec-head, .tsec:first-of-type .tsec-head { margin-top: 1.5rem; }
+
+/* Drugs tab: room between the list heading and the first topic */
+.section[data-filter] .tsec:first-of-type, .fpanel + .tsec { margin-top: 1.75rem; }
+.tsec-head { margin-top: 0; }
+
+/* drug page: sponsor as a tag beside the name */
+.dname .sponsor { display: inline-block; padding: 0.25rem 0.5rem 0.1875rem; border-radius: 3px; background: var(--b2, rgba(0,0,0,0.06)); background: color-mix(in srgb, var(--ink) 7%, transparent); color: var(--ink2); line-height: 1.2; transform: translateY(-0.25rem); }
+
+/* cabinet: LDL / Lp(a) sub-groups, welcome, full-width done */
+.cab-subhead { padding: 0.75rem 0 0.375rem; }
+.cab-subhead .cab-name { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink2); cursor: pointer; }
+.cab-subhead .cab-line { font-size: 0.6875rem; }
+.cab-subhead label.cab-box { cursor: pointer; }
+.cab-subhead + .cab-sub { border-top: 0; }
+.cab-subhead ~ .cab-sub { padding-left: 2rem; }
+.cab-welcome { display: flex; flex-direction: column; gap: 0.5rem; }
+.cab-welcome[hidden], .cab-usual[hidden] { display: none; }
+.cab-welcome .cab-lede { color: var(--ink2); }
+.cab-foot { flex-direction: column; align-items: stretch; gap: 0.75rem; margin-top: 0; }
+.cab-done { display: block; padding: 0.9375rem 1rem; text-align: center; background: var(--ink); color: var(--slab); font-size: 0.8125rem; letter-spacing: 0.16em; border-radius: 3px; }
+.cab-done:hover { text-decoration: none; background: var(--accent); }
+.cab-done.disabled { background: var(--b3); color: var(--muted); cursor: not-allowed; }
+.cab-note { text-align: center; }
+.cab-sub .cab-name { white-space: nowrap; }
+.cab-sub .cab-line { min-width: 0; }
+.cab-sub .cab-line { justify-self: stretch; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cab-row.cab-sub { grid-template-columns: 1.125rem auto minmax(0, 1fr); }
+@media (max-width: 860px) { .cab-row.cab-sub { grid-template-columns: 1.125rem auto minmax(0, 1fr); } }
+@media (max-width: 860px) {
+  .cab-drugs { padding-left: 1.375rem; }
+  .cab-subhead ~ .cab-sub { padding-left: 1.375rem; }
+  .cab-row.cab-sub { column-gap: 0.625rem; }
+  .cab-sub .cab-line { font-size: 0.625rem; letter-spacing: 0; }
+}

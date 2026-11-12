@@ -57,6 +57,9 @@ def load(path: str | Path = "watchlist.yaml") -> dict:
         d.setdefault("topic", topic_ids[0])
         if d["topic"] not in topic_ids:
             raise ValueError(f"{d['id']}: unknown topic {d['topic']!r}")
+        groups = [g["id"] for g in next(t for t in topics if t["id"] == d["topic"]).get("groups") or []]
+        if groups and d.get("group") not in groups:
+            raise ValueError(f"{d['id']}: group must be one of {groups} for topic {d['topic']}")
         d.setdefault("aliases", [])
         d["aliases"] = [str(a) for a in d["aliases"]]
         d.setdefault("sources", [])

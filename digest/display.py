@@ -62,6 +62,7 @@ def rows(watchlist: dict, stages: dict, moved: set[str]) -> list[dict]:
                     "stage": stage, "moved": d["id"] in moved,
                     "lowers_keys": lowers_keys(d.get("lowers", "")),
                     "topic": topic["id"], "topic_title": topic.get("title", topic["id"]),
+                    "group": d.get("group", ""),
                     "companies": companies_of(d, watchlist),
                     "proven_label": outcome.get(d.get("proven", ""), PROVEN_LABEL.get(d.get("proven", ""), "")),
                     "proven_short": (outcome.get("short") or PROVEN_SHORT).get(d.get("proven", ""), "")})
@@ -75,7 +76,10 @@ def sections(all_rows: list[dict], watchlist: dict) -> list[dict]:
     for t in topics_of(watchlist):
         members = [r for r in all_rows if r["topic"] == t["id"]]
         if members:
-            out.append({**t, "n": len(members), "groups": groups(members)})
+            # the topic's own finer groups (e.g. LDL / Lp(a)), for the cabinet
+            subs = [{**g, "rows": [r for r in members if r["group"] == g["id"]]} for g in t.get("groups") or []]
+            out.append({**t, "n": len(members), "groups": groups(members),
+                        "subgroups": [g for g in subs if g["rows"]]})
     return out
 
 

@@ -72,7 +72,9 @@ def test_empty_site_builds(tmp_path):
 def test_pipeline_rows_carry_filter_data(tmp_path):
     out, _ = _build(tmp_path)
     html = (out / "drugs.html").read_text()
-    assert "data-filter" in html and 'data-k="lowers"' not in html  # one option only: no chips
+    assert "data-filter" in html and 'data-k="lowers" data-v="lpa"' in html
+    assert 'data-k="tp" data-v="cancer"' in html and 'data-k="st" data-v="close"' in html  # topic and stage filters
+    assert 'data-tp="heart" data-st="now"' in html
     assert 'data-k="freq" data-v="monthly" aria-pressed="false">Monthly</button>' in html
     assert 'data-v="infrequent"' in html and 'data-v="weekly"' in html
     assert html.count('class="drug"') == len(WL["drugs"])
@@ -124,9 +126,13 @@ def test_drug_page_has_back_link(tmp_path):
 def test_drugs_grouped_by_closeness(tmp_path):
     out, _ = _build(tmp_path)
     html = (out / "drugs.html").read_text()
-    a, c = html.index("Available now"), html.index("Getting close")  # sample moves VERVE-102 to final stage
-    assert a < c and "Further out" not in html  # empty groups aren't shown
-    assert html.index("Lerochol") < c  # approved -> available now
+    html = html[html.index('data-topic-sec="heart"'):html.index('data-topic-sec="obesity"')]
+    a, c, f = html.index("Available now"), html.index("Getting close"), html.index("Further out")
+    assert a < c < f
+    assert html.index("Lerochol") < c < html.index("VERVE-102") < f  # sample moves VERVE-102 to final stage
+    assert html.index("Zerlasiran") > f
+    cancer = (out / "drugs.html").read_text().split('data-topic-sec="cancer"')[1]
+    assert "Further out" not in cancer  # empty groups aren't shown
 
 def test_past_weeks_button_and_back_links(tmp_path):
     out, _ = _build(tmp_path)
@@ -213,3 +219,14 @@ def test_drugs_page_is_split_by_topic_with_topic_words(tmp_path):
     drug = (out / "drugs/donanemab.html").read_text()
     assert "<dt>Slowing of decline</dt>" in drug and "<dt>Clinical effect</dt>" in drug
     assert "<dt>LDL reduction</dt>" in (out / "drugs/inclisiran.html").read_text()
+
+
+def test_welcome_lpa_groups_and_sponsor_tag(tmp_path):
+    out, _ = _build(tmp_path)
+    news, cab = (out / "index.html").read_text(), (out / "cabinet.html").read_text()
+    assert 'location.replace("cabinet.html?welcome")' in news  # first visit starts with the welcome
+    assert "Welcome" in cab and "data-done" in cab
+    # Heart & cholesterol splits into LDL and Lp(a) in the cabinet
+    assert 'id="g-heart-ldl"' in cab and 'id="g-heart-lpa"' in cab and ">Lp(a)-lowering<" in cab
+    lp = (out / "drugs/lepodisiran.html").read_text()
+    assert "<dt>Lp(a) reduction</dt>" in lp and '<span class="sponsor">Eli Lilly</span>' in lp

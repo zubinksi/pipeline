@@ -17,7 +17,8 @@
 <section class="section"{% if filterable %} data-filter{% endif %}>
   <div class="section-head">
     <h2>{{ title }} <span class="sub" data-total>{{ n_drugs }}</span></h2>
-    {% set has_filters = filterable and (filters.lowers|length > 1 or filters.freq|length > 1) %}
+    {% set fdefs = [("tp", filters.tp, "Topic"), ("st", filters.st, "Stage"), ("lowers", filters.lowers, "Cholesterol"), ("freq", filters.freq, "How often")] %}
+    {% set has_filters = filterable and (fdefs|selectattr(1, "ne", none)|map(attribute=1)|map("length")|max > 1) %}
     {% if has_filters %}
     <button type="button" class="ficon" aria-expanded="false" aria-controls="fpanel" aria-label="Filter" hidden>
       <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 3.5h12M4.5 8h7M7 12.5h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg>
@@ -27,10 +28,10 @@
   </div>
   {% if has_filters %}
   <div class="fpanel" id="fpanel" hidden>
-    {% for k, opts in [("lowers", filters.lowers), ("freq", filters.freq)] if opts|length > 1 %}
+    {% for k, opts, flabel in fdefs if opts|length > 1 %}
     <div class="fgroup">
-      <span class="label">{{ 'What it lowers' if k == 'lowers' else 'How often' }}</span>
-      <div class="chips" role="group" aria-label="{{ 'What it lowers' if k == 'lowers' else 'How often' }}">
+      <span class="label">{{ flabel }}</span>
+      <div class="chips" role="group" aria-label="{{ flabel }}">
         <button type="button" class="chip" data-k="{{ k }}" data-v="all" aria-pressed="true">All</button>
         {% for v, label in opts %}<button type="button" class="chip" data-k="{{ k }}" data-v="{{ v }}" aria-pressed="false">{{ label }}</button>{% endfor %}
       </div>
@@ -49,7 +50,7 @@
       <div class="group" data-group>
         <h3>{{ g.title }} <span class="n" data-count>{{ g.rows|length }}</span></h3>
         {% for r in g.rows %}
-        <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-drug="{{ r.id }}" data-lowers="{{ r.lowers_keys|join(' ') }}" data-freq="{{ r.frequency or '' }}">
+        <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-drug="{{ r.id }}" data-tp="{{ r.topic }}" data-st="{{ g.key }}" data-lowers="{{ r.lowers_keys|join(' ') }}" data-freq="{{ r.frequency or '' }}">
           <span class="c-name"><span class="drug-name">{{ r.display_name }}</span>{% if r.generic %}<span class="generic">{{ r.generic|lower }}</span>{% endif %}{{ badge(r.badge) }}{% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}</span>
           <span class="c-line"><span class="nb">{{ r.often or r.form }}</span><span class="sep">·</span>{% for part in (r.effect_short or r.effect or r.lowers).split("; ") %}<span class="nb">{{ part }}</span>{% if not loop.last %}, {% endif %}{% endfor %}</span>
           <span class="c-one"><span>{{ (r.effect_short or r.effect or r.lowers).split("; ")[0] }}</span><span class="sep">·</span><span>{{ r.often or r.form }}</span></span>
