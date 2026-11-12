@@ -11,9 +11,9 @@ from PIL import Image, ImageChops, ImageFilter
 
 SRC = Path(__file__).resolve().parent.parent / "digest/static/iris-white.png"
 OUT = SRC.with_name("iris-emboss.png")
-PAPER = (251, 249, 243)   # --slab on the welcome page
-SCALE = 2                 # rendered at 2x the source; shown at ~96 CSS px
-K = 5.5                   # rendered pixels per CSS pixel at that size
+PAPER = (241, 233, 216)   # the welcome sheet (warmer, like the home project)
+SCALE = 2                 # rendered at 2x the source
+K = 6.3                   # rendered pixels per CSS pixel at the size shown (~84px)
 PAD = 48
 
 
