@@ -6,6 +6,9 @@ on:
   schedule:
     - cron: "7 13 * * 0,2-6"
   workflow_dispatch:
+  push:
+    # change this file to run an update now (e.g. echo $(date -u) > .github/kick/daily)
+    paths: [".github/kick/daily"]
 
 permissions:
   contents: write   # to commit state/ and site/ (Vercel deploys site/ on each commit)
