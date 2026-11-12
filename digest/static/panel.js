@@ -161,9 +161,6 @@
     var label = g.querySelector('.cal-item.first .cal-when');
     if (label && items[0] !== label.parentNode) { items[0].querySelector('.cal-when').innerHTML = label.innerHTML; }
   });
-  document.querySelectorAll('.m-cell.has').forEach(function (c) {
-    if (!c.querySelector('.m-dot:not([hidden])')) c.classList.remove('has');
-  });
   document.querySelectorAll('.tl-list, .section').forEach(function (l) {
     var sec = l.closest('.section') || l;
     var items = sec.querySelectorAll('.tl, .change, .cal-item, .spot');

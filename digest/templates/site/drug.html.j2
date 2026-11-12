@@ -23,8 +23,9 @@
 
 {% if approach %}
 <details class="more how">
-  <summary>How it works <span class="how-title">· {{ approach.title }}</span></summary>
+  <summary>How it works</summary>
   <div>
+    <p class="flow-title">{{ approach.title }}</p>
     <ol class="flow" aria-label="How {{ drug.brand or drug.name }} works">
       {% for st in approach.steps %}
       <li class="flow-step{{ ' acts' if loop.index == approach.acts }}">

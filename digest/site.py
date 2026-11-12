@@ -123,34 +123,6 @@ def calendar(items: list[dict], drugs: dict, topics: dict, today: date | None = 
 _MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 
 
-def calendar_months(groups: list[dict], today: date | None = None, n: int = 6) -> dict:
-    """The calendar view: the next `n` months as small month grids. Items with a day sit
-    on that day; items known only to the month (or due any week now) sit under the
-    month's name; looser or later ones are listed after the grids."""
-    import calendar as cal
-    today = today or date.today()
-    months, index = [], {}
-    y, m = today.year, today.month
-    for _ in range(n):
-        weeks = cal.Calendar(firstweekday=6).monthdayscalendar(y, m)  # weeks start on Sunday
-        entry = {"label": f"{_MONTHS[m - 1].title()} {y}", "y": y, "m": m, "weeks": weeks,
-                 "days": {}, "month_items": [], "today": today.day if (y, m) == (today.year, today.month) else 0}
-        months.append(entry)
-        index[(y, m)] = entry
-        y, m = (y + 1, 1) if m == 12 else (y, m + 1)
-    later = []
-    for g in groups:
-        for it in g["items"]:
-            mo = index.get(tuple(it["ym"])) if it.get("ym") else None
-            if mo is None:
-                later.append({**it, "group": g["label"]})
-            elif it["precision"] == "day":
-                mo["days"].setdefault(it["dom"], []).append(it)
-            else:
-                mo["month_items"].append(it)
-    return {"months": months, "later": later}
-
-
 def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict,
           site_title: str = "Readout") -> Path:
     out = Path(out)
@@ -195,8 +167,7 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
     drug_map = {d["id"]: d for d in watchlist["drugs"]}
     rows_by_id = {r["id"]: r for r in rows_now}
     if latest:
-        cal_groups = calendar(latest["horizon"], drug_map, topics)
-        latest = {**latest, "calendar": cal_groups, "months": calendar_months(cal_groups)}
+        latest = {**latest, "calendar": calendar(latest["horizon"], drug_map, topics)}
     home = dict(latest=latest, n_weeks=len(views), sections=display.sections(rows_now, watchlist),
                 n_drugs=len(watchlist["drugs"]), drug_rows={r["id"]: r for r in rows_now})
     # News and Drugs are one page with both panels; the two files differ only in which is open

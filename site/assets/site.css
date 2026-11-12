@@ -1396,47 +1396,18 @@ html:not(.is-welcome) .w-only { display: none !important; }
 .cal-what b { font-weight: 400; }
 .cal-item:hover .cal-what { color: var(--accent); }
 .cal-ctx { font-size: 0.9375rem; line-height: 1.45; color: var(--muted); }
-/* topic pills: a quiet tint per topic */
-.pill { justify-self: end; margin-top: 0.125rem; padding: 0.1875rem 0.5rem; border-radius: 999px; font-family: var(--mono); font-size: 0.5938rem; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; background: var(--b2); color: var(--ink2); }
-.pill-heart { background: #ecd3c8; color: #7d3426; }
-.pill-obesity { background: #ead9b4; color: #6f511a; }
-.pill-alzheimers { background: #dad6e6; color: #4a4470; }
-.pill-cancer { background: #cfdfd5; color: #2c5641; }
+/* topic pills: all in the navy accent, told apart by pattern: solid, tint, outline, dashed */
+.pill { justify-self: end; margin-top: 0.125rem; padding: 0.1875rem 0.5rem; border-radius: 999px; border: 1px solid var(--accent); font-family: var(--mono); font-size: 0.5938rem; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; background: transparent; color: var(--accent); }
+.pill-heart { background: var(--accent); color: var(--slab); }
+.pill-obesity { background: #cdd6e8; border-color: #cdd6e8; }
+.pill-alzheimers { background: transparent; }
+.pill-cancer { border-style: dashed; }
 @media (max-width: 860px) {
   .cal-item { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "when pill" "body body"; row-gap: 0.25rem; }
   .cal-when { grid-area: when; padding-top: 0.1875rem; }
   .cal-body { grid-area: body; }
   .pill { grid-area: pill; margin-top: 0; }
 }
-
-/* coming up: the List | Calendar toggle */
-.section-head .seg { margin-left: auto; }
-.seg { display: inline-flex; border: 1px solid var(--b4); border-radius: 999px; padding: 2px; gap: 2px; }
-.seg[hidden] { display: none; }
-.seg-b { border: 0; background: none; cursor: pointer; padding: 0.25rem 0.625rem; border-radius: 999px; font-family: var(--mono); font-size: 0.5938rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink3); }
-.seg-b[aria-pressed="true"] { background: var(--ink); color: var(--slab); }
-
-/* coming up: calendar view, six small months with a dot per item */
-.months[hidden] { display: none; }
-.mgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem 1.75rem; }
-.m-name { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); padding-bottom: 0.375rem; border-bottom: 1px solid var(--b4); }
-.m-days, .m-weeks { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
-.m-days span { padding: 0.375rem 0 0.25rem; text-align: center; font-family: var(--mono); font-size: 0.5625rem; color: var(--muted); }
-.m-cell { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 1.75rem; padding-top: 0.1875rem; }
-.m-num { font-family: var(--mono); font-size: 0.6875rem; color: var(--ink3); line-height: 1; }
-.m-cell.today .m-num { color: var(--slab); background: var(--ink); border-radius: 999px; padding: 0.125rem 0.25rem; }
-.m-cell.has .m-num { color: var(--ink); }
-.m-dot { display: inline-block; width: 0.4375rem; height: 0.4375rem; border-radius: 50%; background: var(--now); flex: none; }
-.dot-heart { background: #b0533f; } .dot-obesity { background: #a87b26; } .dot-alzheimers { background: #6b63a1; } .dot-cancer { background: #3d7a5b; }
-.m-dot.due { box-shadow: 0 0 0 2px var(--slab), 0 0 0 3px #2f6fe0; }
-.m-list { list-style: none; margin: 0.375rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.3125rem; }
-.m-list a { display: grid; grid-template-columns: 0.4375rem auto minmax(0, 1fr); align-items: baseline; column-gap: 0.4375rem; text-decoration: none; color: var(--ink); font-size: 0.875rem; line-height: 1.3; }
-.m-list a > :nth-child(3), .m-list a > .m-what { grid-column: 3; }
-.m-list a:hover { color: var(--accent); }
-.m-when { font-family: var(--mono); font-size: 0.5625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-.m-what { color: var(--muted); }
-.m-later { margin-top: 1.5rem; }
-@media (max-width: 860px) { .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 1rem; } }
 
 /* drug page: how it works, as a four-step flow; the step where the drug acts is marked */
 .flow {
@@ -1600,12 +1571,7 @@ html:not(.is-welcome) .w-only { display: none !important; }
 }
 .lchart { overflow: hidden; }
 .ledge-l { fill: var(--accent); opacity: 0.8; }
-/* drug page: "How it works" starts collapsed */
-.how-title { text-transform: none; letter-spacing: 0; font-family: var(--serif); font-size: 0.9375rem; color: var(--ink3); }
-.how .flow { margin-top: 1rem; }
-.how + .section, .section + .how { margin-top: 0; }
-@media (max-width: 860px) {
-  .m-list a { display: block; font-size: 0.8125rem; }
-  .m-list .m-dot { margin-right: 0.375rem; vertical-align: 0.0625rem; }
-  .m-list .m-when { margin-right: 0.375rem; }
-}
+/* drug page: "How it works" starts collapsed; its summary looks like any section head */
+details.how { border-top: 0; padding-top: 0; }
+details.how > summary { padding-bottom: 0.5rem; border-bottom: 3px double var(--b4); font-size: 0.6875rem; line-height: 1.4; letter-spacing: 0.16em; color: var(--ink); }
+details.how > div { padding-top: 0.75rem; }

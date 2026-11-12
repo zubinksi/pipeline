@@ -165,8 +165,7 @@ def test_news_and_drugs_tabs_and_compact_coming_up(tmp_path):
     # Coming up: a calendar across topics; each entry links to the drug's overview
     assert '<a class="cal-item first" href="drugs/inclisiran.html" data-drug="inclisiran">' in news and "Any week now" in news
     assert '<span class="pill pill-heart">Heart</span>' in news and '<span class="pill pill-cancer">Cancer</span>' in news
-    # a list | calendar toggle; the calendar shows the next six months with a dot per dated item
-    assert 'data-cal-toggle' in news and news.count('class="month"') == 6
+    assert 'data-cal-toggle' not in news
     assert "Heart-attack trial results" in news and "twice-a-year shot proven to prevent them" in news
     assert "Twice a year" not in news[news.index("Coming up"):news.index('data-panel="drugs"')]  # no dosing facts in the list
     assert "no changes" not in news.lower()

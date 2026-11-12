@@ -85,20 +85,15 @@
 {% endfor %}
 {%- endmacro %}
 
-{# The look-ahead across topics, as a list grouped by period or (with the toggle) as
-   the next six months' calendars with a dot per item. Each entry opens the drug's page. #}
+{# The look-ahead across topics, as a list grouped by period, each entry tagged with its
+   topic. Each entry opens the drug's page. #}
 {% macro topic_pill(h) -%}
 {% if h.topic_short %}<span class="pill pill-{{ h.topic }}">{{ h.topic_short }}</span>{% endif %}
 {%- endmacro %}
-{% macro horizon(groups, root, months=none) -%}
+{% macro horizon(groups, root) -%}
 <section class="section" data-cal-sec>
-  <div class="section-head"><h2>Coming up</h2>
-    {% if months %}<div class="seg" role="group" aria-label="View" hidden data-cal-toggle>
-      <button type="button" class="seg-b" data-view="list" aria-pressed="true">List</button>
-      <button type="button" class="seg-b" data-view="cal" aria-pressed="false">Calendar</button>
-    </div>{% endif %}
-  </div>
-  <div class="cal" data-cal-view="list">
+  <div class="section-head"><h2>Coming up</h2></div>
+  <div class="cal">
   {% for g in groups %}
   <div class="cal-group{{ ' due' if g.key == 'due' }}" data-cal-group>
     {% for h in g["items"] %}
@@ -115,37 +110,6 @@
   </div>
   {% endfor %}
   </div>
-  {% if months %}
-  <div class="months" data-cal-view="cal" hidden>
-    <div class="mgrid">
-    {% for mo in months.months %}
-    <div class="month">
-      <div class="m-name">{{ mo.label }}</div>
-      <div class="m-days" aria-hidden="true"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
-      <div class="m-weeks">
-      {% for wk in mo.weeks %}{% for d in wk %}
-        <span class="m-cell{{ ' today' if d and d == mo.today }}{{ ' has' if d in mo.days }}">{% if d %}<span class="m-num">{{ d }}</span>{% for h in mo.days.get(d, []) %}<a class="m-dot dot-{{ h.topic }}" href="{{ root }}drugs/{{ h.drug_id }}.html" data-drug="{{ h.drug_id }}" title="{{ h.day }} · {{ h.drug }}: {{ h.short or h.what }}"><span class="sr-only">{{ h.drug }}: {{ h.short or h.what }}</span></a>{% endfor %}{% endif %}</span>
-      {% endfor %}{% endfor %}
-      </div>
-      {% if mo.month_items or mo.days %}
-      <ul class="m-list">
-        {% for d, hs in mo.days|dictsort %}{% for h in hs %}<li data-drug="{{ h.drug_id }}"><a href="{{ root }}drugs/{{ h.drug_id }}.html"><span class="m-dot dot-{{ h.topic }}" aria-hidden="true"></span><span class="m-when">{{ d }}</span>{{ h.drug }} <span class="m-what">{{ h.short or h.what }}</span></a></li>{% endfor %}{% endfor %}
-        {% for h in mo.month_items %}<li data-drug="{{ h.drug_id }}"><a href="{{ root }}drugs/{{ h.drug_id }}.html"><span class="m-dot dot-{{ h.topic }}{{ ' due' if h.precision == 'due' }}" aria-hidden="true"></span><span class="m-when">{{ 'Any week' if h.precision == 'due' else (h.when|title if h.precision == 'approx' else 'This month') }}</span>{{ h.drug }} <span class="m-what">{{ h.short or h.what }}</span></a></li>{% endfor %}
-      </ul>
-      {% endif %}
-    </div>
-    {% endfor %}
-    </div>
-    {% if months.later %}
-    <div class="m-later">
-      <div class="m-name">Later</div>
-      <ul class="m-list">
-        {% for h in months.later %}<li data-drug="{{ h.drug_id }}"><a href="{{ root }}drugs/{{ h.drug_id }}.html"><span class="m-dot dot-{{ h.topic }}" aria-hidden="true"></span><span class="m-when">{{ h.group }}</span>{{ h.drug }} <span class="m-what">{{ h.short or h.what }}</span></a></li>{% endfor %}
-      </ul>
-    </div>
-    {% endif %}
-  </div>
-  {% endif %}
 </section>
 {%- endmacro %}
 
@@ -169,7 +133,7 @@
   {{ changes(drug_changes, root) }}
 </section>
 {% endif %}
-{% if w.calendar %}{{ horizon(w.calendar, root, w.months) }}{% endif %}
+{% if w.calendar %}{{ horizon(w.calendar, root) }}{% endif %}
 {% set field = w.changes|selectattr("kind", "equalto", "field")|list %}
 {% if field %}
 <section class="section">
