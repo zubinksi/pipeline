@@ -1119,3 +1119,6 @@ html:not(.is-welcome) .w-only { display: none !important; }
 /* gauge in the "any week now" blue: current stage solid, earlier stages a see-through tint of it */
 .mini .now .dot, .slab[data-theme="drugs"] .mini .now .dot { background: #2f6fe0; border-color: #2f6fe0; }
 .mini .done .dot, .slab[data-theme="drugs"] .mini .done .dot { background: rgba(47, 111, 224, 0.32); border-color: transparent; }
+/* gauge back in navy: current stage solid, earlier stages a see-through tint of it */
+.mini .now .dot, .slab[data-theme="drugs"] .mini .now .dot { background: var(--now); border-color: var(--now); }
+.mini .done .dot, .slab[data-theme="drugs"] .mini .done .dot { background: rgba(44, 74, 122, 0.3); border-color: transparent; }
