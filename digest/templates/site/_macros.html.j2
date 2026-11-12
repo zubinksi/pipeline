@@ -8,6 +8,11 @@
 {% if text %}<span class="tag{{ ' setback' if text == 'setback' }}">{{ text }}</span>{% endif %}
 {%- endmacro %}
 
+{# a small heart, so a short evidence label ("Proven") keeps its meaning #}
+{% macro heart() -%}
+<svg class="heart" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M8 14s-5.5-3.4-5.5-7.2C2.5 4.7 4 3.2 5.8 3.2c1 0 1.8.5 2.2 1.3.4-.8 1.2-1.3 2.2-1.3 1.8 0 3.3 1.5 3.3 3.6C13.5 10.6 8 14 8 14z" fill="currentColor"/></svg>
+{%- endmacro %}
+
 {% macro proven(r) -%}
 {% if r.proven_label %}<span class="proof proof-{{ r.proven }}">{% if r.proven == 'yes' %}&#10003; {% elif r.proven == 'failed' %}&#10007; {% endif %}{{ r.proven_label }}</span>{% endif %}
 {%- endmacro %}
@@ -40,7 +45,7 @@
   {% endif %}
   <div class="dtable">
     <div class="dhead" aria-hidden="true">
-      <span>Drug</span><span>How often</span><span>Lowers</span><span>Heart attacks?</span><span class="c-stage">Stage</span><span></span>
+      <span>Drug</span><span>Lowers</span><span>How often</span><span>Heart attacks?</span><span class="c-stage">Stage</span><span></span>
     </div>
     {% for g in groups %}
     <div class="group" data-group>
@@ -49,9 +54,9 @@
       <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-lowers="{{ r.lowers_keys|join(' ') }}" data-freq="{{ r.frequency or '' }}">
         <span class="c-name"><span class="drug-name">{{ r.display_name }}</span>{% if r.generic %}<span class="generic">{{ r.generic|lower }}</span>{% endif %}{{ badge(r.badge) }}{% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}</span>
         <span class="c-line"><span class="nb">{{ r.often or r.form }}</span><span class="sep">·</span>{% for part in (r.effect_short or r.effect or r.lowers).split("; ") %}<span class="nb">{{ part }}</span>{% if not loop.last %}, {% endif %}{% endfor %}</span>
-        <span class="c-one"><span>{{ r.often or r.form }}</span><span class="sep">·</span><span>{{ (r.effect_short or r.effect or r.lowers).split("; ")[0] }}</span>{% if r.proven %}<span class="sep">·</span><span class="pf pf-{{ r.proven }}">{% if r.proven == 'yes' %}&#10003; {% elif r.proven == 'failed' %}&#10007; {% endif %}{{ r.proven_short }}</span>{% endif %}</span>
-        <span class="c-often">{{ r.often or r.form }}</span>
+        <span class="c-one"><span>{{ (r.effect_short or r.effect or r.lowers).split("; ")[0] }}</span><span class="sep">·</span><span>{{ r.often or r.form }}</span>{% if r.proven %}<span class="sep">·</span><span class="pf pf-{{ r.proven }}" title="{{ r.proven_label }}">{{ heart() }} {{ r.proven_short }}</span>{% endif %}</span>
         <span class="c-effect">{{ r.effect_short or r.effect or r.lowers }}</span>
+        <span class="c-often">{{ r.often or r.form }}</span>
         <span class="c-proof">{% if r.proven %}<span class="pf pf-{{ r.proven }}">{% if r.proven == 'yes' %}<span class="pf-i" aria-hidden="true">&#10003;</span>{% elif r.proven == 'failed' %}<span class="pf-i" aria-hidden="true">&#10007;</span>{% endif %}<span class="pf-short">{{ r.proven_short }}</span><span class="pf-long">{{ r.proven_label }}</span></span>{% endif %}</span>
         <span class="c-stage">{% if r.show_dots %}{{ mini(r.rank, r.moved) }}<span class="words">{{ r.stage_plain }}</span>{% endif %}</span>
         <span class="go" aria-hidden="true">&rsaquo;</span>

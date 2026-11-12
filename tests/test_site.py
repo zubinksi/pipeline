@@ -168,12 +168,13 @@ def test_drug_page_is_consolidated_for_a_layperson(tmp_path):
     html = (out / "drugs/inclisiran.html").read_text()
     # under the same header and tabs, with Drugs selected
     assert 'class="slab tabbed"' in html and 'class="folder f-drugs on"' in html
-    # the essentials in one "At a glance" table
-    glance = html[html.index("At a glance"):html.index("</dl>")]
-    for label in ("How often", "Effect", "Heart attacks", "Status", "Made by"):
-        assert label in glance
-    assert "LDL down about 50%" in glance and "Heart-attack trial underway" in glance and "Novartis" in glance
-    assert "What's next" in html and "twice-a-year shot proven" in html  # milestone with context
+    # a compact Profile with technical labels; the plain description stays above it
+    assert "A shot twice a year" in html
+    profile = html[html.index(">Profile<"):html.index("</dl>")]
+    for label in ("LDL reduction", "Dosing", "CV outcomes", "Stage", "Sponsor"):
+        assert label in profile
+    assert "↓ 50%" in profile and "Heart-attack trial underway" in profile and "Novartis" in profile
+    assert "Upcoming readouts" in html and "twice-a-year shot proven" in html
     assert 'href="https://clinicaltrials.gov/study/NCT03705234"' in html   # drug page links the source
-    assert "In plain terms" in html and "Where it stands" in html
+    assert ">Notes<" in html and "At a glance" not in html and "In plain terms" not in html
     assert "Trials and technical details" in html                   # detail tucked away

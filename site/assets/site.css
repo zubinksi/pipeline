@@ -759,3 +759,27 @@ a.tl:hover .tl-what b { color: var(--accent); }
   .c-one .sep { color: var(--b4); margin: 0 0.375rem; }
   .c-one .pf { font-size: 0.9375rem; display: inline; }
 }
+
+/* coming up: the context line sits back from its title */
+.tl-ctx { color: var(--muted); font-size: 0.9062rem; }
+
+/* heart icon for short evidence labels */
+.heart { width: 0.75em; height: 0.75em; vertical-align: -0.0625em; }
+
+/* desktop table: no chevrons; the row highlights its drug name on hover */
+@media (min-width: 861px) {
+  .dhead, .drug { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.15fr) minmax(0, 1.15fr) minmax(0, 1.2fr) 6.5rem; }
+  .dhead > span:last-child, .drug .go { display: none; }
+  .drug:hover .drug-name { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+}
+/* phones: stage dots alone, centred on the name line */
+@media (max-width: 860px) {
+  .c-stage .words { display: none; }
+  .c-stage { align-self: center; justify-content: center; }
+  .drug { align-items: center; }
+  .c-one .pf { white-space: nowrap; }
+}
+
+/* drug page profile: tighter rows */
+.gl-compact > div { padding: 0.4375rem 0; }
+.gl-compact .gl-stage { flex-wrap: nowrap; }

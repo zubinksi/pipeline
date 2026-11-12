@@ -9,21 +9,21 @@
   {% if drug.plain %}<p class="dsum">{{ drug.plain }}</p>{% endif %}
 </div>
 
-{# The essentials, laid out like a results table: one fact per line. #}
+{# Profile: compact, technical labels; the plain description above does the explaining. #}
 <section class="section">
-  <div class="section-head"><h2>At a glance</h2></div>
-  <dl class="gl">
-    <div><dt>How often</dt><dd>{{ drug.form or "–" }}</dd></div>
-    <div><dt>Effect</dt><dd>{{ drug.effect or ("Lowers " ~ drug.lowers if drug.lowers else "–") }}{% if drug.effect_source %} <a class="src" href="{{ drug.effect_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</dd></div>
-    {% if drug.proven %}<div><dt>Heart attacks</dt><dd><span class="pf pf-{{ drug.proven }}">{% if drug.proven == 'yes' %}&#10003; {% elif drug.proven == 'failed' %}&#10007; {% endif %}{{ row.proven_label }}</span></dd></div>{% endif %}
-    <div><dt>Status</dt><dd class="gl-stage"><span>{{ row.stage_plain }}</span>{{ m.mini(row.rank, row.moved) }}</dd></div>
-    <div><dt>Made by</dt><dd>{{ drug.company }}</dd></div>
+  <div class="section-head"><h2>Profile</h2></div>
+  <dl class="gl gl-compact">
+    <div><dt>LDL reduction</dt><dd>{{ (drug.effect_short or drug.effect or drug.lowers)|replace("LDL ", "") }}{% if drug.effect_source %} <a class="src" href="{{ drug.effect_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</dd></div>
+    <div><dt>Dosing</dt><dd>{{ drug.form or "–" }}</dd></div>
+    {% if drug.proven %}<div><dt>CV outcomes</dt><dd><span class="pf pf-{{ drug.proven }}">{% if drug.proven == 'yes' %}&#10003; {% elif drug.proven == 'failed' %}&#10007; {% endif %}{{ row.proven_label }}</span></dd></div>{% endif %}
+    <div><dt>Stage</dt><dd class="gl-stage"><span>{{ row.stage_plain }}</span>{{ m.mini(row.rank, row.moved) }}</dd></div>
+    <div><dt>Sponsor</dt><dd>{{ drug.company }}</dd></div>
   </dl>
 </section>
 
 {% if milestones %}
 <section class="section">
-  <div class="section-head"><h2>What's next</h2></div>
+  <div class="section-head"><h2>Upcoming readouts</h2></div>
   <div class="tl-list">
   {% for h in milestones %}
   <a class="tl tl-item{{ ' due' if h.when == 'DUE NOW' }}" href="{{ h.url }}" rel="noopener noreferrer">
@@ -36,15 +36,15 @@
 </section>
 {% endif %}
 
-{# For a drug whose heart-attack trials are listed under "What's next", the
+{# For a drug whose heart-attack trials are listed under "Upcoming readouts", the
    evidence note would only repeat them. #}
 {% set show_proof_note = drug.proven_note and not (drug.proven == "testing" and milestones) %}
 {% if show_proof_note or drug.note %}
 <section class="section">
-  <div class="section-head"><h2>In plain terms</h2></div>
+  <div class="section-head"><h2>Notes</h2></div>
   <div class="plain-terms">
-    {% if show_proof_note %}<p><span class="label">Heart attacks</span>{{ drug.proven_note }}{% if drug.proven_source %} <a class="src" href="{{ drug.proven_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
-    {% if drug.note %}<p><span class="label">Where it stands</span>{{ drug.note }}{% if drug.sources %} <a class="src" href="{{ drug.sources[0] }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
+    {% if show_proof_note %}<p><span class="label">CV outcomes</span>{{ drug.proven_note }}{% if drug.proven_source %} <a class="src" href="{{ drug.proven_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
+    {% if drug.note %}<p><span class="label">Status</span>{{ drug.note }}{% if drug.sources %} <a class="src" href="{{ drug.sources[0] }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
   </div>
 </section>
 {% endif %}
