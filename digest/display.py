@@ -95,3 +95,15 @@ def groups(all_rows: list[dict]) -> list[dict]:
                                   # in "Available now" every drug is approved: dots would add nothing
                                   "show_dots": key != "now"} for r in members]})
     return out
+
+
+def topic_shades(watchlist: dict) -> dict[str, dict]:
+    """Topic pills are all the navy accent; the nth topic (in watchlist order) gets it at
+    a fixed step lighter: 100%, 78%, 56%, 34%, then 16% for any after. Text is cream on
+    the darker steps and navy on the lighter ones, so a new topic needs no design work."""
+    from .watchlist import topics_of
+    out = {}
+    for i, t in enumerate(topics_of(watchlist)):
+        alpha = max(0.16, round(1 - 0.22 * i, 2))
+        out[t["id"]] = {"alpha": alpha, "dark": alpha >= 0.5}
+    return out

@@ -21,22 +21,7 @@
 </dl>
 </div>
 
-{% if approach %}
-<details class="more how">
-  <summary>How it works</summary>
-  <div>
-    <p class="flow-title">{{ approach.title }}</p>
-    <ol class="flow" aria-label="How {{ drug.brand or drug.name }} works">
-      {% for st in approach.steps %}
-      <li class="flow-step{{ ' acts' if loop.index == approach.acts }}">
-        <span class="flow-n">{% if loop.index == approach.acts %}The drug{% else %}{{ "%02d"|format(loop.index) }}{% endif %}</span>
-        <span class="flow-t">{{ st }}</span>
-      </li>
-      {% endfor %}
-    </ol>
-  </div>
-</details>
-{% endif %}
+
 
 {% if milestones %}
 <section class="section">
@@ -53,17 +38,34 @@
 </section>
 {% endif %}
 
+{% if approach %}
+<details class="more fold">
+  <summary>How it works</summary>
+  <div>
+    <p class="flow-title">{{ approach.title }}</p>
+    <ol class="flow" aria-label="How {{ drug.brand or drug.name }} works">
+      {% for st in approach.steps %}
+      <li class="flow-step{{ ' acts' if loop.index == approach.acts }}">
+        <span class="flow-n">{% if loop.index == approach.acts %}The drug{% else %}{{ "%02d"|format(loop.index) }}{% endif %}</span>
+        <span class="flow-t">{{ st }}</span>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</details>
+{% endif %}
+
 {# For a drug whose heart-attack trials are listed under "Upcoming readouts", the
    evidence note would only repeat them. #}
 {% set show_proof_note = drug.proven_note and not (drug.proven == "testing" and milestones) %}
 {% if show_proof_note or drug.note %}
-<section class="section">
-  <div class="section-head"><h2>Notes</h2></div>
+<details class="more fold">
+  <summary>Notes</summary>
   <div class="plain-terms">
     {% if show_proof_note %}<p><span class="label">{{ (topic.outcome or {}).title or "Outcomes" }}</span>{{ drug.proven_note }}{% if drug.proven_source %} <a class="src" href="{{ drug.proven_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
     {% if drug.note %}<p><span class="label">Status</span>{{ drug.note }}{% if drug.sources %} <a class="src" href="{{ drug.sources[0] }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
   </div>
-</section>
+</details>
 {% endif %}
 
 {% if updates %}

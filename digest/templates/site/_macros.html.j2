@@ -88,7 +88,7 @@
 {# The look-ahead across topics, as a list grouped by period, each entry tagged with its
    topic. Each entry opens the drug's page. #}
 {% macro topic_pill(h) -%}
-{% if h.topic_short %}<span class="pill pill-{{ h.topic }}">{{ h.topic_short }}</span>{% endif %}
+{% if h.topic_short %}<span class="pill{{ ' on-dark' if h.shade.dark }}" style="--pa: {{ h.shade.alpha }}">{{ h.topic_short }}</span>{% endif %}
 {%- endmacro %}
 {% macro horizon(groups, root) -%}
 <section class="section" data-cal-sec>

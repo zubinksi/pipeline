@@ -164,7 +164,9 @@ def test_news_and_drugs_tabs_and_compact_coming_up(tmp_path):
     assert (out / "assets/tabs.js").exists()
     # Coming up: a calendar across topics; each entry links to the drug's overview
     assert '<a class="cal-item first" href="drugs/inclisiran.html" data-drug="inclisiran">' in news and "Any week now" in news
-    assert '<span class="pill pill-heart">Heart</span>' in news and '<span class="pill pill-cancer">Cancer</span>' in news
+    # topic pills: the accent at a step lighter per topic, in watchlist order
+    assert '<span class="pill on-dark" style="--pa: 1.0">Heart</span>' in news
+    assert '<span class="pill" style="--pa: 0.34">Cancer</span>' in news
     assert 'data-cal-toggle' not in news
     assert "Heart-attack trial results" in news and "twice-a-year shot proven to prevent them" in news
     assert "Twice a year" not in news[news.index("Coming up"):news.index('data-panel="drugs"')]  # no dosing facts in the list
@@ -187,7 +189,7 @@ def test_drug_page_is_consolidated_for_a_layperson(tmp_path):
     assert "↓ 50%" in strip and "Trial underway" in strip and ">Profile<" not in html and "strip-note" not in html
     assert "Upcoming readouts" in html and "twice-a-year shot proven" in html
     assert 'href="https://clinicaltrials.gov/study/NCT03705234"' in html   # drug page links the source
-    assert ">Notes<" in html and "At a glance" not in html and "In plain terms" not in html
+    assert "<summary>Notes</summary>" in html and "At a glance" not in html and "In plain terms" not in html
     assert "Trials and technical details" in html                   # detail tucked away
 
 
@@ -247,7 +249,8 @@ def test_calendar_groups_by_period_with_topics(tmp_path):
 def test_drug_page_explains_how_it_works(tmp_path):
     out, _ = _build(tmp_path)
     html = (out / "drugs/inclisiran.html").read_text()
-    assert '<details class="more how">' in html and "Silencing the PCSK9 message" in html  # collapsed by default
+    assert '<details class="more fold">\n  <summary>How it works</summary>' in html and "Silencing the PCSK9 message" in html  # collapsed
+    assert html.index("Upcoming readouts") < html.index("How it works")
     assert html.count('class="flow-step') == 4 and 'class="flow-step acts"' in html
     for d in WL["drugs"]:
         assert d.get("approach"), d["id"]  # every drug has a diagram

@@ -1396,12 +1396,10 @@ html:not(.is-welcome) .w-only { display: none !important; }
 .cal-what b { font-weight: 400; }
 .cal-item:hover .cal-what { color: var(--accent); }
 .cal-ctx { font-size: 0.9375rem; line-height: 1.45; color: var(--muted); }
-/* topic pills: all in the navy accent, told apart by pattern: solid, tint, outline, dashed */
-.pill { justify-self: end; margin-top: 0.125rem; padding: 0.1875rem 0.5rem; border-radius: 999px; border: 1px solid var(--accent); font-family: var(--mono); font-size: 0.5938rem; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; background: transparent; color: var(--accent); }
-.pill-heart { background: var(--accent); color: var(--slab); }
-.pill-obesity { background: #cdd6e8; border-color: #cdd6e8; }
-.pill-alzheimers { background: transparent; }
-.pill-cancer { border-style: dashed; }
+/* topic pills: the navy accent at a fixed step lighter per topic (display.topic_shades
+   sets --pa in watchlist order); cream text on the darker steps */
+.pill { justify-self: end; margin-top: 0.125rem; padding: 0.1875rem 0.5rem; border-radius: 999px; font-family: var(--mono); font-size: 0.5938rem; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; background: rgba(44, 74, 122, var(--pa, 1)); color: var(--accent); }
+.pill.on-dark { color: var(--slab); }
 @media (max-width: 860px) {
   .cal-item { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "when pill" "body body"; row-gap: 0.25rem; }
   .cal-when { grid-area: when; padding-top: 0.1875rem; }
@@ -1572,6 +1570,6 @@ html:not(.is-welcome) .w-only { display: none !important; }
 .lchart { overflow: hidden; }
 .ledge-l { fill: var(--accent); opacity: 0.8; }
 /* drug page: "How it works" starts collapsed; its summary looks like any section head */
-details.how { border-top: 0; padding-top: 0; }
-details.how > summary { padding-bottom: 0.5rem; border-bottom: 3px double var(--b4); font-size: 0.6875rem; line-height: 1.4; letter-spacing: 0.16em; color: var(--ink); }
-details.how > div { padding-top: 0.75rem; }
+details.fold { border-top: 0; padding-top: 0; }
+details.fold > summary { padding-bottom: 0.5rem; border-bottom: 3px double var(--b4); font-size: 0.6875rem; line-height: 1.4; letter-spacing: 0.16em; color: var(--ink); }
+details.fold > div { padding-top: 0.75rem; }

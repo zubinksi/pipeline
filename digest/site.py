@@ -73,7 +73,8 @@ def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
             "errors": [e for e in rec.get("errors", []) if e.split(" (")[0] in sources]}
 
 
-def calendar(items: list[dict], drugs: dict, topics: dict, today: date | None = None) -> list[dict]:
+def calendar(items: list[dict], drugs: dict, topics: dict, today: date | None = None,
+             shades: dict | None = None) -> list[dict]:
     """The look-ahead as a calendar across topics: groups by period (any week now,
     a month, or a looser label like "EARLY 2027"), each item tagged with its topic."""
     today = today or date.today()
@@ -110,7 +111,8 @@ def calendar(items: list[dict], drugs: dict, topics: dict, today: date | None = 
             precision, ym = "approx", (int(iso[:4]), int(iso[5:7]))   # e.g. "EARLY 2027", filed under its sort date
         else:
             precision, ym = "loose", None
-        item = {**h, "day": day, "rel": rel, "topic": drug.get("topic", ""),
+        shade = (shades or {}).get(drug.get("topic", ""), {"alpha": 1, "dark": True})
+        item = {**h, "day": day, "rel": rel, "topic": drug.get("topic", ""), "shade": shade,
                 "topic_short": t.get("short") or t.get("title", ""), "precision": precision, "ym": ym,
                 "dom": int(iso[8:10]) if precision == "day" else 0}
         if groups and groups[-1]["key"] == key:
@@ -167,7 +169,8 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
     drug_map = {d["id"]: d for d in watchlist["drugs"]}
     rows_by_id = {r["id"]: r for r in rows_now}
     if latest:
-        latest = {**latest, "calendar": calendar(latest["horizon"], drug_map, topics)}
+        latest = {**latest, "calendar": calendar(latest["horizon"], drug_map, topics,
+                                                 shades=display.topic_shades(watchlist))}
     home = dict(latest=latest, n_weeks=len(views), sections=display.sections(rows_now, watchlist),
                 n_drugs=len(watchlist["drugs"]), drug_rows={r["id"]: r for r in rows_now})
     # News and Drugs are one page with both panels; the two files differ only in which is open
@@ -177,7 +180,8 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
     for i, w in enumerate(views):
         newer = views[i - 1]["date"] if i > 0 else None
         older = views[i + 1]["date"] if i + 1 < len(views) else None
-        w = {**w, "calendar": calendar(w["horizon"], drug_map, topics, date.fromisoformat(w["date"]))}
+        w = {**w, "calendar": calendar(w["horizon"], drug_map, topics, date.fromisoformat(w["date"]),
+                                       shades=display.topic_shades(watchlist))}
         write(f"weeks/{w['date']}.html", "week.html.j2", "../", sel="weeks", week=w, newer=newer, older=older,
               drug_rows={r["id"]: r for r in rows_now},
               sections=display.sections(_rows(watchlist, w.get("stages", stages), set(w["moved"])), watchlist),
