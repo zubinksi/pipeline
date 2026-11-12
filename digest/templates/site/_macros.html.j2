@@ -17,17 +17,27 @@
 <section class="section"{% if filterable %} data-filter{% endif %}>
   <div class="section-head">
     <h2>{{ title }} <span class="sub">{{ n_drugs }}</span></h2>
-    {% if filterable and (filters.lowers|length > 1 or filters.freq|length > 1) %}
-    <div class="filters" hidden>
-      {% for k, opts in [("lowers", filters.lowers), ("freq", filters.freq)] if opts|length > 1 %}
+    {% set has_filters = filterable and (filters.lowers|length > 1 or filters.freq|length > 1) %}
+    {% if has_filters %}
+    <button type="button" class="ficon" aria-expanded="false" aria-controls="fpanel" aria-label="Filter" hidden>
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 3.5h12M4.5 8h7M7 12.5h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg>
+      <span class="fcount" hidden></span>
+    </button>
+    {% endif %}
+  </div>
+  {% if has_filters %}
+  <div class="fpanel" id="fpanel" hidden>
+    {% for k, opts in [("lowers", filters.lowers), ("freq", filters.freq)] if opts|length > 1 %}
+    <div class="fgroup">
+      <span class="label">{{ 'What it lowers' if k == 'lowers' else 'How often' }}</span>
       <div class="chips" role="group" aria-label="{{ 'What it lowers' if k == 'lowers' else 'How often' }}">
         <button type="button" class="chip" data-k="{{ k }}" data-v="all" aria-pressed="true">All</button>
         {% for v, label in opts %}<button type="button" class="chip" data-k="{{ k }}" data-v="{{ v }}" aria-pressed="false">{{ label }}</button>{% endfor %}
       </div>
-      {% endfor %}
     </div>
-    {% endif %}
+    {% endfor %}
   </div>
+  {% endif %}
   <div class="dtable">
     <div class="dhead" aria-hidden="true">
       <span>Drug</span><span>How often</span><span>Lowers</span><span>Heart attacks?</span><span class="c-stage">Stage</span><span></span>
@@ -39,6 +49,7 @@
       <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-lowers="{{ r.lowers_keys|join(' ') }}" data-freq="{{ r.frequency or '' }}">
         <span class="c-name"><span class="drug-name">{{ r.display_name }}</span>{% if r.generic %}<span class="generic">{{ r.generic|lower }}</span>{% endif %}{{ badge(r.badge) }}{% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}</span>
         <span class="c-line"><span class="nb">{{ r.often or r.form }}</span><span class="sep">·</span>{% for part in (r.effect_short or r.effect or r.lowers).split("; ") %}<span class="nb">{{ part }}</span>{% if not loop.last %}, {% endif %}{% endfor %}</span>
+        <span class="c-one"><span>{{ r.often or r.form }}</span><span class="sep">·</span><span>{{ (r.effect_short or r.effect or r.lowers).split("; ")[0] }}</span>{% if r.proven %}<span class="sep">·</span><span class="pf pf-{{ r.proven }}">{% if r.proven == 'yes' %}&#10003; {% elif r.proven == 'failed' %}&#10007; {% endif %}{{ r.proven_short }}</span>{% endif %}</span>
         <span class="c-often">{{ r.often or r.form }}</span>
         <span class="c-effect">{{ r.effect_short or r.effect or r.lowers }}</span>
         <span class="c-proof">{% if r.proven %}<span class="pf pf-{{ r.proven }}">{% if r.proven == 'yes' %}<span class="pf-i" aria-hidden="true">&#10003;</span>{% elif r.proven == 'failed' %}<span class="pf-i" aria-hidden="true">&#10007;</span>{% endif %}<span class="pf-short">{{ r.proven_short }}</span><span class="pf-long">{{ r.proven_label }}</span></span>{% endif %}</span>

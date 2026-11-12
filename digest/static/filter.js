@@ -1,11 +1,14 @@
-// Filters the drug list with the chips next to "The drugs". Without JavaScript
-// the chips stay hidden and every drug shows. The choice is kept in the URL.
+// Filters for the drug list. A filter icon beside "The drugs" opens a panel of
+// chip groups (one per filter, so more can be added). Without JavaScript the
+// icon stays hidden and every drug shows. The choice is kept in the URL.
 (function () {
   var box = document.querySelector('[data-filter]');
   if (!box) return;
-  var bar = box.querySelector('.filters');
-  if (!bar) return;
-  var chips = Array.prototype.slice.call(bar.querySelectorAll('.chip'));
+  var btn = box.querySelector('.ficon');
+  var panel = box.querySelector('.fpanel');
+  if (!btn || !panel) return;
+  var count = btn.querySelector('.fcount');
+  var chips = Array.prototype.slice.call(panel.querySelectorAll('.chip'));
   var groups = Array.prototype.slice.call(box.querySelectorAll('[data-group]'));
   var empty = box.querySelector('.f-empty');
   var want = {};
@@ -13,11 +16,14 @@
   var params = new URLSearchParams(location.search);
   Object.keys(want).forEach(function (k) {
     var v = params.get(k);
-    if (v && bar.querySelector('.chip[data-k="' + k + '"][data-v="' + v + '"]')) want[k] = v;
+    if (v && panel.querySelector('.chip[data-k="' + k + '"][data-v="' + v + '"]')) want[k] = v;
   });
 
   function apply() {
     chips.forEach(function (c) { c.setAttribute('aria-pressed', String(want[c.dataset.k] === c.dataset.v)); });
+    var active = Object.keys(want).filter(function (k) { return want[k] !== 'all'; }).length;
+    count.textContent = active; count.hidden = !active;
+    btn.classList.toggle('on', active > 0);
     var total = 0;
     groups.forEach(function (g) {
       var shown = 0;
@@ -40,12 +46,17 @@
     history.replaceState(history.state, '', url);
   }
 
-  bar.addEventListener('click', function (e) {
+  btn.addEventListener('click', function () {
+    var open = panel.hidden;
+    panel.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  panel.addEventListener('click', function (e) {
     var c = e.target.closest('.chip');
     if (!c) return;
     want[c.dataset.k] = c.dataset.v;
     apply();
   });
-  bar.hidden = false;
+  btn.hidden = false;
   apply();
 })();

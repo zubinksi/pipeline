@@ -26,7 +26,7 @@
   --b2: #ddd8ca;
   --b3: #ece8dc;
   --b4: #c4bdac;
-  --head: #e4ddcd;     /* the panel's header band, a shade darker than the paper */
+  --head: #d8cfbe;     /* the panel's header band, a shade darker than the paper */
   --ink: #1f2933;
   --ink2: #374151;
   --ink3: #4b5563;
@@ -645,7 +645,7 @@ footer { font-family: var(--serif); font-size: 0.875rem; letter-spacing: 0; text
    the same hue when behind. The page under the tabs takes the selected tab's
    color, and each theme has accents chosen for its own paper. */
 .f-news { --tab: #fbf9f3; color: #1f2933; }   /* cream: the news paper */
-.f-drugs { --tab: #d3c9b7; color: #1f2933; }  /* light taupe: the drugs paper */
+.f-drugs { --tab: #ebe4d7; color: #1f2933; }  /* very light taupe: the drugs paper */
 .folder.on { color: inherit; }
 .f-news.on { color: #1f2933; } .f-drugs.on { color: #1f2933; }
 /* the selected tab runs into its page; the other sits behind the double rule */
@@ -655,30 +655,30 @@ footer { font-family: var(--serif); font-size: 0.875rem; letter-spacing: 0; text
 .slab, .slab-body { transition: background-color 0.2s; }
 
 .slab[data-theme="drugs"] {
-  /* light taupe paper with dark ink; navy accent like the rest of the site */
-  --slab: #d3c9b7;
-  --raised: #dad1c1;
-  --zebra: #d9d0bf;
-  --hover: #cabfac;
-  --b1: #bcb19d;
-  --b2: #bcb19d;
-  --b3: #c4b9a6;
-  --b4: #9a8e78;
+  /* very light taupe paper with dark ink; navy accent like the rest of the site */
+  --slab: #ebe4d7;
+  --raised: #efe9de;
+  --zebra: #eee8dc;
+  --hover: #e3dbcc;
+  --b1: #d3c9b7;
+  --b2: #d3c9b7;
+  --b3: #ddd4c4;
+  --b4: #ada18b;
   --ink: #1f2933;
   --ink2: #33302a;
   --ink3: #4a453c;
-  --muted: #625b4f;
-  --track: #a99d87;
-  --done: #7a6f5d;
+  --muted: #645d51;
+  --track: #bbb09c;
+  --done: #857a68;
   --now: #2c4a7a;
   --accent: #2c4a7a;
-  --accent-dim: #e2dacb;
+  --accent-dim: #f3eee5;
   --moved: #8f4f0c;
   --setback: #8a2f24;
 }
 .slab[data-theme="drugs"] .slab-body { background: var(--slab); }
 /* the header band is shared by both tabs, so it keeps the neutral paper borders */
-.slab-head { --b4: #c4bdac; }
+.slab-head { --b4: #b5aa95; }
 
 /* evidence and flags, recoloured for the navy paper */
 .slab[data-theme="drugs"] .pf-yes { color: #2a6233; }
@@ -723,3 +723,39 @@ a.tl:hover .tl-what b { color: var(--accent); }
 @media (max-width: 860px) { a.tl .tl-when { padding-top: 0; } }
 .tl { grid-template-columns: 7.75rem minmax(0, 1fr) 0.75rem; }
 @media (max-width: 860px) { .tl { grid-template-columns: minmax(0, 1fr) 0.75rem; } }
+
+/* "Any week now": a bright dot instead of a bold flag */
+.tl-item.due .tl-when { font-weight: 400; color: var(--ink2); }
+.tl-item.due .tl-when::after { content: none; }
+.tl-item.due .tl-when::before, .tl-when.due::before {
+  content: ''; display: inline-block; width: 0.4375rem; height: 0.4375rem; border-radius: 50%;
+  background: #2f6fe0; margin-right: 0.4375rem; vertical-align: 0.0625rem;
+}
+.tl-when.due { font-weight: 400; color: var(--ink2); }
+
+/* filter icon beside "The drugs", opening a panel of chip groups */
+.ficon {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  width: 2rem; height: 2rem; padding: 0; border: 1px solid var(--b4); border-radius: 2px;
+  background: transparent; color: var(--ink2); cursor: pointer; transition: color 0.15s, border-color 0.15s;
+}
+.ficon:hover, .ficon[aria-expanded='true'], .ficon.on { color: var(--accent); border-color: var(--accent); }
+.fcount {
+  position: absolute; top: -0.4375rem; right: -0.4375rem; min-width: 1rem; height: 1rem; padding: 0 0.25rem;
+  border-radius: 999px; background: var(--accent); color: #fbf9f3;
+  font-family: var(--mono); font-size: 0.5625rem; line-height: 1rem; text-align: center;
+}
+.fpanel { display: flex; flex-direction: column; gap: 0.75rem; padding: 0.875rem 0 0.375rem; }
+.fgroup { display: flex; flex-direction: column; gap: 0.4375rem; }
+.filters { display: none; }
+
+/* drug rows: one condensed line under the name on phones */
+.c-one { display: none; }
+@media (max-width: 860px) {
+  .drug { grid-template-areas: "name stage go" "one one one"; }
+  .c-line, .c-proof { display: none; }
+  .c-one { grid-area: one; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+           font-family: var(--serif); font-size: 0.9375rem; color: var(--ink2); }
+  .c-one .sep { color: var(--b4); margin: 0 0.375rem; }
+  .c-one .pf { font-size: 0.9375rem; display: inline; }
+}
