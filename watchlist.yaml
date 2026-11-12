@@ -144,6 +144,91 @@ topics:
       Each drug here is for a specific cancer, often only with a certain gene
       change.
 
+# How each kind of drug works, as four plain steps; `acts` is the step (1-4) where the
+# drug comes in. Shown as a small diagram on each drug's page (drugs name theirs in
+# `approach`).
+approaches:
+  - id: pcsk9-block
+    title: Blocking PCSK9
+    steps:
+      - Your liver pulls LDL out of the blood using receptors on its surface.
+      - A protein called PCSK9 marks those receptors to be destroyed.
+      - The drug grabs PCSK9 in the blood, so it can't.
+      - More receptors survive, so more LDL is cleared from the blood.
+    acts: 3
+  - id: silence-pcsk9
+    title: Silencing the PCSK9 message
+    steps:
+      - Liver cells copy the PCSK9 gene into a messenger (RNA) to make PCSK9.
+      - PCSK9 marks the liver's LDL receptors to be destroyed.
+      - The drug destroys the messenger, so far less PCSK9 is made, for months.
+      - More receptors survive, so more LDL is cleared from the blood.
+    acts: 3
+  - id: edit-pcsk9
+    title: Switching off the PCSK9 gene
+    steps:
+      - Liver cells use the PCSK9 gene to make PCSK9.
+      - PCSK9 marks the liver's LDL receptors to be destroyed.
+      - One infusion edits a single letter of the gene's DNA, switching it off.
+      - Less PCSK9, more receptors, lower LDL, meant to last for life.
+    acts: 3
+  - id: silence-lpa
+    title: Silencing the Lp(a) message
+    steps:
+      - Liver cells copy the LPA gene into a messenger (RNA) to make apo(a).
+      - Apo(a) joins an LDL-like particle to form Lp(a).
+      - The drug destroys the messenger, so far less apo(a) is made.
+      - Fewer Lp(a) particles circulate in the blood.
+    acts: 3
+  - id: block-lpa
+    title: Stopping Lp(a) from forming
+    steps:
+      - The liver makes apo(a) and an LDL-like particle.
+      - Normally the two join together to form Lp(a).
+      - The pill stops them joining.
+      - Fewer Lp(a) particles circulate in the blood.
+    acts: 3
+  - id: incretin
+    title: Acting on gut hormones
+    steps:
+      - After a meal, the gut releases hormones such as GLP-1.
+      - They tell the brain you're full and slow the stomach.
+      - The drug acts on these hormone signals (GLP-1, and for some also GIP or glucagon), and lasts far longer.
+      - Appetite drops, people eat less, and weight falls steadily.
+    acts: 3
+  - id: amyloid
+    title: Clearing amyloid
+    steps:
+      - Amyloid protein builds up into plaques between brain cells.
+      - The plaques are linked to the damage behind memory loss.
+      - The antibody sticks to amyloid and flags it.
+      - The immune system clears it, slowing decline (not reversing it).
+    acts: 3
+  - id: estrogen-receptor
+    title: Removing the estrogen receptor
+    steps:
+      - This breast cancer grows on estrogen signals, through its estrogen receptor.
+      - A change in the ESR1 gene can make older hormone pills stop working.
+      - The pill latches onto the receptor so the cell destroys it.
+      - Without the receptor, the growth signal is cut off.
+    acts: 3
+  - id: kras-g12c
+    title: Turning off a stuck growth switch
+    steps:
+      - KRAS is a switch that tells cells to grow.
+      - A G12C change in the gene leaves the switch stuck on, driving the cancer.
+      - The pill locks the faulty switch in its off position.
+      - Taken with immunotherapy, the immune system attacks the tumor too.
+    acts: 3
+  - id: pd1-vegf
+    title: Two jobs in one antibody
+    steps:
+      - Tumors switch off immune cells through a "brake" called PD-1.
+      - They also grow new blood vessels using a signal called VEGF.
+      - One antibody blocks both PD-1 and VEGF.
+      - Immune cells can attack, and the tumor's blood supply is cut back.
+    acts: 3
+
 # Companies: follow everything a company is developing, across topics. A drug
 # belongs to a company if its `company` contains one of `match`.
 companies:
@@ -191,6 +276,7 @@ drugs:
   # ======== Heart & cholesterol ========
   # ---- approved ----
   - id: evolocumab
+    approach: pcsk9-block
     topic: heart
     group: ldl
     name: Evolocumab
@@ -215,6 +301,7 @@ drugs:
     sources: [https://www.tctmd.com/news/fourier-evolocumab-reduces-risk-cvd-events-15-compared-placebo]
 
   - id: alirocumab
+    approach: pcsk9-block
     topic: heart
     group: ldl
     name: Alirocumab
@@ -239,6 +326,7 @@ drugs:
     sources: [https://www.managedcaremag.com/news/fda-approves-once-monthly-dosing-option-praluent-injection/]
 
   - id: inclisiran
+    approach: silence-pcsk9
     topic: heart
     group: ldl
     name: Inclisiran
@@ -272,6 +360,7 @@ drugs:
         context: "A second, independent test of the same question, in people already taking a statin."
 
   - id: lerodalcibep
+    approach: pcsk9-block
     topic: heart
     group: ldl
     name: Lerodalcibep
@@ -297,6 +386,7 @@ drugs:
 
   # ---- in development ----
   - id: verve102
+    approach: edit-pcsk9
     topic: heart
     group: ldl
     name: VERVE-102
@@ -326,6 +416,7 @@ drugs:
 
   # ---- Lp(a) (restored 2026-11-12; verified 2026-11-03, muvalaplin 2026-11-12) ----
   - id: lepodisiran
+    approach: silence-lpa
     topic: heart
     group: lpa
     name: Lepodisiran
@@ -349,6 +440,7 @@ drugs:
     sources: [https://www.clinicaltrialsarena.com/analyst-comment/jpm26-eli-lilly-lpa-drugs/]
 
   - id: olpasiran
+    approach: silence-lpa
     topic: heart
     group: lpa
     name: Olpasiran
@@ -372,6 +464,7 @@ drugs:
     sources: [https://clinicaltrials.gov/study/NCT05581303]
 
   - id: pelacarsen
+    approach: silence-lpa
     topic: heart
     group: lpa
     name: Pelacarsen
@@ -396,6 +489,7 @@ drugs:
     sources: [https://www.tctmd.com/news/lpahorizon-top-line-results-dash-hopes-pelacarsen]
 
   - id: zerlasiran
+    approach: silence-lpa
     topic: heart
     group: lpa
     name: Zerlasiran
@@ -420,6 +514,7 @@ drugs:
     sources: [https://www.biospace.com/drug-development/silence-quiets-phase-iii-pace-for-lipoprotein-drug-seeks-partner]
 
   - id: muvalaplin
+    approach: block-lpa
     topic: heart
     group: lpa
     name: Muvalaplin
@@ -444,6 +539,7 @@ drugs:
 
   # ======== Obesity & metabolism ========  (verified by web search 2026-11-12)
   - id: tirzepatide
+    approach: incretin
     topic: obesity
     name: Tirzepatide
     brand: Zepbound
@@ -467,6 +563,7 @@ drugs:
     sources: [https://www.acc.org/Latest-in-Cardiology/Clinical-Trials/2022/08/04/15/32/SURMOUNT-1]
 
   - id: semaglutide
+    approach: incretin
     topic: obesity
     name: Semaglutide
     brand: Wegovy
@@ -490,6 +587,7 @@ drugs:
     sources: [https://hcplive.com/view/select-trial-shows-semaglutide-2-4-mg-could-reduce-cardiovascular-risk]
 
   - id: orforglipron
+    approach: incretin
     topic: obesity
     name: Orforglipron
     brand: Foundayo
@@ -512,6 +610,7 @@ drugs:
     sources: [https://cardiovascularbusiness.com/topics/clinical/heart-health/fda-approves-another-glp-1-pill-weight-loss]
 
   - id: retatrutide
+    approach: incretin
     topic: obesity
     name: Retatrutide
     aliases: [LY3437943]
@@ -540,6 +639,7 @@ drugs:
         context: "The step before approval; a decision would usually follow about a year later."
 
   - id: maritide
+    approach: incretin
     topic: obesity
     name: MariTide
     aliases: [maridebart cafraglutide, AMG 133]
@@ -569,6 +669,7 @@ drugs:
 
   # ======== Alzheimer's & the brain ========  (verified by web search 2026-11-12)
   - id: donanemab
+    approach: amyloid
     topic: alzheimers
     name: Donanemab
     brand: Kisunla
@@ -597,6 +698,7 @@ drugs:
         context: "Tests whether treating before symptoms start can delay Alzheimer's."
 
   - id: lecanemab
+    approach: amyloid
     topic: alzheimers
     name: Lecanemab
     brand: Leqembi
@@ -620,6 +722,7 @@ drugs:
     sources: [https://pharmatimes.com/news/fda-approves-leqembi-iqlik-subcutaneous-initiation-dose-for-alzheimers-disease/]
 
   - id: remternetug
+    approach: amyloid
     topic: alzheimers
     name: Remternetug
     aliases: [LY3372993]
@@ -645,6 +748,7 @@ drugs:
         context: "Finished in May 2026, results not yet announced. Would show whether a self-injected shot works like Kisunla."
 
   - id: trontinemab
+    approach: amyloid
     topic: alzheimers
     name: Trontinemab
     aliases: [RG6102, RO7126209]
@@ -673,6 +777,7 @@ drugs:
 
   # ======== Cancer ========  (verified by web search 2026-11-12)
   - id: imlunestrant
+    approach: estrogen-receptor
     topic: cancer
     name: Imlunestrant
     brand: Inluriyo
@@ -696,6 +801,7 @@ drugs:
     sources: [https://www.cancernetwork.com/view/fda-approves-imlunestrant-in-er-her2-breast-cancer]
 
   - id: olomorasib
+    approach: kras-g12c
     topic: cancer
     name: Olomorasib
     aliases: [LY3537982]
@@ -724,6 +830,7 @@ drugs:
         context: "The first head-to-head test against standard treatment."
 
   - id: ivonescimab
+    approach: pd1-vegf
     topic: cancer
     name: Ivonescimab
     aliases: [SMT112, AK112]

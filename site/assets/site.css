@@ -1161,3 +1161,24 @@ html:not(.is-welcome) .w-only { display: none !important; }
 .spot:hover .spot-name { color: var(--accent); }
 /* spotlight: no box, just the entry on the sheet */
 .spot { padding: 0.25rem 0 0; border: 0; border-radius: 0; background: none; }
+
+/* drug page: how it works, as a four-step flow; the step where the drug acts is marked */
+.flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
+.flow-step { position: relative; display: flex; flex-direction: column; gap: 0.5rem; padding: 0.75rem 1.25rem 0.25rem 0; border-top: 1px solid var(--b4); }
+.flow-step + .flow-step { padding-left: 1.25rem; }
+.flow-step + .flow-step::before { content: "→"; position: absolute; left: -0.4375rem; top: -0.75rem; padding: 0 0.125rem; font-family: var(--mono); font-size: 0.8125rem; line-height: 1.5rem; color: var(--ink3); background: var(--slab); }
+.flow-n { font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.flow-t { font-size: 0.9375rem; line-height: 1.45; color: var(--ink2); }
+.flow-step.acts { border-top: 3px solid var(--now); padding-top: calc(0.75rem - 2px); }
+.flow-step.acts .flow-n { color: var(--now); }
+.flow-step.acts .flow-t { color: var(--ink); }
+@media (max-width: 860px) {
+  .flow { grid-template-columns: minmax(0, 1fr); }
+  .flow-step, .flow-step + .flow-step { display: grid; grid-template-columns: 4.25rem minmax(0, 1fr); gap: 0.75rem; padding: 0.625rem 0; border-top: 1px solid var(--b3); }
+  .flow-step:first-child { border-top: 0; }
+  .flow-step + .flow-step::before { content: none; }
+  .flow-step.acts { border-top: 1px solid var(--b3); padding-top: 0.625rem; }
+  .flow-step.acts .flow-n { padding-left: 0.5rem; border-left: 3px solid var(--now); }
+  .flow-n { padding-top: 0.1875rem; }
+}
+.flow-title { margin: 0 0 0.875rem; font-size: 1.0625rem; color: var(--ink); }

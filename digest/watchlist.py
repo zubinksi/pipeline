@@ -38,6 +38,10 @@ def load(path: str | Path = "watchlist.yaml") -> dict:
     topic_ids = [t["id"] for t in topics]
     if len(set(topic_ids)) != len(topic_ids):
         raise ValueError("duplicate topic id")
+    approach_ids = {a["id"] for a in data.setdefault("approaches", [])}
+    for a in data["approaches"]:
+        if len(a.get("steps", [])) < 2 or not 1 <= int(a.get("acts", 0)) <= len(a["steps"]):
+            raise ValueError(f"approach {a['id']}: needs steps and an `acts` step number")
     seen = set()
     for d in data["drugs"]:
         for key in ("id", "name", "company", "stage"):
@@ -60,6 +64,8 @@ def load(path: str | Path = "watchlist.yaml") -> dict:
         groups = [g["id"] for g in next(t for t in topics if t["id"] == d["topic"]).get("groups") or []]
         if groups and d.get("group") not in groups:
             raise ValueError(f"{d['id']}: group must be one of {groups} for topic {d['topic']}")
+        if d.get("approach") and d["approach"] not in approach_ids:
+            raise ValueError(f"{d['id']}: unknown approach {d['approach']!r}")
         d.setdefault("aliases", [])
         d["aliases"] = [str(a) for a in d["aliases"]]
         d.setdefault("sources", [])

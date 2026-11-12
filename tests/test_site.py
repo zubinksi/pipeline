@@ -248,3 +248,12 @@ def test_quiet_week_spotlight_and_lead(tmp_path):
                               "short": "FDA decision", "what": "", "url": "u"}],
                             {d["id"]: d for d in wl["drugs"]}, {t["id"]: t for t in wl["topics"]}, dt.date(2026, 11, 12))
     assert cal[0]["label"] == "NOV 2026" and cal[0]["items"][0]["day"] == "14 NOV" and cal[0]["items"][0]["rel"] == "in 2 days"
+
+
+def test_drug_page_explains_how_it_works(tmp_path):
+    out, _ = _build(tmp_path)
+    html = (out / "drugs/inclisiran.html").read_text()
+    assert ">How it works<" in html and "Silencing the PCSK9 message" in html
+    assert html.count('class="flow-step') == 4 and 'class="flow-step acts"' in html
+    for d in WL["drugs"]:
+        assert d.get("approach"), d["id"]  # every drug has a diagram

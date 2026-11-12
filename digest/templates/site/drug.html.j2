@@ -21,6 +21,21 @@
 </dl>
 </div>
 
+{% if approach %}
+<section class="section">
+  <div class="section-head"><h2>How it works</h2></div>
+  <p class="flow-title">{{ approach.title }}</p>
+  <ol class="flow" aria-label="How {{ drug.brand or drug.name }} works">
+    {% for st in approach.steps %}
+    <li class="flow-step{{ ' acts' if loop.index == approach.acts }}">
+      <span class="flow-n">{% if loop.index == approach.acts %}The drug{% else %}{{ "%02d"|format(loop.index) }}{% endif %}</span>
+      <span class="flow-t">{{ st }}</span>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endif %}
+
 {% if milestones %}
 <section class="section">
   <div class="section-head"><h2>Upcoming readouts</h2></div>

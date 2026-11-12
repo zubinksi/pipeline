@@ -209,6 +209,7 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
               n_active=sum(1 for t in trials if t["status"] in ACTIVE), next_pcd=next_pcd,
               row=next(r for r in _rows(watchlist, {**stages, d["id"]: stage}, moved) if r["id"] == d["id"]),
               topic=(t := topics_by_id(watchlist).get(d.get("topic")) or topics_of(watchlist)[0]),
+              approach=next((a for a in watchlist.get("approaches", []) if a["id"] == d.get("approach")), None),
               effect_label=next((g.get("effect_label") for g in t.get("groups") or []
                                  if g["id"] == d.get("group") and g.get("effect_label")),
                                 t.get("effect_label") or "Effect"),
