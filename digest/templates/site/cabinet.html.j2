@@ -8,14 +8,14 @@
 </div>
 <form class="cab" data-cabinet>
   {% for g in groups %}
-  <fieldset class="cab-group">
-    <legend>{{ g.title }}</legend>
+  <fieldset class="cab-group" aria-labelledby="cg{{ loop.index }}">
+    <div class="cab-head"><span id="cg{{ loop.index }}">{{ g.title }}</span><button type="button" class="cab-all" data-all hidden>Select all</button></div>
     {% for r in g.rows %}
     <label class="cab-row">
       <input type="checkbox" name="drug" value="{{ r.id }}" checked>
       <span class="cab-box" aria-hidden="true"></span>
-      <span class="cab-name">{{ r.display_name }}{% if r.generic %}<span class="generic">{{ r.generic|lower }}</span>{% endif %}</span>
-      <span class="cab-line">{{ (r.effect_short or r.effect or r.lowers).split("; ")[0] }} · {{ r.often or r.form }}</span>
+      <span class="cab-name">{{ r.display_name }}</span>
+      <span class="cab-line">{{ (r.effect_short or r.effect or r.lowers).split("; ")[0]|replace("LDL ", "") }} · {{ r.often or r.form }}</span>
     </label>
     {% endfor %}
   </fieldset>

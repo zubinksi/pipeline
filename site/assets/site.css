@@ -847,3 +847,16 @@ a.hcab:hover { color: var(--accent); }
   .cab-row { grid-template-columns: 1.125rem minmax(0, 1fr); row-gap: 0.25rem; }
   .cab-line { grid-column: 2; }
 }
+
+/* cabinet: one line per drug; a select-all per group */
+.cab-group { position: relative; }
+.cab-all { position: absolute; right: 0; top: 0; padding: 0; border: 0; background: none; cursor: pointer; font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); line-height: 1.6; }
+.cab-all:hover { text-decoration: underline; }
+.cab-row, .cab-row { grid-template-columns: 1.125rem auto minmax(0, 1fr); align-items: center; }
+.cab-line { justify-self: end; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 860px) {
+  .cab-row { grid-template-columns: 1.125rem auto minmax(0, 1fr); row-gap: 0; }
+  .cab-line { grid-column: auto; font-size: 0.6875rem; }
+}
+.cab-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 0 0.5rem; border-bottom: 3px double var(--b4); font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
+.cab-all { position: static; }

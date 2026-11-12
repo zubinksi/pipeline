@@ -25,40 +25,40 @@
   <p class="cab-lede">Choose the drugs you follow. News and Drugs show only these.</p>
 </div>
 <form class="cab" data-cabinet>
-  <fieldset class="cab-group">
-    <legend>Available now</legend>
+  <fieldset class="cab-group" aria-labelledby="cg1">
+    <div class="cab-head"><span id="cg1">Available now</span><button type="button" class="cab-all" data-all hidden>Select all</button></div>
     <label class="cab-row">
       <input type="checkbox" name="drug" value="evolocumab" checked>
       <span class="cab-box" aria-hidden="true"></span>
-      <span class="cab-name">Repatha<span class="generic">evolocumab</span></span>
-      <span class="cab-line">LDL ↓ 60% · Every 2–4 weeks</span>
+      <span class="cab-name">Repatha</span>
+      <span class="cab-line">↓ 60% · Every 2–4 weeks</span>
     </label>
     <label class="cab-row">
       <input type="checkbox" name="drug" value="alirocumab" checked>
       <span class="cab-box" aria-hidden="true"></span>
-      <span class="cab-name">Praluent<span class="generic">alirocumab</span></span>
-      <span class="cab-line">LDL ↓ 50% · Every 2–4 weeks</span>
+      <span class="cab-name">Praluent</span>
+      <span class="cab-line">↓ 50% · Every 2–4 weeks</span>
     </label>
     <label class="cab-row">
       <input type="checkbox" name="drug" value="inclisiran" checked>
       <span class="cab-box" aria-hidden="true"></span>
-      <span class="cab-name">Leqvio<span class="generic">inclisiran</span></span>
-      <span class="cab-line">LDL ↓ 50% · Twice a year</span>
+      <span class="cab-name">Leqvio</span>
+      <span class="cab-line">↓ 50% · Twice a year</span>
     </label>
     <label class="cab-row">
       <input type="checkbox" name="drug" value="lerodalcibep" checked>
       <span class="cab-box" aria-hidden="true"></span>
-      <span class="cab-name">Lerochol<span class="generic">lerodalcibep</span></span>
-      <span class="cab-line">LDL ↓ 60% · Monthly</span>
+      <span class="cab-name">Lerochol</span>
+      <span class="cab-line">↓ 60% · Monthly</span>
     </label>
   </fieldset>
-  <fieldset class="cab-group">
-    <legend>Further out</legend>
+  <fieldset class="cab-group" aria-labelledby="cg2">
+    <div class="cab-head"><span id="cg2">Further out</span><button type="button" class="cab-all" data-all hidden>Select all</button></div>
     <label class="cab-row">
       <input type="checkbox" name="drug" value="verve102" checked>
       <span class="cab-box" aria-hidden="true"></span>
       <span class="cab-name">VERVE-102</span>
-      <span class="cab-line">LDL ↓ up to 62% · Once</span>
+      <span class="cab-line">↓ up to 62% · Once</span>
     </label>
   </fieldset>
 </form>

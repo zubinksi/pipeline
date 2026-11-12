@@ -14,9 +14,32 @@
   if (form) {
     var boxes = Array.prototype.slice.call(form.querySelectorAll('input[name="drug"]'));
     boxes.forEach(function (b) { b.checked = !mine || mine.indexOf(b.value) !== -1; });
-    form.addEventListener('change', function () {
+    // each group has one button: "Select all" until every box is ticked, then "Clear"
+    var groups = Array.prototype.slice.call(form.querySelectorAll('fieldset'));
+    function sync() {
+      groups.forEach(function (g) {
+        var bs = g.querySelectorAll('input[name="drug"]');
+        var all = Array.prototype.every.call(bs, function (b) { return b.checked; });
+        var btn = g.querySelector('[data-all]');
+        btn.textContent = all ? 'Clear' : 'Select all';
+        btn.dataset.all = all ? 'on' : 'off';
+      });
+    }
+    function store() {
       save(boxes.filter(function (b) { return b.checked; }).map(function (b) { return b.value; }));
+      sync();
+    }
+    groups.forEach(function (g) {
+      var btn = g.querySelector('[data-all]');
+      btn.hidden = false;
+      btn.addEventListener('click', function () {
+        var on = btn.dataset.all !== 'on';
+        g.querySelectorAll('input[name="drug"]').forEach(function (b) { b.checked = on; });
+        store();
+      });
     });
+    form.addEventListener('change', store);
+    sync();
     return;
   }
   if (!mine) return;
