@@ -149,3 +149,23 @@ def test_field_section_in_site_and_email(tmp_path):
     out = site.build(tmp_path / "s", weeks=[rec], snapshot=after, watchlist=WL)
     html = (out / "index.html").read_text()
     assert "In the field" in html and "PCSK9 shot meets primary endpoint" in html
+
+
+def test_lead_paragraph_flows_to_email_history_and_site(tmp_path):
+    from digest import history, site
+    changes, after = _changes()
+    payload = {"headline": "h", "lead": "Leqvio's big trial is due; a new Lp(a) trial started.",
+               "items": [{"id": c.id, "include": True, "why": "w"} for c in changes]}
+    headline, lead, kept = summarize.summarize_full(changes, WL, client=FakeClient(payload))
+    assert lead.startswith("Leqvio's big trial")
+    assert "lead" in summarize.SCHEMA["required"]
+    d = render.render(headline=headline, lead=lead, changes=kept, horizon=[], snapshot=after, watchlist=WL)
+    assert lead.replace("'", "&#39;") in d.html or lead in d.html
+    assert lead in d.text
+    rec = history.record(day=date(2026, 11, 16), headline=headline, lead=lead, changes=kept, horizon=[],
+                         snapshot=after, baseline=False)
+    out = site.build(tmp_path / "site", weeks=[rec], snapshot=after, watchlist=WL)
+    assert 'class="w-lead"' in (out / "index.html").read_text()
+    # without Claude there's no lead
+    _, no_lead, _ = summarize.summarize_full(changes, WL, client=FakeClient({}, stop_reason="refusal"))
+    assert no_lead == ""
