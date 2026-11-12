@@ -85,43 +85,68 @@
 {% endfor %}
 {%- endmacro %}
 
-{# A compact look-ahead: one line per milestone; tap to open a short summary, with
-   links on to the drug's overview and the source. #}
-{% macro horizon(items, root) -%}
+{# The look-ahead as a calendar across topics: grouped by period, each item tagged with
+   its topic; the row opens the drug's overview. #}
+{% macro horizon(groups, root) -%}
 <section class="section">
   <div class="section-head"><h2>Coming up</h2></div>
-  <div class="tl-list">
-  {% for h in items %}
-  {% set when = h.when or (h.date|horizon_date) %}
-  {% set due = when == 'DUE NOW' %}
-  <a class="tl tl-item{{ ' due' if due }}"{% if h.drug_id %} data-drug="{{ h.drug_id }}"{% endif %} href="{{ root ~ 'drugs/' ~ h.drug_id ~ '.html' if h.drug_id else h.url }}">
-    <span class="tl-when">{{ "ANY WEEK NOW" if due else when }}</span>
-    <span class="tl-what"><b>{{ h.drug }}</b> {{ h.short or h.what }}{% if h.context %}<span class="tl-ctx">{{ h.context }}</span>{% endif %}</span>
-    <span class="go" aria-hidden="true">&rsaquo;</span>
-  </a>
+  <div class="cal">
+  {% for g in groups %}
+  <div class="cal-group{{ ' due' if g.key == 'due' }}" data-cal-group>
+    <div class="cal-when">{% if g.key == 'due' %}<span class="due-dot" aria-hidden="true"></span>{% endif %}{{ g.label }}</div>
+    {% for h in g["items"] %}
+    <a class="cal-item" href="{{ root ~ 'drugs/' ~ h.drug_id ~ '.html' if h.drug_id else h.url }}"{% if h.drug_id %} data-drug="{{ h.drug_id }}"{% endif %}>
+      <span class="cal-meta">{% if h.topic_short %}<span class="cal-topic">{{ h.topic_short }}</span>{% endif %}{% if h.day %}<span class="cal-day">{{ h.day }}</span>{% endif %}{% if h.rel %}<span class="cal-rel">{{ h.rel }}</span>{% endif %}</span>
+      <span class="cal-what"><b>{{ h.drug }}</b> {{ h.short or h.what }}</span>
+      {% if h.context %}<span class="cal-ctx">{{ h.context }}</span>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
   {% endfor %}
   </div>
 </section>
 {%- endmacro %}
 
-{# "This week": the drug changes (or just the dated heading), then what's coming up,
-   then broader news. #}
+{# Quiet week: one drug in the spotlight (the first on this week's rotation that's on
+   the reader's panel; the panel script hides the others). #}
+{% macro spotlight(list, root) -%}
+{% if list %}
+<section class="section spot-sec">
+  <div class="section-head"><h2>Spotlight</h2></div>
+  {% for r in list %}
+  <a class="spot" href="{{ root }}drugs/{{ r.id }}.html" data-drug="{{ r.id }}">
+    <span class="spot-name">{{ r.display_name }}{% if r.generic %}<span class="generic">{{ r.generic|lower }}</span>{% endif %}<span class="spot-topic">{{ r.topic_title }}</span></span>
+    {% if r.plain %}<span class="spot-plain">{{ r.plain }}</span>{% endif %}
+    <span class="spot-facts"><span>{{ r.stage_plain }}</span><span>{{ (r.effect_short or r.effect or r.lowers).split("; ")[0] }}</span><span>{{ r.often or r.form }}</span></span>
+    {% if r.watch %}<span class="spot-watch"><span class="label">Where it stands</span>{{ r.watch }}</span>{% endif %}
+    <span class="spot-more">Read more &rarr;</span>
+  </a>
+  {% endfor %}
+</section>
+{% endif %}
+{%- endmacro %}
+
+{# "This week": the date, the week's lead, the drug changes; in a quiet week a spotlight
+   instead. Then what's coming up, then broader news. #}
 {% macro this_week(w, root, title, past=0) -%}
 {% set drug_changes = w.changes|rejectattr("kind", "equalto", "field")|list %}
-{% set n_due = w.horizon|selectattr("when", "equalto", "DUE NOW")|list|length if w.horizon else 0 %}
 <section class="section">
-  {% if drug_changes %}
-  <div class="section-head"><h2>{{ title }} <span class="sub">{{ w.date|nice_date_short }}</span></h2>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
-  {% else %}
   <div class="weekline">
     <div class="weekline-top"><span class="sub">{{ w.date|nice_date_short }}</span>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
-    <p>{% if w.baseline %}Tracking started this week.{% else %}Nothing changed this week.{% endif %}{% if n_due %} {{ n_due }} result{{ "s" if n_due != 1 }} due now.{% endif %}</p>
+    {% if w.lead %}<p class="w-lead">{{ w.lead }}</p>
+    {% elif drug_changes %}<p>{{ w.headline }}</p>
+    {% elif w.baseline %}<p>Tracking started this week.</p>
+    {% else %}<p>A quiet week: nothing on the list moved.</p>{% endif %}
   </div>
-  {% endif %}
   {% if w.errors %}<div class="note">Couldn't reach: {{ w.errors|join(", ") }}.{% if not w.baseline %} The previous week's data was kept for these.{% endif %}</div>{% endif %}
-  {% if drug_changes %}{{ changes(drug_changes, root) }}{% endif %}
 </section>
-{% if w.horizon %}{{ horizon(w.horizon, root) }}{% endif %}
+{% if drug_changes %}
+<section class="section">
+  <div class="section-head"><h2>{{ title }}</h2></div>
+  {{ changes(drug_changes, root) }}
+</section>
+{% elif w.spotlight %}{{ spotlight(w.spotlight, root) }}{% endif %}
+{% if w.calendar %}{{ horizon(w.calendar, root) }}{% endif %}
 {% set field = w.changes|selectattr("kind", "equalto", "field")|list %}
 {% if field %}
 <section class="section">

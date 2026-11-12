@@ -10,11 +10,12 @@ from pathlib import Path
 from .diff import Change, HorizonItem
 
 
-def record(*, day: date, headline: str, changes: list[Change], horizon: list[HorizonItem],
+def record(*, day: date, headline: str, lead: str = "", changes: list[Change], horizon: list[HorizonItem],
            snapshot: dict, baseline: bool) -> dict:
     return {
         "date": day.isoformat(),
         "headline": headline,
+        "lead": lead,
         "baseline": baseline,
         "changes": [{k: v for k, v in asdict(c).items() if k != "extra"} for c in changes],
         "horizon": [asdict(h) for h in horizon],

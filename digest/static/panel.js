@@ -153,9 +153,13 @@
     var empty = sec.querySelector('.cab-empty'); if (empty) empty.hidden = n > 0;
     if (!n) { var f = sec.querySelector('.ficon'); if (f) f.remove(); }
   });
+  // calendar periods with nothing left in them
+  document.querySelectorAll('[data-cal-group]').forEach(function (g) {
+    if (!g.querySelector('.cal-item:not([hidden])')) g.hidden = true;
+  });
   document.querySelectorAll('.tl-list, .section').forEach(function (l) {
     var sec = l.closest('.section') || l;
-    var items = sec.querySelectorAll('.tl, .change');
-    if (items.length && !sec.querySelector('.tl:not([hidden]), .change:not([hidden])') && !sec.querySelector('.dtable, .weekline')) sec.hidden = true;
+    var items = sec.querySelectorAll('.tl, .change, .cal-item, .spot');
+    if (items.length && !sec.querySelector('.tl:not([hidden]), .change:not([hidden]), .cal-item:not([hidden]), .spot:not([hidden])') && !sec.querySelector('.dtable, .weekline')) sec.hidden = true;
   });
 })();

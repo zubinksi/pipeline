@@ -1122,3 +1122,42 @@ html:not(.is-welcome) .w-only { display: none !important; }
 /* gauge back in navy: current stage solid, earlier stages a see-through tint of it */
 .mini .now .dot, .slab[data-theme="drugs"] .mini .now .dot { background: var(--now); border-color: var(--now); }
 .mini .done .dot, .slab[data-theme="drugs"] .mini .done .dot { background: rgba(44, 74, 122, 0.3); border-color: transparent; }
+
+/* this week: the editor's note */
+.w-lead { margin: 0; font-size: 1.1875rem; line-height: 1.5; color: var(--ink); }
+
+/* coming up, as a calendar across topics */
+.cal { display: flex; flex-direction: column; }
+.cal-group { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); column-gap: 1.25rem; padding: 0.75rem 0; border-bottom: 1px solid var(--b3); }
+.cal-group:last-child { border-bottom: 0; }
+.cal-when { grid-row: 1 / span 20; padding-top: 0.1875rem; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+.cal-group.due .cal-when { color: var(--ink); }
+.due-dot { display: inline-block; width: 0.4375rem; height: 0.4375rem; border-radius: 50%; background: #2f6fe0; margin-right: 0.4375rem; vertical-align: 0.0625rem; }
+.cal-item { grid-column: 2; display: flex; flex-direction: column; gap: 0.1875rem; padding: 0.25rem 0 0.5rem; text-decoration: none; color: inherit; }
+.cal-item + .cal-item { border-top: 1px dashed var(--b3); padding-top: 0.5rem; }
+.cal-meta { display: flex; gap: 0.625rem; font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.cal-topic { color: var(--ink3); }
+.cal-rel { color: var(--accent); }
+.cal-what { font-size: 1.0625rem; line-height: 1.3; color: var(--ink); }
+.cal-what b { font-weight: 400; }
+.cal-item:hover .cal-what { color: var(--accent); }
+.cal-ctx { font-size: 0.9375rem; line-height: 1.45; color: var(--muted); }
+@media (max-width: 860px) {
+  .cal-group { grid-template-columns: minmax(0, 1fr); row-gap: 0.25rem; }
+  .cal-when { grid-row: auto; }
+  .cal-item { grid-column: 1; }
+}
+
+/* quiet week: one drug in the spotlight */
+.spot { display: flex; flex-direction: column; gap: 0.4375rem; padding: 1rem 1.125rem; border: 1px solid var(--b2); border-radius: 3px; background: var(--raised); text-decoration: none; color: inherit; }
+.spot:not([hidden]) ~ .spot { display: none; }
+.spot-name { font-size: 1.375rem; line-height: 1.2; color: var(--ink); }
+.spot-topic { margin-left: 0.625rem; font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); vertical-align: 0.25rem; }
+.spot-plain { font-size: 1rem; line-height: 1.45; color: var(--ink2); }
+.spot-facts { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.02em; color: var(--ink3); }
+.spot-watch { font-size: 0.9375rem; line-height: 1.45; color: var(--ink2); }
+.spot-watch .label { display: block; margin-bottom: 0.125rem; font-family: var(--mono); font-size: 0.5625rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.spot-more { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+.spot:hover .spot-name { color: var(--accent); }
+/* spotlight: no box, just the entry on the sheet */
+.spot { padding: 0.25rem 0 0; border: 0; border-radius: 0; background: none; }

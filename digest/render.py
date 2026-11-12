@@ -43,7 +43,7 @@ def strip_rows(snapshot: dict, watchlist: dict, changes: list[Change]) -> list[d
     return out
 
 
-def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], snapshot: dict,
+def render(*, headline: str, lead: str = "", changes: list[Change], horizon: list[HorizonItem], snapshot: dict,
            watchlist: dict, baseline: bool = False, today: date | None = None) -> Digest:
     today = today or date.today()
     names = {d["id"]: d for d in watchlist["drugs"]}
@@ -70,6 +70,7 @@ def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], 
     } for c in changes]
     ctx = {
         "headline": headline,
+        "lead": lead,
         "changes": [c for c in shown if c["kind"] != "field"],
         "field": [c for c in shown if c["kind"] == "field"],
         "horizon": horizon,

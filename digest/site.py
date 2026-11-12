@@ -73,6 +73,53 @@ def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
             "errors": [e for e in rec.get("errors", []) if e.split(" (")[0] in sources]}
 
 
+def calendar(items: list[dict], drugs: dict, topics: dict, today: date | None = None) -> list[dict]:
+    """The look-ahead as a calendar across topics: groups by period (any week now,
+    a month, or a looser label like "EARLY 2027"), each item tagged with its topic."""
+    today = today or date.today()
+    groups: list[dict] = []
+    for h in items:
+        when = h.get("when") or fmt_horizon_date(h.get("date", ""))
+        parts = when.split()
+        if when == "DUE NOW":
+            key, label, day = "due", "Any week now", ""
+        elif len(parts) == 3 and parts[0].isdigit():      # "14 NOV 2026": file under its month
+            key, label, day = f"{parts[1]} {parts[2]}", f"{parts[1]} {parts[2]}", f"{parts[0]} {parts[1]}"
+        else:
+            key, label, day = when, when, ""
+        rel = ""
+        try:
+            d = date.fromisoformat(h.get("date", ""))
+            days = (d - today).days
+            if 0 <= days <= 90:
+                rel = "today" if days == 0 else ("in 1 day" if days == 1 else
+                      f"in {days} days" if days < 14 else f"in {round(days / 7)} weeks")
+        except ValueError:
+            pass
+        drug = drugs.get(h.get("drug_id", ""), {})
+        t = topics.get(drug.get("topic", ""), {})
+        item = {**h, "day": day, "rel": rel, "topic": drug.get("topic", ""),
+                "topic_short": t.get("short") or t.get("title", "")}
+        if groups and groups[-1]["key"] == key:
+            groups[-1]["items"].append(item)
+        else:
+            groups.append({"key": key, "label": label, "items": [item]})
+    return groups
+
+
+def spotlight(watchlist: dict, rows: dict, on: date) -> list[dict]:
+    """Every drug, in this week's rotation order: the first one the reader follows is the
+    quiet-week spotlight (the panel hides the rest)."""
+    drugs = watchlist["drugs"]
+    if not drugs:
+        return []
+    start = on.isocalendar()[1] % len(drugs)
+    out = []
+    for d in drugs[start:] + drugs[:start]:
+        out.append({**rows[d["id"]], "watch": d.get("note") or d.get("proven_note", "")})
+    return out
+
+
 def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict,
           site_title: str = "Readout") -> Path:
     out = Path(out)
@@ -113,6 +160,12 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
         (out / path).write_text(html)
 
     rows_now = _rows(watchlist, stages, moved)
+    topics = topics_by_id(watchlist)
+    drug_map = {d["id"]: d for d in watchlist["drugs"]}
+    rows_by_id = {r["id"]: r for r in rows_now}
+    if latest:
+        latest = {**latest, "calendar": calendar(latest["horizon"], drug_map, topics),
+                  "spotlight": spotlight(watchlist, rows_by_id, date.fromisoformat(latest["date"]))}
     home = dict(latest=latest, n_weeks=len(views), sections=display.sections(rows_now, watchlist),
                 n_drugs=len(watchlist["drugs"]), drug_rows={r["id"]: r for r in rows_now})
     # News and Drugs are one page with both panels; the two files differ only in which is open
@@ -122,6 +175,7 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
     for i, w in enumerate(views):
         newer = views[i - 1]["date"] if i > 0 else None
         older = views[i + 1]["date"] if i + 1 < len(views) else None
+        w = {**w, "calendar": calendar(w["horizon"], drug_map, topics, date.fromisoformat(w["date"]))}
         write(f"weeks/{w['date']}.html", "week.html.j2", "../", sel="weeks", week=w, newer=newer, older=older,
               drug_rows={r["id"]: r for r in rows_now},
               sections=display.sections(_rows(watchlist, w.get("stages", stages), set(w["moved"])), watchlist),

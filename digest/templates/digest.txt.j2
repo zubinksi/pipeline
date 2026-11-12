@@ -1,7 +1,9 @@
 READOUT · week of {{ today.strftime("%b %-d, %Y") }}
 
 {{ headline }}
-{% if changes %}
+{% if lead %}
+{{ lead }}
+{% endif %}{% if changes %}
 
 WHAT MOVED
 {% for c in changes %}

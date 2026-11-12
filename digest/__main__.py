@@ -80,13 +80,13 @@ def cmd_run(args) -> int:
     curr = snapshot.build(w, prev)
     baseline = prev is None
     changes = diff.compute(prev, curr, w)
-    headline, changes = summarize.summarize(changes, w)
+    headline, lead, changes = summarize.summarize_full(changes, w)
     horizon = diff.horizon(curr, w)
-    d = render.render(headline=headline, changes=changes, horizon=horizon,
+    d = render.render(headline=headline, lead=lead, changes=changes, horizon=horizon,
                       snapshot=curr, watchlist=w, baseline=baseline)
     _write(Path(args.out), "digest", d)
 
-    rec = history.record(day=date.today(), changes=changes, horizon=horizon, snapshot=curr,
+    rec = history.record(day=date.today(), lead=lead, changes=changes, horizon=horizon, snapshot=curr,
                          baseline=baseline,
                          headline=render.baseline_headline(curr, w) if baseline else headline)
     weeks = history.load_all(args.history)

@@ -39,6 +39,7 @@ settings:
 # `field_queries` on Google News, with `field_focus` telling the summary what counts).
 topics:
   - id: heart
+    short: "Heart"
     title: Heart & cholesterol
     groups:                 # optional finer choices in the cabinet; drugs say which with `group`
       - {id: ldl, title: "LDL-lowering", effect_label: "LDL reduction"}
@@ -70,6 +71,7 @@ topics:
       attacks and strokes.
 
   - id: obesity
+    short: "Obesity"
     title: Obesity & metabolism
     effect_label: Weight loss
     effect_col: Weight loss
@@ -94,6 +96,7 @@ topics:
       trial showed fewer heart attacks and strokes, not just weight loss.
 
   - id: alzheimers
+    short: "Alzheimer's"
     title: Alzheimer's & the brain
     effect_label: Slowing of decline
     effect_col: Effect
@@ -118,6 +121,7 @@ topics:
       (ARIA) is a known risk.
 
   - id: cancer
+    short: "Cancer"
     title: Cancer
     effect_label: Main result
     effect_col: Main result
