@@ -5,6 +5,7 @@ which the workflow publishes to GitHub Pages.
 """
 from __future__ import annotations
 
+import json
 import shutil
 from datetime import date
 from pathlib import Path
@@ -17,6 +18,7 @@ from dataclasses import asdict
 from . import diff, display
 from .diff import KIND_LABEL, fmt_horizon_date
 from .sources.ctgov import STATUS_PLAIN, phase_label
+from .watchlist import companies_of, topics_by_id, topics_of
 
 TEMPLATES = Path(__file__).parent / "templates" / "site"
 _env = Environment(loader=FileSystemLoader(TEMPLATES), autoescape=select_autoescape(["html", "j2"]),
@@ -41,7 +43,7 @@ _env.filters["nice_date"] = _fmt_date
 _env.filters["nice_date_short"] = _fmt_short
 _env.filters["horizon_date"] = fmt_horizon_date
 STATIC = Path(__file__).parent / "static"
-FREQ_LABEL = {"daily": "Daily", "monthly": "Monthly", "infrequent": "Less often", "once": "Once"}
+FREQ_LABEL = {"daily": "Daily", "weekly": "Weekly", "monthly": "Monthly", "infrequent": "Less often", "once": "Once"}
 ACTIVE = {"NOT_YET_RECRUITING", "RECRUITING", "ENROLLING_BY_INVITATION", "ACTIVE_NOT_RECRUITING"}
 
 
@@ -59,6 +61,7 @@ def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
             continue
         d = drugs.get(c.get("drug"))
         changes.append({**c, "drug_name": d["name"] if d else "", "company": d["company"] if d else "",
+                        "topic": (d or {}).get("topic") or c.get("topic", ""),
                         "kind_label": KIND_LABEL[c["kind"]][0]})
     # a baseline week's stored headline counts drugs at the time; say it plainly instead
     headline = ("Tracking started this week. Changes show up here from next week." if rec.get("baseline")
@@ -93,15 +96,21 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
               "filters": {"lowers": [(k, v) for k, v in display.LOWERS_LABEL.items()
                                      if any(k in display.lowers_keys(d.get("lowers", "")) for d in watchlist["drugs"])],
                           "freq": [(k, v) for k, v in FREQ_LABEL.items() if k in present("frequency")]},
-              "has_lpa": any("lpa" in display.lowers_keys(d.get("lowers", "")) for d in watchlist["drugs"])}
+              "has_lpa": any("lpa" in display.lowers_keys(d.get("lowers", "")) for d in watchlist["drugs"]),
+              "topics": topics_by_id(watchlist),
+              # what cabinet.js needs to know on every page: each drug's topic and companies
+              "cabinet_data": json.dumps({
+                  "topics": [t["id"] for t in topics_of(watchlist)],
+                  "drugs": {d["id"]: {"t": d.get("topic", ""), "c": companies_of(d, watchlist)}
+                            for d in watchlist["drugs"]}}, separators=(",", ":"))}
 
     def write(path: str, template: str, root: str, sel: str = "", **ctx):
         html = _env.get_template(template).render(**common, root=root, sel=sel, **ctx)
         (out / path).write_text(html)
 
     rows_now = _rows(watchlist, stages, moved)
-    home = dict(latest=latest, n_weeks=len(views), groups=_groups(rows_now), n_drugs=len(watchlist["drugs"]),
-                drug_rows={r["id"]: r for r in rows_now})
+    home = dict(latest=latest, n_weeks=len(views), sections=display.sections(rows_now, watchlist),
+                n_drugs=len(watchlist["drugs"]), drug_rows={r["id"]: r for r in rows_now})
     # News and Drugs are one page with both panels; the two files differ only in which is open
     write("index.html", "home.html.j2", "", sel="news", active="news", **home)
     write("drugs.html", "home.html.j2", "", sel="drugs", active="drugs", **home)
@@ -111,10 +120,12 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
         older = views[i + 1]["date"] if i + 1 < len(views) else None
         write(f"weeks/{w['date']}.html", "week.html.j2", "../", sel="weeks", week=w, newer=newer, older=older,
               drug_rows={r["id"]: r for r in rows_now},
-              groups=_groups(_rows(watchlist, w.get("stages", stages), set(w["moved"]))),
+              sections=display.sections(_rows(watchlist, w.get("stages", stages), set(w["moved"])), watchlist),
               n_drugs=len(watchlist["drugs"]))
     write("weeks/index.html", "archive.html.j2", "../", sel="weeks", weeks=views)
-    write("cabinet.html", "cabinet.html.j2", "", sel="cabinet", groups=_groups(rows_now))
+    write("cabinet.html", "cabinet.html.j2", "", sel="cabinet", sections=display.sections(rows_now, watchlist),
+          companies=[{**c, "rows": [r for r in rows_now if c["id"] in r["companies"]]}
+                     for c in watchlist.get("companies", [])])
 
     trials_by_drug: dict[str, list] = {}
     for t in snapshot.get("trials", {}).values():
@@ -138,7 +149,8 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
         next_pcd = min(upcoming, key=lambda t: t["primary_completion"], default=None)
         write(f"drugs/{d['id']}.html", "drug.html.j2", "../", sel="drugs", drug=d,
               n_active=sum(1 for t in trials if t["status"] in ACTIVE), next_pcd=next_pcd,
-              row=_rows({"drugs": [d]}, {d["id"]: stage}, moved)[0],
+              row=next(r for r in _rows(watchlist, {**stages, d["id"]: stage}, moved) if r["id"] == d["id"]),
+              topic=topics_by_id(watchlist).get(d.get("topic")) or topics_of(watchlist)[0],
               stage_basis=snapshot.get("drugs", {}).get(d["id"], {}),
               milestones=[h for h in upcoming_all if h.drug_id == d["id"]],
               updates=updates, history=history, trials=trials)

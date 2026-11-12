@@ -12,8 +12,8 @@
 {% if r.proven_label %}<span class="proof proof-{{ r.proven }}">{% if r.proven == 'yes' %}&#10003; {% elif r.proven == 'failed' %}&#10007; {% endif %}{{ r.proven_label }}</span>{% endif %}
 {%- endmacro %}
 
-{# The drug list, grouped by how close each drug is to a pharmacy. #}
-{% macro drug_list(groups, root, title="The drugs", filterable=false) -%}
+{# The drug list: a block per topic, each grouped by how close a drug is to a pharmacy. #}
+{% macro drug_list(sections, root, title="The drugs", filterable=false) -%}
 <section class="section"{% if filterable %} data-filter{% endif %}>
   <div class="section-head">
     <h2>{{ title }} <span class="sub" data-total>{{ n_drugs }}</span></h2>
@@ -38,36 +38,41 @@
     {% endfor %}
   </div>
   {% endif %}
-  <div class="dtable">
-    <div class="dhead" aria-hidden="true">
-      <span>Drug</span><span>Lowers</span><span>How often</span><span>Heart attacks?</span><span class="c-stage">Stage</span><span></span>
-    </div>
-    {% for g in groups %}
-    <div class="group" data-group>
-      <h3>{{ g.title }} <span class="n" data-count>{{ g.rows|length }}</span></h3>
-      {% for r in g.rows %}
-      <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-drug="{{ r.id }}" data-lowers="{{ r.lowers_keys|join(' ') }}" data-freq="{{ r.frequency or '' }}">
-        <span class="c-name"><span class="drug-name">{{ r.display_name }}</span>{% if r.generic %}<span class="generic">{{ r.generic|lower }}</span>{% endif %}{{ badge(r.badge) }}{% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}</span>
-        <span class="c-line"><span class="nb">{{ r.often or r.form }}</span><span class="sep">·</span>{% for part in (r.effect_short or r.effect or r.lowers).split("; ") %}<span class="nb">{{ part }}</span>{% if not loop.last %}, {% endif %}{% endfor %}</span>
-        <span class="c-one"><span>{{ (r.effect_short or r.effect or r.lowers).split("; ")[0] }}</span><span class="sep">·</span><span>{{ r.often or r.form }}</span></span>
-        <span class="c-effect">{{ r.effect_short or r.effect or r.lowers }}</span>
-        <span class="c-often">{{ r.often or r.form }}</span>
-        <span class="c-proof">{% if r.proven %}<span class="pf pf-{{ r.proven }}">{% if r.proven == 'yes' %}<span class="pf-i" aria-hidden="true">&#10003;</span>{% elif r.proven == 'failed' %}<span class="pf-i" aria-hidden="true">&#10007;</span>{% endif %}<span class="pf-short">{{ r.proven_short }}</span><span class="pf-long">{{ r.proven_label }}</span></span>{% endif %}</span>
-        <span class="c-stage">{% if r.show_dots %}{{ mini(r.rank, r.moved) }}<span class="words">{{ r.stage_plain }}</span>{% endif %}</span>
-        <span class="go" aria-hidden="true">&rsaquo;</span>
-      </a>
+  {% for t in sections %}
+  <div class="tsec" data-topic-sec="{{ t.id }}">
+    {% if sections|length > 1 %}<h3 class="tsec-head">{{ t.title }} <span class="n" data-tcount>{{ t.n }}</span></h3>{% endif %}
+    <div class="dtable">
+      <div class="dhead" aria-hidden="true">
+        <span>Drug</span><span>{{ t.effect_col or "Effect" }}</span><span>How often</span><span>{{ (t.outcome or {}).col or "Outcome" }}</span><span class="c-stage">Stage</span><span></span>
+      </div>
+      {% for g in t.groups %}
+      <div class="group" data-group>
+        <h3>{{ g.title }} <span class="n" data-count>{{ g.rows|length }}</span></h3>
+        {% for r in g.rows %}
+        <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-drug="{{ r.id }}" data-lowers="{{ r.lowers_keys|join(' ') }}" data-freq="{{ r.frequency or '' }}">
+          <span class="c-name"><span class="drug-name">{{ r.display_name }}</span>{% if r.generic %}<span class="generic">{{ r.generic|lower }}</span>{% endif %}{{ badge(r.badge) }}{% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}</span>
+          <span class="c-line"><span class="nb">{{ r.often or r.form }}</span><span class="sep">·</span>{% for part in (r.effect_short or r.effect or r.lowers).split("; ") %}<span class="nb">{{ part }}</span>{% if not loop.last %}, {% endif %}{% endfor %}</span>
+          <span class="c-one"><span>{{ (r.effect_short or r.effect or r.lowers).split("; ")[0] }}</span><span class="sep">·</span><span>{{ r.often or r.form }}</span></span>
+          <span class="c-effect">{{ r.effect_short or r.effect or r.lowers }}</span>
+          <span class="c-often">{{ r.often or r.form }}</span>
+          <span class="c-proof">{% if r.proven %}<span class="pf pf-{{ r.proven }}">{% if r.proven == 'yes' %}<span class="pf-i" aria-hidden="true">&#10003;</span>{% elif r.proven == 'failed' %}<span class="pf-i" aria-hidden="true">&#10007;</span>{% endif %}<span class="pf-short">{{ r.proven_short }}</span><span class="pf-long">{{ r.proven_label }}</span></span>{% endif %}</span>
+          <span class="c-stage">{% if r.show_dots %}{{ mini(r.rank, r.moved) }}<span class="words">{{ r.stage_plain }}</span>{% endif %}</span>
+          <span class="go" aria-hidden="true">&rsaquo;</span>
+        </a>
+        {% endfor %}
+      </div>
       {% endfor %}
     </div>
-    {% endfor %}
   </div>
-  <p class="empty cab-empty" hidden>Your cabinet is empty. <a href="{{ root }}cabinet.html">Choose drugs to follow &rarr;</a></p>
+  {% endfor %}
+  <p class="empty cab-empty" hidden>Nothing here from your cabinet. <a href="{{ root }}cabinet.html">Choose what to follow &rarr;</a></p>
   {% if filterable %}<p class="empty f-empty" hidden>Nothing on the list matches. Try "All".</p>{% endif %}
 </section>
 {%- endmacro %}
 
 {% macro changes(list, root, show_drug=true) -%}
 {% for c in list %}
-<div class="change"{% if c.drug %} data-drug="{{ c.drug }}"{% endif %}>
+<div class="change"{% if c.drug %} data-drug="{{ c.drug }}"{% elif c.topic %} data-topic="{{ c.topic }}"{% endif %}>
   <div class="meta">
     {% if show_drug and c.drug_name %}<a href="{{ root }}drugs/{{ c.drug }}.html">{{ c.drug_name }}</a> · {% endif %}
     {% if not show_drug and c.week %}<a href="{{ root }}weeks/{{ c.week }}.html">{{ c.week|nice_date }}</a> · {% endif %}
@@ -121,7 +126,8 @@
 <section class="section">
   <div class="section-head"><h2>In the field <span class="sub">beyond your list</span></h2></div>
   {% for c in field %}
-  <div class="change">
+  <div class="change"{% if c.topic %} data-topic="{{ c.topic }}"{% endif %}>
+    {% if c.topic in topics and topics|length > 1 %}<div class="meta">{{ topics[c.topic].title }}</div>{% endif %}
     <div class="what">{{ c.what }} <a class="src" href="{{ c.url }}" rel="noopener noreferrer">{{ c.source }} &rarr;</a></div>
     {% if c.why %}<div class="why">{{ c.why }}</div>{% endif %}
   </div>
@@ -161,7 +167,7 @@
       <dl>
         <dt>Early safety tests</dt><dd>First tests in people, mainly for safety.</dd>
         <dt>Mid-stage testing</dt><dd>Does it work, and at what dose?</dd>
-        <dt>Final-stage trials</dt><dd>Large trials, often testing whether it prevents heart attacks. The last step before applying for approval.</dd>
+        <dt>Final-stage trials</dt><dd>Large trials that test whether it works well enough to approve. The last step before applying.</dd>
         <dt>FDA reviewing</dt><dd>The company has applied for approval.</dd>
         <dt>Approved</dt><dd>Doctors can prescribe it.</dd>
       </dl>
@@ -170,10 +176,10 @@
       <p>A short, hand-picked list of results that would change the picture. Dates are when a trial is expected to finish collecting data (they often slip); results usually follow within a few months.</p>
     </div>
     <div>
-      <h4>LDL</h4>
-      <p>The "bad" cholesterol that statins lower. Every drug here lowers LDL without being a statin or a daily pill. The percentages are how much LDL fell in trials, on top of whatever people were already taking.</p>
-      <h4 style="margin-top:1rem">Heart attacks</h4>
-      <p>Lowering LDL isn't automatically the same as preventing heart attacks. "Prevents heart attacks" means a large trial showed fewer heart attacks and strokes; the others haven't been tested that way yet.</p>
+      {% for t in topics.values() if t.explain %}
+      <h4{% if not loop.first %} style="margin-top:1rem"{% endif %}>{{ t.title }}</h4>
+      <p>{{ t.explain }}</p>
+      {% endfor %}
       <p style="margin-top:0.75rem">This is a news tracker, not medical advice.</p>
     </div>
   </div>

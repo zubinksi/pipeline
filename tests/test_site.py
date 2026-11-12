@@ -74,10 +74,10 @@ def test_pipeline_rows_carry_filter_data(tmp_path):
     html = (out / "drugs.html").read_text()
     assert "data-filter" in html and 'data-k="lowers"' not in html  # one option only: no chips
     assert 'data-k="freq" data-v="monthly" aria-pressed="false">Monthly</button>' in html
-    assert 'value="daily"' not in html  # filter options only for values on the watchlist
+    assert 'data-v="infrequent"' in html and 'data-v="weekly"' in html
     assert html.count('class="drug"') == len(WL["drugs"])
     for d in WL["drugs"]:
-        assert d.get("route") and d.get("frequency") and d.get("proven"), d["id"]
+        assert d.get("route") and d.get("proven") and d.get("topic"), d["id"]
     assert 'data-lowers="ldl"' in html
     assert (out / "assets/filter.js").exists() and (out / "assets/site.css").exists()
 
@@ -190,8 +190,26 @@ def test_cabinet_page_chooses_what_to_follow(tmp_path):
     assert 'href="../cabinet.html"' in (out / "drugs/inclisiran.html").read_text()
     cab = (out / "cabinet.html").read_text()
     assert 'class="hcab on" aria-current="page"' in cab and "data-cabinet" in cab
-    for d in ("evolocumab", "alirocumab", "inclisiran", "lerodalcibep", "verve102"):
-        assert f'value="{d}" checked' in cab
+    # topics, each with its drugs; a company to follow across topics
+    for t in ("heart", "obesity", "alzheimers", "cancer"):
+        assert f'data-topic-box="{t}"' in cab
+    for d in WL["drugs"]:
+        assert f'data-drug-box="{d["id"]}"' in cab
+    assert 'data-company-box="lilly"' in cab and "By company" in cab
+    assert '"verve102":{"t":"heart","c":["lilly"]}' in news  # each page knows topics and companies
     assert (out / "assets/cabinet.js").exists() and "assets/cabinet.js" in news
     # rows carry their drug so untracked ones can be hidden
     assert 'data-drug="evolocumab"' in (out / "drugs.html").read_text()
+
+
+def test_drugs_page_is_split_by_topic_with_topic_words(tmp_path):
+    out, _ = _build(tmp_path)
+    html = (out / "drugs.html").read_text()
+    order = [html.index(f'data-topic-sec="{t}"') for t in ("heart", "obesity", "alzheimers", "cancer")]
+    assert order == sorted(order)
+    obesity = html[order[1]:order[2]]
+    assert "<span>Weight loss</span>" in obesity and "Zepbound" in obesity and "Heart & cholesterol" not in obesity
+    assert "<span>Slows decline?</span>" in html[order[2]:order[3]]
+    drug = (out / "drugs/donanemab.html").read_text()
+    assert "<dt>Slowing of decline</dt>" in drug and "<dt>Clinical effect</dt>" in drug
+    assert "<dt>LDL reduction</dt>" in (out / "drugs/inclisiran.html").read_text()

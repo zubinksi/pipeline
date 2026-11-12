@@ -15,7 +15,7 @@ import httpx
 
 from . import RANK_STAGE, STAGE_RANK
 from .sources import ctgov, news, openfda
-from .watchlist import search_terms
+from .watchlist import search_terms, topics_of
 
 log = logging.getLogger(__name__)
 NEWS_SEEN_CAP = 2000
@@ -36,7 +36,7 @@ def http_client() -> httpx.Client:
     return httpx.Client(
         timeout=30,
         follow_redirects=True,
-        headers={"User-Agent": "cholesterol-pipeline-digest/1.0 (personal weekly digest)"},
+        headers={"User-Agent": "drug-pipeline-digest/1.0 (personal weekly digest)"},
     )
 
 
@@ -89,9 +89,12 @@ def build(watchlist: dict, prev: dict | None, client: httpx.Client | None = None
     # --- discovery: new trials in watched conditions ---
     discovery: dict[str, dict] = {}
     disc = settings.get("discovery") or {}
-    if disc.get("enabled") and disc.get("conditions"):
+    disc_topics = [t for t in topics_of(watchlist) if t.get("discovery")]
+    if disc.get("enabled") and disc_topics:
         try:
-            discovery = ctgov.fetch_discovery(client, disc["conditions"])
+            for t in disc_topics:
+                for nct, trial in ctgov.fetch_discovery(client, t["discovery"]).items():
+                    discovery.setdefault(nct, {**trial, "topic": t["id"]})
             baselined["discovery"] = True
         except Exception as e:  # noqa: BLE001
             log.warning("ctgov discovery failed: %s", e)
@@ -177,24 +180,27 @@ def collect_field(client: httpx.Client, watchlist: dict, errors: list[str],
     """Field-wide news: a few broad searches, minus anything naming a watchlist drug
     (that goes in the drug's own news) or already found as drug news."""
     cfg = watchlist["settings"].get("field_news") or {}
-    if not cfg.get("enabled") or not cfg.get("queries"):
+    if not cfg.get("enabled"):
         return {}
     cutoff = (now or datetime.now(timezone.utc)) - timedelta(days=10)
     drugs = watchlist["drugs"]
-    items: dict[str, dict] = {}
-    for q in cfg["queries"]:
-        try:
-            for i in news.fetch_google_news_query(client, q):
-                if (i["id"] in exclude or datetime.fromisoformat(i["published"]) < cutoff
-                        or news.match_drug(i, drugs, search_terms)):
-                    continue
-                items.setdefault(i["id"], {**i, "drug": None, "query": q})
-        except Exception as e:  # noqa: BLE001
-            log.warning("field news %r failed: %s", q, e)
-            if "Google News" not in errors:
-                errors.append("Google News")
-    newest = sorted(items.values(), key=lambda i: i["published"], reverse=True)
-    return {i["id"]: i for i in newest[: cfg.get("max_candidates", 15)]}
+    out: dict[str, dict] = {}
+    for topic in topics_of(watchlist):
+        items: dict[str, dict] = {}
+        for q in topic.get("field_queries") or []:
+            try:
+                for i in news.fetch_google_news_query(client, q):
+                    if (i["id"] in exclude or i["id"] in out or datetime.fromisoformat(i["published"]) < cutoff
+                            or news.match_drug(i, drugs, search_terms)):
+                        continue
+                    items.setdefault(i["id"], {**i, "drug": None, "query": q, "topic": topic["id"]})
+            except Exception as e:  # noqa: BLE001
+                log.warning("field news %r failed: %s", q, e)
+                if "Google News" not in errors:
+                    errors.append("Google News")
+        newest = sorted(items.values(), key=lambda i: i["published"], reverse=True)
+        out.update({i["id"]: i for i in newest[: cfg.get("max_candidates", 15)]})
+    return out
 
 
 def finalize(snapshot: dict) -> dict:

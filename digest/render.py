@@ -54,7 +54,7 @@ def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], 
         line = f"Nothing changed this week across the {n_drugs} drugs you follow."
         if errors:
             line += f" (Couldn't reach: {', '.join(errors)}; they'll be checked again next week.)"
-        return Digest(subject=f"Cholesterol pipeline: nothing changed ({today:%b %-d})",
+        return Digest(subject=f"Your drugs pipeline: nothing changed ({today:%b %-d})",
                       html=f"<p style=\"font-family:Georgia,serif;"
                            f"font-size:15px;color:#1f2933\">{_esc(line)}</p>",
                       text=line + "\n")
@@ -76,13 +76,13 @@ def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], 
         "horizon_days": watchlist["settings"].get("horizon_days", 60),
         "stages": [label for _, label in STAGES],
         "rows": strip_rows(snapshot, watchlist, changes),
-        "groups": display.groups(strip_rows(snapshot, watchlist, changes)),
+        "sections": display.sections(strip_rows(snapshot, watchlist, changes), watchlist),
         "errors": errors,
         "today": today,
         "baseline": baseline,
         "site_url": os.environ.get("SITE_URL", ""),
     }
-    subject = f"Cholesterol pipeline: {headline}" if len(headline) < 90 else "Cholesterol pipeline weekly"
+    subject = f"Drugs pipeline: {headline}" if len(headline) < 90 else "Your drugs pipeline, weekly"
     return Digest(subject=subject,
                   html=_env.get_template("digest.html.j2").render(**ctx),
                   text=_text_env.get_template("digest.txt.j2").render(**ctx))

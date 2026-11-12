@@ -1,4 +1,4 @@
-# Watchlist for the weekly cholesterol-pipeline digest.
+# Watchlist for the weekly drug-pipeline digest, organised by topic.
 #
 # Each drug's `stage` is a FLOOR: the digest takes the highest of this value,
 # the highest phase seen on ClinicalTrials.gov, and an FDA approval found on
@@ -25,26 +25,131 @@ settings:
   horizon_days: 60          # "On the horizon" window
   min_trial_phase: 2        # ignore new trials / status changes below this phase (halts are always reported)
   max_news_per_drug: 5
-  discovery:                # flag NEW industry Phase 2/3 trials in these conditions that aren't on the watchlist
+  discovery:                # flag NEW industry Phase 2/3 trials (per topic `discovery`) not on the watchlist
     enabled: true
-    conditions: ["Hypercholesterolemia", "Atherosclerotic Cardiovascular Disease"]
     max_items: 5
-  field_news:               # "In the field": broader LDL-treatment news beyond the watchlist
+  field_news:               # "In the field": broader news per topic beyond the watchlist
     enabled: true
-    queries:                # Google News searches, past week
+    max_items: 3            # at most this many shown per topic per week
+
+# Topics are the "drawers" in the cabinet. Each drug belongs to one. A topic sets
+# the words the site uses for that kind of drug: what the main result is
+# (`effect_label`), what the big outcome question is (`outcome`), and where to look
+# for news beyond the list (`discovery` conditions on ClinicalTrials.gov,
+# `field_queries` on Google News, with `field_focus` telling the summary what counts).
+topics:
+  - id: heart
+    title: Heart & cholesterol
+    effect_label: LDL reduction
+    effect_col: Lowers
+    outcome:
+      col: Heart attacks?
+      title: CV outcomes
+      "yes": Prevents heart attacks
+      testing: Heart-attack trial underway
+      failed: Didn't prevent heart attacks
+      untested: No heart-attack data yet
+      short: {"yes": Proven, testing: Trial underway, failed: Didn't prevent, untested: No data yet}
+    discovery: ["Hypercholesterolemia", "Atherosclerotic Cardiovascular Disease"]
+    field_queries:
       - '"LDL cholesterol" (drug OR trial OR FDA) when:7d'
       - 'PCSK9 when:7d'
       - '"cholesterol-lowering" (trial OR approval OR FDA) when:7d'
       - 'hypercholesterolemia "phase 3" when:7d'
-    max_items: 3            # at most this many shown per week
+    field_focus: "concrete developments in LDL-lowering treatment (not Lp(a)- or triglyceride-only drugs)"
+    field_match: '\b(ldl|cholesterol|pcsk9|hypercholesterol\w*|statin)'
+    explain: >
+      LDL is the "bad" cholesterol that statins lower. Every drug here lowers LDL
+      without being a statin or a daily pill. Lowering LDL isn't automatically the
+      same as preventing heart attacks: "Prevents heart attacks" means a large trial
+      showed fewer heart attacks and strokes.
+
+  - id: obesity
+    title: Obesity & metabolism
+    effect_label: Weight loss
+    effect_col: Weight loss
+    outcome:
+      col: Heart attacks?
+      title: CV outcomes
+      "yes": Prevents heart attacks
+      testing: Heart-outcome trial underway
+      failed: Didn't prevent heart attacks
+      untested: No heart-outcome data yet
+      short: {"yes": Proven, testing: Trial underway, failed: Didn't prevent, untested: No data yet}
+    discovery: ["Obesity"]
+    field_queries:
+      - 'obesity drug (FDA OR "phase 3") when:7d'
+      - '"weight loss" (GLP-1 OR amylin) trial when:7d'
+    field_focus: "concrete developments in obesity drugs (approvals, trial results, filings)"
+    field_match: '\b(obesity|weight|glp-1|amylin|incretin)'
+    explain: >
+      Weight loss is the average drop in body weight in the main trials, usually
+      over about a year and a half, on top of diet and exercise advice. Trials differ,
+      so close numbers aren't a real difference. "Prevents heart attacks" means a large
+      trial showed fewer heart attacks and strokes, not just weight loss.
+
+  - id: alzheimers
+    title: Alzheimer's & the brain
+    effect_label: Slowing of decline
+    effect_col: Effect
+    outcome:
+      col: Slows decline?
+      title: Clinical effect
+      "yes": Slows decline
+      testing: Main trial underway
+      failed: Didn't slow decline
+      untested: Not yet shown
+      short: {"yes": Shown, testing: Trial underway, failed: Didn't slow, untested: Not yet shown}
+    discovery: ["Alzheimer Disease"]
+    field_queries:
+      - "Alzheimer's (drug OR treatment) (FDA OR \"phase 3\" OR trial) when:7d"
+    field_focus: "concrete developments in Alzheimer's treatment (approvals, trial results, filings)"
+    field_match: "\\b(alzheimer|dementia|amyloid|tau)"
+    explain: >
+      These drugs clear amyloid, a protein that builds up in the brain in
+      Alzheimer's. "Slowing of decline" is how much slower memory and daily
+      function got worse than on placebo, in early-stage patients over about 18
+      months. None stop or reverse the disease, and brain swelling or bleeding
+      (ARIA) is a known risk.
+
+  - id: cancer
+    title: Cancer
+    effect_label: Main result
+    effect_col: Main result
+    outcome:
+      col: Longer survival?
+      title: Survival
+      "yes": Longer survival shown
+      testing: Survival data pending
+      failed: Survival benefit not shown
+      untested: No survival data yet
+      short: {"yes": Shown, testing: Pending, failed: Not shown, untested: No data yet}
+    discovery: []           # too many new cancer trials each week to be useful
+    field_queries:
+      - '"FDA approves" cancer when:7d'
+    field_focus: "major cancer-drug developments a general reader would care about (FDA approvals, practice-changing trial results)"
+    field_match: '\b(cancer|tumou?r|oncology|carcinoma|lymphoma|leukemia|myeloma)'
+    explain: >
+      Cancer drugs are usually judged first on whether they hold off the cancer's
+      growth for longer ("progression"), and then on whether people live longer.
+      Each drug here is for a specific cancer, often only with a certain gene
+      change.
+
+# Companies: follow everything a company is developing, across topics. A drug
+# belongs to a company if its `company` contains one of `match`.
+companies:
+  - id: lilly
+    title: Eli Lilly
+    match: ["Lilly"]
 
 reader_context: >
-  32 years old, not on cholesterol medication. LDL and apoB are moderately
-  high; Lp(a) has been tested and is normal, so Lp(a) drugs aren't relevant.
-  His father has genetic high cholesterol and has been on statins for years;
-  no early heart attacks or strokes in the family. Would prefer to avoid
-  statins if possible and is most interested in LDL-lowering options that
-  don't need daily dosing (monthly or less often, or one-time).
+  A curious layperson. Heart & cholesterol is personal: 32 years old, not on
+  cholesterol medication, LDL and apoB moderately high, Lp(a) tested and normal
+  (so Lp(a) drugs aren't relevant). Their father has genetic high cholesterol and
+  has been on statins for years; no early heart attacks or strokes in the family.
+  Would prefer to avoid statins and is most interested in LDL-lowering options
+  that don't need daily dosing. The other topics (obesity, Alzheimer's, cancer)
+  and the Eli Lilly pipeline are followed out of general interest.
 
 # Extra RSS feeds scanned for any watchlist drug name (in addition to a
 # Google News search per drug, which picks up company press releases).
@@ -78,8 +183,10 @@ drugs:
   #           list, `context` (one or two sentences shown under it) and a plain
   #           `what` sentence for the drug's page
 
+  # ======== Heart & cholesterol ========
   # ---- approved ----
   - id: evolocumab
+    topic: heart
     name: Evolocumab
     brand: Repatha
     aliases: [Repatha, AMG 145]
@@ -102,6 +209,7 @@ drugs:
     sources: [https://www.tctmd.com/news/fourier-evolocumab-reduces-risk-cvd-events-15-compared-placebo]
 
   - id: alirocumab
+    topic: heart
     name: Alirocumab
     brand: Praluent
     aliases: [Praluent, SAR236553, REGN727]
@@ -124,6 +232,7 @@ drugs:
     sources: [https://www.managedcaremag.com/news/fda-approves-once-monthly-dosing-option-praluent-injection/]
 
   - id: inclisiran
+    topic: heart
     name: Inclisiran
     brand: Leqvio
     aliases: [Leqvio, ALN-PCSsc, KJX839]
@@ -155,6 +264,7 @@ drugs:
         context: "A second, independent test of the same question, in people already taking a statin."
 
   - id: lerodalcibep
+    topic: heart
     name: Lerodalcibep
     brand: Lerochol
     aliases: [Lerochol, LIB003]
@@ -178,6 +288,7 @@ drugs:
 
   # ---- in development ----
   - id: verve102
+    topic: heart
     name: VERVE-102
     aliases: ["VERVE 102", LY4636581]
     company: Eli Lilly (Verve)
@@ -202,3 +313,311 @@ drugs:
         short: "Mid-stage trial results"
         what: "Results from its mid-stage trial (HEART-3), the next step toward a one-time treatment."
         context: "The first larger test of a one-time treatment meant to lower LDL for life. Good results would move it toward final-stage trials."
+
+  # ======== Obesity & metabolism ========  (verified by web search 2026-11-12)
+  - id: tirzepatide
+    topic: obesity
+    name: Tirzepatide
+    brand: Zepbound
+    aliases: [Zepbound, Mounjaro, LY3298176]
+    company: Eli Lilly
+    target: GIP + GLP-1
+    lowers: Weight
+    form: Shot, once a week
+    often: "Weekly"
+    route: injection
+    frequency: weekly
+    plain: "A weekly shot that acts on two gut hormones (GIP and GLP-1) to reduce appetite. Sold as Zepbound for weight and Mounjaro for diabetes."
+    stage: approved
+    effect: "About 21% average weight loss at the top dose over 72 weeks (SURMOUNT-1)"
+    effect_short: "Weight ↓ 21%"
+    effect_source: https://www.acc.org/Latest-in-Cardiology/Clinical-Trials/2022/08/04/15/32/SURMOUNT-1
+    proven: testing
+    proven_note: "A 15,000-person heart-outcome trial in people with obesity (SURMOUNT-MMO) is running, with results expected in 2027. In people with diabetes it matched an older drug with proven heart benefit (SURPASS-CVOT, 2025)."
+    proven_source: https://www.biopharmadive.com/news/eli-lilly-mounjaro-heart-benefit-glp-1-surpass-cvot-results/756420/
+    note: "Approved and widely used. The best-selling drug in the world in 2026."
+    sources: [https://www.acc.org/Latest-in-Cardiology/Clinical-Trials/2022/08/04/15/32/SURMOUNT-1]
+
+  - id: semaglutide
+    topic: obesity
+    name: Semaglutide
+    brand: Wegovy
+    aliases: [Wegovy]
+    company: Novo Nordisk
+    target: GLP-1
+    lowers: Weight
+    form: Shot once a week, or a daily pill
+    often: "Weekly shot or daily pill"
+    route: injection
+    frequency: weekly
+    plain: "The first of the new weight-loss drugs: a weekly GLP-1 shot, now also a daily pill. Sold as Ozempic for diabetes."
+    stage: approved
+    effect: "About 15% average weight loss over 68 weeks (STEP 1)"
+    effect_short: "Weight ↓ 15%"
+    effect_source: https://www.nejm.org/doi/full/10.1056/NEJMoa2032183
+    proven: "yes"
+    proven_note: "20% fewer heart attacks, strokes and heart deaths in 17,600 people with obesity and heart disease but no diabetes (SELECT, 2023)."
+    proven_source: https://hcplive.com/view/select-trial-shows-semaglutide-2-4-mg-could-reduce-cardiovascular-risk
+    note: "Approved and widely used; the main rival to Lilly's tirzepatide."
+    sources: [https://hcplive.com/view/select-trial-shows-semaglutide-2-4-mg-could-reduce-cardiovascular-risk]
+
+  - id: orforglipron
+    topic: obesity
+    name: Orforglipron
+    brand: Foundayo
+    aliases: [Foundayo, LY3502970]
+    company: Eli Lilly
+    target: GLP-1 (small molecule)
+    lowers: Weight
+    form: Pill, once a day (any time, with or without food)
+    often: "Daily pill"
+    route: pill
+    frequency: daily
+    plain: "Lilly's GLP-1 pill. Unlike other GLP-1 pills it doesn't need to be taken on an empty stomach, and it's easier to make in bulk than shots."
+    stage: approved
+    effect: "About 11–12% average weight loss over 72 weeks (ATTAIN-1)"
+    effect_short: "Weight ↓ 12%"
+    effect_source: https://pharmashots.com/32510/eli-lilly-reports-us-fda-approval-of-foundayo-orforglipron-for-weight-loss/
+    proven: untested
+    proven_note: "No heart-outcome results yet."
+    note: "FDA-approved for weight management in April 2026."
+    sources: [https://cardiovascularbusiness.com/topics/clinical/heart-health/fda-approves-another-glp-1-pill-weight-loss]
+
+  - id: retatrutide
+    topic: obesity
+    name: Retatrutide
+    aliases: [LY3437943]
+    company: Eli Lilly
+    target: GIP + GLP-1 + glucagon
+    lowers: Weight
+    form: Shot, once a week
+    often: "Weekly"
+    route: injection
+    frequency: weekly
+    plain: "A weekly shot that acts on three hormones. In its final-stage trial it produced the largest weight loss of any drug so far."
+    stage: phase3
+    effect: "About 28% average weight loss at the top dose over 80 weeks (TRIUMPH-1, company-reported)"
+    effect_short: "Weight ↓ 28%"
+    effect_source: https://www.biospace.com/press-releases/lillys-triple-agonist-retatrutide-delivered-powerful-weight-loss-in-pivotal-phase-3-obesity-trial
+    proven: untested
+    proven_note: "No heart-outcome results yet."
+    note: "Three final-stage obesity trials met their goals in 2026. Lilly plans to apply for FDA approval in early 2027."
+    sources: [https://www.fool.com/earnings/call-transcripts/2026/10/29/eli-lilly-lly-q3-2026-earnings-call-transcript/]
+    milestones:
+      - when: "2027-03"
+        label: "EARLY 2027"
+        source: https://www.fool.com/earnings/call-transcripts/2026/10/29/eli-lilly-lly-q3-2026-earnings-call-transcript/
+        short: "FDA application"
+        what: "Lilly plans to apply for FDA approval in early 2027."
+        context: "The step before approval; a decision would usually follow about a year later."
+
+  - id: maritide
+    topic: obesity
+    name: MariTide
+    aliases: [maridebart cafraglutide, AMG 133]
+    company: Amgen
+    target: GIP (blocks) + GLP-1
+    lowers: Weight
+    form: Shot, monthly or less often (being tested)
+    often: "Monthly or less"
+    route: injection
+    frequency: monthly
+    plain: "An antibody-based shot designed to last long enough to be given monthly, or possibly every two months."
+    stage: phase3
+    effect: "Up to about 20% average weight loss at 52 weeks in the best mid-stage groups (12–16% counting everyone who started)"
+    effect_short: "Weight ↓ up to 20%"
+    effect_source: https://www.drugs.com/medical-answers/how-effective-maritide-weight-loss-3580276
+    proven: untested
+    proven_note: "No heart-outcome results yet."
+    note: "In final-stage trials (MARITIME). First results are expected in 2027."
+    sources: ["https://lifesciencedaily.news/?p=15998"]
+    milestones:
+      - when: "2027-06"
+        label: "2027"
+        source: https://lifesciencedaily.news/?p=15998
+        short: "First final-stage results"
+        what: "First results from the MARITIME final-stage trials."
+        context: "Would show whether a monthly shot can match weekly ones."
+
+  # ======== Alzheimer's & the brain ========  (verified by web search 2026-11-12)
+  - id: donanemab
+    topic: alzheimers
+    name: Donanemab
+    brand: Kisunla
+    aliases: [Kisunla, LY3002813]
+    company: Eli Lilly
+    target: Amyloid plaques
+    lowers: Amyloid
+    form: IV infusion, once a month (can stop once amyloid is cleared)
+    often: "Monthly infusion"
+    route: infusion
+    frequency: monthly
+    plain: "A monthly infusion that clears amyloid from the brain in early Alzheimer's. Treatment can stop once the amyloid is gone."
+    stage: approved
+    effect: "Decline slowed 22% overall over 18 months, 35% in people at an earlier stage (TRAILBLAZER-ALZ 2)"
+    effect_short: "Slowed 22–35%"
+    effect_source: https://investor.lilly.com/news-releases/news-release-details/lillys-kisunlatm-donanemab-azbt-approved-fda-treatment-early
+    proven: "yes"
+    proven_note: "Slowed decline in memory and daily function in a large trial. About 37% of patients had brain swelling or bleeding on scans (ARIA), usually without symptoms."
+    proven_source: https://investor.lilly.com/news-releases/news-release-details/lillys-kisunlatm-donanemab-azbt-approved-fda-treatment-early
+    note: "FDA-approved in July 2024 for early symptomatic Alzheimer's."
+    sources: [https://investor.lilly.com/news-releases/news-release-details/lillys-kisunlatm-donanemab-azbt-approved-fda-treatment-early]
+    milestones:
+      - nct: NCT05026866
+        short: "Prevention trial results"
+        what: "Results of TRAILBLAZER-ALZ 3, which treats people with amyloid but no symptoms yet."
+        context: "Tests whether treating before symptoms start can delay Alzheimer's."
+
+  - id: lecanemab
+    topic: alzheimers
+    name: Lecanemab
+    brand: Leqembi
+    aliases: [Leqembi, BAN2401]
+    company: Eisai / Biogen
+    target: Amyloid
+    lowers: Amyloid
+    form: IV infusion every 2 weeks, or a weekly shot at home (Leqembi Iqlik)
+    often: "Weekly shot or infusion"
+    route: injection
+    frequency: weekly
+    plain: "The first amyloid drug with full approval. Now also a weekly shot people can give themselves at home."
+    stage: approved
+    effect: "Decline slowed 27% over 18 months (Clarity AD)"
+    effect_short: "Slowed 27%"
+    effect_source: https://investors.biogen.com/news-releases/news-release-details/eisai-presents-full-results-lecanemab-phase-3-confirmatory
+    proven: "yes"
+    proven_note: "Slowed decline in memory and daily function in an 1,800-person trial (Clarity AD). Brain swelling or bleeding (ARIA) is a known risk."
+    proven_source: https://investors.biogen.com/news-releases/news-release-details/eisai-presents-full-results-lecanemab-phase-3-confirmatory
+    note: "Approved. The at-home weekly shot was approved for maintenance in 2025 and for starting treatment in July 2026."
+    sources: [https://pharmatimes.com/news/fda-approves-leqembi-iqlik-subcutaneous-initiation-dose-for-alzheimers-disease/]
+
+  - id: remternetug
+    topic: alzheimers
+    name: Remternetug
+    aliases: [LY3372993]
+    company: Eli Lilly
+    target: Amyloid plaques
+    lowers: Amyloid
+    form: Shot under the skin, self-injected
+    often: "Self-injected shot"
+    route: injection
+    plain: "Lilly's follow-up to Kisunla, designed as a shot people can give themselves instead of an infusion."
+    stage: phase3
+    effect: "No efficacy results yet"
+    effect_short: "No results yet"
+    proven: testing
+    proven_note: "Its main trial (TRAILRUNNER-ALZ 1, 1,667 people) finished in May 2026; results haven't been announced. A prevention trial runs to about 2030."
+    proven_source: https://www.neurologylive.com/view/early-phase-3-data-highlight-convenience-feasibility-self-administered-alzheimer-agent-remternetug
+    note: "In final-stage trials. Early data showed people could inject it themselves."
+    sources: [https://www.neurologylive.com/view/early-phase-3-data-highlight-convenience-feasibility-self-administered-alzheimer-agent-remternetug]
+    milestones:
+      - nct: NCT05463731
+        short: "Main trial results"
+        what: "Results of TRAILRUNNER-ALZ 1, its main final-stage trial."
+        context: "Finished in May 2026, results not yet announced. Would show whether a self-injected shot works like Kisunla."
+
+  - id: trontinemab
+    topic: alzheimers
+    name: Trontinemab
+    aliases: [RG6102, RO7126209]
+    company: Roche
+    target: Amyloid (with a brain shuttle)
+    lowers: Amyloid
+    form: IV infusion, every 4 weeks for 6 months, then every 12 weeks
+    often: "Every 4–12 weeks"
+    route: infusion
+    frequency: monthly
+    plain: "An amyloid antibody with a 'brain shuttle' that carries more of it into the brain, aiming to clear amyloid faster with fewer side effects."
+    stage: phase3
+    effect: "Cleared amyloid quickly in early trials; effect on decline not yet tested"
+    effect_short: "Not yet tested"
+    proven: testing
+    proven_note: "Two 72-week final-stage trials (TRONTIER 1 and 2, about 1,600 people) are running, finishing around mid-2028."
+    proven_source: https://www.neurologylive.com/view/examining-trontinemab-early-ad-phase-3-trontier-1-2-trials
+    note: "In final-stage trials. A third trial in people without symptoms was announced in July 2026."
+    sources: [https://www.neurologylive.com/view/examining-trontinemab-early-ad-phase-3-trontier-1-2-trials]
+    milestones:
+      - when: "2028-06"
+        source: https://www.neurologylive.com/view/examining-trontinemab-early-ad-phase-3-trontier-1-2-trials
+        short: "Final-stage trial results"
+        what: "TRONTIER 1 and 2 are expected to finish around June 2028."
+        context: "The test of whether faster amyloid clearing means slower decline."
+
+  # ======== Cancer ========  (verified by web search 2026-11-12)
+  - id: imlunestrant
+    topic: cancer
+    name: Imlunestrant
+    brand: Inluriyo
+    aliases: [Inluriyo, LY3484356]
+    company: Eli Lilly
+    target: Estrogen receptor (breast cancer)
+    lowers: ""
+    form: Pill, once a day
+    often: "Daily pill"
+    route: pill
+    frequency: daily
+    plain: "A daily pill for advanced ER+ breast cancer with an ESR1 gene change, alone or with Lilly's Verzenio."
+    stage: approved
+    effect: "38% lower risk of the cancer growing or death vs standard hormone therapy; with Verzenio, time before growth doubled (EMBER-3)"
+    effect_short: "Progression ↓ 38%"
+    effect_source: https://www.cancernetwork.com/view/fda-approves-imlunestrant-in-er-her2-breast-cancer
+    proven: testing
+    proven_note: "Survival data are still immature. It's also being tested after surgery in early breast cancer (EMBER-4)."
+    proven_source: https://www.aacr.org/?p=1043158
+    note: "Approved alone in Sep 2025 and with Verzenio in Sep 2026."
+    sources: [https://www.cancernetwork.com/view/fda-approves-imlunestrant-in-er-her2-breast-cancer]
+
+  - id: olomorasib
+    topic: cancer
+    name: Olomorasib
+    aliases: [LY3537982]
+    company: Eli Lilly
+    target: KRAS G12C (lung cancer)
+    lowers: ""
+    form: Pill, twice a day, with immunotherapy
+    often: "Twice-daily pill"
+    route: pill
+    frequency: daily
+    plain: "A pill aimed at a common lung-cancer gene change (KRAS G12C), taken with immunotherapy as a first treatment."
+    stage: phase3
+    effect: "Tumors shrank in about 73% of people in early studies with immunotherapy (single-arm, not yet compared)"
+    effect_short: "Early data only"
+    effect_source: https://chemxplore.com/news/olomorasib-first-line-kras-g12c
+    proven: untested
+    proven_note: "No survival data yet."
+    note: "FDA Breakthrough designations in lung and pancreatic cancer. First final-stage results expected in the first half of 2027."
+    sources: [https://www.rttnews.com/3702822/lilly-reports-olomorasib-results-eyes-first-phase-3-data-in-h1-2027.aspx]
+    milestones:
+      - when: "2027-04"
+        label: "H1 2027"
+        source: https://www.rttnews.com/3702822/lilly-reports-olomorasib-results-eyes-first-phase-3-data-in-h1-2027.aspx
+        short: "First final-stage results"
+        what: "First randomized results from SUNRAY-01, in first-line lung cancer."
+        context: "The first head-to-head test against standard treatment."
+
+  - id: ivonescimab
+    topic: cancer
+    name: Ivonescimab
+    aliases: [SMT112, AK112]
+    company: Summit Therapeutics / Akeso
+    target: PD-1 + VEGF (lung cancer)
+    lowers: ""
+    form: IV infusion, with chemotherapy
+    often: "Infusion"
+    route: infusion
+    plain: "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF)."
+    stage: filed
+    effect: "48% lower risk of the cancer growing or death with chemo, in EGFR lung cancer after earlier treatment (HARMONi)"
+    effect_short: "Progression ↓ 48%"
+    effect_source: https://www.mims.com/vietnam/news-updates/topic/add-on-ivonescimab-nearly-halves-risk-of-progression--death-in-egfr--nsclc
+    proven: failed
+    proven_note: "Survival trended better but wasn't statistically significant (HR 0.79 at the main analysis; 0.76 in a June 2026 update)."
+    proven_source: https://www.fiercepharma.com/pharma/summit-therapeutics-updates-ivonescimab-survival-data-ahead-fda-decision-date
+    note: "Approved in China. The FDA's decision is due November 14, 2026."
+    sources: [https://www.fiercepharma.com/pharma/summit-therapeutics-updates-ivonescimab-survival-data-ahead-fda-decision-date]
+    milestones:
+      - when: "2026-11-14"
+        source: https://www.fiercepharma.com/pharma/summit-therapeutics-updates-ivonescimab-survival-data-ahead-fda-decision-date
+        short: "FDA decision"
+        what: "The FDA's decision on approval, due November 14, 2026."
+        context: "A test of whether the FDA will approve without a clear survival benefit."

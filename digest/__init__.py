@@ -1,4 +1,4 @@
-"""Weekly cholesterol-drug pipeline digest."""
+"""Weekly drug-pipeline digest, by topic."""
 
 STAGES = [
     ("phase1", "Phase 1"),

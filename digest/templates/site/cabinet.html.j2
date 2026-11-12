@@ -3,23 +3,56 @@
 {% block title %}Your cabinet · {{ site_title }}{% endblock %}
 {% block head %}{{ m.slab_head("cabinet") }}{% endblock %}
 {% block content %}
-<div class="cab-top">
-  <p class="cab-lede">Choose the drugs you follow. News and Drugs show only these.</p>
-</div>
+<p class="cab-lede">Choose what you follow. News and Drugs show only these.</p>
 <form class="cab" data-cabinet>
-  {% for g in groups %}
-  <fieldset class="cab-group" aria-labelledby="cg{{ loop.index }}">
-    <div class="cab-head"><span id="cg{{ loop.index }}">{{ g.title }}</span><button type="button" class="cab-all" data-all hidden>Select all</button></div>
-    {% for r in g.rows %}
-    <label class="cab-row">
-      <input type="checkbox" name="drug" value="{{ r.id }}" checked>
-      <span class="cab-box" aria-hidden="true"></span>
-      <span class="cab-name">{{ r.display_name }}</span>
-      <span class="cab-line">{{ (r.effect_short or r.effect or r.lowers).split("; ")[0]|replace("LDL ", "") }} · {{ r.often or r.form }}</span>
-    </label>
+  <section class="cab-sec">
+    <div class="cab-head">Topics</div>
+    {% for t in sections %}
+    <div class="cab-drawer" data-topic="{{ t.id }}">
+      <div class="cab-row cab-top">
+        <input type="checkbox" id="t-{{ t.id }}" data-topic-box="{{ t.id }}" checked>
+        <label class="cab-box" for="t-{{ t.id }}" aria-hidden="true"></label>
+        <label class="cab-name" for="t-{{ t.id }}">{{ t.title }}</label>
+        <button type="button" class="cab-more" aria-expanded="false" aria-controls="d-{{ t.id }}"><span data-shown>{{ t.n }}</span> of {{ t.n }}<span class="chev" aria-hidden="true"></span></button>
+      </div>
+      <div class="cab-drugs" id="d-{{ t.id }}" hidden>
+        {% for g in t.groups %}{% for r in g.rows %}
+        <label class="cab-row cab-sub">
+          <input type="checkbox" data-drug-box="{{ r.id }}" checked>
+          <span class="cab-box" aria-hidden="true"></span>
+          <span class="cab-name">{{ r.display_name }}</span>
+          <span class="cab-line">{{ (r.effect_short or r.effect or r.lowers).split("; ")[0]|replace("LDL ", "") }} · {{ r.often or r.form }}</span>
+        </label>
+        {% endfor %}{% endfor %}
+      </div>
+    </div>
     {% endfor %}
-  </fieldset>
-  {% endfor %}
+  </section>
+  {% if companies %}
+  <section class="cab-sec">
+    <div class="cab-head">By company</div>
+    <p class="cab-note-line">Everything a company is developing, across topics.</p>
+    {% for c in companies %}
+    <div class="cab-drawer">
+      <div class="cab-row cab-top">
+        <input type="checkbox" id="c-{{ c.id }}" data-company-box="{{ c.id }}">
+        <label class="cab-box" for="c-{{ c.id }}" aria-hidden="true"></label>
+        <label class="cab-name" for="c-{{ c.id }}">{{ c.title }}</label>
+        <button type="button" class="cab-more" aria-expanded="false" aria-controls="cd-{{ c.id }}">{{ c.rows|length }} drugs<span class="chev" aria-hidden="true"></span></button>
+      </div>
+      <div class="cab-drugs" id="cd-{{ c.id }}" hidden>
+        {% for r in c.rows %}
+        <div class="cab-row cab-sub cab-ro">
+          <span></span>
+          <span class="cab-name">{{ r.display_name }}</span>
+          <span class="cab-line">{{ r.topic_title }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
 </form>
 <div class="cab-foot">
   <span class="cab-note">Saved on this device</span>

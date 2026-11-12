@@ -48,17 +48,34 @@ def lowers_keys(text: str) -> list[str]:
 
 
 def rows(watchlist: dict, stages: dict, moved: set[str]) -> list[dict]:
+    from .watchlist import companies_of, topics_by_id
+    topics = topics_by_id(watchlist)
     out = []
     for d in watchlist["drugs"]:
         stage = stages.get(d["id"], d["stage"])
+        topic = topics.get(d.get("topic")) or next(iter(topics.values()))
+        outcome = topic.get("outcome") or {}
         out.append({**d, "display_name": d.get("brand") or d["name"],
                     "generic": d["name"] if d.get("brand") else "",
                     "rank": STAGE_RANK[stage], "stage_label": STAGE_LABEL[stage],
                     "stage_plain": STAGE_PLAIN[stage][0], "stage_explain": STAGE_PLAIN[stage][1],
                     "stage": stage, "moved": d["id"] in moved,
                     "lowers_keys": lowers_keys(d.get("lowers", "")),
-                    "proven_label": PROVEN_LABEL.get(d.get("proven", ""), ""),
-                    "proven_short": PROVEN_SHORT.get(d.get("proven", ""), "")})
+                    "topic": topic["id"], "topic_title": topic.get("title", topic["id"]),
+                    "companies": companies_of(d, watchlist),
+                    "proven_label": outcome.get(d.get("proven", ""), PROVEN_LABEL.get(d.get("proven", ""), "")),
+                    "proven_short": (outcome.get("short") or PROVEN_SHORT).get(d.get("proven", ""), "")})
+    return out
+
+
+def sections(all_rows: list[dict], watchlist: dict) -> list[dict]:
+    """The drugs by topic (in watchlist order), each grouped by stage as in groups()."""
+    from .watchlist import topics_of
+    out = []
+    for t in topics_of(watchlist):
+        members = [r for r in all_rows if r["topic"] == t["id"]]
+        if members:
+            out.append({**t, "n": len(members), "groups": groups(members)})
     return out
 
 

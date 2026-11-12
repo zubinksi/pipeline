@@ -20,7 +20,7 @@ log = logging.getLogger(__name__)
 MODEL = os.environ.get("DIGEST_MODEL", "claude-opus-5-5")
 
 SYSTEM = """You write the summary layer of a personal weekly email digest about \
-cholesterol-lowering drugs in development.
+drugs in development, organised by topic: {topics}.
 
 About the reader: {reader}
 
@@ -36,11 +36,10 @@ Return:
 the headline reports a concrete development (trial results, phase change, regulatory filing or \
 decision, new or halted trial, discontinuation, major licensing deal). False for stock or \
 analyst commentary, opinion, previews, and rehashes of older events.
-    "field" items are broader news not about a specific tracked drug. Be strict: include at \
-most {field_max}, and only concrete developments in LDL-lowering treatment that could matter to \
-the reader (an approval, a trial result, a filing, a major guideline change, a whole drug class \
-succeeding or failing). Exclude diet and supplement stories, studies about people unlike the \
-reader, stock and business news, opinion, and anything about Lp(a)- or triglyceride-only drugs.
+    "field" items are broader news not about a specific tracked drug, each tagged with a topic. \
+Be strict: include at most {field_max} per topic, and only what that topic counts as news:
+{field_focus}
+    Exclude diet and supplement stories, stock and business news, opinion, and previews.
   - why: 1-2 plain-English sentences (at most 40 words) on what this could mean for someone \
 like the reader, e.g. "A once-daily pill that might one day replace injections." Mention \
 form or dosing frequency when it is relevant. Be candid about setbacks. Empty string if \
@@ -72,7 +71,7 @@ SCHEMA = {
     "additionalProperties": False,
 }
 
-PROFILE_KEYS = ("name", "company", "target", "form", "plain", "note")
+PROFILE_KEYS = ("name", "topic", "company", "target", "form", "plain", "note")
 
 
 def _payload(changes: list[Change], drugs: dict) -> str:
@@ -81,6 +80,8 @@ def _payload(changes: list[Change], drugs: dict) -> str:
         item = {"id": c.id, "kind": c.kind, "what": c.what, "source": c.source}
         if c.kind in ("news", "field"):
             item["news_snippet"] = c.extra.get("summary", "")
+        if c.topic:
+            item["topic"] = c.topic
         if c.drug in drugs:
             item["drug"] = {k: drugs[c.drug].get(k) for k in PROFILE_KEYS if drugs[c.drug].get(k)}
         items.append(item)
@@ -99,20 +100,26 @@ def fallback_headline(changes: list[Change]) -> str:
 FIELD_KEYWORDS = re.compile(
     r"\b(phase (3|iii)|fda|approv\w*|met (its )?primary endpoint|trial results?|"
     r"outcomes? (trial|study)|guideline)", re.I)
-FIELD_TOPIC = re.compile(r"\b(ldl|cholesterol|pcsk9|hypercholesterol\w*|statin)", re.I)
+FIELD_TOPIC = r"\b(ldl|cholesterol|pcsk9|hypercholesterol\w*|statin)"  # when a topic has no field_match
 
 
 def field_max(watchlist: dict) -> int:
     return int((watchlist["settings"].get("field_news") or {}).get("max_items", 3))
 
 
+def _field_match(watchlist: dict | None, topic: str):
+    t = next((t for t in (watchlist or {}).get("topics", []) if t["id"] == topic), {})
+    return re.compile(t.get("field_match") or FIELD_TOPIC, re.I)
+
+
 def _cap_field(changes: list[Change], limit: int) -> list[Change]:
-    out, n = [], 0
+    """At most `limit` field items per topic."""
+    out, n = [], {}
     for c in changes:
         if c.kind == "field":
-            if n >= limit:
+            if n.get(c.topic, 0) >= limit:
                 continue
-            n += 1
+            n[c.topic] = n.get(c.topic, 0) + 1
         out.append(c)
     return out
 
@@ -123,7 +130,7 @@ def apply_fallback(changes: list[Change], drugs: dict, watchlist: dict | None = 
         # no Claude to judge field news: keep only headlines that look like concrete
         # LDL-treatment developments
         changes = [c for c in changes if c.kind != "field"
-                   or (FIELD_KEYWORDS.search(c.what) and FIELD_TOPIC.search(c.what))]
+                   or (FIELD_KEYWORDS.search(c.what) and _field_match(watchlist, c.topic).search(c.what))]
         changes = _cap_field(changes, field_max(watchlist) if watchlist else 3)
     for c in changes:
         if c.kind == "field":
@@ -174,6 +181,14 @@ def reader_context(watchlist: dict) -> str:
     return (os.environ.get("READER_CONTEXT") or watchlist.get("reader_context") or "").strip()
 
 
+def system_prompt(watchlist: dict) -> str:
+    topics = watchlist.get("topics", [])
+    focus = "\n".join(f"    - {t['id']}: {t.get('field_focus') or 'concrete developments'}" for t in topics)
+    return SYSTEM.format(reader=reader_context(watchlist), field_max=field_max(watchlist),
+                         topics=", ".join(t.get("title", t["id"]) for t in topics) or "medicines",
+                         field_focus=focus)
+
+
 def _call(client, changes, watchlist, drugs) -> dict:
     response = client.beta.messages.create(
         model=MODEL,
@@ -181,7 +196,7 @@ def _call(client, changes, watchlist, drugs) -> dict:
         betas=["server-side-fallback-2026-07-01"],
         fallbacks="default",
         output_config={"effort": "medium", "format": {"type": "json_schema", "schema": SCHEMA}},
-        system=SYSTEM.format(reader=reader_context(watchlist), field_max=field_max(watchlist)),
+        system=system_prompt(watchlist),
         messages=[{"role": "user", "content": _payload(changes, drugs)}],
     )
     if response.stop_reason in ("refusal", "max_tokens"):

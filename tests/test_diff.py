@@ -101,13 +101,22 @@ def test_resolve_stage_uses_highest_evidence():
 
 def test_watching_for_uses_milestones_only():
     _, after = before_after(WL)
-    h = diff.horizon(after, WL, today=date(2026, 11, 3))
+    heart = {d["id"] for d in WL["drugs"] if d.get("topic", "heart") == "heart"}
+    h = [i for i in diff.horizon(after, WL, today=date(2026, 11, 3)) if i.drug_id in heart]
     # only the hand-picked milestone trial in the data; routine trial dates (NCT90000004 etc.) are left out
     assert [(i.drug, i.when) for i in h] == [("Leqvio", "DUE NOW")]  # ORION-4 was due Oct 2026
     assert "heart-attack prevention trial (ORION-4)" in h[0].what
-    assert diff.horizon(after, WL, today=date(2026, 9, 1))[0].when == "OCT 2026"
+    leqvio = lambda today: next(i for i in diff.horizon(after, WL, today=today) if i.drug == "Leqvio")
+    assert leqvio(date(2026, 9, 1)).when == "OCT 2026"
     after["trials"]["NCT03705234"]["status"] = "COMPLETED"
-    assert diff.horizon(after, WL, today=date(2026, 11, 3))[0].when == "Finished"
+    assert leqvio(date(2026, 11, 3)).when == "Finished"
+
+
+def test_milestone_with_a_label_and_a_date():
+    _, after = before_after(WL)
+    h = {i.drug_id: i for i in diff.horizon(after, WL, today=date(2026, 11, 3))}
+    assert h["retatrutide"].when == "EARLY 2027" and h["ivonescimab"].when == "14 NOV 2026"
+    assert diff.horizon(after, WL, today=date(2026, 11, 3))[-1].when != "EARLY 2027"  # sorted by its date
 
 def test_finalize_marks_seen():
     _, after = before_after(WL)
@@ -170,3 +179,11 @@ def test_approved_drugs_only_report_watched_trials():
     ids = {c.id for c in diff.compute(before, after, WL)}
     assert not {i for i in ids if "NCT7" in i or "NCT8" in i}
     assert "new-NCT9" in ids and "status-NCT03705234-COMPLETED" in ids
+
+
+def test_topics_and_companies_load():
+    from digest.watchlist import companies_of, topics_by_id
+    topics = topics_by_id(WL)
+    assert list(topics) == ["heart", "obesity", "alzheimers", "cancer"]
+    lilly = [d["id"] for d in WL["drugs"] if "lilly" in companies_of(d, WL)]
+    assert "verve102" in lilly and "tirzepatide" in lilly and "semaglutide" not in lilly

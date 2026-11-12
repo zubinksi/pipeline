@@ -860,3 +860,38 @@ a.hcab:hover { color: var(--accent); }
 }
 .cab-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 0 0.5rem; border-bottom: 3px double var(--b4); font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
 .cab-all { position: static; }
+
+/* Drugs tab: a block per topic */
+.tsec + .tsec { margin-top: 2.5rem; }
+.tsec-head { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 0.75rem; font-family: var(--serif); font-size: 1.375rem; line-height: 1.2; color: var(--ink); }
+.tsec-head .n { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.1em; color: var(--muted); }
+
+/* cabinet v2: topics (each opens to its drugs) and companies */
+.cab-lede { margin: 0; }
+.cab-sec { display: flex; flex-direction: column; }
+.cab-head { display: block; }
+.cab-note-line { margin: 0.625rem 0 0; font-size: 0.9375rem; color: var(--muted); }
+.cab-drawer { border-bottom: 1px solid var(--b3); }
+.cab-row, .cab-row { grid-template-columns: 1.125rem minmax(0, 1fr) auto; column-gap: 0.875rem; border-bottom: 0; }
+.cab-top { padding: 0.9375rem 0; }
+.cab-top .cab-name { font-size: 1.1875rem; cursor: pointer; }
+.cab-top label.cab-box { cursor: pointer; }
+.cab-drawer.off .cab-top .cab-name { color: var(--muted); }
+.cab-more { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0; border: 0; background: none; cursor: pointer; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); white-space: nowrap; }
+.cab-more:hover { color: var(--accent); }
+.cab-more .chev { width: 0.4375rem; height: 0.4375rem; border: solid currentColor; border-width: 0 1.5px 1.5px 0; transform: translateY(-0.125rem) rotate(45deg); transition: transform 0.15s; }
+.cab-more[aria-expanded="true"] .chev { transform: translateY(0.0625rem) rotate(-135deg); }
+.cab-drugs { padding: 0 0 0.625rem 2rem; }
+.cab-sub { padding: 0.5rem 0; border-top: 1px solid var(--b2, var(--b3)); }
+.cab-sub .cab-name { font-size: 1rem; }
+.cab-ro { grid-template-columns: 0 minmax(0, 1fr) auto; column-gap: 0; cursor: default; }
+.cab-row input:indeterminate + .cab-box { border-color: var(--ink); }
+.cab-row input:indeterminate + .cab-box::after { content: ""; width: 0.5rem; height: 1.5px; background: var(--ink); }
+.cab .cab-sec + .cab-sec { margin-top: 0.5rem; }
+@media (max-width: 860px) {
+  .cab-row, .cab-sub { grid-template-columns: 1.125rem minmax(0, 1fr) auto; }
+  .cab-ro { grid-template-columns: 0 minmax(0, 1fr) auto; }
+  .cab-drugs { padding-left: 2rem; }
+  .cab-sub .cab-line { font-size: 0.6875rem; }
+}
+.dtable .tsec-head, .tsec:first-of-type .tsec-head { margin-top: 1.5rem; }

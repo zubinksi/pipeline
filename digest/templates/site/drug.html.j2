@@ -15,9 +15,9 @@
 <div class="strip-wrap">
 <div class="strip-head">{{ row.stage_plain }}</div>
 <dl class="strip">
-  <div><dt>LDL reduction</dt><dd>{% if drug.effect_source %}<a class="strip-src" href="{{ drug.effect_source }}" rel="noopener noreferrer" title="Source">{% endif %}{{ (drug.effect_short or drug.effect or drug.lowers)|replace("LDL ", "") }}{% if drug.effect_source %}</a>{% endif %}</dd></div>
+  <div><dt>{{ topic.effect_label or "Effect" }}</dt><dd>{% if drug.effect_source %}<a class="strip-src" href="{{ drug.effect_source }}" rel="noopener noreferrer" title="Source">{% endif %}{{ (drug.effect_short or drug.effect or drug.lowers)|replace("LDL ", "") }}{% if drug.effect_source %}</a>{% endif %}</dd></div>
   <div><dt>{{ route_label }}</dt><dd>{{ drug.often or drug.form or "–" }}</dd></div>
-  {% if drug.proven %}<div><dt>CV outcomes</dt><dd class="pf-{{ drug.proven }}">{% if drug.proven == 'yes' %}&#10003; {% elif drug.proven == 'failed' %}&#10007; {% endif %}{{ row.proven_short }}</dd></div>{% endif %}
+  {% if drug.proven %}<div><dt>{{ (topic.outcome or {}).title or "Outcomes" }}</dt><dd class="pf-{{ drug.proven }}">{% if drug.proven == 'yes' %}&#10003; {% elif drug.proven == 'failed' %}&#10007; {% endif %}{{ row.proven_short }}</dd></div>{% endif %}
 </dl>
 </div>
 
@@ -43,7 +43,7 @@
 <section class="section">
   <div class="section-head"><h2>Notes</h2></div>
   <div class="plain-terms">
-    {% if show_proof_note %}<p><span class="label">CV outcomes</span>{{ drug.proven_note }}{% if drug.proven_source %} <a class="src" href="{{ drug.proven_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
+    {% if show_proof_note %}<p><span class="label">{{ (topic.outcome or {}).title or "Outcomes" }}</span>{{ drug.proven_note }}{% if drug.proven_source %} <a class="src" href="{{ drug.proven_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
     {% if drug.note %}<p><span class="label">Status</span>{{ drug.note }}{% if drug.sources %} <a class="src" href="{{ drug.sources[0] }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
   </div>
 </section>

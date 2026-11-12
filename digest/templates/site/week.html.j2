@@ -10,5 +10,5 @@
   <span>{% if newer %}<a href="{{ newer }}.html">{{ newer|nice_date }} &rarr;</a>{% endif %}</span>
 </div>
 {{ m.this_week(week, root, "What moved") }}
-{{ m.drug_list(groups, root, title="Where things stood") }}
+{{ m.drug_list(sections, root, title="Where things stood") }}
 {% endblock %}

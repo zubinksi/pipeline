@@ -34,6 +34,7 @@ class Change:
     source: str               # e.g. "ClinicalTrials.gov"
     why: str = ""             # filled by the summarizer
     extra: dict = field(default_factory=dict)
+    topic: str = ""           # for changes not tied to a drug (field news, discovery)
 
 
 @dataclass
@@ -151,7 +152,7 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
             id=item_id, kind="news", drug=n["drug"], what=n["title"], url=n["link"], source=n["outlet"],
             extra={"summary": n.get("summary", ""), "published": n.get("published", "")}))
 
-    # --- in the field: broader LDL-treatment news (unseen items only) ---
+    # --- in the field: broader news per topic (unseen items only) ---
     fseen = set(prev.get("field_seen", []))
     if b.get("field"):
         for item_id, n in curr.get("field", {}).items():
@@ -159,7 +160,8 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
                 continue
             changes.append(Change(
                 id=item_id, kind="field", drug=None, what=n["title"], url=n["link"], source=n["outlet"],
-                extra={"summary": n.get("summary", ""), "published": n.get("published", "")}))
+                extra={"summary": n.get("summary", ""), "published": n.get("published", "")},
+                topic=n.get("topic", "")))
 
     # --- discovery: new candidates not on the watchlist ---
     dseen = set(prev.get("discovery_seen", []))
@@ -173,7 +175,7 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
             id=f"disc-{t['nct']}", kind="discovery", drug=None,
             what=f"New {phase_label(t['phases'])} trial not on your watchlist: {ivs} "
                  f"({t['sponsor']}): {_trial_name(t)}.",
-            url=t["url"], source="ClinicalTrials.gov"))
+            url=t["url"], source="ClinicalTrials.gov", topic=t.get("topic", "")))
 
     changes.sort(key=lambda c: KIND_ORDER.index(c.kind))
     return changes
@@ -203,7 +205,7 @@ def horizon(curr: dict, watchlist: dict, today: date | None = None) -> list[Hori
             else:
                 iso = str(m.get("when", ""))
                 pd = _parse_partial_date(iso)
-                when = ("DUE NOW" if pd <= today else fmt_horizon_date(iso[:7])) if pd else iso
+                when = ("DUE NOW" if pd <= today else (m.get("label") or fmt_horizon_date(iso))) if pd else iso
                 url = m.get("source", "")
             if url:
                 items.append(HorizonItem(date=iso, drug=label, what=m["what"], url=url, when=when,

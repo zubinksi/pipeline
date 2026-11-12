@@ -31,12 +31,16 @@ WATCHING FOR
 {% endif %}
 
 THE DRUGS
-{% for g in groups %}
+{% for t in sections %}
+
+== {{ t.title|upper }} ==
+{% for g in t.groups %}
 
 {{ g.title|upper }}
 {% for r in g.rows %}
 - {{ r.display_name }}{% if r.generic %} ({{ r.generic|lower }}){% endif %}{% if r.badge %} ({{ r.badge }}){% endif %}{% if r.moved %} ▲ moved{% endif %}: {{ r.form }}{% if r.effect %}; {{ r.effect }}{% endif %}{% if r.proven_label %}; {{ r.proven_label|lower }}{% endif %}{% if r.show_stage %}; {{ r.stage_plain|lower }}{% endif %}
 
+{% endfor %}
 {% endfor %}
 {% endfor %}
 

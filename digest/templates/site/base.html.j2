@@ -24,6 +24,7 @@
 <footer>
   Report generated{% if updated %} {{ updated|nice_date }}{% endif %} · Sources: ClinicalTrials.gov, openFDA, news searches
 </footer>
+<script type="application/json" id="cabinet-data">{{ cabinet_data|safe }}</script>
 <script src="{{ root }}assets/cabinet.js" defer></script>
 <script src="{{ root }}assets/filter.js" defer></script>
 <script src="{{ root }}assets/tabs.js" defer></script>

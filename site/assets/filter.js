@@ -38,7 +38,13 @@
       g.querySelector('[data-count]').textContent = shown;
       total += shown;
     });
-    empty.hidden = total > 0;
+    box.querySelectorAll('[data-topic-sec]').forEach(function (s) {
+      if (s.dataset.untracked) return;  // the cabinet hid it
+      var n = s.querySelectorAll('.drug:not([hidden])').length;
+      var c = s.querySelector('[data-tcount]'); if (c) c.textContent = n;
+      s.hidden = n === 0;
+    });
+    empty.hidden = total > 0 || !box.querySelector('.drug:not([data-untracked])');
     var url = new URL(location.href);
     Object.keys(want).forEach(function (k) {
       if (want[k] === 'all') url.searchParams.delete(k); else url.searchParams.set(k, want[k]);
