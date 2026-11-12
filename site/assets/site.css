@@ -799,3 +799,10 @@ a.tl:hover .tl-what b { color: var(--accent); }
   .strip > div { padding-right: 0.5rem; } .strip > div + div { padding-left: 0.5rem; }
 }
 .dtop + div { margin-top: -0.75rem; }
+
+.dname { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.875rem; row-gap: 0.25rem; }
+.dname .sponsor { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); }
+.dtop .dmeta { margin-top: 0.5rem; }
+.dtop + .strip { margin-top: -0.75rem; }
+.strip-src { color: inherit; text-decoration: underline dotted var(--b4); text-underline-offset: 0.25em; }
+.strip-src:hover { color: var(--accent); }

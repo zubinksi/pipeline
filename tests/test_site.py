@@ -170,12 +170,12 @@ def test_drug_page_is_consolidated_for_a_layperson(tmp_path):
     assert 'class="slab tabbed"' in html and 'class="folder f-drugs on"' in html
     # stage and sponsor under the name; key results in one strip
     assert "A shot twice a year" in html
-    meta = html[html.index('class="dmeta"'):html.index('class="dsum"')]
-    assert "Approved" in meta and "Novartis" in meta
+    assert '<span class="sponsor">Novartis</span>' in html
+    assert html.index('class="dsum"') < html.index('class="dmeta"')  # stage under the description
     strip = html[html.index('class="strip"'):html.index("</dl>")]
-    for label in ("LDL reduction", "Dosing", "CV outcomes"):
+    for label in ("LDL reduction", "<dt>Shot</dt>", "CV outcomes"):
         assert label in strip
-    assert "↓ 50%" in strip and "Trial underway" in strip and ">Profile<" not in html
+    assert "↓ 50%" in strip and "Trial underway" in strip and ">Profile<" not in html and "strip-note" not in html
     assert "Upcoming readouts" in html and "twice-a-year shot proven" in html
     assert 'href="https://clinicaltrials.gov/study/NCT03705234"' in html   # drug page links the source
     assert ">Notes<" in html and "At a glance" not in html and "In plain terms" not in html

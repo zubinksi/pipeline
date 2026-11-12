@@ -6,20 +6,18 @@
 
 <a class="back" href="{{ root }}drugs.html">&larr; Drugs</a>
 <div class="dtop">
-  <h2 class="dname">{{ drug.brand or drug.name }}{% if drug.brand %}<span class="generic">{{ drug.name|lower }}</span>{% endif %}{{ m.badge(drug.badge) }}{% if row.moved %}<span class="tag moved">&#9650; moved this week</span>{% endif %}</h2>
-  <div class="dmeta"><span>{{ row.stage_plain }}</span>{{ m.mini(row.rank, row.moved) }}<span class="sep">·</span><span>{{ drug.company }}</span></div>
+  <h2 class="dname"><span>{{ drug.brand or drug.name }}{% if drug.brand %}<span class="generic">{{ drug.name|lower }}</span>{% endif %}</span><span class="sponsor">{{ drug.company }}</span>{{ m.badge(drug.badge) }}{% if row.moved %}<span class="tag moved">&#9650; moved this week</span>{% endif %}</h2>
   {% if drug.plain %}<p class="dsum">{{ drug.plain }}</p>{% endif %}
+  <div class="dmeta"><span>{{ row.stage_plain }}</span>{{ m.mini(row.rank, row.moved) }}</div>
 </div>
 
 {# The key results in one strip, like the results row of a lab sheet. #}
-<div>
-  <dl class="strip">
-    <div><dt>LDL reduction</dt><dd>{{ (drug.effect_short or drug.effect or drug.lowers)|replace("LDL ", "") }}</dd></div>
-    <div><dt>Dosing</dt><dd>{{ drug.often or drug.form or "–" }}</dd></div>
-    {% if drug.proven %}<div><dt>CV outcomes</dt><dd class="pf-{{ drug.proven }}">{% if drug.proven == 'yes' %}&#10003; {% elif drug.proven == 'failed' %}&#10007; {% endif %}{{ row.proven_short }}</dd></div>{% endif %}
-  </dl>
-  {% if drug.effect_source or drug.form != drug.often %}<p class="strip-note">{% if drug.form and drug.often and drug.form != drug.often %}Dosing: {{ drug.form }}. {% endif %}{% if drug.effect_source %}LDL figure: <a class="src" href="{{ drug.effect_source }}" rel="noopener noreferrer">Source &rarr;</a>{% endif %}</p>{% endif %}
-</div>
+{% set route_label = {"injection": "Shot", "infusion": "Infusion", "oral": "Pill", "pill": "Pill"}.get(drug.route, "Dosing") %}
+<dl class="strip">
+  <div><dt>LDL reduction</dt><dd>{% if drug.effect_source %}<a class="strip-src" href="{{ drug.effect_source }}" rel="noopener noreferrer" title="Source">{% endif %}{{ (drug.effect_short or drug.effect or drug.lowers)|replace("LDL ", "") }}{% if drug.effect_source %}</a>{% endif %}</dd></div>
+  <div><dt>{{ route_label }}</dt><dd>{{ drug.often or drug.form or "–" }}</dd></div>
+  {% if drug.proven %}<div><dt>CV outcomes</dt><dd class="pf-{{ drug.proven }}">{% if drug.proven == 'yes' %}&#10003; {% elif drug.proven == 'failed' %}&#10007; {% endif %}{{ row.proven_short }}</dd></div>{% endif %}
+</dl>
 
 {% if milestones %}
 <section class="section">
