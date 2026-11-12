@@ -976,3 +976,23 @@ a.hcab:hover { color: var(--accent); }
 .w-go { max-width: none; }
 .w-iris { background: var(--slab); }
 .w-iris-wrap { filter: drop-shadow(-0.75px -0.75px 0 #fff) drop-shadow(0.75px 1.25px 1px rgba(70, 55, 30, 0.32)) drop-shadow(0 0 0.5px rgba(70, 55, 30, 0.3)); }
+
+/* welcome, as a cover page: no header band or footer, the content a third of the way down */
+.is-welcome[data-wstep="1"] .slab-head { display: none; }
+.is-welcome footer { display: none; }
+.is-welcome[data-wstep="1"] .slab-body { min-height: min(46rem, calc(100svh - 6rem)); padding-top: 0; justify-content: flex-start; }
+.is-welcome[data-wstep="1"] .wintro { padding: max(4rem, 18svh) 0 2rem; }
+/* the iris pressed into the sheet: a shade along its upper-left edge, light along its lower-right */
+.w-iris { width: 3.75rem; background: color-mix(in srgb, var(--slab) 94%, #6b5a3a); }
+.w-iris-wrap { filter: drop-shadow(-0.6px -0.6px 0 rgba(70, 55, 30, 0.38)) drop-shadow(0.8px 0.8px 0 #fff); }
+.w-title { margin-top: 1.75rem; font-size: 3.25rem; line-height: 1; letter-spacing: -0.015em; }
+.w-lede { margin-top: 1rem; max-width: 24rem; text-wrap: pretty; }
+.w-go { width: 100%; max-width: 22rem; margin-top: 2.5rem; }
+@media (max-width: 860px) {
+  .w-title { font-size: 2.875rem; }
+  .w-lede { max-width: 19.5rem; }
+  .w-go { max-width: none; }
+}
+/* on wide screens the cover is a narrower sheet */
+@media (min-width: 861px) { .is-welcome[data-wstep="1"] .body { max-width: 40rem; } }
+.is-welcome[data-wstep="2"] .wintro.w-only { display: none; }
