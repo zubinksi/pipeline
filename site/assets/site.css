@@ -970,3 +970,9 @@ a.hcab:hover { color: var(--accent); }
 .w-go { max-width: 22rem; margin-top: 2.25rem; }
 .w-iris-wrap { display: block; filter: drop-shadow(-0.5px -0.5px 0 #fff) drop-shadow(0 1.5px 1.5px rgba(70, 55, 30, 0.30)) drop-shadow(0 0 0.75px rgba(70, 55, 30, 0.35)); }
 .w-iris { display: block; }
+/* welcome: left aligned; the iris pressed blind into the sheet, in the sheet's own colour */
+.wintro { align-items: flex-start; text-align: left; }
+.w-lede { margin-left: 0; margin-right: 0; }
+.w-go { max-width: none; }
+.w-iris { background: var(--slab); }
+.w-iris-wrap { filter: drop-shadow(-0.75px -0.75px 0 #fff) drop-shadow(0.75px 1.25px 1px rgba(70, 55, 30, 0.32)) drop-shadow(0 0 0.5px rgba(70, 55, 30, 0.3)); }
