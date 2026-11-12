@@ -140,7 +140,7 @@
 {# The panel's header band: a line of report details, the title, then the folder tabs. #}
 {% macro slab_head(active) -%}
 <header class="slab-head">
-  <h1 class="sr-only">Your Drugs Pipeline</h1>
+  <h1 class="sr-only">{{ site_title }}</h1>
   <div class="head-meta">
     {# the panel is where you choose which drugs you follow #}
     {% if active == "panel" %}<span class="hcab on p-only" aria-current="page">Your panel</span><span class="hcab on w-only">Welcome</span>

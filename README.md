@@ -1,6 +1,8 @@
-# Cholesterol pipeline digest
+# Readout
 
-A small personal tool. Once a week, GitHub Actions checks ClinicalTrials.gov, openFDA, FDA press announcements, and news searches for the drugs in `watchlist.yaml`, and compares the results with last week's snapshot. It then:
+A weekly, plain-English digest of new medicines and ones still in trials, for the health topics you choose (heart & cholesterol, obesity, Alzheimer's, cancer) and companies you follow (Eli Lilly).
+
+A small personal tool. Once a week, GitHub Actions checks ClinicalTrials.gov, openFDA and news searches for the drugs in `watchlist.yaml`, and compares the results with last week's snapshot. It then:
 
 - updates a **static site** (this week, past weeks, and a page per drug with its updates, stage history and trials), committed to `site/` and deployed by Vercel, and
 - optionally **emails** a short digest of only what changed. If nothing changed, the email is one line.

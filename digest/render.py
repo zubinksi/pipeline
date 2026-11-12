@@ -54,7 +54,7 @@ def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], 
         line = f"Nothing changed this week across the {n_drugs} drugs you follow."
         if errors:
             line += f" (Couldn't reach: {', '.join(errors)}; they'll be checked again next week.)"
-        return Digest(subject=f"Your drugs pipeline: nothing changed ({today:%b %-d})",
+        return Digest(subject=f"Readout: nothing changed ({today:%b %-d})",
                       html=f"<p style=\"font-family:Georgia,serif;"
                            f"font-size:15px;color:#1f2933\">{_esc(line)}</p>",
                       text=line + "\n")
@@ -82,7 +82,7 @@ def render(*, headline: str, changes: list[Change], horizon: list[HorizonItem], 
         "baseline": baseline,
         "site_url": os.environ.get("SITE_URL", ""),
     }
-    subject = f"Drugs pipeline: {headline}" if len(headline) < 90 else "Your drugs pipeline, weekly"
+    subject = f"Readout: {headline}" if len(headline) < 90 else "Your Monday Readout"
     return Digest(subject=subject,
                   html=_env.get_template("digest.html.j2").render(**ctx),
                   text=_text_env.get_template("digest.txt.j2").render(**ctx))

@@ -65,7 +65,7 @@ def test_untrusted_text_is_escaped(tmp_path):
 
 def test_empty_site_builds(tmp_path):
     out = site.build(tmp_path / "s", weeks=[], snapshot={"drugs": {}, "trials": {}}, watchlist=WL)
-    assert "Your Drugs Pipeline" in (out / "index.html").read_text() and "Your panel" in (out / "index.html").read_text()
+    assert "Readout" in (out / "index.html").read_text() and "Your panel" in (out / "index.html").read_text()
     assert "No weekly runs yet" in (out / "weeks/index.html").read_text()
 
 

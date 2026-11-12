@@ -74,7 +74,7 @@ def _week_view(rec: dict, drugs: dict, sources: set[str]) -> dict:
 
 
 def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict,
-          site_title: str = "Your Drugs Pipeline") -> Path:
+          site_title: str = "Readout") -> Path:
     out = Path(out)
     if out.exists():
         shutil.rmtree(out)
