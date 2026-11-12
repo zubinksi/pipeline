@@ -75,7 +75,22 @@ def test_new_drug_on_watchlist_is_baseline():
     before, after = before_after(WL)
     del before["drugs"]["alirocumab"]
     after["trials"]["NCT4"] = _trial("NCT4", "alirocumab", ["PHASE3"], "RECRUITING", 3)
+    new = [c for c in diff.compute(before, after, WL) if c.drug == "alirocumab"]
+    # its trials are a baseline; only its news from the last week comes through
+    assert new and all(c.kind == "news" for c in new)
+    for n in after["news"].values():
+        if n["drug"] == "alirocumab":
+            n["published"] = "2026-10-01T09:00:00+00:00"   # older than a week: treated as seen
     assert not [c for c in diff.compute(before, after, WL) if c.drug == "alirocumab"]
+
+
+def test_new_drug_news_is_capped():
+    before, after = before_after(WL)
+    del before["drugs"]["alirocumab"]
+    base = next(n for n in after["news"].values() if n["drug"] == "alirocumab")
+    for i in range(5):
+        after["news"][f"news-x{i}"] = {**base, "id": f"news-x{i}", "title": f"t{i}"}
+    assert len([c for c in diff.compute(before, after, WL) if c.drug == "alirocumab"]) == diff.NEW_DRUG_NEWS_MAX
 
 
 def test_discovery_skips_seen_and_watched():

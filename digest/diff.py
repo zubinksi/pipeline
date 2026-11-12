@@ -144,10 +144,21 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
                 url=t["url"] + "?tab=results", source="ClinicalTrials.gov"))
 
     # --- news (unseen items only) ---
+    # A drug added to the watchlist this run has no news history: its older news is
+    # treated as seen (no flood), but the last week's is reported, a couple per drug.
     seen = set(prev.get("news_seen", []))
+    now = _when(curr.get("generated_at", ""))
+    fresh_for_new: dict[str, int] = {}
     for item_id, n in (curr.get("news", {}) if b.get("news") else {}).items():
-        if item_id in seen or n.get("drug") not in known_drugs:
+        if item_id in seen:
             continue
+        if n.get("drug") not in known_drugs:
+            pub = _when(n.get("published", ""))
+            if not (now and pub and (now - pub).days <= NEW_DRUG_NEWS_DAYS):
+                continue
+            if fresh_for_new.get(n["drug"], 0) >= NEW_DRUG_NEWS_MAX:
+                continue
+            fresh_for_new[n["drug"]] = fresh_for_new.get(n["drug"], 0) + 1
         changes.append(Change(
             id=item_id, kind="news", drug=n["drug"], what=n["title"], url=n["link"], source=n["outlet"],
             extra={"summary": n.get("summary", ""), "published": n.get("published", "")}))
@@ -179,6 +190,19 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
 
     changes.sort(key=lambda c: KIND_ORDER.index(c.kind))
     return changes
+
+
+NEW_DRUG_NEWS_DAYS = 7
+NEW_DRUG_NEWS_MAX = 2
+
+
+def _when(s: str):
+    from datetime import datetime, timezone
+    try:
+        d = datetime.fromisoformat(s.replace("Z", "+00:00"))
+        return d if d.tzinfo else d.replace(tzinfo=timezone.utc)
+    except (ValueError, AttributeError):
+        return None
 
 
 def horizon(curr: dict, watchlist: dict, today: date | None = None) -> list[HorizonItem]:
