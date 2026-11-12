@@ -17,7 +17,7 @@
 <section class="section"{% if filterable %} data-filter{% endif %}>
   <div class="section-head">
     <h2>{{ title }} <span class="sub" data-total>{{ n_drugs }}</span></h2>
-    {% set fdefs = [("tp", filters.tp, "Topic"), ("st", filters.st, "Stage"), ("lowers", filters.lowers, "Cholesterol"), ("freq", filters.freq, "How often")] %}
+    {% set fdefs = [("tp", filters.tp, "Topic"), ("st", filters.st, "Stage"), ("freq", filters.freq, "How often")] %}
     {% set has_filters = filterable and (fdefs|selectattr(1, "ne", none)|map(attribute=1)|map("length")|max > 1) %}
     {% if has_filters %}
     <button type="button" class="ficon" aria-expanded="false" aria-controls="fpanel" aria-label="Filter" hidden>

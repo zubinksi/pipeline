@@ -72,7 +72,7 @@ def test_empty_site_builds(tmp_path):
 def test_pipeline_rows_carry_filter_data(tmp_path):
     out, _ = _build(tmp_path)
     html = (out / "drugs.html").read_text()
-    assert "data-filter" in html and 'data-k="lowers" data-v="lpa"' in html
+    assert "data-filter" in html and 'data-k="lowers"' not in html  # LDL vs Lp(a) is chosen on Your panel
     assert 'data-k="tp" data-v="cancer"' in html and 'data-k="st" data-v="close"' in html  # topic and stage filters
     assert 'data-tp="heart" data-st="now"' in html
     assert 'data-k="freq" data-v="monthly" aria-pressed="false">Monthly</button>' in html
