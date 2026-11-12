@@ -156,11 +156,10 @@ def test_news_and_drugs_tabs_and_compact_coming_up(tmp_path):
     assert '<div class="panel" data-panel="news">' in news and '<div class="panel" data-panel="drugs" hidden>' in news
     assert '<div class="panel" data-panel="news" hidden>' in drugs and '<div class="panel" data-panel="drugs">' in drugs
     assert (out / "assets/tabs.js").exists()
-    # Coming up: a short line that opens to the full sentence, the drug's facts and links
-    assert '<details class="tl-item due">' in news and "ANY WEEK NOW" in news
-    assert "Heart-attack trial results" in news
-    more = news[news.index('class="tl-more"'):]
-    assert "If positive" in more and "Twice a year" in more and 'href="drugs/inclisiran.html"' in more
+    # Coming up: one line plus a sentence of context; the row links to the drug's overview
+    assert '<a class="tl tl-item due" href="drugs/inclisiran.html">' in news and "ANY WEEK NOW" in news
+    assert "Heart-attack trial results" in news and "twice-a-year shot proven to prevent them" in news
+    assert "Twice a year" not in news[news.index("Coming up"):news.index('data-panel="drugs"')]  # no dosing facts in the list
     assert "no changes" not in news.lower()
 
 
@@ -174,6 +173,7 @@ def test_drug_page_is_consolidated_for_a_layperson(tmp_path):
     for label in ("How often", "Effect", "Heart attacks", "Status", "Made by"):
         assert label in glance
     assert "LDL down about 50%" in glance and "Heart-attack trial underway" in glance and "Novartis" in glance
-    assert "What's next" in html and "If positive" in html          # milestone in plain words
+    assert "What's next" in html and "twice-a-year shot proven" in html  # milestone with context
+    assert 'href="https://clinicaltrials.gov/study/NCT03705234"' in html   # drug page links the source
     assert "In plain terms" in html and "Where it stands" in html
     assert "Trials and technical details" in html                   # detail tucked away

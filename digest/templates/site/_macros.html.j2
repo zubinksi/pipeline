@@ -76,19 +76,11 @@
   {% for h in items %}
   {% set when = h.when or (h.date|horizon_date) %}
   {% set due = when == 'DUE NOW' %}
-  {% set r = drug_rows.get(h.drug_id) if drug_rows and h.drug_id else none %}
-  <details class="tl-item{{ ' due' if due }}">
-    <summary class="tl">
-      <span class="tl-when">{{ "ANY WEEK NOW" if due else when }}</span>
-      <span class="tl-what"><b>{{ h.drug }}</b> {{ h.short or h.what }}</span>
-      <span class="go" aria-hidden="true">&rsaquo;</span>
-    </summary>
-    <div class="tl-more">
-      {% if h.short %}<p>{{ h.what }}</p>{% endif %}
-      {% if r %}<div class="tl-facts"><span class="mono">{{ r.often or r.form }}<span class="sep">·</span>{{ r.effect_short or r.effect }}</span>{% if r.proven_label %}<span class="pf pf-{{ r.proven }}">{% if r.proven == 'yes' %}&#10003; {% elif r.proven == 'failed' %}&#10007; {% endif %}{{ r.proven_label }}</span>{% endif %}</div>{% endif %}
-      <div class="tl-links">{% if h.drug_id %}<a class="src" href="{{ root }}drugs/{{ h.drug_id }}.html">Drug overview &rarr;</a>{% endif %}<a class="src" href="{{ h.url }}" rel="noopener noreferrer">Source &rarr;</a></div>
-    </div>
-  </details>
+  <a class="tl tl-item{{ ' due' if due }}" href="{{ root ~ 'drugs/' ~ h.drug_id ~ '.html' if h.drug_id else h.url }}">
+    <span class="tl-when">{{ "ANY WEEK NOW" if due else when }}</span>
+    <span class="tl-what"><b>{{ h.drug }}</b> {{ h.short or h.what }}{% if h.context %}<span class="tl-ctx">{{ h.context }}</span>{% endif %}</span>
+    <span class="go" aria-hidden="true">&rsaquo;</span>
+  </a>
   {% endfor %}
   </div>
 </section>

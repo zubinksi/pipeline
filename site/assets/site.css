@@ -710,3 +710,16 @@ footer { font-family: var(--serif); font-size: 0.875rem; letter-spacing: 0; text
 @media (prefers-reduced-motion: reduce) { .panel.enter { animation: none; } .slab, .slab-body { transition: none; } }
 @media (max-width: 860px) { .head-meta { margin-bottom: 1rem; } }
 .tl-when.due { color: var(--ink); font-weight: 700; }
+
+/* coming up: a line plus a sentence of context; the whole row is the link */
+a.tl { text-decoration: none; align-items: start; }
+a.tl .tl-when { padding-top: 0.25rem; }
+a.tl .go { align-self: center; }
+.tl-ctx { display: block; margin-top: 0.25rem; font-size: 0.9375rem; line-height: 1.45; color: var(--ink3); max-width: 38rem; }
+.tl-src { display: block; margin-top: 0.375rem; font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+a.tl:hover .tl-what b { color: var(--accent); }
+.tl-list > a.tl { border-bottom: 1px solid var(--b3); }
+.tl-list > a.tl:last-child { border-bottom: 0; }
+@media (max-width: 860px) { a.tl .tl-when { padding-top: 0; } }
+.tl { grid-template-columns: 7.75rem minmax(0, 1fr) 0.75rem; }
+@media (max-width: 860px) { .tl { grid-template-columns: minmax(0, 1fr) 0.75rem; } }
