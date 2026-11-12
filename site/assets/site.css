@@ -645,9 +645,9 @@ footer { font-family: var(--serif); font-size: 0.875rem; letter-spacing: 0; text
    the same hue when behind. The page under the tabs takes the selected tab's
    color, and each theme has accents chosen for its own paper. */
 .f-news { --tab: #fbf9f3; color: #1f2933; }   /* cream: the news paper */
-.f-drugs { --tab: #6f6352; color: #f6f1e6; }  /* taupe: the drugs paper */
+.f-drugs { --tab: #d3c9b7; color: #1f2933; }  /* light taupe: the drugs paper */
 .folder.on { color: inherit; }
-.f-news.on { color: #1f2933; } .f-drugs.on { color: #f6f1e6; }
+.f-news.on { color: #1f2933; } .f-drugs.on { color: #1f2933; }
 /* the selected tab runs into its page; the other sits behind the double rule */
 .folder:not(.on)::before, .folder:not(.on)::after { bottom: 3px; }
 .folder:not(.on) span { position: relative; top: -2px; }
@@ -655,37 +655,37 @@ footer { font-family: var(--serif); font-size: 0.875rem; letter-spacing: 0; text
 .slab, .slab-body { transition: background-color 0.2s; }
 
 .slab[data-theme="drugs"] {
-  /* taupe paper, cream ink, a pale blue accent that ties back to the navy wall */
-  --slab: #6f6352;
-  --raised: #786c5a;
-  --zebra: #766a58;
-  --hover: #7a6e5c;
-  --b1: #857966;
-  --b2: #857966;
-  --b3: #7c705e;
-  --b4: #a3977f;
-  --ink: #f6f1e6;
-  --ink2: #e8e1d2;
-  --ink3: #d3cab8;
-  --muted: #c2b8a4;
-  --track: #8f836e;
-  --done: #d6ccb9;
-  --now: #f6f1e6;
-  --accent: #c4daef;
-  --accent-dim: #7a6e5c;
-  --moved: #f2c27c;
-  --setback: #f6b9a9;
+  /* light taupe paper with dark ink; navy accent like the rest of the site */
+  --slab: #d3c9b7;
+  --raised: #dad1c1;
+  --zebra: #d9d0bf;
+  --hover: #cabfac;
+  --b1: #bcb19d;
+  --b2: #bcb19d;
+  --b3: #c4b9a6;
+  --b4: #9a8e78;
+  --ink: #1f2933;
+  --ink2: #33302a;
+  --ink3: #4a453c;
+  --muted: #625b4f;
+  --track: #a99d87;
+  --done: #7a6f5d;
+  --now: #2c4a7a;
+  --accent: #2c4a7a;
+  --accent-dim: #e2dacb;
+  --moved: #8f4f0c;
+  --setback: #8a2f24;
 }
 .slab[data-theme="drugs"] .slab-body { background: var(--slab); }
 /* the header band is shared by both tabs, so it keeps the neutral paper borders */
 .slab-head { --b4: #c4bdac; }
 
 /* evidence and flags, recoloured for the navy paper */
-.slab[data-theme="drugs"] .pf-yes { color: #c3e8c4; }
-.slab[data-theme="drugs"] .pf-failed { color: #f6b9a9; }
+.slab[data-theme="drugs"] .pf-yes { color: #2a6233; }
+.slab[data-theme="drugs"] .pf-failed { color: #8a2f24; }
 .slab[data-theme="drugs"] .pf-untested { color: var(--muted); }
 .slab[data-theme="drugs"] .tag { border-color: var(--b4); color: var(--ink3); background: transparent; }
-.slab[data-theme="drugs"] .tag.setback { border-color: #f6b9a9; color: #f6b9a9; }
+.slab[data-theme="drugs"] .tag.setback { border-color: #8a2f24; color: #8a2f24; }
 .slab[data-theme="drugs"] .tag.moved { border-color: var(--moved); color: var(--moved); }
 .slab[data-theme="drugs"] .chip[aria-pressed='true'] { color: var(--accent); border-color: var(--accent); background: transparent; }
 /* the shared header band keeps its own (light) ink and borders */
