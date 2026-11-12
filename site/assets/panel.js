@@ -58,7 +58,7 @@
       var any = ids.some(shown);
       done.classList.toggle('disabled', !any);
       done.setAttribute('aria-disabled', String(!any));
-      if (need) need.hidden = any;
+      if (need) { need.hidden = any; saved_.hidden = !any; }
     }
     // switch a set of drugs (a topic, or part of one) on or off together
     function toggleSet(set, t) {
@@ -75,7 +75,7 @@
         set.forEach(function (id) { drop(st.off, id); });
       }
     }
-    var done = document.querySelector('[data-done]'), need = document.querySelector('.cab-need');
+    var done = document.querySelector('[data-done]'), need = document.querySelector('.cab-need'), saved_ = document.querySelector('.cab-saved');
     if (welcome) {
       var root = document.documentElement;
       root.classList.add('is-welcome');
@@ -86,7 +86,7 @@
       document.querySelector('[data-wback]').addEventListener('click', function () { step('1'); });
     }
     done.addEventListener('click', function (e) {
-      if (!ids.some(shown)) { e.preventDefault(); if (need) need.hidden = false; return; }
+      if (!ids.some(shown)) { e.preventDefault(); if (need) { need.hidden = false; saved_.hidden = true; } return; }
       save(st);  // even if nothing was changed, so the welcome isn't shown again
     });
     form.addEventListener('change', function (e) {

@@ -1007,3 +1007,5 @@ a.hcab:hover { color: var(--accent); }
   .w-choose-head .page-title { font-size: min(1.5rem, calc((100vw - 72px) / 14.7)); }
   .w-choose-head .cab-lede { font-size: min(1.0625rem, calc((100vw - 72px) / 21.8)); }
 }
+.cab-note { white-space: nowrap; }
+.cab-note [hidden] { display: none; }
