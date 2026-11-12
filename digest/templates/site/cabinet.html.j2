@@ -1,0 +1,28 @@
+{% extends "base.html.j2" %}
+{% import "_macros.html.j2" as m with context %}
+{% block title %}Your cabinet · {{ site_title }}{% endblock %}
+{% block head %}{{ m.slab_head("cabinet") }}{% endblock %}
+{% block content %}
+<div class="cab-top">
+  <p class="cab-lede">Choose the drugs you follow. News and Drugs show only these.</p>
+</div>
+<form class="cab" data-cabinet>
+  {% for g in groups %}
+  <fieldset class="cab-group">
+    <legend>{{ g.title }}</legend>
+    {% for r in g.rows %}
+    <label class="cab-row">
+      <input type="checkbox" name="drug" value="{{ r.id }}" checked>
+      <span class="cab-box" aria-hidden="true"></span>
+      <span class="cab-name">{{ r.display_name }}{% if r.generic %}<span class="generic">{{ r.generic|lower }}</span>{% endif %}</span>
+      <span class="cab-line">{{ (r.effect_short or r.effect or r.lowers).split("; ")[0] }} · {{ r.often or r.form }}</span>
+    </label>
+    {% endfor %}
+  </fieldset>
+  {% endfor %}
+</form>
+<div class="cab-foot">
+  <span class="cab-note">Saved on this device</span>
+  <a class="cab-done" href="{{ root }}index.html">Done &rarr;</a>
+</div>
+{% endblock %}

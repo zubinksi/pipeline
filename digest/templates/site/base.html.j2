@@ -14,7 +14,7 @@
 </head>
 <body>
 <main class="body">
-  <div class="slab{{ ' tabbed' if sel in ('news', 'drugs', 'weeks') }}" data-theme="{{ 'drugs' if sel == 'drugs' else 'news' }}">
+  <div class="slab{{ ' tabbed' if sel in ('news', 'drugs', 'weeks', 'cabinet') }}" data-theme="{{ 'drugs' if sel == 'drugs' else 'news' }}"{% if sel == 'cabinet' %} data-page="cabinet"{% endif %}>
     {% block head %}{% endblock %}
     <div class="slab-body">
     {% block content %}{% endblock %}
@@ -24,6 +24,7 @@
 <footer>
   Report generated{% if updated %} {{ updated|nice_date }}{% endif %} · Sources: ClinicalTrials.gov, openFDA, news searches
 </footer>
+<script src="{{ root }}assets/cabinet.js" defer></script>
 <script src="{{ root }}assets/filter.js" defer></script>
 <script src="{{ root }}assets/tabs.js" defer></script>
 </body>

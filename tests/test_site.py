@@ -157,7 +157,7 @@ def test_news_and_drugs_tabs_and_compact_coming_up(tmp_path):
     assert '<div class="panel" data-panel="news" hidden>' in drugs and '<div class="panel" data-panel="drugs">' in drugs
     assert (out / "assets/tabs.js").exists()
     # Coming up: one line plus a sentence of context; the row links to the drug's overview
-    assert '<a class="tl tl-item due" href="drugs/inclisiran.html">' in news and "ANY WEEK NOW" in news
+    assert '<a class="tl tl-item due" data-drug="inclisiran" href="drugs/inclisiran.html">' in news and "ANY WEEK NOW" in news
     assert "Heart-attack trial results" in news and "twice-a-year shot proven to prevent them" in news
     assert "Twice a year" not in news[news.index("Coming up"):news.index('data-panel="drugs"')]  # no dosing facts in the list
     assert "no changes" not in news.lower()
@@ -181,3 +181,17 @@ def test_drug_page_is_consolidated_for_a_layperson(tmp_path):
     assert 'href="https://clinicaltrials.gov/study/NCT03705234"' in html   # drug page links the source
     assert ">Notes<" in html and "At a glance" not in html and "In plain terms" not in html
     assert "Trials and technical details" in html                   # detail tucked away
+
+
+def test_cabinet_page_chooses_what_to_follow(tmp_path):
+    out, _ = _build(tmp_path)
+    news = (out / "index.html").read_text()
+    assert '<a class="hcab" href="cabinet.html">' in news  # the header label opens the cabinet
+    assert 'href="../cabinet.html"' in (out / "drugs/inclisiran.html").read_text()
+    cab = (out / "cabinet.html").read_text()
+    assert 'class="hcab on" aria-current="page"' in cab and "data-cabinet" in cab
+    for d in ("evolocumab", "alirocumab", "inclisiran", "lerodalcibep", "verve102"):
+        assert f'value="{d}" checked' in cab
+    assert (out / "assets/cabinet.js").exists() and "assets/cabinet.js" in news
+    # rows carry their drug so untracked ones can be hidden
+    assert 'data-drug="evolocumab"' in (out / "drugs.html").read_text()

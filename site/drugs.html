@@ -18,13 +18,11 @@
 <header class="slab-head">
   <h1 class="sr-only">Your Drugs Pipeline</h1>
   <div class="head-meta">
-<span class="hback off" aria-hidden="true">&larr;</span>    <span class="hplace" aria-disabled="true" title="Coming soon: choose which drugs you track">Your cabinet</span>
-  </div>
-  <nav class="folders" aria-label="Sections">
+<a class="hcab" href="cabinet.html"><span class="hback" aria-hidden="true">&larr;</span>Your cabinet</a>  </div>
+<nav class="folders" aria-label="Sections">
   <a class="folder f-news" data-tab="news" href="index.html"><span>News</span></a>
   <a class="folder f-drugs on" data-tab="drugs" href="drugs.html" aria-current="page"><span>Drugs</span></a>
-</nav>
-</header>    <div class="slab-body">
+</nav></header>    <div class="slab-body">
 <div class="panel" data-panel="news" hidden>
 <section class="section">
   <div class="weekline">
@@ -35,17 +33,17 @@
 <section class="section">
   <div class="section-head"><h2>Coming up</h2></div>
   <div class="tl-list">
-  <a class="tl tl-item due" href="drugs/inclisiran.html">
+  <a class="tl tl-item due" data-drug="inclisiran" href="drugs/inclisiran.html">
     <span class="tl-when">ANY WEEK NOW</span>
     <span class="tl-what"><b>Leqvio</b> Heart-attack trial results<span class="tl-ctx">The big one for Leqvio: if the trial shows fewer heart attacks, it becomes the only twice-a-year shot proven to prevent them.</span></span>
     <span class="go" aria-hidden="true">&rsaquo;</span>
   </a>
-  <a class="tl tl-item" href="drugs/inclisiran.html">
+  <a class="tl tl-item" data-drug="inclisiran" href="drugs/inclisiran.html">
     <span class="tl-when">MAY 2027</span>
     <span class="tl-what"><b>Leqvio</b> 2nd heart-attack trial results<span class="tl-ctx">A second, independent test of the same question, in people already taking a statin.</span></span>
     <span class="go" aria-hidden="true">&rsaquo;</span>
   </a>
-  <a class="tl tl-item" href="drugs/verve102.html">
+  <a class="tl tl-item" data-drug="verve102" href="drugs/verve102.html">
     <span class="tl-when">AUG 2028</span>
     <span class="tl-what"><b>VERVE-102</b> Mid-stage trial results<span class="tl-ctx">The first larger test of a one-time treatment meant to lower LDL for life. Good results would move it toward final-stage trials.</span></span>
     <span class="go" aria-hidden="true">&rsaquo;</span>
@@ -56,7 +54,7 @@
 <div class="panel" data-panel="drugs">
 <section class="section" data-filter>
   <div class="section-head">
-    <h2>The drugs <span class="sub">5</span></h2>
+    <h2>The drugs <span class="sub" data-total>5</span></h2>
     <button type="button" class="ficon" aria-expanded="false" aria-controls="fpanel" aria-label="Filter" hidden>
       <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 3.5h12M4.5 8h7M7 12.5h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg>
       <span class="fcount" hidden></span>
@@ -76,7 +74,7 @@
     </div>
     <div class="group" data-group>
       <h3>Available now <span class="n" data-count>4</span></h3>
-      <a class="drug" href="drugs/evolocumab.html" data-lowers="ldl" data-freq="monthly">
+      <a class="drug" href="drugs/evolocumab.html" data-drug="evolocumab" data-lowers="ldl" data-freq="monthly">
         <span class="c-name"><span class="drug-name">Repatha</span><span class="generic">evolocumab</span></span>
         <span class="c-line"><span class="nb">Every 2–4 weeks</span><span class="sep">·</span><span class="nb">LDL ↓ 60%</span></span>
         <span class="c-one"><span>LDL ↓ 60%</span><span class="sep">·</span><span>Every 2–4 weeks</span></span>
@@ -86,7 +84,7 @@
         <span class="c-stage"></span>
         <span class="go" aria-hidden="true">&rsaquo;</span>
       </a>
-      <a class="drug" href="drugs/alirocumab.html" data-lowers="ldl" data-freq="monthly">
+      <a class="drug" href="drugs/alirocumab.html" data-drug="alirocumab" data-lowers="ldl" data-freq="monthly">
         <span class="c-name"><span class="drug-name">Praluent</span><span class="generic">alirocumab</span></span>
         <span class="c-line"><span class="nb">Every 2–4 weeks</span><span class="sep">·</span><span class="nb">LDL ↓ 50%</span></span>
         <span class="c-one"><span>LDL ↓ 50%</span><span class="sep">·</span><span>Every 2–4 weeks</span></span>
@@ -96,7 +94,7 @@
         <span class="c-stage"></span>
         <span class="go" aria-hidden="true">&rsaquo;</span>
       </a>
-      <a class="drug" href="drugs/inclisiran.html" data-lowers="ldl" data-freq="infrequent">
+      <a class="drug" href="drugs/inclisiran.html" data-drug="inclisiran" data-lowers="ldl" data-freq="infrequent">
         <span class="c-name"><span class="drug-name">Leqvio</span><span class="generic">inclisiran</span></span>
         <span class="c-line"><span class="nb">Twice a year</span><span class="sep">·</span><span class="nb">LDL ↓ 50%</span></span>
         <span class="c-one"><span>LDL ↓ 50%</span><span class="sep">·</span><span>Twice a year</span></span>
@@ -106,7 +104,7 @@
         <span class="c-stage"></span>
         <span class="go" aria-hidden="true">&rsaquo;</span>
       </a>
-      <a class="drug" href="drugs/lerodalcibep.html" data-lowers="ldl" data-freq="monthly">
+      <a class="drug" href="drugs/lerodalcibep.html" data-drug="lerodalcibep" data-lowers="ldl" data-freq="monthly">
         <span class="c-name"><span class="drug-name">Lerochol</span><span class="generic">lerodalcibep</span></span>
         <span class="c-line"><span class="nb">Monthly</span><span class="sep">·</span><span class="nb">LDL ↓ 60%</span></span>
         <span class="c-one"><span>LDL ↓ 60%</span><span class="sep">·</span><span>Monthly</span></span>
@@ -119,7 +117,7 @@
     </div>
     <div class="group" data-group>
       <h3>Further out <span class="n" data-count>1</span></h3>
-      <a class="drug" href="drugs/verve102.html" data-lowers="ldl" data-freq="once">
+      <a class="drug" href="drugs/verve102.html" data-drug="verve102" data-lowers="ldl" data-freq="once">
         <span class="c-name"><span class="drug-name">VERVE-102</span></span>
         <span class="c-line"><span class="nb">Once</span><span class="sep">·</span><span class="nb">LDL ↓ up to 62%</span></span>
         <span class="c-one"><span>LDL ↓ up to 62%</span><span class="sep">·</span><span>Once</span></span>
@@ -132,6 +130,7 @@
       </a>
     </div>
   </div>
+  <p class="empty cab-empty" hidden>Your cabinet is empty. <a href="cabinet.html">Choose drugs to follow &rarr;</a></p>
 <p class="empty f-empty" hidden>Nothing on the list matches. Try "All".</p></section>
 <details class="explain">
   <summary>How to read this</summary>
@@ -165,6 +164,7 @@
 <footer>
   Report generated Nov 9, 2026 · Sources: ClinicalTrials.gov, openFDA, news searches
 </footer>
+<script src="assets/cabinet.js" defer></script>
 <script src="assets/filter.js" defer></script>
 <script src="assets/tabs.js" defer></script>
 </body>

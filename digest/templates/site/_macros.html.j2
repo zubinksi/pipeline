@@ -16,7 +16,7 @@
 {% macro drug_list(groups, root, title="The drugs", filterable=false) -%}
 <section class="section"{% if filterable %} data-filter{% endif %}>
   <div class="section-head">
-    <h2>{{ title }} <span class="sub">{{ n_drugs }}</span></h2>
+    <h2>{{ title }} <span class="sub" data-total>{{ n_drugs }}</span></h2>
     {% set has_filters = filterable and (filters.lowers|length > 1 or filters.freq|length > 1) %}
     {% if has_filters %}
     <button type="button" class="ficon" aria-expanded="false" aria-controls="fpanel" aria-label="Filter" hidden>
@@ -46,7 +46,7 @@
     <div class="group" data-group>
       <h3>{{ g.title }} <span class="n" data-count>{{ g.rows|length }}</span></h3>
       {% for r in g.rows %}
-      <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-lowers="{{ r.lowers_keys|join(' ') }}" data-freq="{{ r.frequency or '' }}">
+      <a class="drug" href="{{ root }}drugs/{{ r.id }}.html" data-drug="{{ r.id }}" data-lowers="{{ r.lowers_keys|join(' ') }}" data-freq="{{ r.frequency or '' }}">
         <span class="c-name"><span class="drug-name">{{ r.display_name }}</span>{% if r.generic %}<span class="generic">{{ r.generic|lower }}</span>{% endif %}{{ badge(r.badge) }}{% if r.moved %}<span class="tag moved">&#9650; moved</span>{% endif %}</span>
         <span class="c-line"><span class="nb">{{ r.often or r.form }}</span><span class="sep">·</span>{% for part in (r.effect_short or r.effect or r.lowers).split("; ") %}<span class="nb">{{ part }}</span>{% if not loop.last %}, {% endif %}{% endfor %}</span>
         <span class="c-one"><span>{{ (r.effect_short or r.effect or r.lowers).split("; ")[0] }}</span><span class="sep">·</span><span>{{ r.often or r.form }}</span></span>
@@ -60,13 +60,14 @@
     </div>
     {% endfor %}
   </div>
+  <p class="empty cab-empty" hidden>Your cabinet is empty. <a href="{{ root }}cabinet.html">Choose drugs to follow &rarr;</a></p>
   {% if filterable %}<p class="empty f-empty" hidden>Nothing on the list matches. Try "All".</p>{% endif %}
 </section>
 {%- endmacro %}
 
 {% macro changes(list, root, show_drug=true) -%}
 {% for c in list %}
-<div class="change">
+<div class="change"{% if c.drug %} data-drug="{{ c.drug }}"{% endif %}>
   <div class="meta">
     {% if show_drug and c.drug_name %}<a href="{{ root }}drugs/{{ c.drug }}.html">{{ c.drug_name }}</a> · {% endif %}
     {% if not show_drug and c.week %}<a href="{{ root }}weeks/{{ c.week }}.html">{{ c.week|nice_date }}</a> · {% endif %}
@@ -87,7 +88,7 @@
   {% for h in items %}
   {% set when = h.when or (h.date|horizon_date) %}
   {% set due = when == 'DUE NOW' %}
-  <a class="tl tl-item{{ ' due' if due }}" href="{{ root ~ 'drugs/' ~ h.drug_id ~ '.html' if h.drug_id else h.url }}">
+  <a class="tl tl-item{{ ' due' if due }}"{% if h.drug_id %} data-drug="{{ h.drug_id }}"{% endif %} href="{{ root ~ 'drugs/' ~ h.drug_id ~ '.html' if h.drug_id else h.url }}">
     <span class="tl-when">{{ "ANY WEEK NOW" if due else when }}</span>
     <span class="tl-what"><b>{{ h.drug }}</b> {{ h.short or h.what }}{% if h.context %}<span class="tl-ctx">{{ h.context }}</span>{% endif %}</span>
     <span class="go" aria-hidden="true">&rsaquo;</span>
@@ -130,15 +131,15 @@
 {%- endmacro %}
 
 {# The panel's header band: a line of report details, the title, then the folder tabs. #}
-{% macro slab_head(active, back=none) -%}
+{% macro slab_head(active) -%}
 <header class="slab-head">
   <h1 class="sr-only">Your Drugs Pipeline</h1>
   <div class="head-meta">
-    {% if back %}<a class="hback" href="{{ back }}" aria-label="Back">&larr;</a>{% else %}<span class="hback off" aria-hidden="true">&larr;</span>{% endif %}
-    {# placeholder: the cabinet will hold your folders (which drugs you track) #}
-    <span class="hplace" aria-disabled="true" title="Coming soon: choose which drugs you track">Your cabinet</span>
+    {# the cabinet is where you choose which drugs you follow #}
+    {% if active == "cabinet" %}<span class="hcab on" aria-current="page">Your cabinet</span>
+    {% else %}<a class="hcab" href="{{ root }}cabinet.html"><span class="hback" aria-hidden="true">&larr;</span>Your cabinet</a>{% endif %}
   </div>
-  {{ tabs(active) }}
+  {% if active != "cabinet" %}{{ tabs(active) }}{% endif %}
 </header>
 {%- endmacro %}
 

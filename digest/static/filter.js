@@ -28,7 +28,7 @@
     groups.forEach(function (g) {
       var shown = 0;
       g.querySelectorAll('.drug').forEach(function (r) {
-        var ok = Object.keys(want).every(function (k) {
+        var ok = !r.dataset.untracked && Object.keys(want).every(function (k) {
           return want[k] === 'all' || (r.dataset[k] || '').split(' ').indexOf(want[k]) !== -1;
         });
         r.hidden = !ok;

@@ -114,6 +114,7 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
               groups=_groups(_rows(watchlist, w.get("stages", stages), set(w["moved"]))),
               n_drugs=len(watchlist["drugs"]))
     write("weeks/index.html", "archive.html.j2", "../", sel="weeks", weeks=views)
+    write("cabinet.html", "cabinet.html.j2", "", sel="cabinet", groups=_groups(rows_now))
 
     trials_by_drug: dict[str, list] = {}
     for t in snapshot.get("trials", {}).values():
