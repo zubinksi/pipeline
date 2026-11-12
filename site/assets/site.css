@@ -1091,3 +1091,21 @@ html:not(.is-welcome) .w-only { display: none !important; }
   .c-one { line-height: 1.2; margin-top: 0.125rem; }
 }
 @media (max-width: 860px) { .drug .go { line-height: 1; } }
+
+/* stage gauge: five slim segments, like a lab sheet's range bar. Past stages
+   filled in a muted tone, the current one in navy, later ones as hairlines. */
+.mini { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; width: 4.25rem; align-items: center; }
+.mini .cell { height: auto; display: block; }
+.mini .cell::before { content: none; }
+.mini .dot, .mini .now .dot, .mini.big .dot, .mini.big .now .dot {
+  display: block; width: 100%; height: 0.3125rem; border-radius: 1px;
+  background: transparent; border: 1px solid var(--b4); box-shadow: none;
+}
+.mini .done .dot { background: var(--done); border-color: var(--done); }
+.mini .now .dot { height: 0.4375rem; background: var(--now); border-color: var(--now); }
+.mini .now.moved .dot { background: var(--moved); border-color: var(--moved); }
+.slab[data-theme="drugs"] .mini .done .dot { background: #9c8d72; border-color: #9c8d72; }
+.mini.big { width: 100%; max-width: 22rem; gap: 3px; }
+.mini.big .dot { height: 0.4375rem; }
+.mini.big .now .dot { height: 0.625rem; }
+@media (max-width: 860px) { .mini { width: 3.75rem; } }
