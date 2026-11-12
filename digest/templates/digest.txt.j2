@@ -23,8 +23,12 @@ IN THE FIELD (beyond your list)
   Source: {{ c.url }}
 {% endfor %}
 {% endif %}
-{% if horizon %}
+{% if minor %}SMALLER UPDATES
+{% for c in minor %}
+- {% if c.drug %}{{ c.drug }}: {% endif %}{{ c.what }} ({{ c.url }})
+{% endfor %}
 
+{% endif %}{% if horizon %}
 WATCHING FOR
 {% for h in horizon %}
 - {{ h.when or (h.date|horizon_date) }}  {{ h.drug }}: {{ h.what }}

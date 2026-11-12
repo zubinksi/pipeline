@@ -115,8 +115,27 @@
 
 {# "This week": the date, the week's lead, the drug changes, then what's coming up,
    then broader news. #}
+{# A compact line per smaller update: what happened and its source, no "why". #}
+{% macro smaller(list, root) -%}
+{% if list %}
+<details class="more fold">
+  <summary>Smaller updates <span class="sub">{{ list|length }}</span></summary>
+  <ul class="small-list">
+  {% for c in list %}
+    <li{% if c.drug %} data-drug="{{ c.drug }}"{% elif c.topic %} data-topic="{{ c.topic }}"{% endif %}{% if c.found %} data-found="{{ c.found }}"{% endif %}>
+      <span class="meta"><span class="new-tag" hidden>New</span>{% if c.found %}{{ c.found|found_day }} · {% endif %}{% if c.drug_name %}{{ c.drug_name }}{% elif c.topic in topics %}{{ topics[c.topic].title }}{% endif %}</span>
+      <span class="what">{{ c.what }} <a class="src" href="{{ c.url }}" rel="noopener noreferrer">{{ c.source }} &rarr;</a></span>
+    </li>
+  {% endfor %}
+  </ul>
+</details>
+{% endif %}
+{%- endmacro %}
+
 {% macro this_week(w, root, title, past=0) -%}
-{% set drug_changes = w.changes|rejectattr("kind", "equalto", "field")|list %}
+{% set top = w.changes|rejectattr("tier", "equalto", "more")|list %}
+{% set drug_changes = top|rejectattr("kind", "equalto", "field")|list %}
+{% set minor = w.changes|selectattr("tier", "equalto", "more")|list %}
 <section class="section">
   <div class="weekline">
     <div class="weekline-top"><span class="sub">{% if w.in_progress %}This week so far{% if w.started %} · since {{ w.started|nice_date_short }}{% endif %}{% else %}{{ w.date|nice_date_short }}{% endif %}</span>{% if past %}<a class="btn" href="{{ root }}weeks/index.html">Past weeks &rarr;</a>{% endif %}</div>
@@ -134,8 +153,9 @@
   {{ changes(drug_changes, root) }}
 </section>
 {% endif %}
+{% if minor %}<section class="section">{{ smaller(minor, root) }}</section>{% endif %}
 {% if w.calendar %}{{ horizon(w.calendar, root) }}{% endif %}
-{% set field = w.changes|selectattr("kind", "equalto", "field")|list %}
+{% set field = top|selectattr("kind", "equalto", "field")|list %}
 {% if field %}
 <section class="section">
   <div class="section-head"><h2>In the field <span class="sub">beyond your list</span></h2></div>

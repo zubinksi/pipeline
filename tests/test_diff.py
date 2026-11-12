@@ -40,7 +40,7 @@ def test_halt_is_reported_even_for_phase1():
     before["trials"]["NCT1"] = _trial("NCT1", "verve102", ["PHASE1"], "RECRUITING", 1)
     after["trials"]["NCT1"] = _trial("NCT1", "verve102", ["PHASE1"], "SUSPENDED", 1)
     halted = [c for c in diff.compute(before, after, WL) if c.kind == "trial_halted"]
-    assert len(halted) == 1 and "suspended" in halted[0].what
+    assert len(halted) == 1 and halted[0].what == "VERVE-102's early-stage trial was paused."
 
 
 def test_phase1_noise_is_ignored():
@@ -53,7 +53,7 @@ def test_new_phase2_trial_reported():
     before, after = before_after(WL)
     after["trials"]["NCT3"] = _trial("NCT3", "verve102", ["PHASE2"], "NOT_YET_RECRUITING", 2)  # still in testing
     new = [c for c in diff.compute(before, after, WL) if c.kind == "trial_new"]
-    assert len(new) == 1 and "NCT3" in new[0].what
+    assert len(new) == 1 and new[0].what == "A new mid-stage trial of VERVE-102 was registered, run by Example Pharma." and new[0].url.endswith("NCT3")
 
 
 def test_fda_approval_suppresses_duplicate_stage_change():

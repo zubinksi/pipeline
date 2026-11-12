@@ -34,7 +34,8 @@ def test_site_pages_exist(tmp_path):
 def test_index_shows_latest_week_and_sources(tmp_path):
     out, changes = _build(tmp_path)
     html = (out / "index.html").read_text()
-    assert "This week" in html and "Coming up" in html and "In the field" in html
+    # without Claude, field news is listed under smaller updates
+    assert "This week" in html and "Coming up" in html and "Smaller updates" in html
     assert "How to read this" in (out / "drugs.html").read_text()
     for c in changes:
         assert c.url in html
@@ -44,7 +45,7 @@ def test_index_shows_latest_week_and_sources(tmp_path):
 def test_drug_page_has_updates_history_and_trials(tmp_path):
     out, _ = _build(tmp_path)
     html = (out / "drugs/verve102.html").read_text()
-    assert "moved from Phase 2 to Phase 3" in html          # update
+    assert "moved up from mid-stage testing to final-stage trials" in html  # update
     assert "Phase 2</dd>" in html and "Phase 3</dd>" in html  # stage history across weeks
     assert "NCT90000010" in html                             # trial table
     assert 'href="../weeks/2026-11-03.html"' in html

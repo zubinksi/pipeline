@@ -36,6 +36,7 @@ class Change:
     extra: dict = field(default_factory=dict)
     topic: str = ""           # for changes not tied to a drug (field news, discovery)
     found: str = ""           # when a daily run first found it (ISO timestamp)
+    tier: str = ""            # "top" (shown in full) or "more" (listed under smaller updates)
 
 
 @dataclass
@@ -50,6 +51,34 @@ class HorizonItem:
     context: str = ""  # a sentence or two on why it matters, shown under the line
 
 
+_STAGE_WORD = {1: "early-stage", 2: "mid-stage", 3: "final-stage", 4: "post-approval"}
+_STAGE_PLACE = {"phase1": "early safety tests", "phase2": "mid-stage testing", "phase3": "final-stage trials",
+                "filed": "FDA review", "approved": "approval"}
+_STATUS_VERB = {
+    "RECRUITING": "started enrolling patients",
+    "ENROLLING_BY_INVITATION": "started enrolling patients (by invitation)",
+    "ACTIVE_NOT_RECRUITING": "finished enrolling patients",
+    "COMPLETED": "finished",
+    "TERMINATED": "was stopped early",
+    "SUSPENDED": "was paused",
+    "WITHDRAWN": "was withdrawn before it started",
+}
+
+
+def _trial_phrase(drug: str, t: dict) -> str:
+    """'VERVE-102's mid-stage trial (HEART-3)': plain words; the registry number stays in the link."""
+    stage = _STAGE_WORD.get(t.get("phase_rank", 0), "")
+    name = f" ({t['acronym']})" if t.get("acronym") else ""
+    return f"{drug}'s {stage + ' ' if stage else ''}trial{name}"
+
+
+def _status_sentence(drug: str, t: dict, old_status: str) -> str:
+    verb = _STATUS_VERB.get(t["status"], f"is now {STATUS_PLAIN.get(t['status'], t['status'].lower())}")
+    if t["status"] == "RECRUITING" and old_status in ("SUSPENDED", "ACTIVE_NOT_RECRUITING"):
+        verb = "is enrolling patients again"
+    return f"{_trial_phrase(drug, t)} {verb}."
+
+
 def _trial_name(t: dict) -> str:
     name = t.get("acronym") or t.get("title", "")
     return f"{name} ({t['nct']})"
@@ -58,7 +87,7 @@ def _trial_name(t: dict) -> str:
 def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
     if not prev:
         return []  # first run is a baseline
-    names = {d["id"]: d["name"] for d in watchlist["drugs"]}
+    names = {d["id"]: d.get("brand") or d["name"] for d in watchlist["drugs"]}
     min_phase = watchlist["settings"].get("min_trial_phase", 2)
     known_drugs = set(prev.get("drugs", {}))
     # Snapshots without a "baselined" record (old format, test data) count as fully baselined.
@@ -94,11 +123,11 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
             via = ""
             if trial and trial["nct"] not in prev.get("trials", {}):
                 stage_trials.add(trial["nct"])  # reported here, not again as "new trial"
-                via = f" with a new trial, {_trial_name(trial)}"
+                via = f", with a new trial{' (' + trial['acronym'] + ')' if trial.get('acronym') else ''}"
             changes.append(Change(
                 id=f"stage-{drug_id}", kind="stage_change", drug=drug_id,
-                what=f"{names.get(drug_id, drug_id)} moved from {STAGE_LABEL[before['stage']]} "
-                     f"to {STAGE_LABEL[s['stage']]}{via}.",
+                what=f"{names.get(drug_id, drug_id)} moved up from {_STAGE_PLACE[before['stage']]} "
+                     f"to {_STAGE_PLACE[s['stage']]}{via}.",
                 url=s.get("url", ""),
                 source="ClinicalTrials.gov" if s.get("basis", "").startswith("NCT") else s.get("basis", "")))
 
@@ -121,8 +150,8 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
             if big_enough and nct not in stage_trials:
                 changes.append(Change(
                     id=f"new-{nct}", kind="trial_new", drug=drug_id,
-                    what=f"New {phase_label(t['phases'])} trial registered for {drug}: {_trial_name(t)}"
-                         f", sponsor {t['sponsor']}.",
+                    what=f"A new {_STAGE_WORD.get(t['phase_rank'], '')} trial of {drug} was registered"
+                         f"{' (' + t['acronym'] + ')' if t.get('acronym') else ''}, run by {t['sponsor']}.",
                     url=t["url"], source="ClinicalTrials.gov"))
             continue
         if routine:
@@ -133,15 +162,12 @@ def compute(prev: dict | None, curr: dict, watchlist: dict) -> list[Change]:
                 changes.append(Change(
                     id=f"status-{nct}-{t['status']}", kind="trial_halted" if halted else "trial_status",
                     drug=drug_id,
-                    what=f"{drug} {phase_label(t['phases'])} trial {_trial_name(t)} is now "
-                         f"{STATUS_PLAIN.get(t['status'], t['status'].lower())} "
-                         f"(was {STATUS_PLAIN.get(old.get('status', ''), str(old.get('status', '')).lower())}).",
+                    what=_status_sentence(drug, t, old.get("status", "")),
                     url=t["url"], source="ClinicalTrials.gov"))
         if t["has_results"] and not old.get("has_results"):
             changes.append(Change(
                 id=f"results-{nct}", kind="trial_results", drug=drug_id,
-                what=f"Results posted on ClinicalTrials.gov for {drug} {phase_label(t['phases'])} trial "
-                     f"{_trial_name(t)}.",
+                what=f"Results were posted for {_trial_phrase(drug, t)}.",
                 url=t["url"] + "?tab=results", source="ClinicalTrials.gov"))
 
     # --- news (unseen items only) ---

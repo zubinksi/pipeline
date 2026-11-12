@@ -52,7 +52,7 @@ def test_llm_why_lines_used_and_untrusted_text_is_only_data():
 def test_refusal_or_error_falls_back():
     changes, _ = _changes()
     headline, kept = summarize.summarize(changes, WL, client=FakeClient({}, stop_reason="refusal"))
-    assert headline.startswith("5 updates this week")  # the sample field headline passes the keyword screen
+    assert headline == "3 top stories and 2 smaller updates this week."
     assert all(c.why for c in kept if c.kind != "field")  # field news gets no stock "why"
 
 
@@ -140,6 +140,9 @@ def test_field_news_needs_claudes_yes():
 def test_field_section_in_site_and_email(tmp_path):
     changes, after = _changes()
     headline, changes = summarize.apply_fallback(changes, {d["id"]: d for d in WL["drugs"]})
+    for c in changes:
+        if c.kind == "field":
+            c.tier = "top"  # as Claude would mark a strong field story
     d = render.render(headline=headline, changes=changes, horizon=[], snapshot=after, watchlist=WL,
                       today=date(2026, 11, 3))
     assert "In the field" in d.html and "IN THE FIELD" in d.text and "Example Wire" in d.html
@@ -203,3 +206,42 @@ def test_without_claude_drug_news_must_look_like_a_development():
             mk("c", "Novo Nordisk partners with a DJ for Wegovy campaign")]
     _, kept = summarize.apply_fallback(news, {d["id"]: d for d in WL["drugs"]}, WL, screen_field=True)
     assert [c.id for c in kept] == ["b"]
+
+
+def test_top_stories_and_smaller_updates():
+    from digest.diff import Change
+    mk = lambda i, t, k="news", d="orforglipron": Change(id=i, kind=k, drug=d, what=t, url="u", source="s")
+    items = [
+        mk("a", "Lilly's Foundayo cuts sleep apnea severity 44% in Phase 3 trial published in JAMA"),
+        mk("b", "Foundayo cuts sleep apnea severity by 44% in Phase 3 trial, published in JAMA"),  # same story
+        mk("c", "Orforglipron market size forecast to 2032"),                                        # noise
+        mk("d", "Real-world study looks at Foundayo adherence"),
+        mk("e", "VERVE-102's mid-stage trial (HEART-3) started enrolling patients.", "trial_status", "verve102"),
+    ]
+    _, _, kept = summarize.summarize_full(items, WL, client=FakeClient({}, stop_reason="refusal"))
+    assert [c.id for c in kept] == ["a", "d", "e"]
+    assert {c.id: c.tier for c in kept} == {"a": "top", "d": "more", "e": "top"}  # a mid-stage trial starting is top
+    # with Claude: its tier and same_as decide
+    payload = {"headline": "h", "lead": "", "items": [
+        {"id": "a", "include": True, "tier": "top", "same_as": "", "why": "w"},
+        {"id": "d", "include": True, "tier": "top", "same_as": "a", "why": "w"},
+        {"id": "e", "include": True, "tier": "top", "same_as": "", "why": "w"}]}
+    _, _, kept = summarize.summarize_full(items, WL, client=FakeClient(payload))
+    assert [(c.id, c.tier) for c in kept] == [("a", "top"), ("e", "top")]
+    assert "tier" in summarize.SCHEMA["properties"]["items"]["items"]["required"]
+
+
+def test_smaller_updates_are_folded_on_the_site_and_listed_in_the_email(tmp_path):
+    from digest import history, site
+    from digest.diff import Change
+    changes, after = _changes()
+    for c in changes:
+        c.tier = "more" if c.kind == "news" else "top"
+    rec = history.record(day=date(2026, 11, 16), headline="h", changes=changes, horizon=[],
+                         snapshot=after, baseline=False)
+    news = (site.build(tmp_path / "s", weeks=[rec], snapshot=after, watchlist=WL) / "index.html").read_text()
+    assert "<summary>Smaller updates" in news
+    smaller = news[news.index("Smaller updates"):]
+    assert "Example headline: alirocumab trial expands" in smaller
+    d = render.render(headline="h", changes=changes, horizon=[], snapshot=after, watchlist=WL)
+    assert "Smaller updates" in d.html and "SMALLER UPDATES" in d.text

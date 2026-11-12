@@ -44,6 +44,19 @@ analyst commentary, opinion, previews, and rehashes of older events.
 Be strict: include at most {field_max} per topic, and only what that topic counts as news:
 {field_focus}
     Exclude diet and supplement stories, stock and business news, opinion, and previews.
+  - tier: "top" or "more", for every item you include. Be selective: most weeks have only a \
+few top items.
+    "top": it changes what a reader knows about a drug's prospects or availability: \
+final-stage (Phase 3) results or their publication; an approval, rejection, filing or FDA \
+decision or advisory vote; a new safety warning or label change; a program halted, paused or \
+failed; a drug moving to a new stage; a major deal for the drug. Example of a top item: \
+"Lilly's Foundayo cut sleep apnea severity by 44% in a Phase 3 trial published in JAMA; Lilly \
+plans to file with the FDA by year end."
+    "more": real but incremental: sub-analyses, real-world or small studies, early-stage \
+updates, conference talks and interviews, previews, cost-effectiveness, pricing, routine \
+trial housekeeping (enrolment updates for trials that aren't final-stage).
+  - same_as: if this item reports the same story as another item in the input, the id of the \
+one to keep (prefer the clearest headline from the most authoritative outlet); otherwise "".
   - why: 1-2 plain-English sentences (at most 40 words) on what this could mean for someone \
 like the reader, e.g. "A once-daily pill that might one day replace injections." Mention \
 form or dosing frequency when it is relevant. Be candid about setbacks. Empty string if \
@@ -65,9 +78,11 @@ SCHEMA = {
                 "properties": {
                     "id": {"type": "string"},
                     "include": {"type": "boolean"},
+                    "tier": {"type": "string", "enum": ["top", "more"]},
+                    "same_as": {"type": "string"},
                     "why": {"type": "string"},
                 },
-                "required": ["id", "include", "why"],
+                "required": ["id", "include", "tier", "same_as", "why"],
                 "additionalProperties": False,
             },
         },
@@ -94,6 +109,18 @@ def _payload(changes: list[Change], drugs: dict) -> str:
 
 
 def fallback_headline(changes: list[Change]) -> str:
+    """'3 top stories and 9 smaller updates this week.' (or the old count by kind, for
+    changes from before stories had tiers)."""
+    if any(c.tier for c in changes):
+        top = sum(1 for c in changes if c.tier != "more")
+        more = len(changes) - top
+        parts = ([f"{top} top stor{'y' if top == 1 else 'ies'}"] if top else []) + \
+                ([f"{more} smaller update{'' if more == 1 else 's'}"] if more else [])
+        return " and ".join(parts).capitalize() + " this week." if parts else ""
+    return _count_by_kind(changes)
+
+
+def _count_by_kind(changes: list[Change]) -> str:
     counts: dict[str, int] = {}
     for c in changes:
         counts[c.kind] = counts.get(c.kind, 0) + 1
@@ -111,6 +138,50 @@ NEWS_KEYWORDS = re.compile(
     r"submi\w*|launch\w*|label|warning|recall|halt\w*|discontinu\w*|stops?|stopped|reduc\w*|lower\w*|"
     r"cuts?|deal|acqui\w*|licens\w*|guideline|breakthrough|fast track|priority review|votes?|decision)", re.I)
 FIELD_TOPIC = r"\b(ldl|cholesterol|pcsk9|hypercholesterol\w*|statin)"  # when a topic has no field_match
+
+
+# Headlines that are never news for this reader, whatever the source.
+NOISE = re.compile(
+    r"\b(market (size|forecast|report|analysis|outlook|share|growth)|stocks?|shares (rose|fell|jump\w*|drop\w*)|"
+    r"price target|earnings call|analyst (says|rating)|buy rating|partners with .* (campaign|ambassador)|"
+    r"coinsurance|copay|deductible|out-of-pocket|listed at \$)", re.I)
+TOP_KEYWORDS = re.compile(
+    r"(?<![-\w])(phase (3|iii)|approv(es|ed|al)|rejects?|complete response|fda (decision|votes?|panel|advisory)|warning|"
+    r"label|halt\w*|discontinu\w*|stops?|stopped|scrap\w*|fil(es|ed|ing)|submi\w*|primary endpoint|"
+    r"fails?|failed|misses|met)\b", re.I)
+
+
+def default_tier(c: Change) -> str:
+    """The tier when Claude doesn't set one: facts about a drug's path are top, routine
+    trial housekeeping is more, and news is top only if its headline says so."""
+    if c.kind in ("stage_change", "fda_approval", "trial_halted", "trial_results"):
+        return "top"
+    if c.kind == "trial_status":  # mid- and final-stage trials starting, filling up or finishing
+        return "top" if ("final-stage" in c.what or "mid-stage" in c.what) else "more"
+    if c.kind in ("trial_new", "discovery"):
+        return "more"
+    if c.kind == "field":
+        return "more"  # without Claude to pick the best few, broader news stays in smaller updates
+    return "top" if TOP_KEYWORDS.search(c.what) else "more"
+
+
+def dedupe(changes: list[Change]) -> list[Change]:
+    """Drop news that repeats another item's story for the same drug (similar headline)."""
+    from difflib import SequenceMatcher
+    out: list[Change] = []
+    for c in changes:
+        # same drug's news, or field news against anything already kept
+        if c.kind in ("news", "field") and any(
+                o.kind in ("news", "field") and (c.kind == "field" or o.drug == c.drug) and
+                SequenceMatcher(None, o.what.lower(), c.what.lower()).ratio() >= 0.6 for o in out):
+            continue
+        out.append(c)
+    return out
+
+
+def prefilter(changes: list[Change]) -> list[Change]:
+    """Cheap, always-on: drop noise headlines and repeated stories before anything else."""
+    return dedupe([c for c in changes if c.kind not in ("news", "field") or not NOISE.search(c.what)])
 
 
 def field_max(watchlist: dict) -> int:
@@ -145,6 +216,7 @@ def apply_fallback(changes: list[Change], drugs: dict, watchlist: dict | None = 
                        and _field_match(watchlist, c.topic).search(c.what))]
         changes = _cap_field(changes, field_max(watchlist) if watchlist else 3)
     for c in changes:
+        c.tier = c.tier or default_tier(c)
         if c.kind == "field":
             continue  # no stock "why" for broader news
         c.why = c.why or (drugs.get(c.drug, {}).get("plain", "") if c.drug else
@@ -165,6 +237,8 @@ def summarize_full(changes: list[Change], watchlist: dict, client=None,
     items the daily runs already filtered), nothing is dropped and existing "why" lines stay."""
     if keep_all:
         kept_whys = {c.id: c.why for c in changes}
+    else:
+        changes = prefilter(changes)
     drugs = {d["id"]: d for d in watchlist["drugs"]}
     if not changes:
         return "", "", []
@@ -200,7 +274,11 @@ def summarize_full(changes: list[Change], watchlist: dict, client=None,
             continue  # only news and field items can be dropped
         if c.kind == "field" and r is None:
             continue  # field news needs Claude's explicit yes
+        if r and r.get("same_as") and r["same_as"] != c.id and r["same_as"] in by_id \
+                and c.kind in ("news", "field"):
+            continue  # another item tells the same story
         c.why = (r or {}).get("why", "").strip()[:400]
+        c.tier = (r or {}).get("tier") or default_tier(c)
         kept.append(c)
     kept = _cap_field(kept, field_max(watchlist))
     _, kept = apply_fallback(kept, drugs)  # fill any missing "why"

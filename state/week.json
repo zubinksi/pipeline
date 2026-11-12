@@ -6,12 +6,13 @@
       "id": "status-NCT07839936-RECRUITING",
       "kind": "trial_status",
       "drug": "verve102",
-      "what": "VERVE-102 Phase 2 trial HEART-3 (NCT07839936) is now recruiting (was not yet recruiting).",
+      "what": "VERVE-102's mid-stage trial (HEART-3) started enrolling patients.",
       "url": "https://clinicaltrials.gov/study/NCT07839936",
       "source": "ClinicalTrials.gov",
       "why": "A one-time gene-editing treatment meant to lower LDL for life.",
       "topic": "",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "top",
       "extra": {}
     },
     {
@@ -24,6 +25,7 @@
       "why": "A shot every 2 weeks or once a month that lowers LDL. On the market since 2015.",
       "topic": "",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "more",
       "extra": {
         "summary": "Evolocumab Cuts First-Stroke Risk, Shows MACE Benefit Up to 8 Years The American Journal of Managed Care",
         "published": "2026-11-10T16:08:16+00:00"
@@ -39,6 +41,7 @@
       "why": "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial.",
       "topic": "",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "top",
       "extra": {
         "summary": "Novartis (SWX:NOVN) Halts Pelacarsen After Trial Miss As Ianalumab Data Impresses Yahoo Finance",
         "published": "2026-11-11T14:15:22+00:00"
@@ -54,6 +57,7 @@
       "why": "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial.",
       "topic": "",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "more",
       "extra": {
         "summary": "Investigators Caution Against Abandoning Lp(a)-Targeting Treatments After Neutral Pelacarsen Trial GenomeWeb",
         "published": "2026-11-10T19:38:00+00:00"
@@ -69,6 +73,7 @@
       "why": "A weekly shot that acts on two gut hormones (GIP and GLP-1) to reduce appetite. Sold as Zepbound for weight and Mounjaro for diabetes.",
       "topic": "",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "top",
       "extra": {
         "summary": "FDA Adds a Vision Warning to Zepbound Days After Lilly\u2019s November 6 Hims & Hers Deal Yahoo Finance",
         "published": "2026-11-12T16:20:33+00:00"
@@ -84,6 +89,7 @@
       "why": "The first of the new weight-loss drugs: a weekly GLP-1 shot, now also a daily pill. Sold as Ozempic for diabetes.",
       "topic": "",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "top",
       "extra": {
         "summary": "FDA adds vision loss warning to Ozempic, Wegovy and other GLP-1 drugs TMJ4 News",
         "published": "2026-11-12T16:00:51+00:00"
@@ -99,6 +105,7 @@
       "why": "Lilly's GLP-1 pill. Unlike other GLP-1 pills it doesn't need to be taken on an empty stomach, and it's easier to make in bulk than shots.",
       "topic": "",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "top",
       "extra": {
         "summary": "China approves Eli Lilly\u2019s oral weight-loss drug orforglipron Minute Mirror",
         "published": "2026-11-12T15:29:41+00:00"
@@ -114,6 +121,7 @@
       "why": "A weekly shot that acts on three hormones. In its final-stage trial it produced the largest weight loss of any drug so far.",
       "topic": "",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "more",
       "extra": {
         "summary": "Can Weight Loss Medicines Reduce Chronic Knee Pain? Eli Lilly's Experimental Drug Retatrutide Shows Promise Health and Me",
         "published": "2026-11-12T10:41:28+00:00"
@@ -129,24 +137,10 @@
       "why": "A weekly shot that acts on three hormones. In its final-stage trial it produced the largest weight loss of any drug so far.",
       "topic": "",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "more",
       "extra": {
         "summary": "Retatrutide shows knee osteoarthritis pain relief in trials \ub514\uc9c0\ud138\ud22c\ub370\uc774",
         "published": "2026-11-12T05:47:56+00:00"
-      }
-    },
-    {
-      "id": "news-625d2febe2f7",
-      "kind": "news",
-      "drug": "lecanemab",
-      "what": "Two Neighbors Will Start Leqembi, Listed at $28,270 a Year. One With Medigap Plan G Will Owe $0 in Coinsurance After the Part B Deductible, While the Other Will Owe 20% of Medicare-Approved Infusion Costs",
-      "url": "https://news.google.com/rss/articles/CBMi4wJBVV95cUxPbXNZQ2Rnd1BSVmNUV0NNYnNpcEprUS14S3ZjbXVLNUpQSFVmclAwdWFxMkhubjdNSUh1M2ZlamRXS3dsRHhxaGdic1JrNDZSY0ludHlSbTZuY2JITFlqdkxUTVFHcHE1LWkxaHF2UFg5ay1lM09hWlpzUHlyN01xR3Izem1mQWVwWGFON2dMYTZOSEZyTVp3YzRtNnRIOWxJMW9DYUlMRGFlZWh4Nm9VMV9XTWZFaFAzalhDTlBoWDgzMjBEclBaMEx0WUtlVWlUYWdtb1ItQTRrZ2RjOVFTcHBNVlJTRHMxdzN1RGZLd1NvSUJ0bk5wbUZaanctX29IdkdMSWFka1duZWgxM0ZGcW1ZRGFzVEd0SkhJRTFlNjY3RmZrRVVIOE4xMktMTklrcER3R3h5c2ZXUGxGU083bHdEa3FlWHNQd0MtRzE4RzNYaUNmYzhQQm5XSGEyNXA1NzZr?oc=5",
-      "source": "24/7 Wall St.",
-      "why": "The first amyloid drug with full approval. Now also a weekly shot people can give themselves at home.",
-      "topic": "",
-      "found": "2026-11-12T17:33:27+00:00",
-      "extra": {
-        "summary": "Two Neighbors Will Start Leqembi, Listed at $28,270 a Year. One With Medigap Plan G Will Owe $0 in Coinsurance After the Part B Deductible, While the Other Will Owe 20% of Medicare-Approved Infusion Costs 24/7 Wall St.",
-        "published": "2026-11-11T01:03:00+00:00"
       }
     },
     {
@@ -159,6 +153,7 @@
       "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
       "topic": "",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "top",
       "extra": {
         "summary": "Lung Cancer Drug Ivonescimab Uses Tumor's Own Growth Signal to Boost Immunity: FDA Votes Saturday Tech Times",
         "published": "2026-11-12T16:34:15+00:00"
@@ -174,70 +169,11 @@
       "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
       "topic": "",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "top",
       "extra": {
         "summary": "Summit sheds commercial leaders ahead of ivonescimab's FDA decision Fierce Pharma",
         "published": "2026-11-10T19:12:09+00:00"
       }
-    },
-    {
-      "id": "disc-NCT07930507",
-      "kind": "discovery",
-      "drug": null,
-      "what": "New Phase 3 trial not on your watchlist: Laroprovstat, Rosuvastatin 1, Rosuvastatin 2, FDC laroprovstat/Rosuvastatin 1 (AstraZeneca): A Phase III Study to Assess the Effect of FDC Laroprovstat/Rosuvastatin Compared With Laroprovstat, Rosuvastatin, and Placebo on LDL-C in LLT-na\u00efve Patients (NCT07930507).",
-      "url": "https://clinicaltrials.gov/study/NCT07930507",
-      "source": "ClinicalTrials.gov",
-      "why": "A trial not yet on your watchlist; worth a look if the drug is new to you.",
-      "topic": "heart",
-      "found": "2026-11-12T17:33:27+00:00",
-      "extra": {}
-    },
-    {
-      "id": "disc-NCT07932925",
-      "kind": "discovery",
-      "drug": null,
-      "what": "New Phase 3 trial not on your watchlist: Berobenatide, Placebo (Pfizer): The Purpose of This Study is to Learn About the Safety and Effectiveness of Berobenatide in Women With Urine Leakage and With Obesity or Overweight (NCT07932925).",
-      "url": "https://clinicaltrials.gov/study/NCT07932925",
-      "source": "ClinicalTrials.gov",
-      "why": "A trial not yet on your watchlist; worth a look if the drug is new to you.",
-      "topic": "obesity",
-      "found": "2026-11-12T17:33:27+00:00",
-      "extra": {}
-    },
-    {
-      "id": "disc-NCT07929298",
-      "kind": "discovery",
-      "drug": null,
-      "what": "New Phase 2 trial not on your watchlist: ecnoglutide tablet, placebo with matching dosage (Hangzhou Sciwind Biosciences Co., Ltd.): A Study to Evaluate the Safety and Efficacy of Ecnoglutide Tablets in Chinese Participants With Overweight or Obesity (NCT07929298).",
-      "url": "https://clinicaltrials.gov/study/NCT07929298",
-      "source": "ClinicalTrials.gov",
-      "why": "A trial not yet on your watchlist; worth a look if the drug is new to you.",
-      "topic": "obesity",
-      "found": "2026-11-12T17:33:27+00:00",
-      "extra": {}
-    },
-    {
-      "id": "disc-NCT07922330",
-      "kind": "discovery",
-      "drug": null,
-      "what": "New Phase 3 trial not on your watchlist: AZD6234, Placebo (AstraZeneca): SELENE-Asia (NCT07922330).",
-      "url": "https://clinicaltrials.gov/study/NCT07922330",
-      "source": "ClinicalTrials.gov",
-      "why": "A trial not yet on your watchlist; worth a look if the drug is new to you.",
-      "topic": "obesity",
-      "found": "2026-11-12T17:33:27+00:00",
-      "extra": {}
-    },
-    {
-      "id": "disc-NCT07918625",
-      "kind": "discovery",
-      "drug": null,
-      "what": "New Phase 2 trial not on your watchlist: BGM1812 injection / plcaebo, BGM1812 injection / plcaebo, BGM1812 injection / plcaebo, BGM1812 injection / plcaebo (BrightGene Bio-Medical Technology Co., Ltd.): A Study to Evaluate Efficacy and Safety of BGM1812 Injection in Overweight or Obese Participants Without Diabetes (NCT07918625).",
-      "url": "https://clinicaltrials.gov/study/NCT07918625",
-      "source": "ClinicalTrials.gov",
-      "why": "A trial not yet on your watchlist; worth a look if the drug is new to you.",
-      "topic": "obesity",
-      "found": "2026-11-12T17:33:27+00:00",
-      "extra": {}
     },
     {
       "id": "news-7dfe591c7f95",
@@ -249,24 +185,10 @@
       "why": "",
       "topic": "heart",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "more",
       "extra": {
         "summary": "Innovent\u2019s cholesterol drug delivers 60% LDL-C reduction in Phase 3 trial Indian Pharma Post",
         "published": "2026-11-11T13:39:45+00:00"
-      }
-    },
-    {
-      "id": "news-fb971076e9be",
-      "kind": "field",
-      "drug": null,
-      "what": "FDA adds vision loss warning to GLP-1 weight loss drugs",
-      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQQkJJbGVpVi1STFowNnpXSERfOHBqcFEyLXhhWHFySnA1bWJIN1VjcGZjaHlyUTJoUXRiMjZZblptT0JYVUpfWFB2b0FVbGJTRmJ1VkZDa1I0SHo2bW5MSEV4OGJFUmZpVFNRUFhKUkJfWFdtZGF0Z0oxUUdpc05NTm1va2JLc0Q0LWVWaDJIeGdaZ1E?oc=5",
-      "source": "https://streamlinefeed.co.ke/",
-      "why": "",
-      "topic": "obesity",
-      "found": "2026-11-12T17:33:27+00:00",
-      "extra": {
-        "summary": "FDA adds vision loss warning to GLP-1 weight loss drugs https://streamlinefeed.co.ke/",
-        "published": "2026-11-12T10:03:55+00:00"
       }
     },
     {
@@ -279,24 +201,10 @@
       "why": "",
       "topic": "obesity",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "more",
       "extra": {
         "summary": "US FDA flags blindness risk from GLP-1 drugs: What patients should know Business Standard",
         "published": "2026-11-12T09:59:37+00:00"
-      }
-    },
-    {
-      "id": "news-9e96b12d5635",
-      "kind": "field",
-      "drug": null,
-      "what": "What To Know About FDA\u2019s Vision Loss Warning For GLP-1 Weight-Loss Drugs",
-      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPbG1aSGhnOWUwbHMxZ0RZNm5KRXBDSHpZU0xheHJ2ZzdmcElnMEUxWUJUMFdZN3JmUzA3LVNmTk9nSUl3cGJ0UDktTE1uOEVYSXR4MWFfUGFTOEpjQllCWHlfWjJtZndvRU0yQ1dBclNvVW9JLWJldGhZZDVpMjBGaXYxd21PMjNJUHp4TmVOeXZTNW9qYjNxcDZBaEpjSndyNXFpS2tkSWFSeEJBanRIenlLTTdkOWpvYk1DTVhDdllXdw?oc=5",
-      "source": "Forbes Middle East",
-      "why": "",
-      "topic": "obesity",
-      "found": "2026-11-12T17:33:27+00:00",
-      "extra": {
-        "summary": "What To Know About FDA\u2019s Vision Loss Warning For GLP-1 Weight-Loss Drugs Forbes Middle East",
-        "published": "2026-11-12T09:18:15+00:00"
       }
     },
     {
@@ -309,6 +217,7 @@
       "why": "",
       "topic": "alzheimers",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "more",
       "extra": {
         "summary": "South Korea's AriBio to Unveil Phase 3 Results for Oral Alzheimer's Drug in Boston on the 16th BigGo Finance",
         "published": "2026-11-11T08:06:00+00:00"
@@ -324,6 +233,7 @@
       "why": "",
       "topic": "alzheimers",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "more",
       "extra": {
         "summary": "Global Alzheimer\u2019s trial summit to unveil AriBio phase 3 pill data and next-wave therapies Chosunbiz",
         "published": "2026-11-11T07:29:00+00:00"
@@ -339,6 +249,7 @@
       "why": "",
       "topic": "alzheimers",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "more",
       "extra": {
         "summary": "Alzheon Highlights ORION-E4 Phase 3 Trial Launch for Oral Valiltramiprosate/ALZ-801 and Expansion of Its Oral Anti-Amyloid Aggregation Inhibitor Portfolio at CTAD 2026 Conference in Boston, November 16\u201319 Business Wire",
         "published": "2026-11-10T11:00:00+00:00"
@@ -354,6 +265,7 @@
       "why": "",
       "topic": "cancer",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "more",
       "extra": {
         "summary": "FDA Approves MSI Companion Diagnostic for Pembrolizumab in MSI-H Tumors Oncology Nursing News",
         "published": "2026-11-12T12:05:19+00:00"
@@ -369,6 +281,7 @@
       "why": "",
       "topic": "cancer",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "more",
       "extra": {
         "summary": "FDA Approves Pimjetmi for Patients With Tenosynovial Giant Cell Tumor Pharmaceutical Executive",
         "published": "2026-11-12T03:46:41+00:00"
@@ -384,6 +297,7 @@
       "why": "",
       "topic": "cancer",
       "found": "2026-11-12T17:33:27+00:00",
+      "tier": "more",
       "extra": {
         "summary": "FDA Approves First New Head and Neck Cancer Drug in 10 Years \uc870\uc120\uc77c\ubcf4",
         "published": "2026-11-12T00:20:56+00:00"

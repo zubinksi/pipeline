@@ -43,6 +43,13 @@
 {% endfor %}
 {% endif %}
 
+{% if minor %}
+<tr><td style="padding:24px 28px 0 28px;"><div style="{{ label }}padding-bottom:6px;border-bottom:1px solid {{ rule2 }};">Smaller updates</div></td></tr>
+<tr><td style="padding:8px 28px 0 28px;font-size:14px;line-height:1.5;color:{{ ink2 }};">
+  {% for c in minor %}<div style="padding:4px 0;">{% if c.drug %}<span style="font-family:{{ mono }};font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:{{ muted }};">{{ c.drug }}</span> · {% endif %}{{ c.what }} <a href="{{ c.url }}" style="font-family:{{ mono }};font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:{{ accent }};text-decoration:none;white-space:nowrap;">{{ c.source }} &rarr;</a></div>{% endfor %}
+</td></tr>
+{% endif %}
+
 {% if horizon %}
 <tr><td style="padding:24px 28px 0 28px;"><div style="{{ label }}padding-bottom:6px;border-bottom:1px solid {{ rule2 }};">Watching for</div></td></tr>
 {% for h in horizon %}

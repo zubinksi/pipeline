@@ -66,13 +66,14 @@ def render(*, headline: str, lead: str = "", changes: list[Change], horizon: lis
         "drug": names[c.drug]["name"] if c.drug in names else "",
         "company": names[c.drug]["company"] if c.drug in names else "",
         "what": c.what, "why": c.why, "url": c.url, "source": c.source,
-        "kind": c.kind,
+        "kind": c.kind, "tier": c.tier or "top",
     } for c in changes]
     ctx = {
         "headline": headline,
         "lead": lead,
-        "changes": [c for c in shown if c["kind"] != "field"],
-        "field": [c for c in shown if c["kind"] == "field"],
+        "changes": [c for c in shown if c["kind"] != "field" and c["tier"] != "more"],
+        "field": [c for c in shown if c["kind"] == "field" and c["tier"] != "more"],
+        "minor": [c for c in shown if c["tier"] == "more"],
         "horizon": horizon,
         "horizon_days": watchlist["settings"].get("horizon_days", 60),
         "stages": [label for _, label in STAGES],
