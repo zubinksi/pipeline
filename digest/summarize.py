@@ -105,6 +105,11 @@ def fallback_headline(changes: list[Change]) -> str:
 FIELD_KEYWORDS = re.compile(
     r"\b(phase (3|iii)|fda|approv\w*|met (its )?primary endpoint|trial results?|"
     r"outcomes? (trial|study)|guideline)", re.I)
+# Without Claude, drug news is kept only if the headline names a concrete development.
+NEWS_KEYWORDS = re.compile(
+    r"\b(fda|ema|approv\w*|phase|trials?|results?|data|stud(y|ies)|efficacy|endpoint|fil(ed|ing|es)|"
+    r"submi\w*|launch\w*|label|warning|recall|halt\w*|discontinu\w*|stops?|stopped|reduc\w*|lower\w*|"
+    r"cuts?|deal|acqui\w*|licens\w*|guideline|breakthrough|fast track|priority review|votes?|decision)", re.I)
 FIELD_TOPIC = r"\b(ldl|cholesterol|pcsk9|hypercholesterol\w*|statin)"  # when a topic has no field_match
 
 
@@ -134,8 +139,10 @@ def apply_fallback(changes: list[Change], drugs: dict, watchlist: dict | None = 
     if screen_field:
         # no Claude to judge field news: keep only headlines that look like concrete
         # LDL-treatment developments
-        changes = [c for c in changes if c.kind != "field"
-                   or (FIELD_KEYWORDS.search(c.what) and _field_match(watchlist, c.topic).search(c.what))]
+        changes = [c for c in changes if c.kind not in ("field", "news")
+                   or (c.kind == "news" and NEWS_KEYWORDS.search(c.what))
+                   or (c.kind == "field" and FIELD_KEYWORDS.search(c.what)
+                       and _field_match(watchlist, c.topic).search(c.what))]
         changes = _cap_field(changes, field_max(watchlist) if watchlist else 3)
     for c in changes:
         if c.kind == "field":

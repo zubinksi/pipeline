@@ -193,3 +193,13 @@ def test_daily_runs_build_the_week_and_monday_closes_it(tmp_path):
     close = {"headline": "Week", "lead": "A lead.", "items": [{"id": c["id"], "include": False, "why": "x"} for c in wk["changes"]]}
     headline, lead, all_ = summarize.summarize_full(week.changes(wk), WL, client=FakeClient(close), keep_all=True)
     assert lead == "A lead." and len(all_) == len(kept) and all(c.why == "w" for c in all_)
+
+
+def test_without_claude_drug_news_must_look_like_a_development():
+    from digest.diff import Change
+    mk = lambda i, t: Change(id=i, kind="news", drug="evolocumab", what=t, url="u", source="s")
+    news = [mk("a", "Repatha Market Forecast to 2030: Analysis of Market Size"),
+            mk("b", "Evolocumab Cuts First-Stroke Risk in 8-Year Data"),
+            mk("c", "Novo Nordisk partners with a DJ for Wegovy campaign")]
+    _, kept = summarize.apply_fallback(news, {d["id"]: d for d in WL["drugs"]}, WL, screen_field=True)
+    assert [c.id for c in kept] == ["b"]
