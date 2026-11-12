@@ -74,7 +74,7 @@
 {% macro changes(list, root, show_drug=true) -%}
 {% for c in list %}
 <div class="change"{% if c.drug %} data-drug="{{ c.drug }}"{% elif c.topic %} data-topic="{{ c.topic }}"{% endif %}{% if c.found %} data-found="{{ c.found }}"{% endif %}>
-  <div class="meta">{% if c.found %}<span class="found">{{ c.found|found_day }}</span> · {% endif %}<span class="new-tag" hidden>New</span>
+  <div class="meta"><span class="new-tag" hidden>New</span>{% if c.found %}<span class="found">{{ c.found|found_day }}</span> · {% endif %}
     {% if show_drug and c.drug_name %}<a href="{{ root }}drugs/{{ c.drug }}.html">{{ c.drug_name }}</a> · {% endif %}
     {% if not show_drug and c.week %}<a href="{{ root }}weeks/{{ c.week }}.html">{{ c.week|nice_date }}</a> · {% endif %}
     {{ c.kind_label }}
@@ -141,7 +141,7 @@
   <div class="section-head"><h2>In the field <span class="sub">beyond your list</span></h2></div>
   {% for c in field %}
   <div class="change"{% if c.topic %} data-topic="{{ c.topic }}"{% endif %}{% if c.found %} data-found="{{ c.found }}"{% endif %}>
-    <div class="meta">{% if c.found %}<span class="found">{{ c.found|found_day }}</span>{% if c.topic in topics and topics|length > 1 %} · {% endif %}{% endif %}{% if c.topic in topics and topics|length > 1 %}{{ topics[c.topic].title }}{% endif %}<span class="new-tag" hidden>New</span></div>
+    <div class="meta"><span class="new-tag" hidden>New</span>{% if c.found %}<span class="found">{{ c.found|found_day }}</span>{% if c.topic in topics and topics|length > 1 %} · {% endif %}{% endif %}{% if c.topic in topics and topics|length > 1 %}{{ topics[c.topic].title }}{% endif %}</div>
     <div class="what">{{ c.what }} <a class="src" href="{{ c.url }}" rel="noopener noreferrer">{{ c.source }} &rarr;</a></div>
     {% if c.why %}<div class="why">{{ c.why }}</div>{% endif %}
   </div>

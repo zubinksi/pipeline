@@ -1576,5 +1576,5 @@ details.fold > div { padding-top: 0.75rem; }
 
 /* this week: when each item was found, and a New tag for ones since your last visit */
 .change .meta .found { color: var(--ink3); }
-.new-tag { margin-left: 0.5rem; padding: 0.0625rem 0.375rem; border-radius: 999px; background: var(--accent); color: var(--slab); font-size: 0.5625rem; letter-spacing: 0.12em; }
+.new-tag { margin-right: 0.5rem; padding: 0.0625rem 0.375rem; border-radius: 999px; background: var(--accent); color: var(--slab); font-size: 0.5625rem; letter-spacing: 0.12em; }
 .new-tag[hidden] { display: none; }
