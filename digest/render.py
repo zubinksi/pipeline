@@ -73,7 +73,6 @@ def render(*, headline: str, lead: str = "", changes: list[Change], horizon: lis
         "lead": lead,
         "changes": [c for c in shown if c["kind"] != "field" and c["tier"] != "more"],
         "field": [c for c in shown if c["kind"] == "field" and c["tier"] != "more"],
-        "minor": [c for c in shown if c["tier"] == "more"],
         "horizon": horizon,
         "horizon_days": watchlist["settings"].get("horizon_days", 60),
         "stages": [label for _, label in STAGES],

@@ -44,8 +44,8 @@ analyst commentary, opinion, previews, and rehashes of older events.
 Be strict: include at most {field_max} per topic, and only what that topic counts as news:
 {field_focus}
     Exclude diet and supplement stories, stock and business news, opinion, and previews.
-  - tier: "top" or "more", for every item you include. Be selective: most weeks have only a \
-few top items.
+  - tier: "top" or "more", for every item you include. Only "top" items reach the reader; \
+"more" items are dropped. Be selective: most weeks have only a few top items.
     "top": it changes what a reader knows about a drug's prospects or availability: \
 final-stage (Phase 3) results or their publication; an approval, rejection, filing or FDA \
 decision or advisory vote; a new safety warning or label change; a program halted, paused or \
@@ -112,11 +112,8 @@ def fallback_headline(changes: list[Change]) -> str:
     """'3 top stories and 9 smaller updates this week.' (or the old count by kind, for
     changes from before stories had tiers)."""
     if any(c.tier for c in changes):
-        top = sum(1 for c in changes if c.tier != "more")
-        more = len(changes) - top
-        parts = ([f"{top} top stor{'y' if top == 1 else 'ies'}"] if top else []) + \
-                ([f"{more} smaller update{'' if more == 1 else 's'}"] if more else [])
-        return " and ".join(parts).capitalize() + " this week." if parts else ""
+        n = len(changes)
+        return f"{n} update{'' if n == 1 else 's'} this week." if n else ""
     return _count_by_kind(changes)
 
 
@@ -248,7 +245,8 @@ def summarize_full(changes: list[Change], watchlist: dict, client=None,
             if keep_all:
                 return fallback_headline(changes), "", changes
             h, kept = apply_fallback(changes, drugs, watchlist, screen_field=True)
-            return h, "", kept
+            kept = [c for c in kept if c.tier != "more"]
+            return (fallback_headline(kept) if kept else ""), "", kept
         import anthropic
         client = anthropic.Anthropic()
     try:
@@ -258,7 +256,8 @@ def summarize_full(changes: list[Change], watchlist: dict, client=None,
         if keep_all:
             return fallback_headline(changes), "", changes
         h, kept = apply_fallback(changes, drugs, watchlist, screen_field=True)
-        return h, "", kept
+        kept = [c for c in kept if c.tier != "more"]
+        return (fallback_headline(kept) if kept else ""), "", kept
 
     if keep_all:
         by_id = {i["id"]: i for i in result.get("items", []) if isinstance(i, dict) and "id" in i}
@@ -282,6 +281,7 @@ def summarize_full(changes: list[Change], watchlist: dict, client=None,
         kept.append(c)
     kept = _cap_field(kept, field_max(watchlist))
     _, kept = apply_fallback(kept, drugs)  # fill any missing "why"
+    kept = [c for c in kept if c.tier != "more"]  # only top stories get through
     if not kept:
         return "", "", []
     headline = (result.get("headline") or "").strip()[:200] or fallback_headline(kept)

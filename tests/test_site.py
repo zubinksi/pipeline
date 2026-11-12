@@ -34,11 +34,11 @@ def test_site_pages_exist(tmp_path):
 def test_index_shows_latest_week_and_sources(tmp_path):
     out, changes = _build(tmp_path)
     html = (out / "index.html").read_text()
-    # without Claude, field news is listed under smaller updates
-    assert "This week" in html and "Coming up" in html and "Smaller updates" in html
+    assert "This week" in html and "Coming up" in html and "Smaller updates" not in html
     assert "How to read this" in (out / "drugs.html").read_text()
     for c in changes:
-        assert c.url in html
+        if c.tier != "more":
+            assert c.url in html
     assert 'href="drugs/verve102.html"' in html  # relative links work on any host
 
 

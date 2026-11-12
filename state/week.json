@@ -16,22 +16,6 @@
       "extra": {}
     },
     {
-      "id": "news-4bf890fc4524",
-      "kind": "news",
-      "drug": "evolocumab",
-      "what": "Evolocumab Cuts First-Stroke Risk, Shows MACE Benefit Up to 8 Years",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPTzZ0c2VxQkhvdWcxcUNJQ0NGZUt4QnhGYkRuUjhrWXljT0VqT2kwazJFeU9UVmlxRm8zV0VScW5OamxKZ2diUVFsNU1ybDg2SHFIbDd6RmMzc0IyVGlQY21BUDluTTRiOHBJQTJRQTQ2a3ZMQ1VEV21VWkFTbnV5YjN0WGw1U2wxWnY0cy0tSEVzV2NiOTBz?oc=5",
-      "source": "The American Journal of Managed Care",
-      "why": "A shot every 2 weeks or once a month that lowers LDL. On the market since 2015.",
-      "topic": "",
-      "found": "2026-11-12T17:33:27+00:00",
-      "tier": "more",
-      "extra": {
-        "summary": "Evolocumab Cuts First-Stroke Risk, Shows MACE Benefit Up to 8 Years The American Journal of Managed Care",
-        "published": "2026-11-10T16:08:16+00:00"
-      }
-    },
-    {
       "id": "news-6bc54f0e30b2",
       "kind": "news",
       "drug": "pelacarsen",
@@ -45,22 +29,6 @@
       "extra": {
         "summary": "Novartis (SWX:NOVN) Halts Pelacarsen After Trial Miss As Ianalumab Data Impresses Yahoo Finance",
         "published": "2026-11-11T14:15:22+00:00"
-      }
-    },
-    {
-      "id": "news-587aa985cdc2",
-      "kind": "news",
-      "drug": "pelacarsen",
-      "what": "Investigators Caution Against Abandoning Lp(a)-Targeting Treatments After Neutral Pelacarsen Trial",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPUWNIWEowV0JUOUxubkJybWJnU2ZTbWpRY1lIbVU2cVRxVUJ6cmhnUjJwemV6TzczeC1kcks3ejZPSm1ZVkp0R3pXVWtWYW1STUJvZUhTXzRwT3YzOXkyLTFLRGZEVFI1ei0tWmsteHRCQnFXM3BkbmxBMU1BZ18ydjdkVFdsSF9kNTEyUWVWbkVXdkgxdlhxakprN3ZKbG9GYkE?oc=5",
-      "source": "GenomeWeb",
-      "why": "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial.",
-      "topic": "",
-      "found": "2026-11-12T17:33:27+00:00",
-      "tier": "more",
-      "extra": {
-        "summary": "Investigators Caution Against Abandoning Lp(a)-Targeting Treatments After Neutral Pelacarsen Trial GenomeWeb",
-        "published": "2026-11-10T19:38:00+00:00"
       }
     },
     {
@@ -112,38 +80,6 @@
       }
     },
     {
-      "id": "news-30446772e3d4",
-      "kind": "news",
-      "drug": "retatrutide",
-      "what": "Can Weight Loss Medicines Reduce Chronic Knee Pain? Eli Lilly's Experimental Drug Retatrutide Shows Promise",
-      "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxNZXBtUWtwTnQtZmszX3ZUN0lRdjh4UEE1RUkwUXFmM3RSUFlPNkM2UDBIR3NRR3BwWlY2TXRGYXMzaUVJT3B1VnlrclhoRjRsck5uZlltRWExZVlvbjQxTnphdExLWjVHMTB1MkhBY3dnem5ocWwxMHFvZ29FREgyUi13SVRaQUFJM0N2NXRBSXY0bTcyU3ZKQlg5b3JHaUtKWXZ4MzJiazRHRnprbEhOeWc1SWxLNEpuaDI2N2VNWmtSLWUwSFZfZDNUblFETUlOYkNZT18yMUc0RTJGb0d1U1FZTmpFVXRHTUtjMThpQUdSd1A5RGc?oc=5",
-      "source": "Health and Me",
-      "why": "A weekly shot that acts on three hormones. In its final-stage trial it produced the largest weight loss of any drug so far.",
-      "topic": "",
-      "found": "2026-11-12T17:33:27+00:00",
-      "tier": "more",
-      "extra": {
-        "summary": "Can Weight Loss Medicines Reduce Chronic Knee Pain? Eli Lilly's Experimental Drug Retatrutide Shows Promise Health and Me",
-        "published": "2026-11-12T10:41:28+00:00"
-      }
-    },
-    {
-      "id": "news-fb237f32bd45",
-      "kind": "news",
-      "drug": "retatrutide",
-      "what": "Retatrutide shows knee osteoarthritis pain relief in trials",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQUG5JS212ZS1GZHpiSGNRUmU2N21JWV9LUFlZS3kxd3U0NDJpOFFTb3JjZXdlQ2pTOEhDQm4zQ2hWbDEtWXBrWjJYR0JWQ3FNTENscmtneGhZOGlnT0lzLTl6RVdTZGh3amFPQjlFbk5aZnJjUGtCalc4cUJWdkw3QXNqamstSWtmZ0UwcGtCWHdTSU9ncTRxRDRjbWtUanJCcF91ZlFlcno?oc=5",
-      "source": "\ub514\uc9c0\ud138\ud22c\ub370\uc774",
-      "why": "A weekly shot that acts on three hormones. In its final-stage trial it produced the largest weight loss of any drug so far.",
-      "topic": "",
-      "found": "2026-11-12T17:33:27+00:00",
-      "tier": "more",
-      "extra": {
-        "summary": "Retatrutide shows knee osteoarthritis pain relief in trials \ub514\uc9c0\ud138\ud22c\ub370\uc774",
-        "published": "2026-11-12T05:47:56+00:00"
-      }
-    },
-    {
       "id": "news-16638fec0cc9",
       "kind": "news",
       "drug": "ivonescimab",
@@ -173,134 +109,6 @@
       "extra": {
         "summary": "Summit sheds commercial leaders ahead of ivonescimab's FDA decision Fierce Pharma",
         "published": "2026-11-10T19:12:09+00:00"
-      }
-    },
-    {
-      "id": "news-7dfe591c7f95",
-      "kind": "field",
-      "drug": null,
-      "what": "Innovent\u2019s cholesterol drug delivers 60% LDL-C reduction in Phase 3 trial",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOLXZvQm5ocUhYdi13c0JQckFKRWV2blBxR2pEbnhPYS1fczhhMTVVX2g1eG9fMjF4QVZqQ3BtS2tmRXRiYjVOeG9EQWF6MV9KREk5MnRobnZhQjN4OE1leXhOSGMxNmNGelQxeVZkZnBTd1RFTDZvOTl0WmZvczVTWG9qVWl1ZVIybjA3cFRRLWY5azlnYXBLR1RoNEM0YjZjS25ybjZiUThidUU5TU5na3BaVTdxd9IBywFBVV95cUxNM2lTVWJfVERNV3RNY0JVbUlRa2szS1liNmJBODNjS1ZlV1lEZldUSlNLWEJhUHhUSmVhb2pzOGwyWVpSMkxEZ0lVN2puekl3ZWtZdzhLbWo1Ym5wajRPMzRnMWxpMm1NT0M2dmNDSGNOOUJ1ZWlWLU1uNVFXa0tRMnoxWHU5c3hHMXdYQWs2YlF0X1Y1clpZRFRDOE80MGRNSG9oVFJneFJIek8tRnM4cnVRUXA4WEFQS0xNeGRsd3ZseVlRX0xuemh3UQ?oc=5",
-      "source": "Indian Pharma Post",
-      "why": "",
-      "topic": "heart",
-      "found": "2026-11-12T17:33:27+00:00",
-      "tier": "more",
-      "extra": {
-        "summary": "Innovent\u2019s cholesterol drug delivers 60% LDL-C reduction in Phase 3 trial Indian Pharma Post",
-        "published": "2026-11-11T13:39:45+00:00"
-      }
-    },
-    {
-      "id": "news-a0aa50df5f72",
-      "kind": "field",
-      "drug": null,
-      "what": "US FDA flags blindness risk from GLP-1 drugs: What patients should know",
-      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNY1BEclFLYXR5N3pSMWQ3WHZkTkhxUk5Cb3hQUUV6TnRoUUxaRW1HT08wWVFEMzNVTmhrNUp2TERXOTN0eTlybWdZY3BIY3ROdkVaSjgzUU1EZUdXeGNkd2gzR1doZHNmeHFSVHNrMndHX1M3Vnk1YkdFVE1xdEVFSC1YZUl1TXhsSGRGRno3ZjVWQjVHTmhMeTA0TVpOem1kM2lqVGFvUXZDNllVdERoX2c5WTlzRk9vOTN6QUFBa3hoQTVpT3dMWmFLd9IB0AFBVV95cUxPVEpqNkRGVVVZWnhNellXV2FIeUdyYkhrQlBJdFN4LUplVG9EbkRfankwU09VWTFYRGRRM3FBU2wxVEYwUmdKbTQxckRWWG5JZEF5eDdMZjlNa1ZnTUtPOXdnSW1ReDNPa3p5QXdOTlJMVWhFcHZJUnBYNnJsMDc5emJ2amtQc284TV83MkNOeDNjVURCdWdXWUpabDhBTFF4Y2luTTl4WER6M01ZRk1xRUNfUW50TjNRUXg5U0hyWHFpTGFRSWpnZUxNWDNJdjdi?oc=5",
-      "source": "Business Standard",
-      "why": "",
-      "topic": "obesity",
-      "found": "2026-11-12T17:33:27+00:00",
-      "tier": "more",
-      "extra": {
-        "summary": "US FDA flags blindness risk from GLP-1 drugs: What patients should know Business Standard",
-        "published": "2026-11-12T09:59:37+00:00"
-      }
-    },
-    {
-      "id": "news-18a56826632f",
-      "kind": "field",
-      "drug": null,
-      "what": "South Korea's AriBio to Unveil Phase 3 Results for Oral Alzheimer's Drug in Boston on the 16th",
-      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5TTEIxLUdMN0hLRzYycUxaV3VrcDdwZzFxcXRndGYzalktTGwxWHRaeGIyZzZIQnlHZGJfamZkQzRPQ3B4Y1RRNjhYOGgtTnhEZjQ2VTBsRTBBWE5Zbk05VlV5REJ6dlpJcmM0S2hqZlpvR2dUYXc?oc=5",
-      "source": "BigGo Finance",
-      "why": "",
-      "topic": "alzheimers",
-      "found": "2026-11-12T17:33:27+00:00",
-      "tier": "more",
-      "extra": {
-        "summary": "South Korea's AriBio to Unveil Phase 3 Results for Oral Alzheimer's Drug in Boston on the 16th BigGo Finance",
-        "published": "2026-11-11T08:06:00+00:00"
-      }
-    },
-    {
-      "id": "news-0044b9fc978a",
-      "kind": "field",
-      "drug": null,
-      "what": "Global Alzheimer\u2019s trial summit to unveil AriBio phase 3 pill data and next-wave therapies",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNQU5kYVdpejlNcEN4RjAwdXNXdG5aMTU1T1AxaUgtaFpRSF9SOWxiTnpXZ29UUUZOVE1nTWFHVWY4bm1USWZqSEptVGsxaEpIazFtbUR0RUs1Z2h3cDNKQkVHS1A5a2JpUmdJaUxWcWxTQVpKSkpXUnE0TW14QUdsb9IBlAFBVV95cUxOdjM5V2Y4UmJWb0xsZFZHWEVRQzQ5em9ueFA5aDc5U2MwemMyMC1BdWZuckV3bUVRQlFaUzRqRGlFLS1IRVYwZDhfS00ybF9PZUotcWRYWHZaYnljSEtiUDRPck9XRVUzY05BamJBQ2tXa0ZFdDl4ZzVuQ2VPU1YzM1JMUnJfaU1jdDM4ZHJncEJ6SWxr?oc=5",
-      "source": "Chosunbiz",
-      "why": "",
-      "topic": "alzheimers",
-      "found": "2026-11-12T17:33:27+00:00",
-      "tier": "more",
-      "extra": {
-        "summary": "Global Alzheimer\u2019s trial summit to unveil AriBio phase 3 pill data and next-wave therapies Chosunbiz",
-        "published": "2026-11-11T07:29:00+00:00"
-      }
-    },
-    {
-      "id": "news-c2ee90d06c40",
-      "kind": "field",
-      "drug": null,
-      "what": "Alzheon Highlights ORION-E4 Phase 3 Trial Launch for Oral Valiltramiprosate/ALZ-801 and Expansion of Its Oral Anti-Amyloid Aggregation Inhibitor Portfolio at CTAD 2026 Conference in Boston, November 16\u201319",
-      "url": "https://news.google.com/rss/articles/CBMi9AJBVV95cUxQWE1tcXNIU0dXYld0OWZMSWdlUmIyNUR1MUpTZEx3OUFvLWZINjhpNGdwSVV3T0NWTTV1LTg2UzNvYi1nanItQnJnS2h6Ml9oaU5ha2lvMG1SRThEQmJPbkJoMkp6WWV2ZFhlc01STDNTVWpsQkFnaktweS1lTDhXdzRJNWtCNGw2MGZkMFZ6NVAwejR2cTlTMzRiQVllZEUxT0ZTYjZpZ211NnVQanJFT3prUEFaVmlBUUwtQmhFYU1wMHJ5ZjVGV05Ja0Q3c3E3aHZoOGVqeGtQN09xcW9vaUI1V25lOWFxc3IzSC1RYVVRLVNJNEpGNmJzdkg3U2lDaFBxbklVclVtSGxPaF8wRnFETXNKXzgyODhEQmRwcjVBX0ZWUVJHWGstWmtYcG1kaUhyOWF3T1NqdkNQNkRYZW8wTC1hNTR5ZW5wSnV0cHNteThva1E5cThRMWZBdTFWNVg2SlZQU0h1WEFod3p0blNZVlo?oc=5",
-      "source": "Business Wire",
-      "why": "",
-      "topic": "alzheimers",
-      "found": "2026-11-12T17:33:27+00:00",
-      "tier": "more",
-      "extra": {
-        "summary": "Alzheon Highlights ORION-E4 Phase 3 Trial Launch for Oral Valiltramiprosate/ALZ-801 and Expansion of Its Oral Anti-Amyloid Aggregation Inhibitor Portfolio at CTAD 2026 Conference in Boston, November 16\u201319 Business Wire",
-        "published": "2026-11-10T11:00:00+00:00"
-      }
-    },
-    {
-      "id": "news-08dda24c075b",
-      "kind": "field",
-      "drug": null,
-      "what": "FDA Approves MSI Companion Diagnostic for Pembrolizumab in MSI-H Tumors",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPcV93SlUyNXFlVTR4d21uVlJPTmFVcnhRd3JVQjVWS2ctcjlKYlo4R0NWd183YzVNcUxYLTdRYmxVcHB3enJQTW9Dc1ozRjlXSTZPeVZTWHVvRmZBVUZCVjRMVTdxWHE3YnVva01FUlhBQVZrUUJrUFJYbXFYSFlnTnBHTVppcWN6NzlTU2FSQW51a05JM090cGZaUXZOc25oeG9OR0pYdjZnb2c?oc=5",
-      "source": "Oncology Nursing News",
-      "why": "",
-      "topic": "cancer",
-      "found": "2026-11-12T17:33:27+00:00",
-      "tier": "more",
-      "extra": {
-        "summary": "FDA Approves MSI Companion Diagnostic for Pembrolizumab in MSI-H Tumors Oncology Nursing News",
-        "published": "2026-11-12T12:05:19+00:00"
-      }
-    },
-    {
-      "id": "news-e74015fb2706",
-      "kind": "field",
-      "drug": null,
-      "what": "FDA Approves Pimjetmi for Patients With Tenosynovial Giant Cell Tumor",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQa3hVV1ExYUhCbF9QbDJKMXBPeF90VVNvdVh5c1JQYzB4aUp6QXc2QW11Y3BuZjBPanZNblZtYnF6c2RrTE9jMkV4dGR3VkhfbWNMTnFYMG5BMTJhekxGZVVuUHFBZTI5UmhBTDFPLWhRaEtSTC05WFQ3SjRsNDJrZ2wxYi1Ldm05RXhabmJZcWlJdGF3cVE?oc=5",
-      "source": "Pharmaceutical Executive",
-      "why": "",
-      "topic": "cancer",
-      "found": "2026-11-12T17:33:27+00:00",
-      "tier": "more",
-      "extra": {
-        "summary": "FDA Approves Pimjetmi for Patients With Tenosynovial Giant Cell Tumor Pharmaceutical Executive",
-        "published": "2026-11-12T03:46:41+00:00"
-      }
-    },
-    {
-      "id": "news-276e27f7286b",
-      "kind": "field",
-      "drug": null,
-      "what": "FDA Approves First New Head and Neck Cancer Drug in 10 Years",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNQ3I5Q3VTU2I5WER1R0JndFZ3V29KT2RHdmd2UE5WTlNDcWV6dHRwUDZ2Y2NxSG0zNDZVZkR2dTJJNTRtemVuZFdTMzcxRG9VZTU5Z2daTDJzZTdjZWtIc29rUFYxUWhSbGRpMXJTczJ1Y2lLdnlZV2RubUR3YUEwSW9QM24tUzFL?oc=5",
-      "source": "\uc870\uc120\uc77c\ubcf4",
-      "why": "",
-      "topic": "cancer",
-      "found": "2026-11-12T17:33:27+00:00",
-      "tier": "more",
-      "extra": {
-        "summary": "FDA Approves First New Head and Neck Cancer Drug in 10 Years \uc870\uc120\uc77c\ubcf4",
-        "published": "2026-11-12T00:20:56+00:00"
       }
     }
   ],

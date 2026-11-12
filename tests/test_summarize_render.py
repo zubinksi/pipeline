@@ -52,7 +52,7 @@ def test_llm_why_lines_used_and_untrusted_text_is_only_data():
 def test_refusal_or_error_falls_back():
     changes, _ = _changes()
     headline, kept = summarize.summarize(changes, WL, client=FakeClient({}, stop_reason="refusal"))
-    assert headline == "3 top stories and 2 smaller updates this week."
+    assert headline == "3 updates this week."  # smaller updates are dropped
     assert all(c.why for c in kept if c.kind != "field")  # field news gets no stock "why"
 
 
@@ -79,7 +79,8 @@ def test_render_full_digest():
         assert section in d.text
     assert "▲ moved" in d.text and "&#9650; MOVED" in d.html
     for c in changes:
-        assert c.url.replace("&", "&amp;") in d.html
+        if c.tier != "more":
+            assert c.url.replace("&", "&amp;") in d.html
     assert "not medical advice" in d.text
 
 
@@ -219,8 +220,8 @@ def test_top_stories_and_smaller_updates():
         mk("e", "VERVE-102's mid-stage trial (HEART-3) started enrolling patients.", "trial_status", "verve102"),
     ]
     _, _, kept = summarize.summarize_full(items, WL, client=FakeClient({}, stop_reason="refusal"))
-    assert [c.id for c in kept] == ["a", "d", "e"]
-    assert {c.id: c.tier for c in kept} == {"a": "top", "d": "more", "e": "top"}  # a mid-stage trial starting is top
+    assert [c.id for c in kept] == ["a", "e"]  # noise, the repeat and the smaller update are gone
+    assert {c.id: c.tier for c in kept} == {"a": "top", "e": "top"}  # a mid-stage trial starting is top
     # with Claude: its tier and same_as decide
     payload = {"headline": "h", "lead": "", "items": [
         {"id": "a", "include": True, "tier": "top", "same_as": "", "why": "w"},
@@ -231,17 +232,14 @@ def test_top_stories_and_smaller_updates():
     assert "tier" in summarize.SCHEMA["properties"]["items"]["items"]["required"]
 
 
-def test_smaller_updates_are_folded_on_the_site_and_listed_in_the_email(tmp_path):
+def test_smaller_updates_never_reach_the_site_or_email(tmp_path):
     from digest import history, site
-    from digest.diff import Change
     changes, after = _changes()
     for c in changes:
         c.tier = "more" if c.kind == "news" else "top"
     rec = history.record(day=date(2026, 11, 16), headline="h", changes=changes, horizon=[],
                          snapshot=after, baseline=False)
     news = (site.build(tmp_path / "s", weeks=[rec], snapshot=after, watchlist=WL) / "index.html").read_text()
-    assert "<summary>Smaller updates" in news
-    smaller = news[news.index("Smaller updates"):]
-    assert "Example headline: alirocumab trial expands" in smaller
+    assert "Example headline: alirocumab trial expands" not in news and "Smaller updates" not in news
     d = render.render(headline="h", changes=changes, horizon=[], snapshot=after, watchlist=WL)
-    assert "Smaller updates" in d.html and "SMALLER UPDATES" in d.text
+    assert "Example headline: alirocumab" not in d.html and "Smaller updates" not in d.html
