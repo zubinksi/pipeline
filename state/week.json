@@ -1,0 +1,574 @@
+{
+  "started": "2026-11-12",
+  "updated": "2026-11-12T17:33:27+00:00",
+  "changes": [
+    {
+      "id": "status-NCT07839936-RECRUITING",
+      "kind": "trial_status",
+      "drug": "verve102",
+      "what": "VERVE-102 Phase 2 trial HEART-3 (NCT07839936) is now recruiting (was not yet recruiting).",
+      "url": "https://clinicaltrials.gov/study/NCT07839936",
+      "source": "ClinicalTrials.gov",
+      "why": "A one-time gene-editing treatment meant to lower LDL for life.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {}
+    },
+    {
+      "id": "news-f1100241f225",
+      "kind": "news",
+      "drug": "evolocumab",
+      "what": "Repatha Market Forecast to 2030: Analysis of Market Size, Growth Rate, Trends, and Projections",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNYkpweGw3ZVg1NVpsM1VCU01pbHhPVVRNd09sdjhsNFNJdFdreUoyWEhkWkVrbWdTWEpKblp3UlV2cFlJU0g0Y0ozRThUcTVCVkstT2MxTFFENlRobE1XMDB4NTZ2alZMNFVucWxucE1mSnVuaG9vcFBMMXRGU3N3TmVXWlFwdjBvTk5ESm1QdHlmNDFjZ2daUElFQ2lZRTVyUVg4V3F3czBwWWJ2R1BQeURQVzY2eTd3WjN5V0F1aVJYZS05QWIwTzlSSzg?oc=5",
+      "source": "EIN News",
+      "why": "A shot every 2 weeks or once a month that lowers LDL. On the market since 2015.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Repatha Market Forecast to 2030: Analysis of Market Size, Growth Rate, Trends, and Projections EIN News",
+        "published": "2026-11-11T17:30:00+00:00"
+      }
+    },
+    {
+      "id": "news-5349396de9a9",
+      "kind": "news",
+      "drug": "evolocumab",
+      "what": "Repatha was found cost-effective for some high-risk adults\u2014but the key dollar figure hasn't been released",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOMmotYVAxMVk0ZDNpd1E3dXZvN0xrVXdoYWVGSW1yWHZ3X1pqaWhfdUxRT25VakFDQ3Q2UExyaHJ2ekxLUUg3aV94VzNlWDlrZUlvdjczVjFqZE1jMG9oLUp6MzNidy15Vjl0LUJReTlNNFB0Zi1ITkRuVmExU2N1YXFGN1hwVnI5Y1lYcQ?oc=5",
+      "source": "Medical Daily",
+      "why": "A shot every 2 weeks or once a month that lowers LDL. On the market since 2015.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Repatha was found cost-effective for some high-risk adults\u2014but the key dollar figure hasn't been released Medical Daily",
+        "published": "2026-11-11T01:46:52+00:00"
+      }
+    },
+    {
+      "id": "news-4bf890fc4524",
+      "kind": "news",
+      "drug": "evolocumab",
+      "what": "Evolocumab Cuts First-Stroke Risk, Shows MACE Benefit Up to 8 Years",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPTzZ0c2VxQkhvdWcxcUNJQ0NGZUt4QnhGYkRuUjhrWXljT0VqT2kwazJFeU9UVmlxRm8zV0VScW5OamxKZ2diUVFsNU1ybDg2SHFIbDd6RmMzc0IyVGlQY21BUDluTTRiOHBJQTJRQTQ2a3ZMQ1VEV21VWkFTbnV5YjN0WGw1U2wxWnY0cy0tSEVzV2NiOTBz?oc=5",
+      "source": "The American Journal of Managed Care",
+      "why": "A shot every 2 weeks or once a month that lowers LDL. On the market since 2015.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Evolocumab Cuts First-Stroke Risk, Shows MACE Benefit Up to 8 Years The American Journal of Managed Care",
+        "published": "2026-11-10T16:08:16+00:00"
+      }
+    },
+    {
+      "id": "news-7eacdaae8786",
+      "kind": "news",
+      "drug": "evolocumab",
+      "what": "Amgen (AMGN) Highlights Cost-Effectiveness of Repatha in New Car",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQdk5BdEJBb2pTcWZnVTJwODh6UHM4VzNSZ1d6XzFCa2ZUWFpxVURHWU90bzlEZFdQc1kwQVNaS003VHZNWUswemI4MlFyTjc3QUxCVzhHMU04NWhYN0tERDRWX2JMdVBHazI5Tk9MaDkzMXNmaUtBVlVvdXlXcEY2blJjQjNaeTVTVkc1WEc1X1E1SzB0QVBCS0swZWFEczJMNnpwRUh3QjY1NUNyWGNWRU9SSXpHXzRJUXdNUw?oc=5",
+      "source": "GuruFocus",
+      "why": "A shot every 2 weeks or once a month that lowers LDL. On the market since 2015.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Amgen (AMGN) Highlights Cost-Effectiveness of Repatha in New Car GuruFocus",
+        "published": "2026-11-09T23:01:58+00:00"
+      }
+    },
+    {
+      "id": "news-efc397a2432f",
+      "kind": "news",
+      "drug": "inclisiran",
+      "what": "Impact of Inclisiran on Apolipoprotein B in Patients With Hyperlipidemia: A Systematic Review and Meta-Analysis",
+      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPN3JSN2FXWHlRVW9lZEFBejRMbDJOeDltY2FJbGpMcFNVZTVuZHZ4bU9ZRVliSHFtaFQybDNGUjdqeldBY055ZWUtR0tWeW9GN0VDU2hUXy15TnRPVnk5SkxscnNJU3RxUWRGMUl6ZGdKMzdzQVc0SnlYbUxpRWdKSFA2NE5qZzBjNG93Um52RUE0NUNPVDdMdXJKN19CRURneTlMVlVVTXduMkx6M0tLNk0wQjVJX1lLc0tfbmJFVTBZbXROT1JOc3dDNzRDVThvSFg2aWZYbWFBbVhtV1lsV2NHRQ?oc=5",
+      "source": "Cureus",
+      "why": "A shot twice a year that lowers LDL by switching off PCSK9 in the liver.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Impact of Inclisiran on Apolipoprotein B in Patients With Hyperlipidemia: A Systematic Review and Meta-Analysis Cureus",
+        "published": "2026-11-12T00:42:55+00:00"
+      }
+    },
+    {
+      "id": "news-6bc54f0e30b2",
+      "kind": "news",
+      "drug": "pelacarsen",
+      "what": "Novartis (SWX:NOVN) Halts Pelacarsen After Trial Miss As Ianalumab Data Impresses",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQVzR2U2tISEI4SG96ZF9LX3R3WnI0eXotV1g3ek5xV0tLOG5DSWlReXdzQmIyaThfaXk3bjVfbmh1bndPQVZHcllGZVhWbFA4TTlEZXJHQ0NKaW5OY2N4bWNSMWU3NUdVNTdQM1NFTExrSmw0LUFtYXFxdXlGMXdyTkIzTXlDVkl0czRPUzJySUhOc0RjQTBUajJtQQ?oc=5",
+      "source": "Yahoo Finance",
+      "why": "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Novartis (SWX:NOVN) Halts Pelacarsen After Trial Miss As Ianalumab Data Impresses Yahoo Finance",
+        "published": "2026-11-11T14:15:22+00:00"
+      }
+    },
+    {
+      "id": "news-587aa985cdc2",
+      "kind": "news",
+      "drug": "pelacarsen",
+      "what": "Investigators Caution Against Abandoning Lp(a)-Targeting Treatments After Neutral Pelacarsen Trial",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPUWNIWEowV0JUOUxubkJybWJnU2ZTbWpRY1lIbVU2cVRxVUJ6cmhnUjJwemV6TzczeC1kcks3ejZPSm1ZVkp0R3pXVWtWYW1STUJvZUhTXzRwT3YzOXkyLTFLRGZEVFI1ei0tWmsteHRCQnFXM3BkbmxBMU1BZ18ydjdkVFdsSF9kNTEyUWVWbkVXdkgxdlhxakprN3ZKbG9GYkE?oc=5",
+      "source": "GenomeWeb",
+      "why": "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Investigators Caution Against Abandoning Lp(a)-Targeting Treatments After Neutral Pelacarsen Trial GenomeWeb",
+        "published": "2026-11-10T19:38:00+00:00"
+      }
+    },
+    {
+      "id": "news-db0453708e15",
+      "kind": "news",
+      "drug": "tirzepatide",
+      "what": "FDA Adds a Vision Warning to Zepbound Days After Lilly\u2019s November 6 Hims & Hers Deal",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPVjRXVUNrVTJwWmxuRVg4VU1Yc1R0UkNwaXF2ZnFhcElzOWpHNXRmRkVpQklFZGZELXl0UUZRdmpDdVR1Q0NVeWZJOUl3UzE4ZUozT2Zka0RWSXF1TGcyUGx0bFpHeVBiS0xMbVRvVEpjZkgxRFZ1bjYzOWV2WHhUaktHRzBtOFQxWURxM2tVTm1rOEVxNzZ5SQ?oc=5",
+      "source": "Yahoo Finance",
+      "why": "A weekly shot that acts on two gut hormones (GIP and GLP-1) to reduce appetite. Sold as Zepbound for weight and Mounjaro for diabetes.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "FDA Adds a Vision Warning to Zepbound Days After Lilly\u2019s November 6 Hims & Hers Deal Yahoo Finance",
+        "published": "2026-11-12T16:20:33+00:00"
+      }
+    },
+    {
+      "id": "news-f126e8e03aab",
+      "kind": "news",
+      "drug": "tirzepatide",
+      "what": "Muscle benefits of lifting weights while taking tirzepatide",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNaHVrYnRzOEhxSGdIS3BsLTgyWVZBaU1kcm95b25oaUMxcnlxYXJXWWl1LWFXSnNOYW5lZHNYYTlpR0dUb004Q2RlUTJsQjNNTFJVYUJYMGRzVFdlNXR4NW10OUxsMThzUml3SHEzQTBHYlowdHAyNE85Qi1EVFIwaVpGMnZCUU9CNUd4Nk9rdkdpUnVMNnJaYUxtUmJtTTJyaDRLZmRUelV1cWc?oc=5",
+      "source": "News-Medical",
+      "why": "A weekly shot that acts on two gut hormones (GIP and GLP-1) to reduce appetite. Sold as Zepbound for weight and Mounjaro for diabetes.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Muscle benefits of lifting weights while taking tirzepatide News-Medical",
+        "published": "2026-11-12T14:10:00+00:00"
+      }
+    },
+    {
+      "id": "news-6d4450579fac",
+      "kind": "news",
+      "drug": "semaglutide",
+      "what": "Novo Nordisk partners with DJ Khaled for Wegovy campaign",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQNTY4M3hNcjdLSDdPcXhnMGxEMmZiaUZQNmt6Mkh6TlRGU2Rua3NSM19JTDhoLTZiSUVsVm4tdWR5UGF6X3g0SGF6UzNqdGlPQ0M1alRjbFRqVkhZYmZtU284cU9CZEtFLW5MM19Kalo2LWdOd2F6U3FKelhGSFEtQWlVRS1PZFNOZ1dtMmxOUzRvVzd5Mm80VGpmSFFFLXJCMjVVSzVhUVFKYWd1Unp5LWU0TQ?oc=5",
+      "source": "Investing.com",
+      "why": "The first of the new weight-loss drugs: a weekly GLP-1 shot, now also a daily pill. Sold as Ozempic for diabetes.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Novo Nordisk partners with DJ Khaled for Wegovy campaign Investing.com",
+        "published": "2026-11-12T16:09:12+00:00"
+      }
+    },
+    {
+      "id": "news-698055be7049",
+      "kind": "news",
+      "drug": "semaglutide",
+      "what": "FDA adds vision loss warning to Ozempic, Wegovy and other GLP-1 drugs",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQTjhVeDdOSlhucWxUSTFLQmFEdEo2aFpIT21rWG9feXVqQl9XdXdEY2s2OFZCLWt3dmloejg0Q0hyYXZrZ25VcTRnSHFGc0VyOHRIc1E5NnRrdHhEVWxjaUJtZHdjMmNwVEFXRGFmLV9pYmw2bjJUVkFYby14b3pqdUFPZTR3NHp2a0FPakFEOFdKM1ZwWlY2N1RMSDlnSUotWERGQQ?oc=5",
+      "source": "TMJ4 News",
+      "why": "The first of the new weight-loss drugs: a weekly GLP-1 shot, now also a daily pill. Sold as Ozempic for diabetes.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "FDA adds vision loss warning to Ozempic, Wegovy and other GLP-1 drugs TMJ4 News",
+        "published": "2026-11-12T16:00:51+00:00"
+      }
+    },
+    {
+      "id": "news-9ceda718e674",
+      "kind": "news",
+      "drug": "orforglipron",
+      "what": "China approves Eli Lilly\u2019s oral weight-loss drug orforglipron",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOdWFydGpiOHQ1VWJOQ3NKcXNMVTlKUEwzdWw0ZzI2MUNFWHVMVGs5b01GRmJzQmhNSlpnMnlNUHFZY3VIaU56Q202YWNxUlhuQnIzVTJlcVZpWVdtZmxCOHM5WVd2eXlqdkQ4bkJfbWg0YXRqd0E5R1ZIdUxBZ3VJSzBxVk0tTHZLWFZMbU5qUW85MDhCTE9sYUVQRVA?oc=5",
+      "source": "Minute Mirror",
+      "why": "Lilly's GLP-1 pill. Unlike other GLP-1 pills it doesn't need to be taken on an empty stomach, and it's easier to make in bulk than shots.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "China approves Eli Lilly\u2019s oral weight-loss drug orforglipron Minute Mirror",
+        "published": "2026-11-12T15:29:41+00:00"
+      }
+    },
+    {
+      "id": "news-b2d9b49c00d7",
+      "kind": "news",
+      "drug": "orforglipron",
+      "what": "Physician Views Preview: Has Lilly's Foundayo found its niche in sleep apnoea?",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5VVE5RZWdiUHBoZmtscDZJRERMcU92QVo1UWMyS05XMzJfUXNwQndjWkgxSnBDYVBTNzl3QWpLY3MwMDRWNmJfVWhzcVhJaUNDTEZ3?oc=5",
+      "source": "FirstWord Pharma",
+      "why": "Lilly's GLP-1 pill. Unlike other GLP-1 pills it doesn't need to be taken on an empty stomach, and it's easier to make in bulk than shots.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Physician Views Preview: Has Lilly's Foundayo found its niche in sleep apnoea? FirstWord Pharma",
+        "published": "2026-11-12T15:04:32+00:00"
+      }
+    },
+    {
+      "id": "news-30446772e3d4",
+      "kind": "news",
+      "drug": "retatrutide",
+      "what": "Can Weight Loss Medicines Reduce Chronic Knee Pain? Eli Lilly's Experimental Drug Retatrutide Shows Promise",
+      "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxNZXBtUWtwTnQtZmszX3ZUN0lRdjh4UEE1RUkwUXFmM3RSUFlPNkM2UDBIR3NRR3BwWlY2TXRGYXMzaUVJT3B1VnlrclhoRjRsck5uZlltRWExZVlvbjQxTnphdExLWjVHMTB1MkhBY3dnem5ocWwxMHFvZ29FREgyUi13SVRaQUFJM0N2NXRBSXY0bTcyU3ZKQlg5b3JHaUtKWXZ4MzJiazRHRnprbEhOeWc1SWxLNEpuaDI2N2VNWmtSLWUwSFZfZDNUblFETUlOYkNZT18yMUc0RTJGb0d1U1FZTmpFVXRHTUtjMThpQUdSd1A5RGc?oc=5",
+      "source": "Health and Me",
+      "why": "A weekly shot that acts on three hormones. In its final-stage trial it produced the largest weight loss of any drug so far.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Can Weight Loss Medicines Reduce Chronic Knee Pain? Eli Lilly's Experimental Drug Retatrutide Shows Promise Health and Me",
+        "published": "2026-11-12T10:41:28+00:00"
+      }
+    },
+    {
+      "id": "news-fb237f32bd45",
+      "kind": "news",
+      "drug": "retatrutide",
+      "what": "Retatrutide shows knee osteoarthritis pain relief in trials",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQUG5JS212ZS1GZHpiSGNRUmU2N21JWV9LUFlZS3kxd3U0NDJpOFFTb3JjZXdlQ2pTOEhDQm4zQ2hWbDEtWXBrWjJYR0JWQ3FNTENscmtneGhZOGlnT0lzLTl6RVdTZGh3amFPQjlFbk5aZnJjUGtCalc4cUJWdkw3QXNqamstSWtmZ0UwcGtCWHdTSU9ncTRxRDRjbWtUanJCcF91ZlFlcno?oc=5",
+      "source": "\ub514\uc9c0\ud138\ud22c\ub370\uc774",
+      "why": "A weekly shot that acts on three hormones. In its final-stage trial it produced the largest weight loss of any drug so far.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Retatrutide shows knee osteoarthritis pain relief in trials \ub514\uc9c0\ud138\ud22c\ub370\uc774",
+        "published": "2026-11-12T05:47:56+00:00"
+      }
+    },
+    {
+      "id": "news-3fb68605a38a",
+      "kind": "news",
+      "drug": "maritide",
+      "what": "deCODE and K\u00e1ri Stef\u00e1nsson Clash Over MariTide Origin",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOcGRPRVM3ZUZCelczTFJ0S0hzcU9Kc1pOUXFXY3lJVjV5eDJMXzRKZGp5ektzRUdhTEItc3pvbUM1NENpbVhjYmxTVzBVMWVXS1BZQ01RMUxVdTNXci1TWTRxVEczYnA4OW51NFJiZ3JtaGNSZHBRZFpjYjVCbjc4dkJSdHlGa0ZaaWc?oc=5",
+      "source": "Iceland Review",
+      "why": "An antibody-based shot designed to last long enough to be given monthly, or possibly every two months.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "deCODE and K\u00e1ri Stef\u00e1nsson Clash Over MariTide Origin Iceland Review",
+        "published": "2026-11-10T12:00:06+00:00"
+      }
+    },
+    {
+      "id": "news-27beba202988",
+      "kind": "news",
+      "drug": "maritide",
+      "what": "Icelandic Genetics Helped Shape Amgen\u2019s MariTide Drug",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNYkhsYldOV2FCcWNjX29QTTlpekNMSXdJRUw1YjFrRkoyaERybHYzTWkwYS0tQlhYU05pT29KbVBMSm53OWNXQWZMTzY4b1dhdWY4NmlucFdxbk1YX2FrNnV4eE5mMnZ5X3lxWTBGZnBBN0RtVU1LanFFVWNRV1Z5Z29WS1VaNnhEWEFwOWREMWdxZ0FGMXc?oc=5",
+      "source": "Iceland Review",
+      "why": "An antibody-based shot designed to last long enough to be given monthly, or possibly every two months.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Icelandic Genetics Helped Shape Amgen\u2019s MariTide Drug Iceland Review",
+        "published": "2026-11-09T12:00:32+00:00"
+      }
+    },
+    {
+      "id": "news-6ab2d29e98ac",
+      "kind": "news",
+      "drug": "donanemab",
+      "what": "Donanemab Shows Manageable Safety Profile in Real-World Multicenter Chinese Alzheimer\u2019s Cohort",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNRURkYUNmN0dRTFozOEctMHlmZzFyX2dENkJQR0RTdHlWZEE5UGlwTXZsdWRMX3ZISFhwRm43M2pVUW56QWZIUWFuQjY1RHZqTFJpSnJMRk9rcVZQclgtWGVBRVpUaVM1MmdGUlNQbl91MjJEbFBGUnY0NWROLWFZTVI1R3pfNkJiV29pQk1ITklVZHVVdnBWb2o5V2hxTVR2MW9aVGF6STVLZDZPNjZURFpyV214dUlyX3c?oc=5",
+      "source": "Bioengineer.org",
+      "why": "A monthly infusion that clears amyloid from the brain in early Alzheimer's. Treatment can stop once the amyloid is gone.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Donanemab Shows Manageable Safety Profile in Real-World Multicenter Chinese Alzheimer\u2019s Cohort Bioengineer.org",
+        "published": "2026-11-12T17:28:32+00:00"
+      }
+    },
+    {
+      "id": "news-8a8e0b99a0a4",
+      "kind": "news",
+      "drug": "lecanemab",
+      "what": "[Eisai FY2026 Q2 Earnings Call] Eisai Posts 20.4% Rise in Interim Operating Profit to \u00a541.4 Billion - Subcutaneous Leqembi Winning Patients at 4x the Pace of IV; Full-Year \u00a570 Billion Target \"Aiming for Upside\"",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBZLW1xY1pGaDU4MXd2MlhublBDZzk4VlU4V19ONkVQalhnV0ZPbGlTTy1EUWhrbmpwakFfZ3dHa2tBOEpHekdlU1RJU0xWRXI1SHVNN1QwcjJUb1lCbEd1Tg?oc=5",
+      "source": "finance.biggo.com",
+      "why": "The first amyloid drug with full approval. Now also a weekly shot people can give themselves at home.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "[Eisai FY2026 Q2 Earnings Call] Eisai Posts 20.4% Rise in Interim Operating Profit to \u00a541.4 Billion - Subcutaneous Leqembi Winning Patients at 4x the Pace of IV; Full-Year \u00a570 Billion Target \"Aiming for Upside\" finance.biggo.com",
+        "published": "2026-11-11T10:30:05+00:00"
+      }
+    },
+    {
+      "id": "news-625d2febe2f7",
+      "kind": "news",
+      "drug": "lecanemab",
+      "what": "Two Neighbors Will Start Leqembi, Listed at $28,270 a Year. One With Medigap Plan G Will Owe $0 in Coinsurance After the Part B Deductible, While the Other Will Owe 20% of Medicare-Approved Infusion Costs",
+      "url": "https://news.google.com/rss/articles/CBMi4wJBVV95cUxPbXNZQ2Rnd1BSVmNUV0NNYnNpcEprUS14S3ZjbXVLNUpQSFVmclAwdWFxMkhubjdNSUh1M2ZlamRXS3dsRHhxaGdic1JrNDZSY0ludHlSbTZuY2JITFlqdkxUTVFHcHE1LWkxaHF2UFg5ay1lM09hWlpzUHlyN01xR3Izem1mQWVwWGFON2dMYTZOSEZyTVp3YzRtNnRIOWxJMW9DYUlMRGFlZWh4Nm9VMV9XTWZFaFAzalhDTlBoWDgzMjBEclBaMEx0WUtlVWlUYWdtb1ItQTRrZ2RjOVFTcHBNVlJTRHMxdzN1RGZLd1NvSUJ0bk5wbUZaanctX29IdkdMSWFka1duZWgxM0ZGcW1ZRGFzVEd0SkhJRTFlNjY3RmZrRVVIOE4xMktMTklrcER3R3h5c2ZXUGxGU083bHdEa3FlWHNQd0MtRzE4RzNYaUNmYzhQQm5XSGEyNXA1NzZr?oc=5",
+      "source": "24/7 Wall St.",
+      "why": "The first amyloid drug with full approval. Now also a weekly shot people can give themselves at home.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Two Neighbors Will Start Leqembi, Listed at $28,270 a Year. One With Medigap Plan G Will Owe $0 in Coinsurance After the Part B Deductible, While the Other Will Owe 20% of Medicare-Approved Infusion Costs 24/7 Wall St.",
+        "published": "2026-11-11T01:03:00+00:00"
+      }
+    },
+    {
+      "id": "news-694abbed77d5",
+      "kind": "news",
+      "drug": "olomorasib",
+      "what": "Dr Negrao on Olomorasib Plus Chemoimmunotherapy in KRAS G12C\u2013Mutant NSCLC",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQeE4zMWdSM3gtYUVScjYyZU5BN1RkYW9wN0ZxTmNSRHVlODVQVl9jZDdtck9zUG5kZ1ZTSTR4VmdFOWNLN1hOMmxNNVktRVdicG5ocUh2VWFZRW5LNmRsaV9icFA5ZklEcThqY3kzaFA3dGtmeVR6NVZrcFZ0eC1OWnNLZzJnaWFzeWlRZGZLemVWVW1sOU13OG5KTGpIcnF5LWRIeg?oc=5",
+      "source": "OncLive",
+      "why": "A pill aimed at a common lung-cancer gene change (KRAS G12C), taken with immunotherapy as a first treatment.",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Dr Negrao on Olomorasib Plus Chemoimmunotherapy in KRAS G12C\u2013Mutant NSCLC OncLive",
+        "published": "2026-11-09T16:51:29+00:00"
+      }
+    },
+    {
+      "id": "news-16638fec0cc9",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "Lung Cancer Drug Ivonescimab Uses Tumor's Own Growth Signal to Boost Immunity: FDA Votes Saturday",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQa01VRm5WN3N5UmZzMmt1aTY4V2NhTk52anhOcG80ZEk1OVFVWUg0VzduWmZIUnVGNnZEeTlxMnpnczBZcjRxcldHdEtZc3FpSGM2aGlwOWpyTHF0OGVaRWtMUkRBOHhQbHZtZm1EazRUbTNOU3N6MXpvSWRTTmF6eHYwdnYzN01ZcVRHd0ZHWk5EVk9XalhtaUNCZTFXMFdpekMzY1l0YW1lemlJd0tTcndXNG9ScVVyeTduREVRNkJETWZoYkZpd1VCWENId1ctMGhmZE5JQ2xxeGxFYjY0Sg?oc=5",
+      "source": "Tech Times",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Lung Cancer Drug Ivonescimab Uses Tumor's Own Growth Signal to Boost Immunity: FDA Votes Saturday Tech Times",
+        "published": "2026-11-12T16:34:15+00:00"
+      }
+    },
+    {
+      "id": "news-56c21c57789c",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "Summit sheds commercial leaders ahead of ivonescimab's FDA decision",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPYV9qeG1oV0JPSDhxY3pFTUMta19sZjd5emN4dkV2UDN1elUzRlIxV0dpSENOdXJyMDlUUnVSR0VCRUNneUxyWnB0clRlRElTMVBuZTFNZEU3N2lBZWVKc1VraGhsTThhMUFKRFRxUXJJVFN2MHlrMW42R2xWd3FyalNhNGw5VTNWSnA3U0VjMTNQVXpyZ0N3ZmxIYW5ZQmhPdEZyeQ?oc=5",
+      "source": "Fierce Pharma",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Summit sheds commercial leaders ahead of ivonescimab's FDA decision Fierce Pharma",
+        "published": "2026-11-10T19:12:09+00:00"
+      }
+    },
+    {
+      "id": "disc-NCT07930507",
+      "kind": "discovery",
+      "drug": null,
+      "what": "New Phase 3 trial not on your watchlist: Laroprovstat, Rosuvastatin 1, Rosuvastatin 2, FDC laroprovstat/Rosuvastatin 1 (AstraZeneca): A Phase III Study to Assess the Effect of FDC Laroprovstat/Rosuvastatin Compared With Laroprovstat, Rosuvastatin, and Placebo on LDL-C in LLT-na\u00efve Patients (NCT07930507).",
+      "url": "https://clinicaltrials.gov/study/NCT07930507",
+      "source": "ClinicalTrials.gov",
+      "why": "A trial not yet on your watchlist; worth a look if the drug is new to you.",
+      "topic": "heart",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {}
+    },
+    {
+      "id": "disc-NCT07932925",
+      "kind": "discovery",
+      "drug": null,
+      "what": "New Phase 3 trial not on your watchlist: Berobenatide, Placebo (Pfizer): The Purpose of This Study is to Learn About the Safety and Effectiveness of Berobenatide in Women With Urine Leakage and With Obesity or Overweight (NCT07932925).",
+      "url": "https://clinicaltrials.gov/study/NCT07932925",
+      "source": "ClinicalTrials.gov",
+      "why": "A trial not yet on your watchlist; worth a look if the drug is new to you.",
+      "topic": "obesity",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {}
+    },
+    {
+      "id": "disc-NCT07929298",
+      "kind": "discovery",
+      "drug": null,
+      "what": "New Phase 2 trial not on your watchlist: ecnoglutide tablet, placebo with matching dosage (Hangzhou Sciwind Biosciences Co., Ltd.): A Study to Evaluate the Safety and Efficacy of Ecnoglutide Tablets in Chinese Participants With Overweight or Obesity (NCT07929298).",
+      "url": "https://clinicaltrials.gov/study/NCT07929298",
+      "source": "ClinicalTrials.gov",
+      "why": "A trial not yet on your watchlist; worth a look if the drug is new to you.",
+      "topic": "obesity",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {}
+    },
+    {
+      "id": "disc-NCT07922330",
+      "kind": "discovery",
+      "drug": null,
+      "what": "New Phase 3 trial not on your watchlist: AZD6234, Placebo (AstraZeneca): SELENE-Asia (NCT07922330).",
+      "url": "https://clinicaltrials.gov/study/NCT07922330",
+      "source": "ClinicalTrials.gov",
+      "why": "A trial not yet on your watchlist; worth a look if the drug is new to you.",
+      "topic": "obesity",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {}
+    },
+    {
+      "id": "disc-NCT07918625",
+      "kind": "discovery",
+      "drug": null,
+      "what": "New Phase 2 trial not on your watchlist: BGM1812 injection / plcaebo, BGM1812 injection / plcaebo, BGM1812 injection / plcaebo, BGM1812 injection / plcaebo (BrightGene Bio-Medical Technology Co., Ltd.): A Study to Evaluate Efficacy and Safety of BGM1812 Injection in Overweight or Obese Participants Without Diabetes (NCT07918625).",
+      "url": "https://clinicaltrials.gov/study/NCT07918625",
+      "source": "ClinicalTrials.gov",
+      "why": "A trial not yet on your watchlist; worth a look if the drug is new to you.",
+      "topic": "obesity",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {}
+    },
+    {
+      "id": "news-7dfe591c7f95",
+      "kind": "field",
+      "drug": null,
+      "what": "Innovent\u2019s cholesterol drug delivers 60% LDL-C reduction in Phase 3 trial",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOLXZvQm5ocUhYdi13c0JQckFKRWV2blBxR2pEbnhPYS1fczhhMTVVX2g1eG9fMjF4QVZqQ3BtS2tmRXRiYjVOeG9EQWF6MV9KREk5MnRobnZhQjN4OE1leXhOSGMxNmNGelQxeVZkZnBTd1RFTDZvOTl0WmZvczVTWG9qVWl1ZVIybjA3cFRRLWY5azlnYXBLR1RoNEM0YjZjS25ybjZiUThidUU5TU5na3BaVTdxd9IBywFBVV95cUxNM2lTVWJfVERNV3RNY0JVbUlRa2szS1liNmJBODNjS1ZlV1lEZldUSlNLWEJhUHhUSmVhb2pzOGwyWVpSMkxEZ0lVN2puekl3ZWtZdzhLbWo1Ym5wajRPMzRnMWxpMm1NT0M2dmNDSGNOOUJ1ZWlWLU1uNVFXa0tRMnoxWHU5c3hHMXdYQWs2YlF0X1Y1clpZRFRDOE80MGRNSG9oVFJneFJIek8tRnM4cnVRUXA4WEFQS0xNeGRsd3ZseVlRX0xuemh3UQ?oc=5",
+      "source": "Indian Pharma Post",
+      "why": "",
+      "topic": "heart",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Innovent\u2019s cholesterol drug delivers 60% LDL-C reduction in Phase 3 trial Indian Pharma Post",
+        "published": "2026-11-11T13:39:45+00:00"
+      }
+    },
+    {
+      "id": "news-fb971076e9be",
+      "kind": "field",
+      "drug": null,
+      "what": "FDA adds vision loss warning to GLP-1 weight loss drugs",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQQkJJbGVpVi1STFowNnpXSERfOHBqcFEyLXhhWHFySnA1bWJIN1VjcGZjaHlyUTJoUXRiMjZZblptT0JYVUpfWFB2b0FVbGJTRmJ1VkZDa1I0SHo2bW5MSEV4OGJFUmZpVFNRUFhKUkJfWFdtZGF0Z0oxUUdpc05NTm1va2JLc0Q0LWVWaDJIeGdaZ1E?oc=5",
+      "source": "https://streamlinefeed.co.ke/",
+      "why": "",
+      "topic": "obesity",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "FDA adds vision loss warning to GLP-1 weight loss drugs https://streamlinefeed.co.ke/",
+        "published": "2026-11-12T10:03:55+00:00"
+      }
+    },
+    {
+      "id": "news-a0aa50df5f72",
+      "kind": "field",
+      "drug": null,
+      "what": "US FDA flags blindness risk from GLP-1 drugs: What patients should know",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNY1BEclFLYXR5N3pSMWQ3WHZkTkhxUk5Cb3hQUUV6TnRoUUxaRW1HT08wWVFEMzNVTmhrNUp2TERXOTN0eTlybWdZY3BIY3ROdkVaSjgzUU1EZUdXeGNkd2gzR1doZHNmeHFSVHNrMndHX1M3Vnk1YkdFVE1xdEVFSC1YZUl1TXhsSGRGRno3ZjVWQjVHTmhMeTA0TVpOem1kM2lqVGFvUXZDNllVdERoX2c5WTlzRk9vOTN6QUFBa3hoQTVpT3dMWmFLd9IB0AFBVV95cUxPVEpqNkRGVVVZWnhNellXV2FIeUdyYkhrQlBJdFN4LUplVG9EbkRfankwU09VWTFYRGRRM3FBU2wxVEYwUmdKbTQxckRWWG5JZEF5eDdMZjlNa1ZnTUtPOXdnSW1ReDNPa3p5QXdOTlJMVWhFcHZJUnBYNnJsMDc5emJ2amtQc284TV83MkNOeDNjVURCdWdXWUpabDhBTFF4Y2luTTl4WER6M01ZRk1xRUNfUW50TjNRUXg5U0hyWHFpTGFRSWpnZUxNWDNJdjdi?oc=5",
+      "source": "Business Standard",
+      "why": "",
+      "topic": "obesity",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "US FDA flags blindness risk from GLP-1 drugs: What patients should know Business Standard",
+        "published": "2026-11-12T09:59:37+00:00"
+      }
+    },
+    {
+      "id": "news-9e96b12d5635",
+      "kind": "field",
+      "drug": null,
+      "what": "What To Know About FDA\u2019s Vision Loss Warning For GLP-1 Weight-Loss Drugs",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPbG1aSGhnOWUwbHMxZ0RZNm5KRXBDSHpZU0xheHJ2ZzdmcElnMEUxWUJUMFdZN3JmUzA3LVNmTk9nSUl3cGJ0UDktTE1uOEVYSXR4MWFfUGFTOEpjQllCWHlfWjJtZndvRU0yQ1dBclNvVW9JLWJldGhZZDVpMjBGaXYxd21PMjNJUHp4TmVOeXZTNW9qYjNxcDZBaEpjSndyNXFpS2tkSWFSeEJBanRIenlLTTdkOWpvYk1DTVhDdllXdw?oc=5",
+      "source": "Forbes Middle East",
+      "why": "",
+      "topic": "obesity",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "What To Know About FDA\u2019s Vision Loss Warning For GLP-1 Weight-Loss Drugs Forbes Middle East",
+        "published": "2026-11-12T09:18:15+00:00"
+      }
+    },
+    {
+      "id": "news-18a56826632f",
+      "kind": "field",
+      "drug": null,
+      "what": "South Korea's AriBio to Unveil Phase 3 Results for Oral Alzheimer's Drug in Boston on the 16th",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5TTEIxLUdMN0hLRzYycUxaV3VrcDdwZzFxcXRndGYzalktTGwxWHRaeGIyZzZIQnlHZGJfamZkQzRPQ3B4Y1RRNjhYOGgtTnhEZjQ2VTBsRTBBWE5Zbk05VlV5REJ6dlpJcmM0S2hqZlpvR2dUYXc?oc=5",
+      "source": "BigGo Finance",
+      "why": "",
+      "topic": "alzheimers",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "South Korea's AriBio to Unveil Phase 3 Results for Oral Alzheimer's Drug in Boston on the 16th BigGo Finance",
+        "published": "2026-11-11T08:06:00+00:00"
+      }
+    },
+    {
+      "id": "news-0044b9fc978a",
+      "kind": "field",
+      "drug": null,
+      "what": "Global Alzheimer\u2019s trial summit to unveil AriBio phase 3 pill data and next-wave therapies",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNQU5kYVdpejlNcEN4RjAwdXNXdG5aMTU1T1AxaUgtaFpRSF9SOWxiTnpXZ29UUUZOVE1nTWFHVWY4bm1USWZqSEptVGsxaEpIazFtbUR0RUs1Z2h3cDNKQkVHS1A5a2JpUmdJaUxWcWxTQVpKSkpXUnE0TW14QUdsb9IBlAFBVV95cUxOdjM5V2Y4UmJWb0xsZFZHWEVRQzQ5em9ueFA5aDc5U2MwemMyMC1BdWZuckV3bUVRQlFaUzRqRGlFLS1IRVYwZDhfS00ybF9PZUotcWRYWHZaYnljSEtiUDRPck9XRVUzY05BamJBQ2tXa0ZFdDl4ZzVuQ2VPU1YzM1JMUnJfaU1jdDM4ZHJncEJ6SWxr?oc=5",
+      "source": "Chosunbiz",
+      "why": "",
+      "topic": "alzheimers",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Global Alzheimer\u2019s trial summit to unveil AriBio phase 3 pill data and next-wave therapies Chosunbiz",
+        "published": "2026-11-11T07:29:00+00:00"
+      }
+    },
+    {
+      "id": "news-c2ee90d06c40",
+      "kind": "field",
+      "drug": null,
+      "what": "Alzheon Highlights ORION-E4 Phase 3 Trial Launch for Oral Valiltramiprosate/ALZ-801 and Expansion of Its Oral Anti-Amyloid Aggregation Inhibitor Portfolio at CTAD 2026 Conference in Boston, November 16\u201319",
+      "url": "https://news.google.com/rss/articles/CBMi9AJBVV95cUxQWE1tcXNIU0dXYld0OWZMSWdlUmIyNUR1MUpTZEx3OUFvLWZINjhpNGdwSVV3T0NWTTV1LTg2UzNvYi1nanItQnJnS2h6Ml9oaU5ha2lvMG1SRThEQmJPbkJoMkp6WWV2ZFhlc01STDNTVWpsQkFnaktweS1lTDhXdzRJNWtCNGw2MGZkMFZ6NVAwejR2cTlTMzRiQVllZEUxT0ZTYjZpZ211NnVQanJFT3prUEFaVmlBUUwtQmhFYU1wMHJ5ZjVGV05Ja0Q3c3E3aHZoOGVqeGtQN09xcW9vaUI1V25lOWFxc3IzSC1RYVVRLVNJNEpGNmJzdkg3U2lDaFBxbklVclVtSGxPaF8wRnFETXNKXzgyODhEQmRwcjVBX0ZWUVJHWGstWmtYcG1kaUhyOWF3T1NqdkNQNkRYZW8wTC1hNTR5ZW5wSnV0cHNteThva1E5cThRMWZBdTFWNVg2SlZQU0h1WEFod3p0blNZVlo?oc=5",
+      "source": "Business Wire",
+      "why": "",
+      "topic": "alzheimers",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "Alzheon Highlights ORION-E4 Phase 3 Trial Launch for Oral Valiltramiprosate/ALZ-801 and Expansion of Its Oral Anti-Amyloid Aggregation Inhibitor Portfolio at CTAD 2026 Conference in Boston, November 16\u201319 Business Wire",
+        "published": "2026-11-10T11:00:00+00:00"
+      }
+    },
+    {
+      "id": "news-08dda24c075b",
+      "kind": "field",
+      "drug": null,
+      "what": "FDA Approves MSI Companion Diagnostic for Pembrolizumab in MSI-H Tumors",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPcV93SlUyNXFlVTR4d21uVlJPTmFVcnhRd3JVQjVWS2ctcjlKYlo4R0NWd183YzVNcUxYLTdRYmxVcHB3enJQTW9Dc1ozRjlXSTZPeVZTWHVvRmZBVUZCVjRMVTdxWHE3YnVva01FUlhBQVZrUUJrUFJYbXFYSFlnTnBHTVppcWN6NzlTU2FSQW51a05JM090cGZaUXZOc25oeG9OR0pYdjZnb2c?oc=5",
+      "source": "Oncology Nursing News",
+      "why": "",
+      "topic": "cancer",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "FDA Approves MSI Companion Diagnostic for Pembrolizumab in MSI-H Tumors Oncology Nursing News",
+        "published": "2026-11-12T12:05:19+00:00"
+      }
+    },
+    {
+      "id": "news-e74015fb2706",
+      "kind": "field",
+      "drug": null,
+      "what": "FDA Approves Pimjetmi for Patients With Tenosynovial Giant Cell Tumor",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQa3hVV1ExYUhCbF9QbDJKMXBPeF90VVNvdVh5c1JQYzB4aUp6QXc2QW11Y3BuZjBPanZNblZtYnF6c2RrTE9jMkV4dGR3VkhfbWNMTnFYMG5BMTJhekxGZVVuUHFBZTI5UmhBTDFPLWhRaEtSTC05WFQ3SjRsNDJrZ2wxYi1Ldm05RXhabmJZcWlJdGF3cVE?oc=5",
+      "source": "Pharmaceutical Executive",
+      "why": "",
+      "topic": "cancer",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "FDA Approves Pimjetmi for Patients With Tenosynovial Giant Cell Tumor Pharmaceutical Executive",
+        "published": "2026-11-12T03:46:41+00:00"
+      }
+    },
+    {
+      "id": "news-276e27f7286b",
+      "kind": "field",
+      "drug": null,
+      "what": "FDA Approves First New Head and Neck Cancer Drug in 10 Years",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNQ3I5Q3VTU2I5WER1R0JndFZ3V29KT2RHdmd2UE5WTlNDcWV6dHRwUDZ2Y2NxSG0zNDZVZkR2dTJJNTRtemVuZFdTMzcxRG9VZTU5Z2daTDJzZTdjZWtIc29rUFYxUWhSbGRpMXJTczJ1Y2lLdnlZV2RubUR3YUEwSW9QM24tUzFL?oc=5",
+      "source": "\uc870\uc120\uc77c\ubcf4",
+      "why": "",
+      "topic": "cancer",
+      "found": "2026-11-12T17:33:27+00:00",
+      "extra": {
+        "summary": "FDA Approves First New Head and Neck Cancer Drug in 10 Years \uc870\uc120\uc77c\ubcf4",
+        "published": "2026-11-12T00:20:56+00:00"
+      }
+    }
+  ],
+  "errors": []
+}
