@@ -1011,3 +1011,6 @@ a.hcab:hover { color: var(--accent); }
 .cab-note [hidden] { display: none; }
 /* welcome-only parts never show outside the welcome */
 html:not(.is-welcome) .w-only { display: none !important; }
+/* the iris as a pre-rendered deboss (scripts/emboss_iris.py): same in every browser */
+.w-iris-wrap { filter: none; }
+.w-iris { width: 4.25rem; aspect-ratio: 528 / 482; background: url('iris-deboss.png') center / contain no-repeat; -webkit-mask: none; mask: none; }
