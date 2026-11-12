@@ -118,7 +118,7 @@ def test_dropped_drugs_and_retired_sources_are_hidden(tmp_path):
 
 def test_drug_page_has_back_link(tmp_path):
     out, _ = _build(tmp_path)
-    assert 'class="hback" href="../drugs.html"' in (out / "drugs/inclisiran.html").read_text()
+    assert '<a class="back" href="../drugs.html">&larr; Drugs</a>' in (out / "drugs/inclisiran.html").read_text()
 
 
 def test_drugs_grouped_by_closeness(tmp_path):
@@ -131,9 +131,9 @@ def test_drugs_grouped_by_closeness(tmp_path):
 def test_past_weeks_button_and_back_links(tmp_path):
     out, _ = _build(tmp_path)
     assert 'class="btn" href="weeks/index.html"' in (out / "index.html").read_text()
-    assert 'class="hback" href="../index.html"' in (out / "weeks/index.html").read_text()
+    assert '<a class="back" href="../index.html">&larr; News</a>' in (out / "weeks/index.html").read_text()
     week = (out / "weeks/2026-11-03.html").read_text()
-    assert 'class="hback" href="../weeks/index.html"' in week
+    assert '<a class="back" href="../index.html">&larr; News</a>' in week
     # past weeks sit under the same header and tabs, with News selected
     assert 'class="folder f-news on"' in week and 'class="slab tabbed"' in week
     assert 'class="folder f-news on"' in (out / "weeks/index.html").read_text()
@@ -168,12 +168,14 @@ def test_drug_page_is_consolidated_for_a_layperson(tmp_path):
     html = (out / "drugs/inclisiran.html").read_text()
     # under the same header and tabs, with Drugs selected
     assert 'class="slab tabbed"' in html and 'class="folder f-drugs on"' in html
-    # a compact Profile with technical labels; the plain description stays above it
+    # stage and sponsor under the name; key results in one strip
     assert "A shot twice a year" in html
-    profile = html[html.index(">Profile<"):html.index("</dl>")]
-    for label in ("LDL reduction", "Dosing", "CV outcomes", "Stage", "Sponsor"):
-        assert label in profile
-    assert "↓ 50%" in profile and "Heart-attack trial underway" in profile and "Novartis" in profile
+    meta = html[html.index('class="dmeta"'):html.index('class="dsum"')]
+    assert "Approved" in meta and "Novartis" in meta
+    strip = html[html.index('class="strip"'):html.index("</dl>")]
+    for label in ("LDL reduction", "Dosing", "CV outcomes"):
+        assert label in strip
+    assert "↓ 50%" in strip and "Trial underway" in strip and ">Profile<" not in html
     assert "Upcoming readouts" in html and "twice-a-year shot proven" in html
     assert 'href="https://clinicaltrials.gov/study/NCT03705234"' in html   # drug page links the source
     assert ">Notes<" in html and "At a glance" not in html and "In plain terms" not in html

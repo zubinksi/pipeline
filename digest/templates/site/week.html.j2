@@ -1,8 +1,9 @@
 {% extends "base.html.j2" %}
 {% import "_macros.html.j2" as m with context %}
 {% block title %}{{ week.date|nice_date }} · {{ site_title }}{% endblock %}
-{% block head %}{{ m.slab_head("news", back=root ~ "weeks/index.html") }}{% endblock %}
+{% block head %}{{ m.slab_head("news") }}{% endblock %}
 {% block content %}
+<a class="back" href="{{ root }}index.html">&larr; News</a>
 <h2 class="page-title">Week of {{ week.date|nice_date }}</h2>
 <div class="pager">
   <span>{% if older %}<a href="{{ older }}.html">&larr; {{ older|nice_date }}</a>{% endif %}</span>

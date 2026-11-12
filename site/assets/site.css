@@ -780,3 +780,22 @@ a.tl:hover .tl-what b { color: var(--accent); }
 /* drug page profile: tighter rows */
 .gl-compact > div { padding: 0.4375rem 0; }
 .gl-compact .gl-stage { flex-wrap: nowrap; }
+
+/* drug page: stage and sponsor under the name; key results in one strip */
+.back { display: inline-block; margin: 0 0 -1rem; color: var(--ink2); font-size: 0.75rem; }
+.back:hover { color: var(--accent); }
+.dmeta { display: flex; align-items: center; flex-wrap: wrap; gap: 0.25rem 0.625rem; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); }
+.dmeta .sep { color: var(--b4); }
+.dmeta .mini { width: 5.25rem; }
+.strip { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 3px double var(--b4); border-bottom: 1px solid var(--b4); }
+.strip > div { padding: 0.625rem 0.75rem 0.6875rem 0; }
+.strip > div + div { padding-left: 0.75rem; border-left: 1px solid var(--b3); }
+.strip dt { font-family: var(--mono); font-size: 0.5625rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.strip dd { margin: 0.3125rem 0 0; font-family: var(--mono); font-size: 0.875rem; letter-spacing: 0.02em; line-height: 1.35; color: var(--ink); }
+.strip dd.pf-yes { color: #2f6b3a; } .strip dd.pf-failed { color: var(--setback); } .strip dd.pf-untested { color: var(--muted); }
+.strip-note { margin: 0.4375rem 0 0; font-size: 0.875rem; line-height: 1.45; color: var(--muted); }
+@media (max-width: 860px) {
+  .strip dd { font-size: 0.8125rem; }
+  .strip > div { padding-right: 0.5rem; } .strip > div + div { padding-left: 0.5rem; }
+}
+.dtop + div { margin-top: -0.75rem; }
