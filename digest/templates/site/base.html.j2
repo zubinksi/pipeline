@@ -17,7 +17,7 @@
 </head>
 <body>
 <main class="body">
-  <div class="slab{{ ' tabbed' if sel in ('news', 'drugs', 'weeks', 'panel') }}" data-theme="{{ 'drugs' if sel == 'drugs' else 'news' }}"{% if sel == 'panel' %} data-page="panel"{% endif %}>
+  <div class="slab{{ ' tabbed' if sel in ('news', 'drugs', 'weeks', 'panel', 'labs') }}" data-theme="{{ 'drugs' if sel == 'drugs' else 'news' }}"{% if sel in ('panel', 'labs') %} data-page="panel"{% endif %}>
     {% block head %}{% endblock %}
     <div class="slab-body">
     {% block content %}{% endblock %}
@@ -31,5 +31,6 @@
 <script src="{{ root }}assets/panel.js" defer></script>
 <script src="{{ root }}assets/filter.js" defer></script>
 <script src="{{ root }}assets/tabs.js" defer></script>
+{% if sel == "labs" %}<script src="{{ root }}assets/labs.js" defer></script>{% endif %}
 </body>
 </html>

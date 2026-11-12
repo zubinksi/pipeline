@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Your labs · Readout</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#172740">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="preload" href="assets/fonts/GeistSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<main class="body">
+  <div class="slab tabbed" data-theme="news" data-page="panel">
+<header class="slab-head">
+  <h1 class="sr-only">Readout</h1>
+  <div class="head-meta">
+<a class="hcab" href="panel.html"><span class="hback" aria-hidden="true">&larr;</span>Your panel</a>
+  </div>
+</header>    <div class="slab-body">
+<div class="labs-top">
+  <h2 class="page-title">Your labs</h2>
+  <p class="cab-lede">Stored only in this browser. Nothing is sent anywhere.</p>
+</div>
+
+<section class="section" data-labs>
+  <div class="section-head"><h2>Results over time</h2></div>
+  <p class="empty labs-empty">No results yet. Add your first set below.</p>
+  <div class="markers" data-markers></div>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>Add results</h2></div>
+  <form class="labs-form" data-labs-form>
+    <label class="lf lf-date"><span>Date</span><input type="date" name="date" required></label>
+    <label class="lf"><span>LDL <em>mg/dL</em></span><input type="number" name="ldl" inputmode="decimal" step="any" min="0"></label>
+    <label class="lf"><span>ApoB <em>mg/dL</em></span><input type="number" name="apob" inputmode="decimal" step="any" min="0"></label>
+    <label class="lf"><span>HDL <em>mg/dL</em></span><input type="number" name="hdl" inputmode="decimal" step="any" min="0"></label>
+    <label class="lf"><span>Triglycerides <em>mg/dL</em></span><input type="number" name="tg" inputmode="decimal" step="any" min="0"></label>
+    <label class="lf"><span>Lp(a) <em>nmol/L</em></span><input type="number" name="lpa" inputmode="decimal" step="any" min="0"></label>
+    <label class="lf"><span>hs-CRP <em>mg/L</em></span><input type="number" name="crp" inputmode="decimal" step="any" min="0"></label>
+    <button type="submit" class="cab-done labs-save">Save results</button>
+  </form>
+</section>
+
+<section class="section" data-labs-table hidden>
+  <div class="section-head"><h2>All results</h2></div>
+  <div class="scroll"><table class="trials labs-table">
+    <thead><tr><th>Date</th><th>LDL</th><th>ApoB</th><th>HDL</th><th>TG</th><th>Lp(a)</th><th>hs-CRP</th><th></th></tr></thead>
+    <tbody data-labs-rows></tbody>
+  </table></div>
+  <div class="labs-io">
+    <button type="button" class="btn" data-labs-export>Export (JSON)</button>
+    <label class="btn">Import<input type="file" accept="application/json" data-labs-import hidden></label>
+  </div>
+</section>
+
+<details class="explain">
+  <summary>About the ranges</summary>
+  <div class="explain-body">
+    <div>
+      <p>The shaded band on each chart is a commonly used reference range for adults, not a personal target. Your own goals depend on your overall risk, so they're a conversation with your clinician.</p>
+      <p style="margin-top:0.75rem">LDL below 100 ("optimal"), HDL 40 or above (50 for women) and triglycerides below 150 mg/dL are the bands from the U.S. <a href="https://www.nhlbi.nih.gov/resources/atp-iii-glance-quick-desk-reference">NCEP ATP III</a> guideline, since replaced by risk-based guidelines that don't use fixed targets. Lp(a) below 75 nmol/L is the low range in the <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9639807/">European Atherosclerosis Society's 2022 statement</a>. hs-CRP below 1 mg/L is the lower-risk group in the <a href="https://doi.org/10.1161/01.CIR.0000052939.59093.45">AHA/CDC statement</a>. ApoB has no single agreed cutoff, so no band is shown.</p>
+    </div>
+    <div>
+      <p>Your results never leave this device. To move them to another browser, export them here and import them there. Clearing your browser's data for this site deletes them.</p>
+      <p style="margin-top:0.75rem">This is a personal record, not medical advice.</p>
+    </div>
+  </div>
+</details>
+    </div>
+  </div>
+</main>
+<footer>
+  Report generated Nov 9, 2026 · Sources: ClinicalTrials.gov, openFDA, news searches
+</footer>
+<script type="application/json" id="panel-data">{"topics":["heart","obesity","alzheimers","cancer"],"drugs":{"evolocumab":{"t":"heart","c":[]},"alirocumab":{"t":"heart","c":[]},"inclisiran":{"t":"heart","c":[]},"lerodalcibep":{"t":"heart","c":[]},"verve102":{"t":"heart","c":["lilly"]},"lepodisiran":{"t":"heart","c":["lilly"]},"olpasiran":{"t":"heart","c":[]},"pelacarsen":{"t":"heart","c":[]},"zerlasiran":{"t":"heart","c":[]},"muvalaplin":{"t":"heart","c":["lilly"]},"tirzepatide":{"t":"obesity","c":["lilly"]},"semaglutide":{"t":"obesity","c":[]},"orforglipron":{"t":"obesity","c":["lilly"]},"retatrutide":{"t":"obesity","c":["lilly"]},"maritide":{"t":"obesity","c":[]},"donanemab":{"t":"alzheimers","c":["lilly"]},"lecanemab":{"t":"alzheimers","c":[]},"remternetug":{"t":"alzheimers","c":["lilly"]},"trontinemab":{"t":"alzheimers","c":[]},"imlunestrant":{"t":"cancer","c":["lilly"]},"olomorasib":{"t":"cancer","c":["lilly"]},"ivonescimab":{"t":"cancer","c":[]}}}</script>
+<script src="assets/panel.js" defer></script>
+<script src="assets/filter.js" defer></script>
+<script src="assets/tabs.js" defer></script>
+<script src="assets/labs.js" defer></script></body>
+</html>

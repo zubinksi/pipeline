@@ -169,9 +169,10 @@
   <div class="head-meta">
     {# the panel is where you choose which drugs you follow #}
     {% if active == "panel" %}<span class="hcab on p-only" aria-current="page">Your panel</span><span class="hcab on w-only">Welcome</span>
+    {% elif active == "labs" %}<a class="hcab" href="{{ root }}panel.html"><span class="hback" aria-hidden="true">&larr;</span>Your panel</a>
     {% else %}<a class="hcab" href="{{ root }}panel.html"><span class="hback" aria-hidden="true">&larr;</span>Your panel</a>{% endif %}
   </div>
-  {% if active != "panel" %}{{ tabs(active) }}{% endif %}
+  {% if active not in ("panel", "labs") %}{{ tabs(active) }}{% endif %}
 </header>
 {%- endmacro %}
 

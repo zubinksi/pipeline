@@ -257,3 +257,12 @@ def test_drug_page_explains_how_it_works(tmp_path):
     assert html.count('class="flow-step') == 4 and 'class="flow-step acts"' in html
     for d in WL["drugs"]:
         assert d.get("approach"), d["id"]  # every drug has a diagram
+
+
+def test_labs_page_is_private_by_design(tmp_path):
+    out, _ = _build(tmp_path)
+    html = (out / "labs.html").read_text()
+    assert "Stored only in this browser" in html and 'assets/labs.js' in html
+    js = (out / "assets/labs.js").read_text()
+    assert "localStorage" in js and "fetch(" not in js and "XMLHttpRequest" not in js  # never sent anywhere
+    assert 'href="labs.html"' in (out / "panel.html").read_text()

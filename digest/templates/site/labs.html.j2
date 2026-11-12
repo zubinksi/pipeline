@@ -1,0 +1,58 @@
+{% extends "base.html.j2" %}
+{% import "_macros.html.j2" as m with context %}
+{% block title %}Your labs · {{ site_title }}{% endblock %}
+{% block head %}{{ m.slab_head("labs") }}{% endblock %}
+{% block content %}
+{# Your own lab results. Everything on this page lives only in this browser
+   (localStorage): nothing is sent anywhere, and nothing is in the site's files. #}
+<div class="labs-top">
+  <h2 class="page-title">Your labs</h2>
+  <p class="cab-lede">Stored only in this browser. Nothing is sent anywhere.</p>
+</div>
+
+<section class="section" data-labs>
+  <div class="section-head"><h2>Results over time</h2></div>
+  <p class="empty labs-empty">No results yet. Add your first set below.</p>
+  <div class="markers" data-markers></div>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>Add results</h2></div>
+  <form class="labs-form" data-labs-form>
+    <label class="lf lf-date"><span>Date</span><input type="date" name="date" required></label>
+    <label class="lf"><span>LDL <em>mg/dL</em></span><input type="number" name="ldl" inputmode="decimal" step="any" min="0"></label>
+    <label class="lf"><span>ApoB <em>mg/dL</em></span><input type="number" name="apob" inputmode="decimal" step="any" min="0"></label>
+    <label class="lf"><span>HDL <em>mg/dL</em></span><input type="number" name="hdl" inputmode="decimal" step="any" min="0"></label>
+    <label class="lf"><span>Triglycerides <em>mg/dL</em></span><input type="number" name="tg" inputmode="decimal" step="any" min="0"></label>
+    <label class="lf"><span>Lp(a) <em>nmol/L</em></span><input type="number" name="lpa" inputmode="decimal" step="any" min="0"></label>
+    <label class="lf"><span>hs-CRP <em>mg/L</em></span><input type="number" name="crp" inputmode="decimal" step="any" min="0"></label>
+    <button type="submit" class="cab-done labs-save">Save results</button>
+  </form>
+</section>
+
+<section class="section" data-labs-table hidden>
+  <div class="section-head"><h2>All results</h2></div>
+  <div class="scroll"><table class="trials labs-table">
+    <thead><tr><th>Date</th><th>LDL</th><th>ApoB</th><th>HDL</th><th>TG</th><th>Lp(a)</th><th>hs-CRP</th><th></th></tr></thead>
+    <tbody data-labs-rows></tbody>
+  </table></div>
+  <div class="labs-io">
+    <button type="button" class="btn" data-labs-export>Export (JSON)</button>
+    <label class="btn">Import<input type="file" accept="application/json" data-labs-import hidden></label>
+  </div>
+</section>
+
+<details class="explain">
+  <summary>About the ranges</summary>
+  <div class="explain-body">
+    <div>
+      <p>The shaded band on each chart is a commonly used reference range for adults, not a personal target. Your own goals depend on your overall risk, so they're a conversation with your clinician.</p>
+      <p style="margin-top:0.75rem">LDL below 100 ("optimal"), HDL 40 or above (50 for women) and triglycerides below 150 mg/dL are the bands from the U.S. <a href="https://www.nhlbi.nih.gov/resources/atp-iii-glance-quick-desk-reference">NCEP ATP III</a> guideline, since replaced by risk-based guidelines that don't use fixed targets. Lp(a) below 75 nmol/L is the low range in the <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9639807/">European Atherosclerosis Society's 2022 statement</a>. hs-CRP below 1 mg/L is the lower-risk group in the <a href="https://doi.org/10.1161/01.CIR.0000052939.59093.45">AHA/CDC statement</a>. ApoB has no single agreed cutoff, so no band is shown.</p>
+    </div>
+    <div>
+      <p>Your results never leave this device. To move them to another browser, export them here and import them there. Clearing your browser's data for this site deletes them.</p>
+      <p style="margin-top:0.75rem">This is a personal record, not medical advice.</p>
+    </div>
+  </div>
+</details>
+{% endblock %}

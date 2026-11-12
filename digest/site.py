@@ -181,6 +181,7 @@ def build(out: str | Path, *, weeks: list[dict], snapshot: dict, watchlist: dict
               sections=display.sections(_rows(watchlist, w.get("stages", stages), set(w["moved"])), watchlist),
               n_drugs=len(watchlist["drugs"]))
     write("weeks/index.html", "archive.html.j2", "../", sel="weeks", weeks=views)
+    write("labs.html", "labs.html.j2", "", sel="labs")
     write("panel.html", "panel.html.j2", "", sel="panel", sections=display.sections(rows_now, watchlist),
           companies=[{**c, "rows": [r for r in rows_now if c["id"] in r["companies"]]}
                      for c in watchlist.get("companies", [])])
