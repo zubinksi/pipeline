@@ -1009,3 +1009,5 @@ a.hcab:hover { color: var(--accent); }
 }
 .cab-note { white-space: nowrap; }
 .cab-note [hidden] { display: none; }
+/* welcome-only parts never show outside the welcome */
+html:not(.is-welcome) .w-only { display: none !important; }
