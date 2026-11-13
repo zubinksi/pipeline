@@ -1,6 +1,6 @@
 {
   "started": "2026-11-12",
-  "updated": "2026-11-12T17:33:27+00:00",
+  "updated": "2026-11-13T20:27:57+00:00",
   "changes": [
     {
       "id": "status-NCT07839936-RECRUITING",
@@ -109,6 +109,54 @@
       "extra": {
         "summary": "Summit sheds commercial leaders ahead of ivonescimab's FDA decision Fierce Pharma",
         "published": "2026-11-10T19:12:09+00:00"
+      }
+    },
+    {
+      "id": "news-d01873b2f523",
+      "kind": "news",
+      "drug": "pelacarsen",
+      "what": "AHA26: Pelacarsen misses primary endpoint in Phase III HORIZON trial",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOQlJxX2ZuV0J2MjJHLXUtNm1reHRxR3BqUzdFWjN4Zk5FRnB1TVowNzNxVi1Wc3BTMkdMN0l0Y0xZX1c3UVpDT2wxX0pOUDR3WllXd2gxWjkxOEZWZHFnY1BYZWV3YlkzeG9Ec2lyLVpFYVcyOTNPbl9hUGloMjNxc082bXJTcHNxRDRkUU1SRTlPaWFJYkFwc0swRjlHMEdLWGVtZ2R5Sk1KSzdfbURfVko5SzRYVkx4Q3VZZg?oc=5",
+      "source": "Clinical Trials Arena",
+      "why": "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial.",
+      "topic": "",
+      "found": "2026-11-13T20:27:57+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "AHA26: Pelacarsen misses primary endpoint in Phase III HORIZON trial Clinical Trials Arena",
+        "published": "2026-11-13T16:03:49+00:00"
+      }
+    },
+    {
+      "id": "news-ed1e7c9432ed",
+      "kind": "news",
+      "drug": "semaglutide",
+      "what": "Generic Semaglutide Matches Innovator Drug in Phase 3 Indian Diabetes Trial",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQM1ZRYi11LVZtR3ZIMEtWM0l5LWp4ZmFXQTFVN1hQemI2cE9ZVm5rMU5ZUVZTbEVrZE1RRkhrTjdBYWY0ZUc1WUh6Ml93WXE2aVNrS3RHYkt2TExIN2pmcHM3TVFTRVpvcGVQTWd6cjFUWmxCN0V5cnpDU0hsVWFjYnJPdUFXNFRBd3hRU2Y4TjF6alk1UXYxY3ZYcVhONnBvN1E?oc=5",
+      "source": "Bioengineer.org",
+      "why": "The first of the new weight-loss drugs: a weekly GLP-1 shot, now also a daily pill. Sold as Ozempic for diabetes.",
+      "topic": "",
+      "found": "2026-11-13T20:27:57+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Generic Semaglutide Matches Innovator Drug in Phase 3 Indian Diabetes Trial Bioengineer.org",
+        "published": "2026-11-13T16:15:24+00:00"
+      }
+    },
+    {
+      "id": "news-536b76ebc38e",
+      "kind": "news",
+      "drug": "orforglipron",
+      "what": "China Approves Oral Obesity Drug 'Orforglipron'; Expected to Launch in Korea Next Year",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9BNndQOUo2YkotYW9VdmxZYkJ4VllnN0FCcklST3JNcmdNTm9ieGpnZXFiRnZsdVBLRGlnbzVvaXJiN1hmdGJlaUVnZkpWekFlc2ZDWk1PWU1HcEVVc0xKYVhTbUNMQ1prRnVaUk5n?oc=5",
+      "source": "news.sbs.co.kr",
+      "why": "Lilly's GLP-1 pill. Unlike other GLP-1 pills it doesn't need to be taken on an empty stomach, and it's easier to make in bulk than shots.",
+      "topic": "",
+      "found": "2026-11-13T20:27:57+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "China Approves Oral Obesity Drug 'Orforglipron'; Expected to Launch in Korea Next Year news.sbs.co.kr",
+        "published": "2026-11-13T07:07:32+00:00"
       }
     }
   ],
