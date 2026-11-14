@@ -1,6 +1,6 @@
 {
   "started": "2026-11-12",
-  "updated": "2026-11-13T20:27:57+00:00",
+  "updated": "2026-11-14T18:43:02+00:00",
   "changes": [
     {
       "id": "status-NCT07839936-RECRUITING",
@@ -157,6 +157,54 @@
       "extra": {
         "summary": "China Approves Oral Obesity Drug 'Orforglipron'; Expected to Launch in Korea Next Year news.sbs.co.kr",
         "published": "2026-11-13T07:07:32+00:00"
+      }
+    },
+    {
+      "id": "news-bc5b4bbf7e81",
+      "kind": "news",
+      "drug": "pelacarsen",
+      "what": "Pelacarsen Fails to Reduce Cardiovascular Events Despite Lowering Lp(a): NEJM",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPZzhTd3dPWnVhQlZZZW9fOFNZVE1IMUR2cm9xWC1IOUw3bVV3TE1sVlJEdEc0QWZxQ21HSE9KVzBFcm9RdGpsQUVudERFdUxyNmxQMHMzYVFFcEg4T0s3bVdGTm1Hal9WSFU3QlZyQXhtQVphMWJId0J4MDNHMHd4Vnp6cThGcVlpekxTbEZhcVhyajlhQnhzZlZwR0FwQUlfZldkWkhYM1VaOG9ackVqaUZSZkhCaE9JbFF5MldJWDhKMERZdzh2QWF30gHPAUFVX3lxTE1Rb3RoRFNwXzg3UFcyNlpINDFlYi1zVmc1ZEdRN3NvUWtmMUpqb0hrY1BZLXIxZHRqemZCbGItdTB6Q2htYV9wcUFaSGpqU2JKUnBqWWNtM1ZmOXVtZFBOakJVaFBwb2s0TDVWbDY5MzhKVEN6amY4UE8wVzJRVWd0SzItVjRlSEdMS2I5dVh0X0ZlY3lEYXJvTUU4WHYyYXQ1ZENSV25BTHZub0gyNE9OZlRTZjZLaVhoa2xWZGdPRFV3VmJ2V2ltYTRQZ0Vwcw?oc=5",
+      "source": "Medical Dialogues",
+      "why": "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial.",
+      "topic": "",
+      "found": "2026-11-14T18:43:02+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Pelacarsen Fails to Reduce Cardiovascular Events Despite Lowering Lp(a): NEJM Medical Dialogues",
+        "published": "2026-11-14T04:30:30+00:00"
+      }
+    },
+    {
+      "id": "news-a98f7db37e96",
+      "kind": "news",
+      "drug": "semaglutide",
+      "what": "Eli Lilly's Oral Obesity Drug Orforglipron Gets China Approval, Challenging Novo's Wegovy",
+      "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOU0M3d2k2N1hPUGRLQk8zOERwOHQtQ2FKZTMtNkI3aVFUeGZiT3gwbUhybHl5bnRLS2J0aWRKaXAtb0lRMVVjZFVHZ2taWVo0SjNLb1VWRjFqU1o2dDdVMC1qcG50dWtlOWp3R0NDdy1CelpKbDZuRWtFb19RVU5KdDU1dHdiTGVzMzdJZXV2Mk9JOFcyRzJCbUZxdjJTZENmVUFPekhBakNUcGhBNUI4NXBXbHFNeHdYaXdVOHhpV2lObFBTMFlWVmo3Sng1OGNxOVdROWRTMTJYUdIB3wFBVV95cUxQN3VQanJzRkNheGZXU0EyMUJpUnlQZjdWbW5nYzJUX3Q2aG1JMHFxcDZyR0xMUENlX0ItNHBPSVh2LTRHSHFGaUI0MzhST1loakVwbWYtaGx5MWV2ZHZnWkJxNVd0MmpJSXNVS0s2WW1kMXF3cXU2R0pwenFBdzlkLTNFNTFUUktJVWg4WlFRVlVBaU5PV0J3ME5iMVV6aEZRM3lTb3hvSjlSYmVBNTROY0RVczJmWmNkREFOTlNlVzBVZkVvX21iZzdEUmFaSlRQVXBOb1kwUVNnZFgzbUdz?oc=5",
+      "source": "Medical Dialogues",
+      "why": "The first of the new weight-loss drugs: a weekly GLP-1 shot, now also a daily pill. Sold as Ozempic for diabetes.",
+      "topic": "",
+      "found": "2026-11-14T18:43:02+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Eli Lilly's Oral Obesity Drug Orforglipron Gets China Approval, Challenging Novo's Wegovy Medical Dialogues",
+        "published": "2026-11-14T14:46:20+00:00"
+      }
+    },
+    {
+      "id": "news-26887b10e722",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "Researchers Report New Ivonescimab Data as FDA Decision Nears",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOdXBrQWlqTmFQNklJTllhM0ltcnFJRmlSV0FaNDFCeGVCNElqNllXNFZWZU9IeExycWxfSnJRODlTSFZrUWdGQzVhcXVsb2w0TEVNX1dHcHVsUl8zM2dZbXlNV0tzM0FiQ2U5SXR6UzQtb2J1X3V5Sm9SMVNNQy03LV9OdU5wX1NTMmt5Z0NzQ3Z3UER6aHJabC1xYWtHOTJwOGc?oc=5",
+      "source": "Cancer Health",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-14T18:43:02+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Researchers Report New Ivonescimab Data as FDA Decision Nears Cancer Health",
+        "published": "2026-11-05T21:47:28+00:00"
       }
     }
   ],
