@@ -1,6 +1,6 @@
 {
   "started": "2026-11-12",
-  "updated": "2026-11-14T18:43:02+00:00",
+  "updated": "2026-11-15T19:21:26+00:00",
   "changes": [
     {
       "id": "status-NCT07839936-RECRUITING",
@@ -205,6 +205,86 @@
       "extra": {
         "summary": "Researchers Report New Ivonescimab Data as FDA Decision Nears Cancer Health",
         "published": "2026-11-05T21:47:28+00:00"
+      }
+    },
+    {
+      "id": "news-15af6eaf87b0",
+      "kind": "news",
+      "drug": "tirzepatide",
+      "what": "Bariatric Surgery and Drug Switches Outperform Discontinuation After Semaglutide or Tirzepatide",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQd3NkYzdnQXBpTF95WFJBRDgzbXFSWWw1QVJlUW1pLU5qQXBJVjhxdVJKcDBIMHF2NnRneFBRT3A1eWdRYUpLd09mVjJVckhFYkY3TGhjcTNWUEZmR2tTUDFzNHRlR2FlZ1lmVmFxY01OMXFKZTlva2lRQjBZbnRvVjFrdk8zTGFJYlNVVTZieHRwWW1aa3dOUnNHZnYzVDRJVGpuRjllZEpycndIX21tQWxRSVJyTGRpOXBDbw?oc=5",
+      "source": "Bioengineer.org",
+      "why": "A weekly shot that acts on two gut hormones (GIP and GLP-1) to reduce appetite. Sold as Zepbound for weight and Mounjaro for diabetes.",
+      "topic": "",
+      "found": "2026-11-15T19:21:26+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Bariatric Surgery and Drug Switches Outperform Discontinuation After Semaglutide or Tirzepatide Bioengineer.org",
+        "published": "2026-11-15T12:25:33+00:00"
+      }
+    },
+    {
+      "id": "news-fd935031835d",
+      "kind": "news",
+      "drug": "orforglipron",
+      "what": "Lilly's Obesity Drugs: Foundayo Becomes First GLP-1 Pill Approved In China, Experimental Combo Shows Promise",
+      "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxQNzN4LXBqZHNyX2MzMG9TUUdzdWFlVFh2NWx0TkpyVUI0ZUVGQXBOYnRYQlhTX0I1VG9DM2tkOTFLMFBmVHdfWnl6RnJHdFI5OHhRSWY5TW1kNXFnd0NvVXFuTEdzR2pzZ0xBa2VfclhtRndwNk8tZl9HUk5lc3VMV3VRTXlHWFhEMC1HYkpuRFRpdHFySERLdU9XcHg5OU5EaFV1czlPSmU1NEVXRW91Rl9PSHFaZmFGZllGUExiUEg0YjFEcmFLU3RVZE8ydWF1R0UxaWQ0OEo2VGJ3ZDFWY24zSW04UzhPd0MydzlJY0tIZ2hKUkE?oc=5",
+      "source": "Health and Me",
+      "why": "Lilly's GLP-1 pill. Unlike other GLP-1 pills it doesn't need to be taken on an empty stomach, and it's easier to make in bulk than shots.",
+      "topic": "",
+      "found": "2026-11-15T19:21:26+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Lilly's Obesity Drugs: Foundayo Becomes First GLP-1 Pill Approved In China, Experimental Combo Shows Promise Health and Me",
+        "published": "2026-11-15T16:30:00+00:00"
+      }
+    },
+    {
+      "id": "news-9bbc09e19b35",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "FDA declines ivonescimab approval over survival data",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE00eW9ERlFxVWJtOUxyYnVHaUhiYTNRWEZPWTVua2JTUUJUQWczNmUwdVlkWDVWOUlLVGIxVDNCYnh6SFF4bFJyTVVNbk1CYTRvWFdUWkV5UFdOT0QyODRIS3p6NnhoZDBMdXNqeUl1bTRJYkVKanFXUQ?oc=5",
+      "source": "CASRAI",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-15T19:21:26+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "FDA declines ivonescimab approval over survival data CASRAI",
+        "published": "2026-11-15T18:14:10+00:00"
+      }
+    },
+    {
+      "id": "news-6ac91cb0ef73",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "FDA Rejects Ivonescimab Lung Cancer Drug Approval",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPczZET0FWLXY1VERGcDQyazhfaHhHN0xwVVU2eG5nNUhEbkJkT0lFRVFwWk9kYXNZUWJ0bklvVzdQVnNqZjBCbGFLaTdyR2xQbWdBaXJnRkJsUlRKNjhXTnV5eGM3ZkphR2tJUkFiWkM5bklNTmlxSUZWN2ptbUxzNVZpMGpKQXdNclJEYnJQYXhJelU0N25yWmVZd3JWUDJSc1E?oc=5",
+      "source": "Daily Beirut",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-15T19:21:26+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "FDA Rejects Ivonescimab Lung Cancer Drug Approval Daily Beirut",
+        "published": "2026-11-15T16:20:27+00:00"
+      }
+    },
+    {
+      "id": "news-820b64857c46",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "FDA rejects lung cancer treatment ivonescimab from Summit Therapeutics",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOZXFPV1FyNFd1Mm90OUJQdk9XajZya0tYVE1kSkV4RHhnZkMyM21KYzFRbzlQUmh2ZWE3MG5KR3NFQXJMcTNQY3lBYlZpRTV3V2lEcC0taUlvTm5zbHFSNi1RS0t4bTIxOGt4cGUzbGIwZllqUkZZeURVcF9rei1rUzhkMGZKaEU1djljSTljQXdKb2d2b1FDMVZoWng0YTJtbXJjdQ?oc=5",
+      "source": "STAT",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-15T19:21:26+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "FDA rejects lung cancer treatment ivonescimab from Summit Therapeutics STAT",
+        "published": "2026-11-15T15:06:48+00:00"
       }
     }
   ],
