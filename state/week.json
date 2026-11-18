@@ -1,6 +1,6 @@
 {
   "started": "2026-11-16",
-  "updated": "2026-11-17T21:44:30+00:00",
+  "updated": "2026-11-18T21:22:35+00:00",
   "changes": [
     {
       "id": "news-6a8745969bb7",
@@ -112,6 +112,86 @@
       "extra": {
         "summary": "FDA rejects Summit\u2019s ivonescimab over missed OS endpoint BioWorld News",
         "published": "2026-11-17T16:00:00+00:00"
+      }
+    },
+    {
+      "id": "news-5d4167bb3039",
+      "kind": "news",
+      "drug": "tirzepatide",
+      "what": "Health Canada Approves Eli Lilly's Mounjaro for Cardiovascular R",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNUDh0OFlaV0tFWXNWUHlXdEcxSy1tMlUyS2pKX0ZmN3k5TVhWeEdGNHI2ZUxfRmtXcW0xMGRlUjNHZno5Q0hhdEdQdWdoS250WGVEeVRROVVOMkF5ZHhDU2lsekxLTnJLVFRpTnMzc005UF8tY2JxSlZSMURqWmRITHhBRkE2RmN1WXBHZ3d2ektZeWhBZFBzbFhDNU83dUJscHFLSkJEY05mZmItZzdhNldqSFlGMEM0dXlJaVRLTmZ0dFlDSVNJWjNsYWNzR2JCSHQ4cA?oc=5",
+      "source": "GuruFocus",
+      "why": "A weekly shot that acts on two gut hormones (GIP and GLP-1) to reduce appetite. Sold as Zepbound for weight and Mounjaro for diabetes.",
+      "topic": "",
+      "found": "2026-11-18T21:22:35+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Health Canada Approves Eli Lilly's Mounjaro for Cardiovascular R GuruFocus",
+        "published": "2026-11-18T21:17:03+00:00"
+      }
+    },
+    {
+      "id": "news-036140b07d9c",
+      "kind": "news",
+      "drug": "orforglipron",
+      "what": "Australia approves orforglipron, its first non-peptide oral GLP-1 pill",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxObDNIbFc0aDU2aGI3ZDVpcVdrVHYtZ2xjbGttZG1nY0pWc3k5eWlwWG9pQ3pPMUhQTmtRTEZZRW5uUm9qUEcyMVlfb204R3YxdHIxOG9RcUdlNl9nS0luMG9zbHQtOU1wd1JwZkFHZm5YX19xWFVfNC1wN2U2dERoMzdfaF9lZEZQQjNFaWc5YXF6Y3lFMjBvRWhVRkdEVmlIVVBscHRR?oc=5",
+      "source": "https://streamlinefeed.co.ke/",
+      "why": "Lilly's GLP-1 pill. Unlike other GLP-1 pills it doesn't need to be taken on an empty stomach, and it's easier to make in bulk than shots.",
+      "topic": "",
+      "found": "2026-11-18T21:22:35+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Australia approves orforglipron, its first non-peptide oral GLP-1 pill https://streamlinefeed.co.ke/",
+        "published": "2026-11-18T06:58:18+00:00"
+      }
+    },
+    {
+      "id": "news-d4cd53c7e52a",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "Summit Therapeutics starts a sixth Phase III trial of ivonescimab, testing it against AstraZeneca's Imfinzi in stage III lung cancer",
+      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQWGhaWldkTmN2MHdyZFVQdUl5UExjZU5MZkE3MGpuSklJWWRTMElPYW1oNlBkeGIwMG85U0tOWEd4T1Jkbmx1WGNtVVEwT2lYci1ubFItUHpESVNxdG40dENwSWhUX0dzYkIzMUR4S3dCMDVacGZzTV9OQ0h5aWZaeF9GTGhYNzZGbzkxa0t0Z0h6RjVIRlVoZnlVQko4QjhFSk1KUm8zV0RxVm0ySGNPdzZQUmpYX2tlTk51S0JHb0x4cWIxMTJpVzg0eUtqSnhoRXJ5NUZ1emVYMDJLS2JoNzh1LXVrUQ?oc=5",
+      "source": "MLQ.ai",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-18T21:22:35+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Summit Therapeutics starts a sixth Phase III trial of ivonescimab, testing it against AstraZeneca's Imfinzi in stage III lung cancer MLQ.ai",
+        "published": "2026-11-18T16:08:56+00:00"
+      }
+    },
+    {
+      "id": "news-e12e0bb9d48e",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "Summit starts phase 3 trial of ivonescimab in lung cancer",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPdGNoS29zY0pYSGtzWjZQWFprbzdjdGx1WEE1dVJaTS1oaVZpNlR5ckFKNXN1bFhSOW5jZk9CaFdhOVd0clNITkl3aDMtdjRRYldPOG9WWmJoVV9SdEl3ZUFoaVRVWEMzZjZ1aVp2UE8tckU4TzB0SFljY3A0aXo5RkN6dkpmRmxZTUlyZWZ2TDY2U2c4WWZfZjd2MUtrdWl4ZE5CbzBIeU5MN3kwUTBTd3hfR3M?oc=5",
+      "source": "Investing.com",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-18T21:22:35+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Summit starts phase 3 trial of ivonescimab in lung cancer Investing.com",
+        "published": "2026-11-18T11:17:37+00:00"
+      }
+    },
+    {
+      "id": "news-ade522153831",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "Summit Therapeutics Further Expands Ivonescimab Global Development Program with Phase III HARMONi-10 Study in Unresectable Stage III Non-Small Cell Lung Cancer",
+      "url": "https://news.google.com/rss/articles/CBMivAJBVV95cUxNV2xDS1hBV1kySWlpR0ZMeHNSbEpsT203aFZPRTZaVXZicmxTYm1QOXFFaWE4Zm11T3RmN3NXVXNINE1hbk1ISElOY1luV1RWN2hlclVvZFFRRXViRmhKc1Z1UWNvREwzaFpXVDRpNWVYdzZuVW5NU0N4ekxIeFhINkdtUTZfS29VaDVtTzF1eGxYb3YteVRpVU45U2dIUzJoMEVXVVpIZElXcVVuQWdqeWJXZk1zU1NYX3p4MzY0Q3VCUzRidXgwQkR1QXFZQ2hRZ19JWXVtVEFvRWFLRjh5a1VqaHEyU2tZUDRFLXFfWWRGTkp6NWp5TjV5Zm1QcXR3NUVFTWh3RWZJcjRWd2dQR3BTdmpzU2U0TkJPXzlYb3ZiTXlCOHdkMHZheXdqOF9weUNkX2ZxRHpsR2tq?oc=5",
+      "source": "Business Wire",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-18T21:22:35+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Summit Therapeutics Further Expands Ivonescimab Global Development Program with Phase III HARMONi-10 Study in Unresectable Stage III Non-Small Cell Lung Cancer Business Wire",
+        "published": "2026-11-18T11:00:00+00:00"
       }
     }
   ],
