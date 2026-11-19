@@ -1,6 +1,6 @@
 {
   "started": "2026-11-16",
-  "updated": "2026-11-18T21:22:35+00:00",
+  "updated": "2026-11-19T21:26:19+00:00",
   "changes": [
     {
       "id": "news-6a8745969bb7",
@@ -192,6 +192,70 @@
       "extra": {
         "summary": "Summit Therapeutics Further Expands Ivonescimab Global Development Program with Phase III HARMONi-10 Study in Unresectable Stage III Non-Small Cell Lung Cancer Business Wire",
         "published": "2026-11-18T11:00:00+00:00"
+      }
+    },
+    {
+      "id": "news-9d61137152d5",
+      "kind": "news",
+      "drug": "tirzepatide",
+      "what": "In a phase 3 trial, tirzepatide reduced BMI versus placebo in adolescents with obesity and obesity-related complications",
+      "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxPX2tjcHVmaXZScjR4RGxYZTlXbTdFQmY5NTdxRzlJY0dMTGFqcDdxblh4QXRWdHpjM1lXSDAzbGhWSHJfWVBBaXhTYmZSX2sxZUdOdjFzSGM3UHY3ZEwwTVZ0OWw4dkpmMWpJMUpyQ2szUk5xLU5vYVd3QVVRUWh4VmRLM2ZZbk5PeHIyUF9pdTNGVHlVOWFsTjBKeGladkV3dzJTVFgxODB4aGszMUVGUVpIX1VFWHJSZDFPMERmd1Q1T016d2Z1RmR5LWlDMFlBeDdpZUsxZTdYVTNnTGUyOWRiYXVmN2M?oc=5",
+      "source": "2 Minute Medicine",
+      "why": "A weekly shot that acts on two gut hormones (GIP and GLP-1) to reduce appetite. Sold as Zepbound for weight and Mounjaro for diabetes.",
+      "topic": "",
+      "found": "2026-11-19T21:26:19+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "In a phase 3 trial, tirzepatide reduced BMI versus placebo in adolescents with obesity and obesity-related complications 2 Minute Medicine",
+        "published": "2026-11-19T13:06:18+00:00"
+      }
+    },
+    {
+      "id": "news-ed822eb7d3e4",
+      "kind": "news",
+      "drug": "orforglipron",
+      "what": "Health Canada Approves Eli Lilly Foundayo Weight Loss Pill",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBYZm9MRGpfM21LcUhJcGc1bGo0bFhYNVFvWlJfeGItYmJQRGwybFZjcERDMkU2aW4zSnhwUk9XNG0tZFRpWXZ1QjFLa3lIbmp5Q0ZmdThJeXlIemR0RzgxQmZvNVpWbVdFOXJ0VU5yOA?oc=5",
+      "source": "cwibc.co.id",
+      "why": "Lilly's GLP-1 pill. Unlike other GLP-1 pills it doesn't need to be taken on an empty stomach, and it's easier to make in bulk than shots.",
+      "topic": "",
+      "found": "2026-11-19T21:26:19+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Health Canada Approves Eli Lilly Foundayo Weight Loss Pill cwibc.co.id",
+        "published": "2026-11-19T20:53:00+00:00"
+      }
+    },
+    {
+      "id": "news-f7aeaef4e960",
+      "kind": "news",
+      "drug": "orforglipron",
+      "what": "Eli Lilly Secures Canada and Australia Approval for Foundayo",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1nT01ZOGdRR0U3SGxINkVMWS0xRGt3d1gwbDh6S0dUX3JsVUt3RE9SY3lFTG91alVFRDg3ekhIUEVVS2J5d29jOEd1Tml2SU1YYVRPc3psQ1V0UVU3blZ0UmM3QzJSMlliTVRj?oc=5",
+      "source": "SuaraGarut.ID",
+      "why": "Lilly's GLP-1 pill. Unlike other GLP-1 pills it doesn't need to be taken on an empty stomach, and it's easier to make in bulk than shots.",
+      "topic": "",
+      "found": "2026-11-19T21:26:19+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Eli Lilly Secures Canada and Australia Approval for Foundayo SuaraGarut.ID",
+        "published": "2026-11-19T20:52:00+00:00"
+      }
+    },
+    {
+      "id": "news-f24ac1a21f0c",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "Gilberto Lopes on Ivonescimab and the FDA Decision: When Is Progression-Free Survival Enough?",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5waGdPWXBES2o1Q0pfTmR3MzJWblhOdGZFZE1NcVhkc3d6b2RPSU8yWWtFd2MtS01oQlR4bXJDWlVHUGQ0eHd6TXNCMUVQNXRoUWFvQ19xRFM5S1Q1bmExZlNHS0FILWNpMEJSUWxtRTQ?oc=5",
+      "source": "Oncodaily",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-19T21:26:19+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Gilberto Lopes on Ivonescimab and the FDA Decision: When Is Progression-Free Survival Enough? Oncodaily",
+        "published": "2026-11-18T23:05:37+00:00"
       }
     }
   ],
