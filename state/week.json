@@ -1,6 +1,6 @@
 {
   "started": "2026-11-16",
-  "updated": "2026-11-19T21:26:19+00:00",
+  "updated": "2026-11-20T21:01:59+00:00",
   "changes": [
     {
       "id": "news-6a8745969bb7",
@@ -257,7 +257,73 @@
         "summary": "Gilberto Lopes on Ivonescimab and the FDA Decision: When Is Progression-Free Survival Enough? Oncodaily",
         "published": "2026-11-18T23:05:37+00:00"
       }
+    },
+    {
+      "id": "news-c7450eeb4394",
+      "kind": "news",
+      "drug": "orforglipron",
+      "what": "Eli Lilly GLP-1 Pill Foundayo Wins Canadian Approval",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPQms0NEQ0OXJoLXM3UjZRdnREUGItc2gxdGIyekdjSm5hTVhpU2kxQ0dWcmVFdnplVloybkFqNHE4Z3ZnNkJwSzIwallfVGdqd2ZQUXpsbVdWWUtROHdIMWNJSU5xSDlzaFVlSTlZT2NsVHVCS3NzN0E1ZElVNGtVdXdjTEJBMWF4bUduWg?oc=5",
+      "source": "JournalArta",
+      "why": "Lilly's GLP-1 pill. Unlike other GLP-1 pills it doesn't need to be taken on an empty stomach, and it's easier to make in bulk than shots.",
+      "topic": "",
+      "found": "2026-11-20T21:01:59+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Eli Lilly GLP-1 Pill Foundayo Wins Canadian Approval JournalArta",
+        "published": "2026-11-19T23:22:13+00:00"
+      }
+    },
+    {
+      "id": "news-dfd85dd7223b",
+      "kind": "news",
+      "drug": "orforglipron",
+      "what": "Health Canada approves Eli Lilly\u2019s daily Foundayo pill for weight loss",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxORzhMV0dBb29NNV9iQVUyVkhSS3NtZnVKVHhzQ2JPeU5jNlhUN1d0R0JzcENONjc3RUgxNHRoZ1NOaUVlbkxTazRCUmotMDJjN3lnUkZ2UDdFMzM4YnVhUU1MNTlhZG9vTjgtemtsNlBqNzdJbG5QMnNsNF9zQkJZZlItbGRMVlI3VGgwVUVDYmpUUnVTcWwwMXlFMGY?oc=5",
+      "source": "SSBCrack",
+      "why": "Lilly's GLP-1 pill. Unlike other GLP-1 pills it doesn't need to be taken on an empty stomach, and it's easier to make in bulk than shots.",
+      "topic": "",
+      "found": "2026-11-20T21:01:59+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Health Canada approves Eli Lilly\u2019s daily Foundayo pill for weight loss SSBCrack",
+        "published": "2026-11-19T22:25:25+00:00"
+      }
+    },
+    {
+      "id": "news-54ecf32c5123",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "Jia Liu: The Lesson from Ivonescimab CRL on Designing Trials for Global Regulatory Approval",
+      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE90akZlSUlVbmZFMTR1S285QkNqX2x2Mk4tNkc3ZTFWeEZzcU5lRXNfYkZIN3BwRGtabHliajc2SEY0SW43NXN4MjMydV90d25rcTBCelVxNA?oc=5",
+      "source": "Oncodaily",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-20T21:01:59+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Jia Liu: The Lesson from Ivonescimab CRL on Designing Trials for Global Regulatory Approval Oncodaily",
+        "published": "2026-11-20T03:15:42+00:00"
+      }
+    },
+    {
+      "id": "news-62908594da65",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "Summit Therapeutics Expands Ivonescimab Development Program With New Phase III HARMONi-10 Trial",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE04NzVuT2tLMGlYRDhvZ01mMDhiZXBURjFCd1ZZVnRkem1xYUtTT1c1MkNnbWZJTXdFXzhtcWt3MVYwRHVnS0pXNktCU20zNUh4WXE5TGJLYzRpU2g2UVY4QWlrRFFoTS00c2ZxMUttZmt0SzhrTm0yU3J3?oc=5",
+      "source": "Oncodaily",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-20T21:01:59+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Summit Therapeutics Expands Ivonescimab Development Program With New Phase III HARMONi-10 Trial Oncodaily",
+        "published": "2026-11-19T22:42:51+00:00"
+      }
     }
   ],
-  "errors": []
+  "errors": [
+    "Google News"
+  ]
 }
