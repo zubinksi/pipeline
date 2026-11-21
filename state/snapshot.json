@@ -190,9 +190,7 @@
       "url": "https://www.biospace.com/drug-development/silence-quiets-phase-iii-pace-for-lipoprotein-drug-seeks-partner"
     }
   },
-  "errors": [
-    "Google News"
-  ],
+  "errors": [],
   "fda": {
     "alirocumab": {
       "application": "BLA125559",
@@ -600,9 +598,29 @@
     "news-d73eaf3b0b9b",
     "news-92953b22532a",
     "news-ff6e17053dbc",
-    "news-f285005afb24"
+    "news-f285005afb24",
+    "news-54d37402e5a4",
+    "news-76c9455f075a",
+    "news-5cf47326e2d7",
+    "news-b2f5d57ab46b",
+    "news-1afa7170491a",
+    "news-3327d2285fcf",
+    "news-e964fd12ccbf",
+    "news-7bfeeee178c4",
+    "news-7ade2f33f2a0",
+    "news-1f4c07ef85e7",
+    "news-6aa468c63567",
+    "news-f1af60eb16a6",
+    "news-2e7ff87b608f",
+    "news-2fdf6c68b4f7",
+    "news-2116003e95df",
+    "news-dfda5e73effd",
+    "news-bbb51c89ec41",
+    "news-277baa74cf9b",
+    "news-34462ac74bda",
+    "news-ee4f1962f6a3"
   ],
-  "generated_at": "2026-11-20T21:01:59+00:00",
+  "generated_at": "2026-11-21T20:03:40+00:00",
   "news_seen": [
     "news-f87d4dd7d1e4",
     "news-933f845c31b3",
@@ -822,7 +840,23 @@
     "news-6d60d0d196b9",
     "news-e39912cc6926",
     "news-54ecf32c5123",
-    "news-62908594da65"
+    "news-62908594da65",
+    "news-b0ef9ebd1538",
+    "news-a02e80a48f1a",
+    "news-edf1abb1a58e",
+    "news-7920176d4201",
+    "news-7b9bc43b9a3d",
+    "news-866e18297127",
+    "news-153b94622f73",
+    "news-73204894da57",
+    "news-f33871cd6b1d",
+    "news-5e3562b153e1",
+    "news-77167c74bbbf",
+    "news-d11b3173f132",
+    "news-4b0f020548e2",
+    "news-e2d96948e737",
+    "news-c75eb0b9a9a4",
+    "news-20838bceb4df"
   ],
   "trials": {
     "NCT00833716": {

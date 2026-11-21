@@ -1,6 +1,6 @@
 {
   "started": "2026-11-16",
-  "updated": "2026-11-20T21:01:59+00:00",
+  "updated": "2026-11-21T20:03:40+00:00",
   "changes": [
     {
       "id": "news-6a8745969bb7",
@@ -321,9 +321,23 @@
         "summary": "Summit Therapeutics Expands Ivonescimab Development Program With New Phase III HARMONi-10 Trial Oncodaily",
         "published": "2026-11-19T22:42:51+00:00"
       }
+    },
+    {
+      "id": "news-153b94622f73",
+      "kind": "news",
+      "drug": "tirzepatide",
+      "what": "'More nausea and vomiting' warning to Mounjaro and Wegovy users by GP",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQRG1hR3ZJYzFJVnVFbWY1Z2pwUk5Qd0M2ek96TXJ3Sk9mRVlxaHUyQU91RGd1Z1JGQ2I5YTYwajBBMmtXWDVRb0JRU0VSSjhfNGNzUG53aWJNRThwM0NJdnN6aUZrZHR5d3ExU3BXVUxUVFFTMTNmOUVqVVJjamFNd3MzTW5PZkNjX2s00gGQAUFVX3lxTE5FQ0ZnZGprdzFUdi1HcUk0U0lzdHp5Zzd3cXBLTVdfUXBydUoyOVdPZEcwQXFQVnhxbTMzaEJsemctVUpkdy1pRk0tRWhPSlpyUFhkZ3M0ZWNPbHJqdDl0NTgteFBBX2xmR3RHck44UnBmNWVpUi0xcTgtQ2hVdW16Q1NnN2dBdGhKbE1VTGdYcA?oc=5",
+      "source": "Mirror",
+      "why": "A weekly shot that acts on two gut hormones (GIP and GLP-1) to reduce appetite. Sold as Zepbound for weight and Mounjaro for diabetes.",
+      "topic": "",
+      "found": "2026-11-21T20:03:40+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "'More nausea and vomiting' warning to Mounjaro and Wegovy users by GP Mirror",
+        "published": "2026-11-21T12:05:00+00:00"
+      }
     }
   ],
-  "errors": [
-    "Google News"
-  ]
+  "errors": []
 }
