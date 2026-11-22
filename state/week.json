@@ -1,6 +1,6 @@
 {
   "started": "2026-11-16",
-  "updated": "2026-11-21T20:03:40+00:00",
+  "updated": "2026-11-22T20:18:50+00:00",
   "changes": [
     {
       "id": "news-6a8745969bb7",
@@ -336,6 +336,54 @@
       "extra": {
         "summary": "'More nausea and vomiting' warning to Mounjaro and Wegovy users by GP Mirror",
         "published": "2026-11-21T12:05:00+00:00"
+      }
+    },
+    {
+      "id": "news-83370e5d3932",
+      "kind": "news",
+      "drug": "tirzepatide",
+      "what": "Pharmacist issues 'ask your GP' Mounjaro warning to parents of teenagers",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNZnF3QmM4QXdhYzZfNjkyTFV5cEI0VXQ0cE9vOGZsN0hVMXE5cmdaN0otYnFGdkQ5R2RXNVZERWdsYW1xbWI4aE05aHhCRGZLbVl0dnJid3l4UTc2cEN1aHlNbXc3NVotV2tCNEV6c2E0dThZSW40ek02cElxX2U4NdIBhgFBVV95cUxOck9IbXlrYk05eDh1Rndzb3M3a0R5UUlVY1lNS29mWGxvc2d1S0I4Z0RFa3lWYmkwUUJzZTJ4eTREQzNiY0NRN2dfa3k0aFJuTGFlS2Q1eEtRdUtmQll1b1hZRGIxT2xmUXJWMFk2UzFZV1Jfd1ZOcWRLMTRLYXljS19rdFdLZw?oc=5",
+      "source": "The Mirror",
+      "why": "A weekly shot that acts on two gut hormones (GIP and GLP-1) to reduce appetite. Sold as Zepbound for weight and Mounjaro for diabetes.",
+      "topic": "",
+      "found": "2026-11-22T20:18:50+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Pharmacist issues 'ask your GP' Mounjaro warning to parents of teenagers The Mirror",
+        "published": "2026-11-22T14:47:00+00:00"
+      }
+    },
+    {
+      "id": "news-2290c7079dc1",
+      "kind": "news",
+      "drug": "tirzepatide",
+      "what": "'Avoid eating four foods' warning to Wegovy and Mounjaro users over side effects",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNUTVXSnNQT3A2SVBoYTJ6bkJXZ0MwVktIckFLbFJXTUN5OFh4SlIwcmRqZXZOcHpMT0tIZ0hYbkJ5ZWZHXzJ4UjRab3hSVDVGeU5jYTdETGN5cWV6akFnbzdDQzk3ZEc2QnQ0SGxJOTFDUjZmcmxDZlNYU2FDMURKV1Iyc9IBiAFBVV95cUxQaW9taVB6YVJXZDRfenl5WjIyRy1jX0o0Yk5kS2VIaXhkTU1DQ3Brd3ZsUzBfRWp6SVE3ejA5NlhLQlQtYVBDTl9Zcjg0Y0tOTUdqc3AxZkZEd2ZZMUJtTVBwRVlYb0tESjhPanBVeFRCcEFlLUxFakZVRkwwQmF5TWJ2VGk0OEZn?oc=5",
+      "source": "The Mirror",
+      "why": "A weekly shot that acts on two gut hormones (GIP and GLP-1) to reduce appetite. Sold as Zepbound for weight and Mounjaro for diabetes.",
+      "topic": "",
+      "found": "2026-11-22T20:18:50+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "'Avoid eating four foods' warning to Wegovy and Mounjaro users over side effects The Mirror",
+        "published": "2026-11-22T14:44:32+00:00"
+      }
+    },
+    {
+      "id": "news-81dbae87650d",
+      "kind": "news",
+      "drug": "semaglutide",
+      "what": "Wegovy and Mounjaro users issued warning by medication expert",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPa1AxUFBaVVJyZWJKelJqdDk3czRkT2xFMlM4VURMZlhEX05fY0NnQmRpZlJETncydHJFd2FxbnRSR2FrdG4wbHh0LS1OQTUzQ0VSZ05zT2JlRHI2YUtPWDBGdi13NXJIaDRJSlNmaFY5QU0ydXRVZEp4STE0YU56NWtsOA?oc=5",
+      "source": "Yahoo News UK",
+      "why": "The first of the new weight-loss drugs: a weekly GLP-1 shot, now also a daily pill. Sold as Ozempic for diabetes.",
+      "topic": "",
+      "found": "2026-11-22T20:18:50+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Wegovy and Mounjaro users issued warning by medication expert Yahoo News UK",
+        "published": "2026-11-22T14:00:16+00:00"
       }
     }
   ],
