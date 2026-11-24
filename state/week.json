@@ -1,6 +1,71 @@
 {
   "started": "2026-11-24",
-  "updated": "",
-  "changes": [],
+  "updated": "2026-11-24T22:59:28+00:00",
+  "changes": [
+    {
+      "id": "news-41635b0cf317",
+      "kind": "news",
+      "drug": "inclisiran",
+      "what": "Inclisiran reduced major adverse cardiovascular events in topline phase 3 ORION-4 results",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPNUdNSnBSa2ZaY05JY2I5bTNQNVdVc0JtbWZGeXlrdUZYYWdGZndEREIwWWtmS2Z3NE1VbGdUdF9zUEdlaW5RZUlhOV9xMkMtUUJmTUNYQmNLTWhUMXBEX2tjd0EzTVhtWHNvd054RV9OQUJqUktQeERuZUZOSXp0cW9nOV91a25KX3dGczFCTjhUcVlJQUhIRjZZSWtNMU5FU2JJYzhvTVYySWl0OFdpM3VzWHJRWlJlR09ScV9NSQ?oc=5",
+      "source": "2 Minute Medicine",
+      "why": "A shot twice a year that lowers LDL by switching off PCSK9 in the liver.",
+      "topic": "",
+      "found": "2026-11-24T22:59:28+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Inclisiran reduced major adverse cardiovascular events in topline phase 3 ORION-4 results 2 Minute Medicine",
+        "published": "2026-11-24T18:11:15+00:00"
+      }
+    },
+    {
+      "id": "news-0f5fd642daf6",
+      "kind": "news",
+      "drug": "inclisiran",
+      "what": "Novartis Secures Dual Catalysts: Leqvio Phase III Success, 2026 Profit Guidance Upgrade",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQS1BNM0RXUFVkd1c5VDJndWRRNWZVbkJBUWJ6ZWtOLTdlVnV4OVp4Wjg1cTE0UDcxT094U0VjMlR6Tk5Td0p4YnY2YkVpeVlrZzN0YnRqaUU3MXJLdTFhbmwxNURZSnIxV2Rsc1VIVlVVUWtrSFN1bHZJSE9MX082UFUxWmFULWVoM19rVmI3QVpiRTZuZldSRFhkWWlUaGFMNVNZUTFfTmowYU9BS2JrTWR6c1JxY2U2OUE?oc=5",
+      "source": "NAI500",
+      "why": "A shot twice a year that lowers LDL by switching off PCSK9 in the liver.",
+      "topic": "",
+      "found": "2026-11-24T22:59:28+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Novartis Secures Dual Catalysts: Leqvio Phase III Success, 2026 Profit Guidance Upgrade NAI500",
+        "published": "2026-11-24T01:38:31+00:00"
+      }
+    },
+    {
+      "id": "news-809df3183fc8",
+      "kind": "news",
+      "drug": "tirzepatide",
+      "what": "Wegovy and Mounjaro weight regain warning from GP for anyone stopping GLP-1 medication",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPODZYZVJKSmdMUm92RVYyR0xMTGZFNTdGRlZZVVp2a2lCcFczTEd1cDIyd1I5U3BDUmFMVFZ5cFE5SDJZS3FLeWxqT2laSnFlaE1wMWpyaDkyci1BU0I5LXdlQzAzZ3BESVlBWTVobXpRTkl5NzZqMWtEM2RVT2RxajFRZjVXWnhFcmhXVEhqbGJaUdIBlwFBVV95cUxNdk1mRVpBZjVaY2xpYS03UklLdzVkNDZGcnkxMmkyenNtNDNnMFZMOFRLTW1lODV6Y2VldlRMZWJlaUpUeGJqTFlOU3hHalpVZTdkNXptZWQ3TFdQUm1CeXV5NVhtaEE1d1ktQllyZTFPREdOSXM3Y18tUjBHZkM4MUlVeEJscjlQOFM1am50N2VWT2h1VWg4?oc=5",
+      "source": "Wales Online",
+      "why": "A weekly shot that acts on two gut hormones (GIP and GLP-1) to reduce appetite. Sold as Zepbound for weight and Mounjaro for diabetes.",
+      "topic": "",
+      "found": "2026-11-24T22:59:28+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Wegovy and Mounjaro weight regain warning from GP for anyone stopping GLP-1 medication Wales Online",
+        "published": "2026-11-24T13:22:00+00:00"
+      }
+    },
+    {
+      "id": "news-f5fe2845ef7a",
+      "kind": "news",
+      "drug": "lecanemab",
+      "what": "Yomiuri: Leqembi Halts or Reverses Decline in 80% of Early Alzheimer's Patients, Study Shows",
+      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQVlhRaUJrNldQWXc2YXZteGNXdDc4bkVQVktNb2FIVDVmeVpYRnZwaG1BRnZLZFlmSXVOMEdvQTBxbzVRckMzTm1wT0pnX2lqb1B0dXdDclJIUjRZdGJocUZLRW9JWFFuZHZWZlpOemtldUpfb2ZOOVBQZlhSdE0welI3allJSHpRdlRvaHlJa3VlTW4xNHZsRG1vRjFrZ0czVV9wTElIVU1NbVFPN3B3WkJqQ0NJLVI5VDR6QVFTRU4xT3VKZ2V0ZXhuekRjRkdjN0UzVWJ3MUNIcVpWak8xRGxkRQ?oc=5",
+      "source": "MarketWatch",
+      "why": "The first amyloid drug with full approval. Now also a weekly shot people can give themselves at home.",
+      "topic": "",
+      "found": "2026-11-24T22:59:28+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Yomiuri: Leqembi Halts or Reverses Decline in 80% of Early Alzheimer's Patients, Study Shows MarketWatch",
+        "published": "2026-11-24T12:40:00+00:00"
+      }
+    }
+  ],
   "errors": []
 }
