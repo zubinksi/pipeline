@@ -1,6 +1,6 @@
 {
   "started": "2026-11-24",
-  "updated": "2026-11-24T22:59:28+00:00",
+  "updated": "2026-11-25T22:27:37+00:00",
   "changes": [
     {
       "id": "news-41635b0cf317",
@@ -64,6 +64,70 @@
       "extra": {
         "summary": "Yomiuri: Leqembi Halts or Reverses Decline in 80% of Early Alzheimer's Patients, Study Shows MarketWatch",
         "published": "2026-11-24T12:40:00+00:00"
+      }
+    },
+    {
+      "id": "news-61fbce77e911",
+      "kind": "news",
+      "drug": "semaglutide",
+      "what": "Health Canada issues warning on rare risk of vision loss with semaglutide GLP-1 drugs",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQRjBYeXNBRTlZaUp1UnM3OXZOMlpwNlFXamo2d1RacHVqdmxTM1I1Wk5YNTQ3Zm9VNXA0czgxaU5IMkRSRERSWVQ1YzNNbkdDNE8tT2lTLW92MGpObFlobmpBaTA2czlkUzZXWUUtZ0VWNktkcTR4NTIycnp6R1VySXJwdWE?oc=5",
+      "source": "CBC",
+      "why": "The first of the new weight-loss drugs: a weekly GLP-1 shot, now also a daily pill. Sold as Ozempic for diabetes.",
+      "topic": "",
+      "found": "2026-11-25T22:27:37+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Health Canada issues warning on rare risk of vision loss with semaglutide GLP-1 drugs CBC",
+        "published": "2026-11-25T21:06:33+00:00"
+      }
+    },
+    {
+      "id": "news-dbd338d8840e",
+      "kind": "news",
+      "drug": "orforglipron",
+      "what": "GLP-1 Analogues Market (2035): Foundayo FDA Approval, Oral",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNUGtNa0FERG1Vclhsck01eE8zTmVyUTlEclV3cjZlby1wVmpjTTladm1IRXBmeU9lclROSVBfbF9iTGh6bzZnLXlSN002SmVEd1IwYWk4alR3Y2hUSjdBLUNWZ0lPaXhKT1RpN0R3N2ZLdWZxMFE3RFZXWlM3NVlJcG83ZTR1endpeUdyT1ByYy1QdmQt?oc=5",
+      "source": "openPR.com",
+      "why": "Lilly's GLP-1 pill. Unlike other GLP-1 pills it doesn't need to be taken on an empty stomach, and it's easier to make in bulk than shots.",
+      "topic": "",
+      "found": "2026-11-25T22:27:37+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "GLP-1 Analogues Market (2035): Foundayo FDA Approval, Oral openPR.com",
+        "published": "2026-11-24T12:33:38+00:00"
+      }
+    },
+    {
+      "id": "news-4519a76584da",
+      "kind": "news",
+      "drug": "maritide",
+      "what": "Amgen (AMGN) Has Advanced MariTide Into Phase 3 Trials",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOMGlEdUt1LUpZTHRlOTI3WFZya3Z4WlE1bzRtcno2Ty1IOF9ma245UmktX1BIQWtucXN3M0F1VlpfV0pVUHZqSzd6Q3BUSnJRc2p2SzdqemF1RnFMMC1zTE1KMk9rcGk4UGl0bmpHc1VoVGxxdC1HWU9XUDM1Nkp5VjZUSlViTXRjeFR2QXJ5bFcwLXZVSGF2TE50dw?oc=5",
+      "source": "Yahoo Finance",
+      "why": "An antibody-based shot designed to last long enough to be given monthly, or possibly every two months.",
+      "topic": "",
+      "found": "2026-11-25T22:27:37+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Amgen (AMGN) Has Advanced MariTide Into Phase 3 Trials Yahoo Finance",
+        "published": "2026-11-19T14:19:53+00:00"
+      }
+    },
+    {
+      "id": "news-4f7eefd79062",
+      "kind": "news",
+      "drug": "lecanemab",
+      "what": "BioArctic Q3 2026 slides: royalties surge, subcutaneous Leqembi approved globally",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOZmJwWndzRlJoRGpWeU1FSGZpV3QzUDhOXzFYWDRtMFhjZ1ZEX3ZqSDdFdHVqYXpZTk14MUh2blRsbTR5NEVmZEV4eUFzdGdFWDFGbHVPZExzMkVaMTR1TGFJR0dBU1YxSzZDNE9zam1KUFQtQURkdUN3eU5ldndrS1E2ZEFmc0ZUeTY4UXJWZmc5Q0U3aTc4T3p6dzRMUlBHNUQ4RHZva0g5aXY4ZHh3OGNGc3VNZkVzUVRTbGYtVUJURk9hV1B2ZGx1UFYySEpJbjVlLTU1Yw?oc=5",
+      "source": "Investing.com Canada",
+      "why": "The first amyloid drug with full approval. Now also a weekly shot people can give themselves at home.",
+      "topic": "",
+      "found": "2026-11-25T22:27:37+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "BioArctic Q3 2026 slides: royalties surge, subcutaneous Leqembi approved globally Investing.com Canada",
+        "published": "2026-11-25T10:20:55+00:00"
       }
     }
   ],
