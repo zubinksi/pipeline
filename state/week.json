@@ -1,6 +1,6 @@
 {
   "started": "2026-11-24",
-  "updated": "2026-11-25T22:27:37+00:00",
+  "updated": "2026-11-26T22:16:27+00:00",
   "changes": [
     {
       "id": "news-41635b0cf317",
@@ -128,6 +128,22 @@
       "extra": {
         "summary": "BioArctic Q3 2026 slides: royalties surge, subcutaneous Leqembi approved globally Investing.com Canada",
         "published": "2026-11-25T10:20:55+00:00"
+      }
+    },
+    {
+      "id": "news-6fb042c2ae82",
+      "kind": "news",
+      "drug": "semaglutide",
+      "what": "Ozempic and Wegovy Users in Canada Get Rare Vision Loss Warning After Review Flags 16 of 23 Cases",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOWFp5NDF0NDA1cEFsZS1aSDQ0UTQzenpKOS02cUU4bkZxcnJNRE5tTi00NmtFVjc5ZVhyNGltakdzRGRiZHlvUm1Xak1HMEdTcFhOOUZZU25Cdm1NYnluUTF1a0tNQlc1Z3VZX0I1anQ2ekVEN0w5M3pxdko5Q2QtQW1GYjY2d0FzUVZRd3pTem4?oc=5",
+      "source": "Medical Daily",
+      "why": "The first of the new weight-loss drugs: a weekly GLP-1 shot, now also a daily pill. Sold as Ozempic for diabetes.",
+      "topic": "",
+      "found": "2026-11-26T22:16:27+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Ozempic and Wegovy Users in Canada Get Rare Vision Loss Warning After Review Flags 16 of 23 Cases Medical Daily",
+        "published": "2026-11-26T15:48:59+00:00"
       }
     }
   ],
