@@ -1,6 +1,6 @@
 {
   "started": "2026-11-24",
-  "updated": "2026-11-26T22:16:27+00:00",
+  "updated": "2026-11-27T21:55:45+00:00",
   "changes": [
     {
       "id": "news-41635b0cf317",
@@ -144,6 +144,64 @@
       "extra": {
         "summary": "Ozempic and Wegovy Users in Canada Get Rare Vision Loss Warning After Review Flags 16 of 23 Cases Medical Daily",
         "published": "2026-11-26T15:48:59+00:00"
+      }
+    },
+    {
+      "id": "status-NCT06813911-TERMINATED",
+      "kind": "trial_halted",
+      "drug": "pelacarsen",
+      "what": "Pelacarsen's final-stage trial (ADD-VANTAGE) was stopped early.",
+      "url": "https://clinicaltrials.gov/study/NCT06813911",
+      "source": "ClinicalTrials.gov",
+      "why": "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial.",
+      "topic": "",
+      "found": "2026-11-27T21:55:45+00:00",
+      "tier": "top",
+      "extra": {}
+    },
+    {
+      "id": "status-NCT06875973-TERMINATED",
+      "kind": "trial_halted",
+      "drug": "pelacarsen",
+      "what": "Pelacarsen's final-stage trial was stopped early.",
+      "url": "https://clinicaltrials.gov/study/NCT06875973",
+      "source": "ClinicalTrials.gov",
+      "why": "A monthly shot that lowers Lp(a). It was the first Lp(a) drug to finish a large final-stage trial.",
+      "topic": "",
+      "found": "2026-11-27T21:55:45+00:00",
+      "tier": "top",
+      "extra": {}
+    },
+    {
+      "id": "news-2c79cc8b79e1",
+      "kind": "news",
+      "drug": "tirzepatide",
+      "what": "Vanishing Mounjaro, new Alzheimer\u2019s pill and a domperidone warning \u2013 take the Pulse clinical quiz",
+      "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxOang3enNqWk1CZElTNFRLc21HY0w3TG5PTEpET0dyNTk5VEdvSTVFUXJtZHhRVHRWWGk5WE1zdlpSN0p0d3JvcVNPY1FSU1lHcXRKRnRnakw0U2RPLXlHWVNrWUlhMFdGbEpqTHFHc3g5djB4Vlp0eTY5NUo4cm9DMDR0WlVFYTk1b2VqQ0ZhNy1wZUtFd0lNd28tRjBLVExrYkZkc29sbFNVUF9kMmxyWm1CSTV5WDVWMW5MVmJwNmR6am91RG81d0RXZFN5T0tQY08xck5qWkdTNmNrd0JWQnVOVmxJQmpkYzg3SUVJM3ZxUlVjc0FNRE50WUxkV1FIRC1IbEZSZjN0SWo0?oc=5",
+      "source": "Pulse Today",
+      "why": "A weekly shot that acts on two gut hormones (GIP and GLP-1) to reduce appetite. Sold as Zepbound for weight and Mounjaro for diabetes.",
+      "topic": "",
+      "found": "2026-11-27T21:55:45+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Vanishing Mounjaro, new Alzheimer\u2019s pill and a domperidone warning \u2013 take the Pulse clinical quiz Pulse Today",
+        "published": "2026-11-27T16:56:21+00:00"
+      }
+    },
+    {
+      "id": "news-4a069af7e693",
+      "kind": "news",
+      "drug": "ivonescimab",
+      "what": "Is Summit Therapeutics (SMMT) Undervalued As The FDA Rejects Ivonescimab For Now?",
+      "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPdTN5aU1ILXhBWWRFdmo5SVdlYWFua1VsLXhta2Y5SlZaMU96eHBsc0Zsbk5BSWpkSWJJZ0dkNGhUeUNnQVEzelVSNHM5SGZXS3hVUE5SR3N6aUM3VVR1MjZaSnNPM245c0l6S09qUzU0SzFvTDVweW5LODVWMExRZ0F6RzRGenZkdGxXdG4tTmI3eE1sWEFTRzc5Sms2SVVzcjJkZEZsT3V5TmRfaW9YQVg0alVjUXhCMHZwOXhaczRhblNyNkxDUU9SMnVpRlBYcjM0dnBnRVRLMlZRVk95VVl4TTR6Z1c5WXdUUGtR0gHuAUFVX3lxTE91M3lpTUgteEFZZEV2ajlJV2VhYW5rVWwteG1rZjlKVloxT3p4cGxzRmxuTkFJamRJYklnR2Q0aFR5Q2dBUTN6VVI0czlIZldLeFVQTlJHc3ppQzdVVHUyNlpKc08zbjlzSXpLT2pTNTRLMW9MNXB5bks4NVYwTFFnQXpHNEZ6dmR0bFd0bi1OYjd4TWxYQVNHNzlKazZJVXNyMmRkRmxPdXlOZF9pb1hBWDRqVWNReEIwdnA5eFpzNGFuU3I2TENRT1IydWlGUFhyMzR2cGdFVEsyVlFWT3lVWXhNNHpnVzlZd1RQa1E?oc=5",
+      "source": "Simply Wall St",
+      "why": "One antibody that does two jobs: unleashes the immune system (PD-1) and starves tumors of blood supply (VEGF).",
+      "topic": "",
+      "found": "2026-11-27T21:55:45+00:00",
+      "tier": "top",
+      "extra": {
+        "summary": "Is Summit Therapeutics (SMMT) Undervalued As The FDA Rejects Ivonescimab For Now? Simply Wall St",
+        "published": "2026-11-27T20:10:30+00:00"
       }
     }
   ],
